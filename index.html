@@ -60,7 +60,7 @@
   .nav .sub-btn{background:none;border:0;color:var(--gold-soft);font:inherit;font-size:1rem;padding:0;cursor:pointer}
   .nav .sub-btn:hover{color:#fff;text-decoration:underline;text-underline-offset:.2em}
   .nav .sub-btn::after{content:" ▾";font-size:.8em}
-  .nav ul.sub{display:none;position:absolute;left:0;top:calc(100% + .6rem);flex-direction:column;gap:0;background:var(--navy-deep);border:1px solid var(--gold);min-width:16rem;padding:.4rem 0;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .nav ul.sub{display:none;position:absolute;right:0;left:auto;top:calc(100% + .6rem);flex-direction:column;gap:0;background:var(--navy-deep);border:1px solid var(--gold);min-width:16rem;padding:.4rem 0;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4)}
   .nav li.has-sub.open ul.sub,.nav li.has-sub:hover ul.sub,.nav li.has-sub:focus-within ul.sub{display:flex}
   .nav ul.sub a{display:block;padding:.45rem 1rem}
   .nav ul.sub a:hover{background:rgba(201,162,76,.15);text-decoration:none}
@@ -73,7 +73,7 @@
   .plan-card p{margin:0;color:var(--gold-soft)}
   .plan-card .btn{align-self:flex-start;margin-top:auto}
   .menu-btn{display:none;background:none;border:1px solid var(--gold);color:var(--gold-soft);font:inherit;font-size:1rem;padding:.35rem .8rem;border-radius:2px;cursor:pointer}
-  @media (max-width:640px){
+  @media (max-width:900px){
     .nav{flex-wrap:wrap}
     .menu-btn{display:inline-block}
     .nav ul{display:none;flex-direction:column;gap:.6rem;width:100%;padding:.6rem 0 .4rem;border-top:1px solid rgba(201,162,76,.35)}
