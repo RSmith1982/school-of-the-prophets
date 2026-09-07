@@ -1,0 +1,27 @@
+name: Fetch lesson images
+on:
+  workflow_dispatch:
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download images listed in images.json
+        run: |
+          mkdir -p images
+          python3 - <<'PY'
+          import json, urllib.request
+          for name, url in json.load(open('images.json')).items():
+              data = urllib.request.urlopen(url, timeout=60).read()
+              open(f'images/{name}', 'wb').write(data)
+              print(name, len(data))
+          PY
+      - name: Commit images
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add images
+          git commit -m "Add lesson images" || echo "nothing to commit"
+          git push
