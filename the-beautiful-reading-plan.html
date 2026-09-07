@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>The Beautiful Reading Plan — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;--parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--measure:42rem}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Georgia,serif;font-size:1.15rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.25;margin:0}
+  .wrap{width:min(100% - 2.5rem,62rem);margin-inline:auto}
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;text-decoration:none}
+  .hero{background:var(--navy);color:var(--parchment);padding:3rem 0 2.5rem;text-align:center;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,162,76,.16),transparent 70%),var(--navy)}
+  .hero h1{font-size:clamp(2.2rem,6vw,3.6rem);color:#fff}
+  .hero h1 em{font-style:italic;font-weight:400}
+  .hero .sub{font-size:clamp(1.1rem,3vw,1.5rem);color:var(--gold-soft);font-style:italic;margin-top:.3rem}
+  .hero .rule{width:8rem;height:1px;background:var(--gold);margin:1.2rem auto}
+  .hero p{max-width:var(--measure);margin:0 auto;color:var(--gold-soft);font-size:1.1rem}
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel h2{font-size:1.8rem;color:var(--navy);margin-bottom:1rem}
+  .panel h3{font-size:1.4rem;color:var(--burgundy);margin:2.2rem 0 .8rem;padding-bottom:.3rem;border-bottom:1px solid var(--gold)}
+  .intro p{max-width:var(--measure)}
+  .source{font-size:.98rem;color:var(--ink-soft);border-left:3px solid var(--gold);padding:.5rem 1rem;max-width:var(--measure)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:0 0 1.2rem}
+  .btn{font:inherit;font-size:.95rem;padding:.35rem .8rem;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:2px;cursor:pointer;text-decoration:none;white-space:nowrap}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .toolbar .btn{font-size:1rem;padding:.5rem 1rem}
+  .toolbar .msg{font-size:.95rem;color:var(--ink-soft)}
+  /* plan list */
+  ol.plan{list-style:none;margin:0;padding:0}
+  ol.plan li{display:grid;grid-template-columns:3rem 1.4rem 1fr auto;gap:.5rem .9rem;align-items:baseline;padding:.6rem 0;border-top:1px solid var(--parchment-dark)}
+  ol.plan li .num{color:var(--gold);font-size:1.15rem;text-align:right}
+  ol.plan li.ps{background:#EFE6CF}
+  ol.plan li.done .ref{color:var(--ink-soft)}
+  ol.plan li.done .num{color:var(--ink-soft)}
+  ol.plan input[type=checkbox]{width:1.1rem;height:1.1rem;accent-color:var(--burgundy);margin:0;position:relative;top:.15rem;cursor:pointer}
+  ol.plan .ref{font-weight:500;color:var(--navy);font-size:1.15rem}
+  ol.plan .note{display:block;font-size:.98rem;color:var(--ink-soft);font-style:italic}
+  ol.plan .tools{display:flex;gap:.4rem}
+  .reader{grid-column:1 / -1;background:#FBF7EC;border:1px solid var(--gold);padding:1.2rem clamp(1rem,3vw,2rem);margin:.3rem 0 .6rem}
+  .reader h4{margin:0 0 .8rem;font-weight:500;color:var(--navy);font-size:1.3rem;letter-spacing:.02em}
+  .reader p{margin:0 0 .45rem;max-width:var(--measure);text-align:justify;hyphens:auto}
+  .reader .vn{font-size:.72em;color:var(--burgundy);vertical-align:super;margin-right:.25em;font-weight:500}
+  .reader i{font-style:italic;color:var(--ink-soft)}
+  .reader .kjv{font-size:.9rem;color:var(--ink-soft);margin-top:.8rem;font-style:italic}
+  @media (max-width:600px){ol.plan li{grid-template-columns:2.4rem 1.2rem 1fr}ol.plan .tools{grid-column:3}}
+  .progress{font-size:1rem;color:var(--ink-soft);margin:.4rem 0 1rem}
+  .progress b{color:var(--burgundy)}
+  footer{padding:2rem 0;text-align:center;color:var(--gold-soft);background:var(--navy-deep);font-size:.95rem}
+  @media print{
+    header,.toolbar,ol.plan .tools,.progress,input[type=checkbox],.source{display:none!important}
+    body{background:#fff;font-size:11pt}
+    .hero{background:#fff;color:#000;padding:0 0 1rem}
+    .hero h1,.hero .sub,.hero p{color:#000}
+    .panel{border:0;box-shadow:none;padding:0;margin:0 0 1.5rem}
+    ol.plan li{break-inside:avoid;grid-template-columns:2.2rem 1fr;background:none}
+    .reader{grid-column:1 / -1;border:0;background:#fff;padding:0 0 .5rem}
+    .reader p{text-align:left}
+  }
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+<img src="images/logo.svg" alt="" width="44" height="44">
+<div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+<a href="index.html">Home</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<h1>The Beautiful <em>Reading Plan</em></h1>
+<div class="sub">The Word, the Gospel, the Church, and the Psalms — in the King James Version</div>
+<div class="rule"></div>
+<p>Begin with the Word in John 1. Walk with the Lord Jesus Christ through Luke, with Matthew's Sermon on the Mount and the upper-room words of John 14–17 set in their places. Follow the Acts of the Apostles with the epistles read as they were written, the Psalms sounding throughout, and the generations traced back to Adam at the end.</p>
+</div></section>
+
+<main class="wrap">
+<section class="panel intro">
+<h2>About this plan</h2>
+<p>The text is the <strong>King James Version</strong> (the Authorized Version of 1611, in the standard 1769 text). Every reading is printed in full on this page: open a reading with <em>Read</em>, or open them all at once and print the whole plan as a book. Words shown in italics were supplied by the translators.</p>
+<p>The order is deliberate. John's prologue opens the plan. Luke's Gospel is read from the story onward (Luke's dedication and the genealogy are set aside), and Matthew's Sermon on the Mount is added after Luke's Sermon on the Plain so that both are heard. The Lord Jesus Christ's words in the upper room, John 14–17, are placed within the night of the Last Supper. The Acts of the Apostles follows, with each epistle read at the point in the story where it was written. A psalm is set beside each passage it echoes; the genealogy from Joseph back to Adam is read after the Revelation; and the psalms not yet read close the plan.</p>
+<div class="source">The plan has <span id="count"></span> readings. Tick each one as you finish it; your place is remembered on this device.</div>
+</section>
+
+<section class="panel">
+<h2>The order of reading</h2>
+<div class="toolbar">
+  <button class="btn gold" type="button" id="openAll">Open every reading on this page</button>
+  <button class="btn ghost" type="button" id="closeAll">Close them</button>
+  <button class="btn ghost" type="button" id="printAll">Print or save as PDF</button>
+  <span class="msg" id="msg"></span>
+</div>
+<div class="progress" id="progress"></div>
+<p class="intro" style="max-width:var(--measure);color:var(--ink-soft)">Shaded lines are Psalms. Readings are numbered in order; read one or several a day, as you are able.</p>
+<div id="plan"></div>
+</section>
+</main>
+<footer><div class="wrap">“In the beginning was the Word, and the Word was with God, and the Word was God.” — John 1:1<br>© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
+
+<script src="beautiful-reading-plan-data.js"></script>
+<script>
+const root=document.getElementById('plan');
+const KEY='sotp-beautiful-plan-done';
+let done=new Set(); try{done=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e){}}
+function refName(e){
+  const b=DATA.books[e.book];
+  if(e.book==='PSA') return `Psalm ${e.ch}`;
+  if(['PHM','JUD','2JN','3JN'].includes(e.book)) return b;
+  return `${b} ${e.ch}${e.vs?':'+e.vs.replace('-','–'):''}`;
+}
+function renderText(e){
+  const d=document.createElement('div'); d.className='reader';
+  const title=e.book==='PSA'?`Psalm ${e.ch}`:refName(e);
+  d.innerHTML=`<h4>${title}</h4>`+e.text.map(([v,t])=>`<p><span class="vn">${v}</span>${t}</p>`).join('')+`<div class="kjv">King James Version</div>`;
+  return d;
+}
+let part=null, ol=null;
+DATA.plan.forEach(e=>{
+  if(e.part!==part){part=e.part;const h=document.createElement('h3');h.textContent=part;root.appendChild(h);ol=document.createElement('ol');ol.className='plan';root.appendChild(ol);}
+  const li=document.createElement('li'); li.dataset.n=e.n; if(e.book==='PSA') li.classList.add('ps'); if(done.has(e.n)) li.classList.add('done');
+  li.innerHTML=`<span class="num">${e.n}</span><input type="checkbox" aria-label="Mark reading ${e.n} as read" ${done.has(e.n)?'checked':''}>
+  <div><span class="ref">${refName(e)}</span>${e.note?`<span class="note">${e.note}</span>`:''}</div>
+  <div class="tools"><button class="btn" type="button">Read</button></div>`;
+  const btn=li.querySelector('button');
+  btn.addEventListener('click',()=>toggle(li,e));
+  li.querySelector('input').addEventListener('change',ev=>{ if(ev.target.checked){done.add(e.n);li.classList.add('done')} else {done.delete(e.n);li.classList.remove('done')} save(); progress(); });
+  ol.appendChild(li);
+});
+function toggle(li,e,force){
+  const open=li.querySelector('.reader'); const btn=li.querySelector('.tools button');
+  if(open && force!==true){open.remove();btn.textContent='Read';return;}
+  if(!open){li.appendChild(renderText(e));btn.textContent='Close';}
+}
+const items=[...document.querySelectorAll('ol.plan li')];
+document.getElementById('openAll').addEventListener('click',()=>{items.forEach(li=>toggle(li,DATA.plan[+li.dataset.n-1],true));document.getElementById('msg').textContent='Every reading is open. Use Print to save the whole plan.';});
+document.getElementById('closeAll').addEventListener('click',()=>{items.forEach(li=>{const r=li.querySelector('.reader');if(r){r.remove();li.querySelector('.tools button').textContent='Read';}});document.getElementById('msg').textContent='';});
+document.getElementById('printAll').addEventListener('click',()=>{items.forEach(li=>toggle(li,DATA.plan[+li.dataset.n-1],true));setTimeout(()=>window.print(),300);});
+function progress(){const n=DATA.plan.length,k=[...done].filter(x=>x>=1&&x<=n).length;document.getElementById('progress').innerHTML=`<b>${k}</b> of ${n} readings finished${k===n?' — the whole plan is complete. Begin again with John 1.':''}`;}
+document.getElementById('count').textContent=DATA.plan.length;
+progress();
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

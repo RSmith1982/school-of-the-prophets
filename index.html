@@ -56,12 +56,30 @@
   .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.2rem;font-size:1rem;white-space:nowrap}
   .nav a:not(.brand){text-decoration:none;color:var(--gold-soft)}
   .nav a:not(.brand):hover{color:#fff;text-decoration:underline;text-underline-offset:.2em}
+  .nav li.has-sub{position:relative}
+  .nav .sub-btn{background:none;border:0;color:var(--gold-soft);font:inherit;font-size:1rem;padding:0;cursor:pointer}
+  .nav .sub-btn:hover{color:#fff;text-decoration:underline;text-underline-offset:.2em}
+  .nav .sub-btn::after{content:" ▾";font-size:.8em}
+  .nav ul.sub{display:none;position:absolute;left:0;top:calc(100% + .6rem);flex-direction:column;gap:0;background:var(--navy-deep);border:1px solid var(--gold);min-width:16rem;padding:.4rem 0;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .nav li.has-sub.open ul.sub,.nav li.has-sub:hover ul.sub,.nav li.has-sub:focus-within ul.sub{display:flex}
+  .nav ul.sub a{display:block;padding:.45rem 1rem}
+  .nav ul.sub a:hover{background:rgba(201,162,76,.15);text-decoration:none}
+  .nav ul.sub .jp{font-size:.9em;color:var(--gold);margin-left:.4rem}
+  .plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  @media (max-width:760px){.plans-grid{grid-template-columns:1fr}}
+  .plan-card{background:var(--navy-deep);border:1px solid var(--gold);padding:1.6rem;display:flex;flex-direction:column;gap:.8rem}
+  .plan-card h3{font-size:1.5rem;color:#fff;margin:0}
+  .plan-card h3 .jp{display:block;font-size:.75em;color:var(--gold-soft);margin-top:.2rem}
+  .plan-card p{margin:0;color:var(--gold-soft)}
+  .plan-card .btn{align-self:flex-start;margin-top:auto}
   .menu-btn{display:none;background:none;border:1px solid var(--gold);color:var(--gold-soft);font:inherit;font-size:1rem;padding:.35rem .8rem;border-radius:2px;cursor:pointer}
   @media (max-width:640px){
     .nav{flex-wrap:wrap}
     .menu-btn{display:inline-block}
     .nav ul{display:none;flex-direction:column;gap:.6rem;width:100%;padding:.6rem 0 .4rem;border-top:1px solid rgba(201,162,76,.35)}
     .nav.open ul{display:flex}
+    .nav ul.sub,.nav li.has-sub:hover ul.sub{position:static;display:flex;border:0;box-shadow:none;background:none;padding:.2rem 0 0 1rem;min-width:0}
+    .nav .sub-btn::after{content:""}
   }
 
   /* ---------- hero ---------- */
@@ -221,7 +239,12 @@
         <li><a href="#courses">Courses</a></li>
         <li><a href="#exams">Examinations</a></li>
         <li><a href="#training">Practical training</a></li>
-        <li><a href="#japanese">日本語</a></li>
+        <li class="has-sub"><button type="button" class="sub-btn" aria-expanded="false">Reading plans</button>
+          <ul class="sub">
+            <li><a href="japanese-bible-study.html">日本語聖書研究 <span class="jp">Japanese Holy Bible Study</span></a></li>
+            <li><a href="the-beautiful-reading-plan.html">The Beautiful Reading Plan</a></li>
+          </ul>
+        </li>
         <li><a href="#enroll">Enroll</a></li>
       </ul>
     </nav>
@@ -411,13 +434,24 @@
   </div>
 </section>
 
-<section id="japanese">
+<section id="plans">
   <div class="wrap">
     <div class="section-head">
-      <h2>Japanese Holy Bible Study <span style="display:block;font-size:.7em;color:var(--gold-soft);margin-top:.2rem">日本語聖書研究</span></h2>
-      <p>A reading plan in Japanese through the Gospel of Luke, the Acts and the epistles, and the Psalms, with the text of the 口語訳 Holy Bible shown in traditional vertical writing.</p>
+      <h2>Reading plans</h2>
+      <p>Two ways through the Word, in the same order: the Word in John 1, the Gospel of Luke with Matthew's Sermon on the Mount and the upper-room words of John, the Acts with the epistles as they were written, the Psalms throughout, and the generations back to Adam at the end.</p>
     </div>
-    <a class="btn" href="japanese-bible-study.html">Open the study — 聖書研究を開く</a>
+    <div class="plans-grid">
+      <article class="plan-card">
+        <h3>The Beautiful Reading Plan</h3>
+        <p>The King James Version, printed in full on the page, with every reading in order and a place to mark your progress.</p>
+        <a class="btn" href="the-beautiful-reading-plan.html">Open the plan</a>
+      </article>
+      <article class="plan-card">
+        <h3>Japanese Holy Bible Study <span class="jp">日本語聖書研究</span></h3>
+        <p>The same plan in Japanese, with the text of the 口語訳 Holy Bible shown in traditional vertical writing.</p>
+        <a class="btn" href="japanese-bible-study.html">Open the study — 聖書研究を開く</a>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -450,6 +484,8 @@
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
 const nav=document.querySelector('.nav'),mb=document.getElementById('menuBtn');
+document.querySelectorAll('.sub-btn').forEach(b=>b.addEventListener('click',e=>{const li=b.parentElement;const o=li.classList.toggle('open');b.setAttribute('aria-expanded',o);e.stopPropagation();}));
+document.addEventListener('click',()=>document.querySelectorAll('.has-sub.open').forEach(li=>{li.classList.remove('open');li.querySelector('.sub-btn').setAttribute('aria-expanded','false');}));
 mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);});
 document.getElementById('showForm').addEventListener('click',()=>{
   const f=document.getElementById('formFrame'), i=document.getElementById('formIframe');
