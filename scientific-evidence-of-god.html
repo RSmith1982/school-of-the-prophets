@@ -130,10 +130,10 @@
   .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
   .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
   .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
-  .cert .course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
-  .cert .unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
-  .cert .body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
-  .cert .body strong{color:#6B1F2E}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
   .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
   .cert .col.r{left:62.4%;width:23%}
   .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
@@ -402,9 +402,9 @@ function showResults(answers){
       <div class="abs school1">The School</div>
       <div class="abs school2">of The Prophets</div>
       <div class="abs cname">${student.name}</div>
-      <div class="abs course">${COURSE.title}</div>
-      <div class="abs unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
-      <div class="abs body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${QUESTIONS.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${QUESTIONS.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
       <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
       <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${QUESTIONS.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
       <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
