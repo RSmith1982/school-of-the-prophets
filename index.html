@@ -140,22 +140,29 @@
   .steps h3{font-size:1.35rem;color:#fff;margin-bottom:.2rem}
   .steps p{margin:0;color:var(--gold-soft);font-size:1.05rem}
 
-  .cert{
-    background:linear-gradient(180deg,#F8F3E6,#EFE7D2);color:var(--ink);
-    padding:2.2rem 1.6rem;text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,.4);
-    outline:1px solid var(--gold);outline-offset:-10px;
-    border:1px solid var(--gold-soft);
-  }
-  .cert svg{width:48px;height:54px;margin-bottom:.4rem}.cert .cert-seal{width:76px;height:76px;display:block;margin:0 auto .6rem}
-  .cert .school{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--navy)}
-  .cert .title{font-size:1.9rem;font-style:italic;margin:.6rem 0 .5rem;color:var(--navy)}
-  .cert .certify{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
-  .cert .name{font-size:2rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 1.5rem .2rem;margin:.4rem 0 .8rem}
-  .cert .body{font-size:1rem;max-width:26rem;margin:0 auto 1.2rem;line-height:1.5}
-  .cert .body strong{color:var(--burgundy)}
-  .cert .foot{display:flex;justify-content:space-between;font-style:italic;font-size:.85rem;color:var(--ink-soft);padding-top:1.2rem;gap:.5rem}
-  .cert .foot span{border-top:1px solid var(--ink-soft);padding-top:.3rem;flex:1}
+  .certwrap{container-type:inline-size;max-width:44rem;margin:0 auto}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
 
   /* score breakdown */
   .score{margin-top:1.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(201,162,76,.35);padding:1.2rem 1.4rem}
@@ -362,15 +369,18 @@
           </div>
         </div>
       </div>
-      <div class="cert" aria-label="Sample certificate of completion">
-        <img src="images/logo.svg" alt="" class="cert-seal">
-        <div class="school">The School of The Prophets</div>
-        <div class="title">Certificate of Completion</div>
-        <div class="certify">This is to certify that</div>
-        <div class="name">Student Name</div>
-        <p class="body">has successfully completed the formal assessment entitled <em>“The Beginning of the Lord Jesus Christ’s Ministry”</em> attaining a meritorious score of <strong>95% (19 of 20)</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
-        <div class="foot"><span>Bishop Robert P. Smith, Sr.</span><span>Date</span></div>
-      </div>
+      <div class="certwrap" aria-label="Sample certificate of completion"><div class="cert">
+        <div class="abs school1">The School</div>
+        <div class="abs school2">of The Prophets</div>
+        <div class="abs cname">Student Name</div>
+        <div class="abs course">The Full Gospel</div>
+        <div class="abs unit">Disciple level &middot; The Full Gospel: Justice, Mercy, and the Cross</div>
+        <div class="abs body">attaining a meritorious score of <strong>95%</strong> (19 of 20), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+        <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">95%</div><div>Passing Mark: 80%</div><div>Honors Mark: 90%</div><div style="margin-top:.8cqw">Grade: <strong>With Honors</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+        <div class="abs col r"><h4>Assessment summary</h4><div class="row"><span>Justice and mercy</span><span>4 / 4</span></div><div class="row"><span>Sin and death</span><span>5 / 6</span></div><div class="row"><span>Repentance and belief</span><span>6 / 6</span></div><div class="row"><span>The Holy Spirit</span><span>4 / 4</span></div><div class="row tot"><span>Total Questions:</span><span>20</span></div><div class="row"><span>Correct Answers:</span><span>19</span></div><div class="row"><span>Accuracy:</span><span>95%</span></div></div>
+        <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+        <div class="abs sig r">September 7, 2026</div><div class="abs lab r">Date</div>
+      </div></div>
     </div>
   </div>
 </section>
