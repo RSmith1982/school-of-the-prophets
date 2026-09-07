@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
 <title>The School of The Prophets</title>
 <meta name="description" content="A ministry school offering the Disciple, Evangelist, Pastor, Prophet, and Bishop diplomas through courses, examinations, and practical training.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +52,7 @@
   }
   .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 0}
   .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-size:1.05rem;font-weight:500;letter-spacing:.01em}
-  .brand svg{width:28px;height:32px}
+  .brand img{width:36px;height:36px;flex:none}
   .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.2rem;font-size:1rem;white-space:nowrap}
   .nav a:not(.brand){text-decoration:none;color:var(--gold-soft)}
   .nav a:not(.brand):hover{color:#fff;text-decoration:underline;text-underline-offset:.2em}
@@ -144,7 +147,7 @@
     outline:1px solid var(--gold);outline-offset:-10px;
     border:1px solid var(--gold-soft);
   }
-  .cert svg{width:48px;height:54px;margin-bottom:.4rem}
+  .cert svg{width:48px;height:54px;margin-bottom:.4rem}.cert .cert-seal{width:76px;height:76px;display:block;margin:0 auto .6rem}
   .cert .school{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--navy)}
   .cert .title{font-size:1.9rem;font-style:italic;margin:.6rem 0 .5rem;color:var(--navy)}
   .cert .certify{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
@@ -201,7 +204,7 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="The School of The Prophets, home">
-      <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+      <img src="images/logo.svg" alt="" width="36" height="36">
       The School of The Prophets
     </a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" id="menuBtn">Menu</button>
@@ -360,7 +363,7 @@
         </div>
       </div>
       <div class="cert" aria-label="Sample certificate of completion">
-        <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+        <img src="images/logo.svg" alt="" class="cert-seal">
         <div class="school">The School of The Prophets</div>
         <div class="title">Certificate of Completion</div>
         <div class="certify">This is to certify that</div>

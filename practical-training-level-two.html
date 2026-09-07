@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
 <title>Practical Training, Level Two — The School of The Prophets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +26,7 @@
 
   header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
   .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
-  .top svg{width:34px;height:38px;flex:none}
+  .top img{width:44px;height:44px;flex:none}
   .top .name{font-size:1.25rem;font-weight:500}
   .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
   .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
@@ -144,8 +147,8 @@
   .cert .above.script{font-family:"Pinyon Script","EB Garamond",cursive;font-size:clamp(1.5rem,4vw,2.1rem);white-space:nowrap;color:var(--navy);line-height:1;transform:rotate(-3deg)}
   .cert .line{border-top:1px solid var(--ink-soft);margin:.25rem 0 .3rem}
   .cert .label{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
-  .cert .seal{width:88px;height:88px;border:2px solid var(--burgundy);border-radius:50%;display:grid;place-items:center;flex:none;outline:1px solid var(--burgundy);outline-offset:-7px;background:#FBF7EC}
-  .cert .seal svg{width:44px;height:50px}
+  .cert .seal{width:88px;height:88px;display:grid;place-items:center;flex:none}
+  .cert .seal img{width:88px;height:88px;display:block}
   .fail{max-width:var(--measure);margin:0 auto}
 
   @media print{
@@ -160,7 +163,7 @@
 
 <header>
   <div class="wrap top">
-    <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#0E1830" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+    <img src="images/logo.svg" alt="" width="44" height="44">
     <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
     <a href="index.html">Home</a>
   </div>
@@ -440,7 +443,7 @@ function showResults(answers){
       <p class="body">a scholar at the ${LEVEL_LABEL[student.level]||student.level} level, has successfully completed the formal assessment entitled <em>“${COURSE.assessment}”</em> attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}% (${correct} of ${QUESTIONS.length})</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
       <div class="foot">
         <div class="sigblock"><div class="above script">Robert P. Smith, Sr.</div><div class="line"></div><div class="label">Bishop Robert P. Smith, Sr.</div></div>
-        <div class="seal"><svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="seal"><img src="images/logo.svg" alt="Seal of The School of The Prophets"></div>
         <div class="sigblock"><div class="above">${date}</div><div class="line"></div><div class="label">Date</div></div>
       </div>
     </div>` : "";
