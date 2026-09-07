@@ -24,4 +24,5 @@ jobs:
           git config user.email "actions@github.com"
           git add images
           git commit -m "Add lesson images" || echo "nothing to commit"
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
