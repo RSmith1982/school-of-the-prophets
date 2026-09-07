@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearing from God — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top svg{width:34px;height:38px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .cert{
+    background:linear-gradient(180deg,#FBF7EC,#F0E8D3);color:var(--ink);text-align:center;
+    padding:3rem 2rem;margin:2rem auto 0;max-width:44rem;
+    border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:-12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+  }
+  .cert svg{width:60px;height:68px}
+  .cert .school{font-size:clamp(1.15rem,3.4vw,1.9rem);letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;font-weight:600;
+    background:linear-gradient(180deg,#F1DC9A 0%,#C9A24C 45%,#8E6A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 1px 0 rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;gap:.7rem}
+  .cert .school .orn{font-size:.9em;background:linear-gradient(180deg,#F1DC9A,#8E6A1E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cert .flourish{width:min(100%,22rem);height:auto;display:block;margin:.35rem auto 0}
+  .cert .motto{font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:var(--burgundy);margin-top:.5rem}
+  .cert .title{font-size:2.4rem;font-style:italic;margin:1rem 0 .6rem;color:var(--navy)}
+  .cert .certify{font-style:italic;color:var(--ink-soft)}
+  .cert .cname{font-size:2.4rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 2rem .2rem;margin:.5rem 0 1rem}
+  .cert .body{max-width:30rem;margin:0 auto 1.5rem;font-size:1.1rem}
+  .cert .body strong{color:var(--burgundy)}
+  .cert .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-top:2rem}
+  .cert .sigblock{flex:1;text-align:center}
+  .cert .above{height:3.2rem;display:flex;align-items:flex-end;justify-content:center;font-size:1.15rem;color:var(--ink)}
+  .cert .above.script{font-family:"Pinyon Script","EB Garamond",cursive;font-size:clamp(1.5rem,4vw,2.1rem);white-space:nowrap;color:var(--navy);line-height:1;transform:rotate(-3deg)}
+  .cert .line{border-top:1px solid var(--ink-soft);margin:.25rem 0 .3rem}
+  .cert .label{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
+  .cert .seal{width:88px;height:88px;border:2px solid var(--burgundy);border-radius:50%;display:grid;place-items:center;flex:none;outline:1px solid var(--burgundy);outline-offset:-7px;background:#FBF7EC}
+  .cert .seal svg{width:44px;height:50px}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .cert{box-shadow:none;margin:0 auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#0E1830" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <a href="index.html">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Hearing from God</h2>
+    <p class="lesson" style="max-width:var(--measure)">A course on two-way communication with God: why the Scriptures come first, how to approach Him without foolishness, and how to recognize and test His voice. Each section begins with its video, followed by the reading. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">Why read the Bible</a></li>
+      <li><a href="#lesson-2">Stay until He answers</a></li>
+      <li class="toc-soon">Further sections <span class="soon">Coming soon</span></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. Why read the Bible</h3><div class="video"><iframe src="https://www.youtube.com/embed/pkJzB2yHihs" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/pkJzB2yHihs" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgJ" cx="50%" cy="30%" r="85%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glJ" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient>
+<linearGradient id="pgJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF7EC"/><stop offset="1" stop-color="#E8DFC8"/></linearGradient></defs>
+<rect width="640" height="260" fill="url(#bgJ)"/>
+<circle cx="320" cy="60" r="90" fill="url(#glJ)" opacity=".6"/>
+<path d="M320 40 L200 150" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M320 40 L240 150" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M320 40 L280 150" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M320 40 L320 150" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M320 40 L360 150" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M320 40 L400 150" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M320 40 L440 150" stroke="#F1DC9A" stroke-width="2" opacity=".35"/>
+<path d="M170 210 c40 -16 110 -16 150 -4 c40 -12 110 -12 150 4 v-90 c-40 -16 -110 -16 -150 -4 c-40 -12 -110 -12 -150 4z" fill="url(#pgJ)" stroke="#D4AF4F" stroke-width="3"/>
+<path d="M320 116 v90" stroke="#D4AF4F" stroke-width="2"/>
+<path d="M195 140 c30 -8 80 -8 110 -2 M335 138 c30 -6 80 -6 110 2" stroke="#8A7A5A" stroke-width="2" opacity=".7"/><path d="M195 158 c30 -8 80 -8 110 -2 M335 156 c30 -6 80 -6 110 2" stroke="#8A7A5A" stroke-width="2" opacity=".7"/><path d="M195 176 c30 -8 80 -8 110 -2 M335 174 c30 -6 80 -6 110 2" stroke="#8A7A5A" stroke-width="2" opacity=".7"/><path d="M195 194 c30 -8 80 -8 110 -2 M335 192 c30 -6 80 -6 110 2" stroke="#8A7A5A" stroke-width="2" opacity=".7"/>
+<path d="M110 200 V60" stroke="#F1DC9A" stroke-width="4" stroke-linecap="round"/><path d="M92 82 L110 58 L128 82" stroke="#F1DC9A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="110" y="225" font-family="EB Garamond,serif" font-size="14" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">prayer</text>
+<path d="M530 60 V200" stroke="#F1DC9A" stroke-width="4" stroke-linecap="round"/><path d="M512 178 L530 202 L548 178" stroke="#F1DC9A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="530" y="225" font-family="EB Garamond,serif" font-size="14" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">His voice</text>
+<text x="320" y="245" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">two-way communication</text>
+</svg></figure>
+<p>"Well then, what about reading the Bible?" Reading the Bible serves its purpose. I remember being on a job site when a man walked up to me. I always say good morning, so I said, "Good morning." He answered, "What's up, though?" I said, "Okay — good morning," and kept walking. He had assumed that because of who I was, he could not simply say "morning" to me; he had to say "what's up, though." I wasn't offended, because he only made himself look foolish.</p>
+<p>That is what studying the Bible is for. You study so that you know enough about God that when you interact with Him you do not look thick-headed, thinking you know how to pray while praying disrespectful things — praying things that do not draw God closer to you. You may even get the prayer answered, but you are no closer to Him; if anything you are further away.</p>
+<p>You need to read the Bible so you can learn how God interacts with people: what He says, what He wants, who has gotten close to Him and how, and how reality works. Then when you talk to Him and pray to Him, you can speak in a way that actually brings you closer. That is why reading the Bible is so important.</p>
+<p>And remember: the Bible is written in a way that discourages people who are wise and proud. Its purpose is to teach you how to have a two-way communication with God.</p>
+<aside class="key"><div class="key-t">Hold onto this: Scripture teaches you how to speak to Him</div><p>Study is not the goal; relationship is. You read the Bible so that when you approach God you do not talk like the man who could only say "what's up, though."</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. Stay until He answers</h3><div class="video"><iframe src="https://www.youtube.com/embed/BPZsEv83o3A" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/BPZsEv83o3A" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgK" cx="70%" cy="30%" r="85%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glK" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient>
+<linearGradient id="gdK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1DC9A"/><stop offset="1" stop-color="#9A7326"/></linearGradient></defs>
+<rect width="640" height="260" fill="url(#bgK)"/>
+<rect x="0" y="200" width="640" height="60" fill="#1A2748"/>
+<circle cx="470" cy="100" r="110" fill="url(#glK)" opacity=".45"/>
+<path d="M380 200 h180 v-14 h-180z M395 186 h150 v-14 h-150z" fill="url(#gdK)"/>
+<path d="M430 172 v-110 a40 40 0 0 1 80 0 v110z" fill="#1A2748" stroke="#D4AF4F" stroke-width="3"/>
+<path d="M440 120 h60 v52 h-60z" fill="#7A2334"/>
+<path d="M418 120 h12 v52 h-12z M510 120 h12 v52 h-12z" fill="url(#gdK)"/>
+<circle cx="470" cy="46" r="10" fill="#F1DC9A"/>
+<text x="470" y="248" font-family="EB Garamond,serif" font-size="14" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">the throne</text>
+<g transform="translate(200 110)"><circle cx="0" cy="0" r="16" fill="#F5EFE1"/><path d="M-16 18 h32 l6 62 h-44z" fill="#F5EFE1"/><path d="M-6 44 c-14 -6 -22 0 -20 8 c2 8 12 6 14 2 M6 44 c14 -6 22 0 20 8 c-2 8 -12 6 -14 2" stroke="#F5EFE1" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M-14 80 l-4 40 h12 l4 -40z M14 80 l4 40 h-12 l-4 -40z" fill="#F5EFE1"/></g>
+<text x="200" y="248" font-family="EB Garamond,serif" font-size="14" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">still here, still asking</text>
+</svg></figure>
+<p>You need the baptism of the Holy Spirit, but that alone does not guarantee you will make it. Many people were anointed. Scripture says Satan was the anointed cherub; he had the Holy Spirit. Saul had the Holy Spirit. The Spirit is an earnest — a down payment. It means God gives you up front a portion of what eternity is. It does not mean it cannot be lost. You still have to have the relationship.</p>
+<p>We read books on how to hear from God, how to hear His voice. Throw them all away. God talks to everyone in a unique way. It cannot be taught and cannot be described, and the enemy cannot duplicate it, because he does not know how God talks to you. Knowing how God talks to you takes one thing: you communicating with Him and believing that He is going to respond.</p>
+<p>He ignored a woman once, and she was persistent, and He rewarded her because of her faith. When He taught His disciples to pray, He told of a judge who would not grant a woman's request, but she kept on until he granted it, and He said: won't God grant your prayer in the same way if you show that persistence, though He bear long with you? Then He said something that seems disconnected but is exactly connected: "When the Son of Man comes, will He find faith?" In other words, if you keep seeking God, He may ignore you simply to test whether you have faith. Because if you talk to Him and He is silent, you should not go off and handle it on your own. You should seek His face to find out why He is not responding.</p>
+<p>I once ordered a taxi and heard nothing back. It took forever, so I ordered another one, got picked up, and left. Then the bar called: the first driver was there, furious, cursing me. I had assumed he wasn't coming because I got no feedback. That was rude and wrong of me. We have to treat God better than that. You do not only treat others well; you treat God well, because He is a Person. You are not a good person merely because you treat other people right. You have to treat the Creator right.</p>
+<p>So when I contact God and He does not respond, the goal is to know that God heard me. I do not have to say it over and over; I have to have faith. God heard me; He is God. Do not take His name in vain by thinking He cannot hear you. It is not that you must learn how to talk to Him, as if God sat on the throne waiting for someone to pick up a book and learn His voice so He could finally have someone to talk to. No. He spoke to Pharaoh, who worshiped devils. He spoke to a donkey. He speaks to the waters and the wind. If He can talk to a donkey and to unbelievers, trust me, He can talk to you. He made your ear; He made your brain. He knows how to talk to you. You just need to not give up when He does not respond.</p>
+<p>Picture it. He is on the throne, and you say, "Dear God, I don't know what to do, I need Your help with this situation." He waits. You say, "Amen," get up, and go looking for someone else to help you and for your own solution. You never developed the relationship. You never waited for His response. You prayed and then went looking for help elsewhere and never came back to Him. People do this and think it is normal. Why pray at all if you do not believe the One you are praying to hears you or will do anything? If you know He is real, and God, and Almighty, then when He does not respond you will keep seeking Him and seeking His face. That is why He says, "Seek My face."</p>
+<p>When I do that, and keep seeking Him, I know God hears me. I know He can help me. I know He is in control. If He is upset with me, I know He can help me get back into His good graces. So I keep seeking Him over this; I do not need help outside of God in this situation. Then you begin to get a response. If you do not understand the response, seek Him over that, and He can teach you how He is talking to you and train you. Over the years God has been teaching me how He speaks to me, to the point that now, if I am praying and have not gotten a response, I am not done praying.</p>
+<p>You cannot say, "I talked to Sheila about that." "Well, what did she say?" "I don't know." "Then you didn't talk to her about it." "I did — she didn't say anything bad." "Did you wait around for a response?" "No." Then you did not talk to her. You have not talked to someone until you have had a two-way conversation. Your prayer is not you talking at God, throwing up some words and going about your business. Your prayer is you talking and staying with God until you have His response about the situation. Then you are done praying.</p>
+<p>That is how you build the relationship. As long as you are trying, and you have that relationship, you will know God and the Lord Jesus Christ — and the Lord Jesus Christ said that is salvation. Keep that up to the end and you shall be saved.</p>
+<aside class="key"><div class="key-t">Hold onto this: You aren't done praying until He answers</div><p>The Spirit is an earnest, not a guarantee. God knows how to speak to you; your part is to stay with Him until you have His response, and never to go looking elsewhere first.</p></aside>
+<div class="check" data-check="1"></div>
+      <div class="coming"><span class="soon">Coming soon</span>&nbsp; Further sections will be added as each video is prepared. The assessment currently covers Sections 1–2.</div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit.</p>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script>
+const COURSE = {
+  title: "Hearing from God",
+  assessment: "Hearing from God",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = { SC:"Scripture and preparation", PR:"Prayer and approach", VO:"Recognizing His voice" };
+
+const QUESTIONS = [
+ {t:"SC", q:"According to the lesson, what is the purpose of studying the Bible?",
+  o:["To win arguments","To know enough about God that your prayers draw you closer to Him rather than further away","To memorize as many verses as possible","To replace prayer"], a:1, v:"2 Timothy 2:15", vt:"Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth.", l:1},
+ {t:"PR", q:"What warning does the lesson give about answered prayer?",
+  o:["Answered prayer proves you are close to God","You can get a prayer answered and still be no closer to God, or even further away","Prayers are never answered","Only ministers get answers"], a:1, v:"James 4:3", vt:"Ye ask, and receive not, because ye ask amiss, that ye may consume it upon your lusts.", l:1},
+ {t:"SC", q:"Whom does the lesson say the Bible is written to discourage?",
+  o:["The poor","The wise and the proud","Children","Foreigners"], a:1, v:"1 Corinthians 1:27", vt:"But God hath chosen the foolish things of the world to confound the wise.", l:1},
+ {t:"VO", q:"Why does the lesson say books on how to hear God's voice should be thrown away?",
+  o:["Because reading is a waste of time","Because God speaks to each person uniquely; it cannot be taught, and is learned by communicating with Him and believing He will respond","Because only prophets hear Him","Because the Bible forbids other books"], a:1, v:"John 10:27", vt:"My sheep hear my voice, and I know them, and they follow me.", l:2},
+ {t:"PR", q:"According to the lesson, why might God be silent when you pray?",
+  o:["Because He is angry","Because He may be testing whether you have faith and will keep seeking His face","Because He did not hear","Because you used the wrong words"], a:1, v:"Luke 18:7–8", vt:"And shall not God avenge his own elect, which cry day and night unto him, though he bear long with them?… when the Son of man cometh, shall he find faith on the earth?", l:2},
+ {t:"VO", q:"What does the lesson say the baptism of the Holy Spirit is?",
+  o:["A guarantee of salvation","An earnest, a down payment of eternity that can still be lost without relationship","A reward for good works","A sign given only to apostles"], a:1, v:"Ephesians 1:13–14", vt:"Ye were sealed with that holy Spirit of promise, which is the earnest of our inheritance.", l:2},
+ {t:"PR", q:"When is a prayer finished, according to the lesson?",
+  o:["When you say Amen","When you have stayed with God and received His response about the situation","After ten minutes","When you feel better"], a:1, v:"Psalm 27:8", vt:"When thou saidst, Seek ye my face; my heart said unto thee, Thy face, LORD, will I seek.", l:2},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["Why read the Bible", "Stay until He answers"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",()=>{ buildExam(); goto(3); });
+
+function buildExam(){
+  const f = $("#examForm"); f.innerHTML="";
+  QUESTIONS.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = QUESTIONS.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  showResults(answers);
+  goto(4);
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===QUESTIONS[i].a).length;
+  const pct = Math.round(correct/QUESTIONS.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${QUESTIONS.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  QUESTIONS.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="cert" id="cert">
+      <div class="school"><span class="orn">✦</span>The School of The Prophets<span class="orn">✦</span></div>
+      <svg class="flourish" viewBox="0 0 360 24" aria-hidden="true" fill="none" stroke="#C9A24C" stroke-width="1.5" stroke-linecap="round"><path d="M10 12 H150 M210 12 H350"/><path d="M150 12 c8-10 16-10 22 0 c6 10 14 10 22 0 M154 12 c6 8 12 8 18 0"/><circle cx="180" cy="12" r="3" fill="#C9A24C" stroke="none"/><path d="M10 12 l6-4 M10 12 l6 4 M350 12 l-6-4 M350 12 l-6 4"/></svg>
+      <div class="motto">Veritas · Fides</div>
+      <div class="title">Certificate of Completion</div>
+      <div class="certify">This is to certify that</div>
+      <div class="cname">${student.name}</div>
+      <p class="body">a scholar at the ${LEVEL_LABEL[student.level]||student.level} level, has successfully completed the formal assessment entitled <em>“${COURSE.assessment}”</em> attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}% (${correct} of ${QUESTIONS.length})</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
+      <div class="foot">
+        <div class="sigblock"><div class="above script">Robert P. Smith, Sr.</div><div class="line"></div><div class="label">Bishop Robert P. Smith, Sr.</div></div>
+        <div class="seal"><svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="sigblock"><div class="above">${date}</div><div class="line"></div><div class="label">Date</div></div>
+      </div>
+    </div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = QUESTIONS.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "What is the point of the \"what's up, though\" story?", "o": ["That greetings do not matter", "That approaching God without knowing Him makes a person look foolish, even if he means well", "That job sites are rude places", "That God prefers formal language"], "a": 1, "e": "The man assumed how he had to speak and got it wrong. Scripture teaches how God actually interacts, so you do not guess."}, {"q": "What is the point of the taxi story?", "o": ["Taxis are unreliable", "Assuming God is not coming because you heard nothing, and moving on, treats Him worse than a person deserves", "Always order two taxis", "Bars are dangerous"], "a": 1, "e": "The driver was on his way; the fault was leaving without a reply. God is a Person, and He is owed better than that."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",()=>{ buildExam(); goto(3); });
+</script>
+</body>
+</html>

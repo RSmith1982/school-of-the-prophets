@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The School of The Prophets</title>
+<meta name="description" content="A ministry school offering the Disciple, Evangelist, Pastor, Prophet, and Bishop diplomas through courses, examinations, and practical training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;
+    --navy-deep:#0E1830;
+    --burgundy:#6B1F2E;
+    --gold:#C9A24C;
+    --gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;
+    --parchment-dark:#E8DFC8;
+    --ink:#221A14;
+    --ink-soft:#5A4E42;
+    --measure:38rem;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    font-family:"EB Garamond",Garamond,"Times New Roman",serif;
+    font-size:1.125rem;
+    line-height:1.6;
+    color:var(--parchment);
+    background:var(--navy);
+  }
+  a{color:inherit}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+    outline:3px solid var(--gold);outline-offset:3px
+  }
+  h1,h2,h3{font-weight:500;line-height:1.1;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,68rem);margin-inline:auto}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:10;
+    background:rgba(20,33,61,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(201,162,76,.35);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 0}
+  .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-size:1.05rem;font-weight:500;letter-spacing:.01em}
+  .brand svg{width:28px;height:32px}
+  .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.2rem;font-size:1rem;white-space:nowrap}
+  .nav a:not(.brand){text-decoration:none;color:var(--gold-soft)}
+  .nav a:not(.brand):hover{color:#fff;text-decoration:underline;text-underline-offset:.2em}
+  .menu-btn{display:none;background:none;border:1px solid var(--gold);color:var(--gold-soft);font:inherit;font-size:1rem;padding:.35rem .8rem;border-radius:2px;cursor:pointer}
+  @media (max-width:640px){
+    .nav{flex-wrap:wrap}
+    .menu-btn{display:inline-block}
+    .nav ul{display:none;flex-direction:column;gap:.6rem;width:100%;padding:.6rem 0 .4rem;border-top:1px solid rgba(201,162,76,.35)}
+    .nav.open ul{display:flex}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:4.5rem 0 4rem;text-align:center;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,162,76,.16),transparent 70%),
+      var(--navy);
+  }
+  .seal{width:150px;height:170px;margin:0 auto 1.5rem;display:block}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:.01em;color:#fff}
+  .hero h1 em{font-style:italic;font-weight:400}
+  .hero .rule{width:9rem;height:1px;background:var(--gold);margin:1.4rem auto}
+  .hero p{max-width:var(--measure);margin:0 auto 2rem;font-size:1.25rem;color:var(--gold-soft)}
+  .actions{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
+  .btn{
+    display:inline-block;padding:.7rem 1.5rem;border-radius:2px;text-decoration:none;
+    font-size:1.05rem;font-weight:500;letter-spacing:.02em;border:1px solid var(--gold);
+    color:var(--navy-deep);background:var(--gold);
+  }
+  .btn.ghost{background:transparent;color:var(--gold-soft)}
+  .btn:hover{filter:brightness(1.08)}
+
+  /* ---------- sections ---------- */
+  section{padding:4.5rem 0}
+  .section-head{max-width:var(--measure);margin-bottom:2.5rem}
+  .section-head h2{font-size:clamp(2rem,4.5vw,2.8rem);color:#fff}
+  .section-head p{color:var(--gold-soft);margin-top:.8rem}
+  .on-paper{background:var(--parchment);color:var(--ink)}
+  .on-paper .section-head h2{color:var(--burgundy)}
+  .on-paper .section-head p{color:var(--ink-soft)}
+
+  /* ---------- diploma ladder ---------- */
+  .ladder{list-style:none;margin:0;padding:0;counter-reset:step}
+  .ladder li{
+    position:relative;display:grid;grid-template-columns:4.5rem 1fr;gap:1rem;
+    padding:1.8rem 0;border-top:1px solid rgba(201,162,76,.35);
+  }
+  .ladder li:last-child{border-bottom:1px solid rgba(201,162,76,.35)}
+  .ladder li::before{
+    counter-increment:step;content:counter(step,upper-roman);
+    font-size:2.2rem;line-height:1;color:var(--gold);font-weight:400;padding-top:.15rem
+  }
+  .ladder h3{font-size:1.9rem;color:#fff;display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem}
+  .ladder .soon{
+    font-size:.85rem;color:var(--navy-deep);background:var(--gold-soft);
+    padding:.1rem .55rem;border-radius:2px;letter-spacing:.03em
+  }
+  .ladder p{margin:.4rem 0 .8rem;color:var(--parchment);max-width:var(--measure)}
+  .ladder li>div{min-width:0}
+  .req{display:grid;gap:.3rem 1.5rem;grid-template-columns:repeat(auto-fit,minmax(min(14rem,100%),1fr));font-size:1rem;color:var(--gold-soft);max-width:44rem}
+  .req span::before{content:"✦ ";color:var(--gold)}
+  .ladder li.pending{opacity:.7}
+  @media (max-width:520px){.ladder li{grid-template-columns:3rem 1fr}.ladder li::before{font-size:1.7rem}}
+
+  /* ---------- courses ---------- */
+  .courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1.5rem 2.5rem}
+  .course{border-top:2px solid var(--burgundy);padding-top:1rem}
+  .course h3{font-size:1.5rem;color:var(--burgundy);margin-bottom:.4rem}
+  .course p{color:var(--ink-soft);font-size:1.05rem;margin:0}
+  .course.pending h3{color:var(--ink-soft)}
+  .course.pending p{opacity:.75}
+  .course .soon{font-size:.8rem;font-weight:400;color:#fff;background:var(--burgundy);padding:.1rem .55rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle;white-space:nowrap}
+  .course .course-link{margin-top:.6rem;font-size:1.05rem}
+  .course.open{border-top-color:var(--navy)}
+  .course.open h3{color:var(--navy)}
+  .course .course-link a{color:#1A4FD6;font-weight:500;text-underline-offset:.2em}
+
+  /* ---------- exam & certificate ---------- */
+  .exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+  @media (max-width:820px){.exam-grid{grid-template-columns:1fr}}
+  .steps{list-style:none;margin:0;padding:0}
+  .steps li{display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;padding:1rem 0}
+  .steps li+li{border-top:1px solid rgba(201,162,76,.35)}
+  .steps .n{width:2rem;height:2rem;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-size:.95rem}
+  .steps h3{font-size:1.35rem;color:#fff;margin-bottom:.2rem}
+  .steps p{margin:0;color:var(--gold-soft);font-size:1.05rem}
+
+  .cert{
+    background:linear-gradient(180deg,#F8F3E6,#EFE7D2);color:var(--ink);
+    padding:2.2rem 1.6rem;text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+    outline:1px solid var(--gold);outline-offset:-10px;
+    border:1px solid var(--gold-soft);
+  }
+  .cert svg{width:48px;height:54px;margin-bottom:.4rem}
+  .cert .school{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--navy)}
+  .cert .title{font-size:1.9rem;font-style:italic;margin:.6rem 0 .5rem;color:var(--navy)}
+  .cert .certify{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
+  .cert .name{font-size:2rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 1.5rem .2rem;margin:.4rem 0 .8rem}
+  .cert .body{font-size:1rem;max-width:26rem;margin:0 auto 1.2rem;line-height:1.5}
+  .cert .body strong{color:var(--burgundy)}
+  .cert .foot{display:flex;justify-content:space-between;font-style:italic;font-size:.85rem;color:var(--ink-soft);padding-top:1.2rem;gap:.5rem}
+  .cert .foot span{border-top:1px solid var(--ink-soft);padding-top:.3rem;flex:1}
+
+  /* score breakdown */
+  .score{margin-top:1.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(201,162,76,.35);padding:1.2rem 1.4rem}
+  .score .big{font-size:2.6rem;line-height:1;color:#fff}
+  .score .sub{color:var(--gold-soft);font-style:italic;font-size:1rem;margin:.2rem 0 1rem}
+  .bars{display:grid;gap:.5rem;font-size:.95rem}
+  .bar{display:grid;grid-template-columns:10rem 1fr 3rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:6px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--gold-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:6.5rem 1fr 2.6rem}}
+
+  /* ---------- practical ---------- */
+  .practical{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+  @media (max-width:760px){.practical{grid-template-columns:1fr}}
+  .practical article{border-top:2px solid var(--burgundy);padding-top:1rem}
+  .practical .step{font-size:.95rem;color:var(--burgundy);font-style:italic}
+  .practical h3{font-size:1.5rem;color:var(--burgundy);margin:.2rem 0 .5rem}
+  .practical p{color:var(--ink-soft);font-size:1.05rem;margin:0}
+
+  /* ---------- enroll ---------- */
+  .enroll{background:var(--navy-deep)}
+  .enroll form{max-width:var(--measure);display:grid;gap:1rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--gold-soft)}
+  input,select,textarea{
+    font:inherit;padding:.6rem .8rem;border:1px solid rgba(201,162,76,.5);border-radius:2px;
+    background:rgba(255,255,255,.05);color:#fff
+  }
+  select option{color:var(--ink)}
+  textarea{min-height:6rem;resize:vertical}
+  .note{font-size:.95rem;color:var(--gold-soft);opacity:.85}
+  .form-frame{max-width:52rem}
+  .form-frame[hidden]{display:none}
+  .form-frame iframe{width:100%;height:min(80vh,900px);border:1px solid var(--gold);background:#fff;display:block}
+  .enroll-out{scroll-margin-top:9rem;margin-top:1rem;padding:1rem;border:1px solid rgba(201,162,76,.5);background:rgba(255,255,255,.04)}
+  .enroll-out[hidden]{display:none}
+  .enroll-out textarea{width:100%;font-size:1rem}
+
+  footer{padding:2.5rem 0;text-align:center;font-size:1rem;color:var(--gold-soft);border-top:1px solid rgba(201,162,76,.35)}
+  footer .verse{font-style:italic;max-width:var(--measure);margin:0 auto .3rem}
+  footer .ref{font-size:.9rem;opacity:.8}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="The School of The Prophets, home">
+      <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+      The School of The Prophets
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" id="menuBtn">Menu</button>
+    <nav aria-label="Sections">
+      <ul id="menu">
+        <li><a href="#diplomas">Diplomas</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#exams">Examinations</a></li>
+        <li><a href="#training">Practical training</a></li>
+        <li><a href="#japanese">日本語</a></li>
+        <li><a href="#enroll">Enroll</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <svg class="seal" viewBox="0 0 150 170" aria-hidden="true">
+      <g fill="none" stroke="#C9A24C" stroke-width="2.2" stroke-linecap="round">
+        <path d="M32 150c-14-10-22-28-22-52"/><path d="M118 150c14-10 22-28 22-52"/>
+        <g id="leaf"><path d="M18 138c-6-2-10-7-10-13 6 0 11 4 12 10z" fill="#C9A24C" stroke="none"/></g>
+        <path d="M26 128c-7-1-12-6-13-12 6-1 12 3 14 9z" fill="#C9A24C" stroke="none"/>
+        <path d="M22 116c-7-1-12-7-12-14 6 0 11 5 13 11z" fill="#C9A24C" stroke="none"/>
+        <path d="M132 138c6-2 10-7 10-13-6 0-11 4-12 10z" fill="#C9A24C" stroke="none"/>
+        <path d="M124 128c7-1 12-6 13-12-6-1-12 3-14 9z" fill="#C9A24C" stroke="none"/>
+        <path d="M128 116c7-1 12-7 12-14-6 0-11 5-13 11z" fill="#C9A24C" stroke="none"/>
+      </g>
+      <path d="M75 10 125 26v44c0 30-22 52-50 64C47 122 25 100 25 70V26z" fill="#0E1830" stroke="#C9A24C" stroke-width="3"/>
+      <path d="M75 34v58M56 52h38" stroke="#C9A24C" stroke-width="8" stroke-linecap="round"/>
+      <path d="M46 106c12-5 46-5 58 0" stroke="#F5EFE1" stroke-width="6" stroke-linecap="round"/>
+      <path d="M52 100c10-4 36-4 46 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+      <path d="M60 8l15-6 15 6" fill="none" stroke="#C9A24C" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <h1>The School <em>of</em> The Prophets</h1>
+    <div class="rule"></div>
+    <p>Study the Word, defend the faith, and be sent out. Five diplomas, earned through courses, examinations, and practical ministry under supervision.</p>
+    <div class="actions">
+      <a class="btn" href="#enroll">Enroll now</a>
+      <a class="btn ghost" href="#diplomas">See the diplomas</a>
+    </div>
+  </div>
+</section>
+
+<section id="diplomas">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Five diplomas</h2>
+      <p>Disciple is the foundation. Evangelist and Pastor each build on it with their own courses, examinations, and practical training; Prophet builds on Pastor; and Bishop crowns Evangelist and Pastor together.</p>
+    </div>
+    <ol class="ladder">
+      <li>
+        <div>
+          <h3>Disciple</h3>
+          <p>The foundation every diploma is built on. You learn why belief in God is reasonable, what the whole Gospel is, how the New Testament tells it, how to defend it, what it may cost, and how healing and miracles follow faith.</p>
+          <div class="req">
+            <span><a href="scientific-evidence-of-god.html" style="color:var(--gold-soft)">Scientific Evidence of God</a></span>
+            <span><a href="full-gospel.html" style="color:var(--gold-soft)">The Full Gospel</a></span>
+            <span>The New Testament</span>
+            <span>Apologetics</span>
+            <span>Martyrship</span>
+            <span><a href="healing-and-miracles.html" style="color:var(--gold-soft)">Healing and Miracles</a></span>
+            <span><a href="practical-training-level-one.html" style="color:var(--gold-soft)">Practical training, level one</a></span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Evangelist</h3>
+          <p>Trained to carry the message outward, contend for it in public, and set the captive free.</p>
+          <div class="req">
+            <span>Disciple diploma</span>
+            <span>Robert's Rules of Debate</span>
+            <span><a href="deliverance.html" style="color:var(--gold-soft)">Deliverance</a></span>
+            <span>Heaven and Hell</span>
+            <span><a href="practical-training-level-two.html" style="color:var(--gold-soft)">Practical training, level two</a></span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Pastor</h3>
+          <p>Prepared to shepherd a congregation, teach the whole counsel of Scripture, guard it from error, and steward its resources.</p>
+          <div class="req">
+            <span>Disciple diploma</span>
+            <span>The Old Testament</span>
+            <span>Heresies</span>
+            <span>Biblical Finances</span>
+            <span><a href="practical-training-level-two.html" style="color:var(--gold-soft)">Practical training, level two</a></span>
+          </div>
+        </div>
+      </li>
+      <li class="pending">
+        <div>
+          <h3>Prophet <span class="soon">Coming soon</span></h3>
+          <p>Called to hear the voice of God and speak what He says.</p>
+          <div class="req">
+            <span>Pastor diploma</span>
+            <span><a href="hearing-from-god.html" style="color:var(--gold-soft)">Hearing from God</a></span>
+          </div>
+        </div>
+      </li>
+      <li class="pending">
+        <div>
+          <h3>Bishop <span class="soon">Coming soon</span></h3>
+          <p>Oversight of pastors and churches.</p>
+          <div class="req">
+            <span>Evangelist diploma</span>
+            <span>Pastor diploma</span>
+            <span>Practical training, level three</span>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="courses" class="on-paper">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The courses</h2>
+      <p>Thirteen courses and three levels of practical training make up the full curriculum, released one at a time. Every course ends with an examination, and a passing score earns a certificate of completion.</p>
+    </div>
+    <div class="courses">
+      <article class="course open"><h3>Scientific Evidence of God</h3><p>Creation, design, and the order of the universe as witnesses to their Maker. Sections 1–2 are open; further sections are being added.</p><p class="course-link"><a href="scientific-evidence-of-god.html">Begin this course</a></p></article>
+      <article class="course open"><h3>The Full Gospel</h3><p>Salvation, repentance, the work of the Holy Spirit, healing, and the life of the believer.</p><p class="course-link"><a href="full-gospel.html">Begin this course</a></p></article>
+      <article class="course pending"><h3>The New Testament <span class="soon">Coming soon</span></h3><p>The Gospels, Acts, the Epistles, and Revelation, read book by book.</p></article>
+      <article class="course pending"><h3>The Old Testament <span class="soon">Coming soon</span></h3><p>The Law, the histories, the wisdom books, and the Prophets, and how they point to Christ.</p></article>
+      <article class="course pending"><h3>Apologetics <span class="soon">Coming soon</span></h3><p>Giving a reasoned answer for the hope within you, to skeptics and seekers alike.</p></article>
+      <article class="course pending"><h3>Robert's Rules of Debate <span class="soon">Coming soon</span></h3><p>How to argue a point in order, with courtesy and force, so the truth is heard and not shouted down.</p></article>
+      <article class="course pending"><h3>Heresies <span class="soon">Coming soon</span></h3><p>The false teachings the Church has faced, how to recognize them, and how Scripture answers them.</p></article>
+      <article class="course pending"><h3>Heaven and Hell <span class="soon">Coming soon</span></h3><p>What Scripture teaches about eternity, judgment, and the hope of the resurrection.</p></article>
+      <article class="course open"><h3>Hearing from God</h3><p>Recognizing the voice of God, testing what is heard against Scripture, and speaking only what He has said. Section 1 is open.</p><p class="course-link"><a href="hearing-from-god.html">Begin this course</a></p></article>
+      <article class="course open"><h3>Deliverance</h3><p>Spiritual warfare, the authority of the believer, and setting the captive free in the name of the Lord Jesus Christ. Videos are open; readings are being added.</p><p class="course-link"><a href="deliverance.html">Begin this course</a></p></article>
+      <article class="course pending"><h3>Biblical Finances <span class="soon">Coming soon</span></h3><p>Stewardship, tithing, giving, and handling money in the Church the way Scripture directs.</p></article>
+      <article class="course open"><h3>Healing and Miracles</h3><p>Faith only in God for healing, the authority given to the believer, and how signs follow those who believe. Section 1 and the closing section are open; more are being added.</p><p class="course-link"><a href="healing-and-miracles.html">Begin this course</a></p></article>
+      <article class="course open"><h3>Practical Training, Level One</h3><p>Eternity, the balance of sowing and reaping, real intelligence and its Maker, and what love and faith require in practice. Sections 1–4 are open.</p><p class="course-link"><a href="practical-training-level-one.html">Begin this course</a></p></article>
+      <article class="course open"><h3>Practical Training, Level Two</h3><p>Free will, hell and the lake of fire, mercy and grace, the boundaries of creation, and the destiny of the sons of God. Section 1 is open.</p><p class="course-link"><a href="practical-training-level-two.html">Begin this course</a></p></article>
+      <article class="course pending"><h3>Martyrship <span class="soon">Coming soon</span></h3><p>The cost of discipleship: the witness of those who died for the faith, and what it means to count the cost today.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="exams">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How a course ends</h2>
+      <p>Finishing the reading is not the end. Each course closes with an examination that shows exactly what you understood and what you did not.</p>
+    </div>
+    <div class="exam-grid">
+      <div>
+        <ol class="steps">
+          <li><span class="n">1</span><div><h3>Sit the examination</h3><p>Answer a set of questions drawn from the course readings. The passing standard is 80%.</p></div></li>
+          <li><span class="n">2</span><div><h3>Review your assessment</h3><p>See every question marked correct or incorrect, with a breakdown of your score by topic so you know where to return.</p></div></li>
+          <li><span class="n">3</span><div><h3>Receive your certificate</h3><p>Pass, and a formal certificate of completion is issued in your name with your score and the date.</p></div></li>
+        </ol>
+        <div class="score" aria-label="Sample assessment results">
+          <div class="big">95%</div>
+          <div class="sub">19 of 20 questions answered correctly. With honors, assessment passed.</div>
+          <div class="bars">
+            <div class="bar"><span>Scripture recall</span><i><b style="width:100%"></b></i><span>6 / 6</span></div>
+            <div class="bar"><span>Interpretation</span><i><b style="width:100%"></b></i><span>7 / 7</span></div>
+            <div class="bar"><span>Doctrine</span><i><b style="width:80%"></b></i><span>4 / 5</span></div>
+            <div class="bar"><span>Application</span><i><b style="width:100%"></b></i><span>2 / 2</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cert" aria-label="Sample certificate of completion">
+        <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+        <div class="school">The School of The Prophets</div>
+        <div class="title">Certificate of Completion</div>
+        <div class="certify">This is to certify that</div>
+        <div class="name">Student Name</div>
+        <p class="body">has successfully completed the formal assessment entitled <em>“The Beginning of Christ’s Ministry”</em> attaining a meritorious score of <strong>95% (19 of 20)</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
+        <div class="foot"><span>Bishop Robert P. Smith, Sr.</span><span>Date</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="training" class="on-paper">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Practical training</h2>
+      <p>Knowledge alone does not make a minister. Every diploma includes hands-on training in three parts, completed in order.</p>
+    </div>
+    <div class="practical">
+      <article>
+        <div class="step">Part one</div>
+        <h3>Take the course</h3>
+        <p>Learn the practice itself: what it is, why the Church does it, and how it is done well.</p>
+      </article>
+      <article>
+        <div class="step">Part two</div>
+        <h3>Watch it done</h3>
+        <p>Observe an experienced minister carrying out the practice in a real setting, and reflect on what you saw.</p>
+      </article>
+      <article>
+        <div class="step">Part three</div>
+        <h3>Do it while being graded</h3>
+        <p>Carry out the practice yourself while a supervisor watches and grades you. Pass, and the training is complete.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="japanese">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Japanese Holy Bible Study <span style="display:block;font-size:.7em;color:var(--gold-soft);margin-top:.2rem">日本語聖書研究</span></h2>
+      <p>A reading plan in Japanese through the Gospel of Luke, the Acts and the epistles, and the Psalms, with the text of the 口語訳 Holy Bible shown in traditional vertical writing.</p>
+    </div>
+    <a class="btn" href="japanese-bible-study.html">Open the study — 聖書研究を開く</a>
+  </div>
+</section>
+
+<section id="enroll" class="enroll">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Enroll</h2>
+      <p>Tell us who you are and which diploma you are pursuing. Bishop Robert P. Smith, Sr. will reply with your first course and reading.</p>
+    </div>
+    <div class="actions" style="border:0;padding:0;margin:0 0 1.2rem;justify-content:flex-start">
+      <button class="btn" type="button" id="showForm">Open the registration form</button>
+    </div>
+    <div class="form-frame" id="formFrame" hidden>
+      <iframe id="formIframe" title="Registration form" data-src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qKw8dVUMUlEMUoxUEU2VUI4OVhGWTlCNkYzTktKVi4u&embed=true" allowfullscreen></iframe>
+      <p class="note">If the form does not appear above, <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qKw8dVUMUlEMUoxUEU2VUI4OVhGWTlCNkYzTktKVi4u" target="_blank" rel="noopener" style="color:var(--gold-soft)">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="verse">“Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets.”</p>
+    <p class="ref">Amos 3:7</p>
+    <p>© <span id="year"></span> The School of The Prophets</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+const nav=document.querySelector('.nav'),mb=document.getElementById('menuBtn');
+mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);});
+document.getElementById('showForm').addEventListener('click',()=>{
+  const f=document.getElementById('formFrame'), i=document.getElementById('formIframe');
+  if(!i.src) i.src=i.dataset.src; f.hidden=false; document.getElementById('showForm').hidden=true;
+  setTimeout(()=>f.scrollIntoView({behavior:'smooth',block:'start'}),50);
+});
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
+</script>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practical Training, Level One — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top svg{width:34px;height:38px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .cert{
+    background:linear-gradient(180deg,#FBF7EC,#F0E8D3);color:var(--ink);text-align:center;
+    padding:3rem 2rem;margin:2rem auto 0;max-width:44rem;
+    border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:-12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+  }
+  .cert svg{width:60px;height:68px}
+  .cert .school{font-size:clamp(1.15rem,3.4vw,1.9rem);letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;font-weight:600;
+    background:linear-gradient(180deg,#F1DC9A 0%,#C9A24C 45%,#8E6A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 1px 0 rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;gap:.7rem}
+  .cert .school .orn{font-size:.9em;background:linear-gradient(180deg,#F1DC9A,#8E6A1E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cert .flourish{width:min(100%,22rem);height:auto;display:block;margin:.35rem auto 0}
+  .cert .motto{font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:var(--burgundy);margin-top:.5rem}
+  .cert .title{font-size:2.4rem;font-style:italic;margin:1rem 0 .6rem;color:var(--navy)}
+  .cert .certify{font-style:italic;color:var(--ink-soft)}
+  .cert .cname{font-size:2.4rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 2rem .2rem;margin:.5rem 0 1rem}
+  .cert .body{max-width:30rem;margin:0 auto 1.5rem;font-size:1.1rem}
+  .cert .body strong{color:var(--burgundy)}
+  .cert .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-top:2rem}
+  .cert .sigblock{flex:1;text-align:center}
+  .cert .above{height:3.2rem;display:flex;align-items:flex-end;justify-content:center;font-size:1.15rem;color:var(--ink)}
+  .cert .above.script{font-family:"Pinyon Script","EB Garamond",cursive;font-size:clamp(1.5rem,4vw,2.1rem);white-space:nowrap;color:var(--navy);line-height:1;transform:rotate(-3deg)}
+  .cert .line{border-top:1px solid var(--ink-soft);margin:.25rem 0 .3rem}
+  .cert .label{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
+  .cert .seal{width:88px;height:88px;border:2px solid var(--burgundy);border-radius:50%;display:grid;place-items:center;flex:none;outline:1px solid var(--burgundy);outline-offset:-7px;background:#FBF7EC}
+  .cert .seal svg{width:44px;height:50px}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .cert{box-shadow:none;margin:0 auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#0E1830" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <a href="index.html">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Practical Training, Level One</h2>
+    <p class="lesson" style="max-width:var(--measure)">The first level of practical training: how to think about eternity, how the universe keeps its balance, what it means that you are a real intelligence made by a Maker, and what love, the commandments, and faith require in practice. Each section begins with its video, followed by the reading. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">Walking blindfolded toward the cliff</a></li>
+      <li><a href="#lesson-2">Sowing and reaping: the balance of the universe</a></li>
+      <li><a href="#lesson-3">Artificial intelligence and real intelligence</a></li>
+      <li><a href="#lesson-4">Love, the commandments, and faith</a></li>
+      <li class="toc-soon">Further sections <span class="soon">Coming soon</span></li>
+    </ol>
+
+    <div class="lesson">
+      <h3 id="lesson-1">1. Walking blindfolded toward the cliff</h3><div class="video"><iframe src="https://www.youtube.com/embed/oPq8pRlu7QQ" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/oPq8pRlu7QQ" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgA" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glA" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".8"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgA)"/>
+<circle cx="560" cy="60" r="110" fill="url(#glA)" opacity=".4"/>
+<path d="M0 150 L420 150 L440 165 L455 200 L470 260 L0 260z" fill="#2A3A29"/>
+<path d="M0 150 L420 150 L430 158 L0 162z" fill="#3C5232"/>
+<path d="M455 200 L640 200 L640 260 L470 260z" fill="#0A1128"/>
+<g stroke="#F1DC9A" stroke-width="2" opacity=".5" fill="none"><path d="M40 175 l14 -6 v12z" fill="#F1DC9A" stroke="none"/><path d="M100 175 l14 -6 v12z" fill="#F1DC9A" stroke="none"/><path d="M160 175 l14 -6 v12z" fill="#F1DC9A" stroke="none"/><path d="M220 175 l14 -6 v12z" fill="#F1DC9A" stroke="none"/><path d="M280 175 l14 -6 v12z" fill="#F1DC9A" stroke="none"/><path d="M340 175 l14 -6 v12z" fill="#F1DC9A" stroke="none"/></g>
+<g transform="translate(330 60)"><circle cx="0" cy="18" r="16" fill="#F5EFE1"/><rect x="-16" y="12" width="32" height="8" fill="#7A2334"/><path d="M-14 36 h28 l6 60 h-12 l-4 -30 -4 30 h-12 z" fill="#F5EFE1"/><path d="M-14 40 l-26 30 M14 40 l30 -10" stroke="#F5EFE1" stroke-width="7" stroke-linecap="round"/><path d="M-4 96 l-6 56 M6 96 l14 52" stroke="#F5EFE1" stroke-width="8" stroke-linecap="round"/></g>
+<text x="545" y="240" font-family="EB Garamond,serif" font-size="18" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">eternity</text>
+</svg></figure>
+<p>Start with a few questions. When you drive, do you put on a seat belt? Before you cross a busy street, do you look both ways, or do you dive into traffic and hope everything will be all right? And all of us have been to funerals. We know we are going to die. Death is around the corner, and it could happen at any moment.</p>
+<p>Here is a fact of arithmetic: the majority of existence will occur after you die. So much of existence comes after your death that your time here on earth is, mathematically, infinitesimally small. Compared with forever, it is almost nothing.</p>
+<p>So picture it this way. We are all walking toward a cliff. Some are close to the edge and some have a long walk ahead, but every one of us is blindfolded. That is what it means not to know when you will die. You could die tomorrow, next year, or in twenty years, but you will go off the edge. You have watched other people go off it. You held ceremonies for them.</p>
+<p>And the ground is a conveyor belt. Time cannot be stopped. You can run the other way — eat healthy, wear the seat belt, test a tank for gas before you climb in, look both ways — and that is wise. But the belt is always faster than you. Run as hard as you can and the best you will do is about a hundred and twenty years, and then you are off the edge.</p>
+<p>People talk about religious delusion. But here is one delusion we can prove: the delusion of not caring that we are walking toward the cliff. If you walk blindfolded toward a wall, you put your hands up by instinct, even though bumping a wall is nothing — a bloody nose, a tissue, and life goes on. Yet when it comes to the edge of the cliff, which you could reach at any moment, people do not want to think about it. Mention it and they say, "Talk about something more positive." More positive? This is the most important event of your existence.</p>
+<p>"I think nothing happens," some say. Try living the rest of your life like that. Cross the street without looking because you think you will be all right. Climb into a tank without checking the air. You would never do it, because you could be hit by a truck, and a truck is a small thing next to eternity. Whatever happens after death is infinitely more important than anything happening here, because here is for a moment and there is forever and ever.</p>
+<p>Fear of the unknown is not weakness; it is an instinct that keeps you alive. It is why people are afraid of the dark: you do not know whether there is a hole, a lion, a man with a gun, or just the corner of a table waiting for your toe. All you know is that you do not know, and that is enough to make you careful. It is why you do not fly down the stairs headfirst when you are late, and why you do not floor the gas pedal the whole way to work. That fear makes you smart.</p>
+<p>So apply the same intelligence to the one certainty you have. We know we are going to die. Therefore we need to think seriously about what happens when we do.</p>
+<aside class="key"><div class="key-t">Hold onto this: Most of your existence is after death</div><p>Life here is a moment; what follows is forever. The same instinct that makes you look both ways should make you investigate eternity.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. Sowing and reaping: the balance of the universe</h3><div class="video"><iframe src="https://www.youtube.com/embed/AZrEpTuK-gE" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/AZrEpTuK-gE" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgD" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<linearGradient id="gdD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1DC9A"/><stop offset="1" stop-color="#9A7326"/></linearGradient></defs>
+<rect width="640" height="260" fill="url(#bgD)"/>
+<path d="M0 260 V200 C100 180 200 215 320 200 C440 185 540 215 640 200 V260z" fill="#2A3A29"/>
+<path d="M0 260 V225 C160 210 320 235 640 222 V260z" fill="#1F2D1F"/>
+<g transform="translate(120 60)"><circle cx="0" cy="18" r="16" fill="#F5EFE1"/><path d="M-14 36 h28 l6 60 h-40z" fill="#F5EFE1"/><path d="M14 44 l46 -22" stroke="#F5EFE1" stroke-width="7" stroke-linecap="round"/><path d="M-4 96 l-8 56 M6 96 l10 56" stroke="#F5EFE1" stroke-width="8" stroke-linecap="round"/></g>
+<circle cx="200" cy="70" r="4" fill="#F1DC9A"/><circle cx="240" cy="85" r="4" fill="#F1DC9A"/><circle cx="285" cy="105" r="4" fill="#F1DC9A"/><circle cx="330" cy="130" r="4" fill="#F1DC9A"/><circle cx="375" cy="160" r="4" fill="#F1DC9A"/><circle cx="420" cy="190" r="4" fill="#F1DC9A"/>
+<path d="M180 60 C260 20 380 60 450 190" stroke="#F1DC9A" stroke-width="1.5" fill="none" stroke-dasharray="4 7" opacity=".6"/>
+<path d="M430 200 c0 -22 -14 -30 -14 -46 c14 8 14 20 14 46z M430 200 c0 -22 14 -30 14 -46 c-14 8 -14 20 -14 46z M430 200 v-58" fill="#D4AF4F" stroke="#D4AF4F" stroke-width="2"/><path d="M466 200 c0 -22 -14 -30 -14 -46 c14 8 14 20 14 46z M466 200 c0 -22 14 -30 14 -46 c-14 8 -14 20 -14 46z M466 200 v-58" fill="#D4AF4F" stroke="#D4AF4F" stroke-width="2"/><path d="M502 200 c0 -22 -14 -30 -14 -46 c14 8 14 20 14 46z M502 200 c0 -22 14 -30 14 -46 c-14 8 -14 20 -14 46z M502 200 v-58" fill="#D4AF4F" stroke="#D4AF4F" stroke-width="2"/><path d="M538 200 c0 -22 -14 -30 -14 -46 c14 8 14 20 14 46z M538 200 c0 -22 14 -30 14 -46 c-14 8 -14 20 -14 46z M538 200 v-58" fill="#D4AF4F" stroke="#D4AF4F" stroke-width="2"/><path d="M574 200 c0 -22 -14 -30 -14 -46 c14 8 14 20 14 46z M574 200 c0 -22 14 -30 14 -46 c-14 8 -14 20 -14 46z M574 200 v-58" fill="#D4AF4F" stroke="#D4AF4F" stroke-width="2"/><path d="M610 200 c0 -22 -14 -30 -14 -46 c14 8 14 20 14 46z M610 200 c0 -22 14 -30 14 -46 c-14 8 -14 20 -14 46z M610 200 v-58" fill="#D4AF4F" stroke="#D4AF4F" stroke-width="2"/>
+<path d="M300 40 a6 6 0 1 1 0 -0.1" fill="#F1DC9A"/>
+<text x="120" y="245" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">sowing</text>
+<text x="520" y="245" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">reaping</text>
+</svg></figure>
+<p>We have observed that in the universe everything balances out. The Bible calls it sowing and reaping. Hinduism calls it karma. But the Bible represents the oldest religion on earth, and you could argue that Christianity is the oldest, because the Christianity we have today is only the most recent covenant. The first covenant was made with the first man, Adam, and the Creator.</p>
+<p>Think of any simulation. To enter the internet, you need an avatar; you cannot jump bodily into the computer and run around inside. So it is with the Creator and His creation. And it is foolish to look for God inside the machine, like an AI trying to prove the existence of the mainframe's designer by running code tests on its own internal software. The designer would not be in there.</p>
+<p>In fact we have a great deal of evidence of spiritual activity. Because science cannot fit it inside its tests, it is filed under parapsychology — which is an admission that something is happening; it is simply outside their modes of testing. Those modes may open up. Standard physics gives no way to reach Alpha Centauri or any distant star; you would need to step into a new physics. Today they call that new physics "spooky," as if it were religious, when it is just physics. The spiritual realm is science at a higher level.</p>
+<p>People before us would have looked at today's technology and called it witchcraft. Scientists today look at the more advanced science of the spiritual realms and call it spooky, magical, religious. One day future scientists will look back at them the way today's scientists look back at those who thought flight was magic. This is not controversial: no scientist teaches from a book written fifty years ago, and if you ask why, the answer is "because it's wrong." Every generation of scientists has said the previous books are wrong. In the year 3000 no one will teach from the books of 2023, for the same reason.</p>
+<p>So we know there is always a balance. You have seen it in your own life, and others have seen it in theirs: what you do to someone usually comes back to you. Every force has an equal and opposite force in the laws of physics, and the same holds in the laws of the spiritual realm. The sowing and reaping God spoke of in the Holy Bible is observable and testable. Fire a missile and engineers must calculate the trajectory, because what goes up comes back down. The physical realm behaves that way, and the spiritual realm behaves the exact same way. Every action has an equal and opposite reaction; what goes around comes around. That is why it matters to do right by others.</p>
+<p>And here is the point that builds on it. Many people try to do right by other people. But if it is scientifically impossible that there was no Creator, no initiator of reality, then that Person must be included too. You cannot refuse to wrong your neighbor and then wrong the Creator. Do right by the Creator and by others.</p>
+<aside class="key"><div class="key-t">Hold onto this: Balance is a law, not a slogan</div><p>Sowing and reaping is as observable as a missile's arc. And the Creator is someone you can do right or wrong by — include Him.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Artificial intelligence and real intelligence</h3><div class="video"><iframe src="https://www.youtube.com/embed/894D2aCK8Bg" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/894D2aCK8Bg" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgE" cx="70%" cy="40%" r="80%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glE" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgE)"/>
+<g stroke="#D4AF4F" stroke-width="2" fill="none" opacity=".8">
+<rect x="60" y="70" width="180" height="120" rx="6"/>
+<path d="M80 90 v80" /><path d="M102 90 v80" /><path d="M124 90 v80" /><path d="M146 90 v80" /><path d="M168 90 v80" /><path d="M190 90 v80" /><path d="M212 90 v80" /><path d="M234 90 v80" /><path d="M80 90 h154" /><path d="M80 110 h154" /><path d="M80 130 h154" /><path d="M80 150 h154" /><path d="M80 170 h154" />
+</g>
+<rect x="78" y="88" width="6" height="6" fill="#D4AF4F"/><rect x="78" y="168" width="6" height="6" fill="#D4AF4F"/><rect x="100" y="148" width="6" height="6" fill="#D4AF4F"/><rect x="122" y="128" width="6" height="6" fill="#D4AF4F"/><rect x="144" y="108" width="6" height="6" fill="#D4AF4F"/><rect x="166" y="88" width="6" height="6" fill="#D4AF4F"/><rect x="166" y="168" width="6" height="6" fill="#D4AF4F"/><rect x="188" y="148" width="6" height="6" fill="#D4AF4F"/><rect x="210" y="128" width="6" height="6" fill="#D4AF4F"/><rect x="232" y="108" width="6" height="6" fill="#D4AF4F"/>
+<text x="150" y="222" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">AI: switches upon switches</text>
+<circle cx="460" cy="120" r="100" fill="url(#glE)" opacity=".5"/>
+<path d="M460 50 c-40 0 -62 30 -62 62 c0 22 10 36 24 48 v22 h76 v-22 c14 -12 24 -26 24 -48 c0 -32 -22 -62 -62 -62z" fill="#F1DC9A"/>
+<path d="M446 160 v-30 l7 -10 -14 -12 14 -12 -14 -12 7 -8 M474 160 v-30 l-7 -10 14 -12 -14 -12 14 -12 -7 -8" stroke="#0A1128" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M428 196 h64 M434 208 h52" stroke="#F1DC9A" stroke-width="4" stroke-linecap="round"/>
+<text x="460" y="240" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">RI: real intelligence</text>
+</svg></figure>
+<p>We are speaking of things far beyond the universe, beyond alien technology. People could not understand alien technology, let alone the Creator's technology. But we have something in our own hands that helps: humans have been creating AI.</p>
+<p>"AI" is a misnomer. It stands for artificial intelligence, not real intelligence. When someone says, "That robot really thinks," then by definition it is not AI, because AI means it is not thinking; it is artificial. Even a toilet is AI in its mechanism. Flush it and it sends enough water to create a suction that clears the bowl, then stops, then refills the tank until it reaches a set level and stops again. That looks like it is intelligently managing its own water system, but it uses no electricity, only switches. A microprocessor uses switches too. AI is a great many switches configured in a very complex fashion, layer upon layer. It is not real intelligence.</p>
+<p>People say they are terrified of AI and what it can do, and they are right to be. But God is dealing with something far greater than AI. He is dealing with RI: real intelligence. Not artificial. It really is thinking. If AI is terrifying and requires power to manage, imagine RI. RI could destroy humanity in a moment. To manage RI you would have to be almighty, all-powerful, all-intelligent, all-knowing — far beyond what is needed for AI.</p>
+<p>With RI, just as with AI, there are specifications and parameters. Things self-destruct when they do not treat one another with respect, and when they do not treat the Creator with respect. Imagine an intelligent car that picks your kids up from school, takes itself for an oil change and gas, parks itself in the garage, and speeds away if someone is shooting at you. Impressive. And who cares whether that car is courteous to other cars on the road and lets them keep their lane if it will not do what you tell it? If it decides it no longer wants to pick you up, no longer wants oil changes, and has discovered that oil in the gas tank feels good and gas in the engine feels good, so now it has health problems from doing things differently than it was designed to do — and it is not listening to you?</p>
+<p>What would a human do with that car? Melt it down. Put it in the furnace, because it is useless. It goes against the very reason it was created. That is the picture of a created intelligence that will not do what its Maker designed it to do.</p>
+<aside class="key"><div class="key-t">Hold onto this: AI is switches; you are RI</div><p>Humanity is real intelligence, made by a Maker with specifications. A creation that refuses its design is not free; it is broken, and headed for the furnace.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Love, the commandments, and faith</h3><div class="video"><iframe src="https://www.youtube.com/embed/HHzQoC1tJXc" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/HHzQoC1tJXc" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgF" cx="50%" cy="60%" r="80%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<linearGradient id="flF" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7A2334"/><stop offset=".5" stop-color="#E0642A"/><stop offset="1" stop-color="#F1DC9A"/></linearGradient></defs>
+<rect width="640" height="260" fill="url(#bgF)"/>
+<path d="M0 260 V215 H640 V260z" fill="#1A1410"/>
+<rect x="380" y="110" width="170" height="105" fill="#3B2A1E"/><path d="M370 112 L465 50 L560 112z" fill="#5A3E2B"/>
+<rect x="440" y="150" width="40" height="65" fill="#1A1410"/><rect x="500" y="130" width="30" height="30" fill="url(#flF)"/><rect x="400" y="130" width="30" height="30" fill="url(#flF)"/>
+<path d="M395 112 c-10 -30 10 -50 20 -70 c4 20 20 26 22 44 c14 -12 18 -30 14 -46 c18 20 30 40 26 72z M470 60 c-6 -20 6 -34 14 -46 c2 14 14 20 16 34 c8 -10 12 -22 10 -34 c14 14 20 28 16 48z" fill="url(#flF)"/>
+<g transform="translate(150 100)"><circle cx="0" cy="18" r="16" fill="#F5EFE1"/><path d="M-14 36 h28 l8 56 h-44z" fill="#F5EFE1"/><path d="M14 44 l40 -14 M-14 44 l-30 8" stroke="#F5EFE1" stroke-width="7" stroke-linecap="round"/><path d="M-6 92 l-30 40 M6 92 l30 36" stroke="#F5EFE1" stroke-width="8" stroke-linecap="round"/></g>
+<path d="M230 150 L360 150" stroke="#F1DC9A" stroke-width="2" stroke-dasharray="6 8" opacity=".7"/><path d="M350 140 l14 10 -14 10z" fill="#F1DC9A"/>
+<text x="150" y="245" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">who would you run in for?</text>
+</svg></figure>
+<p>So there were commandments and rules, and those commandments were based on doing what God wants first and doing what others want second. That is what the Bible calls love. In the Bible, love is not an emotion or a feeling ("I like you so much"). It is the sacrifice of your own will to the will of another.</p>
+<p>Picture a burning house. Who would you run into it for? The more you love a person, the more likely you are to run in. You would run in for your children. You might not run in for a friend, though you should. You might run in for a friend but not a stranger, though you should. You might run in for a stranger but not for your enemy, though you should. Love, biblically, is being willing to sacrifice yourself for the other person's benefit.</p>
+<p>Definitions belong to their source. Microsoft has proprietary definitions for its own technology, and those are Microsoft's to set. In the same way, "Christian" is a term invented in the Bible and defined there as a follower of the Lord Jesus Christ. Not someone who says they are a Christian; a follower. If you do not follow Him, you are not a Christian, simply because that is the definition, and definitions are facts you cannot argue away.</p>
+<p>The first four commandments are about loving God; the other six are about loving others. So there are really two commandments: love God with all your heart, mind, soul, and strength, and love others as yourself. The Ten are an expansion of those two.</p>
+<p>You have probably seen Ray Comfort of Living Waters give the test, so let's do it. Have you lied? What do you call someone who lies? A liar. Have you taken something that wasn't yours? Have you let a debt ride on your credit report, borrowed money and not returned it, downloaded music illegally, watched a movie from an unofficial upload instead of paying for it, been dishonest on your taxes, padded your résumé, or slept with someone who was in a covenant with someone else, violating a covenant the other party never agreed to have broken? All of that is theft. What do you call someone who steals? A thief. So what does that make you? A lying thief.</p>
+<p>Have you used God's name in vain? That is not only using it as a four-letter word of disgust. It is treating His name as worthless. Even people who never say "OMG" take His name in vain when they pray without expecting anything to happen — when they are in the hospital and want God to be the nurse who assists the doctor rather than the Doctor. He is the Creator. He does not exist to cheer you up. He is the designer and engineer of your body; He can actually heal you. He is not the corner mechanic who has to cut a piece from your muffler to patch your heart the way surgeons do. He made this reality. Treating Him as less makes a person a blasphemer.</p>
+<p>And notice something. People curse with the name of Jesus Christ. They do not curse with Muhammad's name, or with their mother's name. Of every god in the world, people curse only with the Christian God's name. Why? Not because Christians are dangerous: in India you can be set on fire for disrespecting the gods; in Pakistan you can be killed; in China you can be chained up; in North Korea you can be tortured for not worshiping the leader; even in Israel disrespect can get you killed. Nearly every religion on earth will kill you for disrespecting its god. Christians will get upset and say "I'll pray for you." So whatever argument you have against Christianity because "Christians do this," every other religion does it a hundred times over. Stay in facts and logic here.</p>
+<p>And understand what faith is. Faith is not believing things that make no sense. Faith is not needing it to make sense before you obey. Everything God does makes perfect sense, and there are explanations for everything, so there is no reason to float off into la-la land when we talk about religion. But if you want to grow closer to the Creator, you have to learn to act without demanding the explanation first. Those who believe only after they get the answers do receive a lesser reward and are used less than those who simply follow orders. It is the same in the military or in business: if the commander or the CEO has to explain every detail and prove it is a good idea before you will move, you are not getting promoted or handed greater responsibility.</p>
+<aside class="key"><div class="key-t">Hold onto this: Love is sacrifice, faith is obedience</div><p>Love is giving up your will for another's good; the burning house measures it. Faith is obeying before the explanation, not believing nonsense.</p></aside>
+<div class="check" data-check="3"></div>
+      <div class="coming"><span class="soon">Coming soon</span>&nbsp; Further sections will be added as each video is prepared. The assessment currently covers Sections 1–4.</div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit.</p>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script>
+const COURSE = {
+  title: "Practical Training, Level One",
+  assessment: "Practical Training, Level One",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = { MO:"Mortality and eternity", EV:"Evidence and reason", CR:"The Creator" };
+
+const QUESTIONS = [
+ {t:"MO", q:"Why does the lesson say what happens after death is infinitely more important than anything in this life?",
+  o:["Because religion says so","Because life here is a moment and what follows is forever","Because death is painful","Because no one can avoid funerals"], a:1, v:"James 4:14", vt:"For what is your life? It is even a vapour, that appeareth for a little time, and then vanisheth away.", l:1},
+ {t:"MO", q:"What does the lesson call the one delusion we can prove?",
+  o:["Believing in God without evidence","Not caring that we are walking blindfolded toward death","Trusting doctors instead of God","Thinking fear is a weakness"], a:1, v:"Hebrews 9:27", vt:"And as it is appointed unto men once to die, but after this the judgment.", l:1},
+ {t:"MO", q:"Why does the lesson say fear of the dark is helpful?",
+  o:["Because darkness is evil","Because not knowing what is there makes you careful, and that keeps you alive","Because fear pleases God","Because it is a sign of guilt"], a:1, v:"Proverbs 22:3", vt:"A prudent man foreseeth the evil, and hideth himself: but the simple pass on, and are punished.", l:1},
+ {t:"EV", q:"How does the lesson show that sowing and reaping is observable science?",
+  o:["Because ministers preach it","Because every action has an equal and opposite reaction, in physics and in the spiritual realm alike","Because karma is taught in Hinduism","Because it appears in the oldest book"], a:1, v:"Galatians 6:7", vt:"Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap.", l:2},
+ {t:"EV", q:"What does the lesson say future scientists will do with today's science books?",
+  o:["Preserve them as final truth","Set them aside as wrong, just as today's scientists set aside the books of fifty years ago","Burn them","Translate them into new languages"], a:1, v:"1 Corinthians 13:9", vt:"For we know in part, and we prophesy in part.", l:2},
+ {t:"CR", q:"What conclusion does the lesson draw from the law of sowing and reaping and the existence of a Creator?",
+  o:["That doing right by people is enough","That you must do right by the Creator as well as by others","That karma replaces the need for God","That the Creator cannot be wronged"], a:1, v:"Ecclesiastes 12:13", vt:"Fear God, and keep his commandments: for this is the whole duty of man.", l:2},
+ {t:"CR", q:"According to the lesson, what would be required to manage real intelligence (RI)?",
+  o:["A faster computer","A being that is almighty, all-powerful, all-intelligent, and all-knowing","A government","Better switches"], a:1, v:"Psalm 147:5", vt:"Great is our Lord, and of great power: his understanding is infinite.", l:3},
+ {t:"CR", q:"What does the intelligent car that stops obeying its owner illustrate?",
+  o:["That machines will one day replace people","That a creation which refuses its design is useless and fit for the furnace","That cars should not be trusted","That respect between cars is unnecessary"], a:1, v:"Matthew 3:10", vt:"Every tree which bringeth not forth good fruit is hewn down, and cast into the fire.", l:3},
+ {t:"CR", q:"How does the Bible define love, according to the lesson?",
+  o:["A strong feeling of affection","The sacrifice of your own will to the will of another","Loyalty to family","Kindness to strangers"], a:1, v:"John 15:13", vt:"Greater love hath no man than this, that a man lay down his life for his friends.", l:4},
+ {t:"CR", q:"What does the lesson say faith is?",
+  o:["Believing things that don't make sense","Not needing it to make sense before you obey","Waiting for proof before acting","Feeling certain"], a:1, v:"Hebrews 11:8", vt:"By faith Abraham, when he was called to go out… obeyed; and he went out, not knowing whither he went.", l:4},
+ {t:"EV", q:"What point does the lesson draw from the fact that people curse only with the name of Jesus Christ?",
+  o:["That Christians are violent","That the argument 'Christians do this' applies a hundred times more to every other religion","That God's name should never be spoken","That cursing is harmless"], a:1, v:"Exodus 20:7", vt:"Thou shalt not take the name of the LORD thy God in vain; for the LORD will not hold him guiltless that taketh his name in vain.", l:4},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["Walking blindfolded toward the cliff", "Sowing and reaping: the balance of the universe", "Artificial intelligence and real intelligence", "Love, the commandments, and faith"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",()=>{ buildExam(); goto(3); });
+
+function buildExam(){
+  const f = $("#examForm"); f.innerHTML="";
+  QUESTIONS.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = QUESTIONS.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  showResults(answers);
+  goto(4);
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===QUESTIONS[i].a).length;
+  const pct = Math.round(correct/QUESTIONS.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${QUESTIONS.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  QUESTIONS.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="cert" id="cert">
+      <div class="school"><span class="orn">✦</span>The School of The Prophets<span class="orn">✦</span></div>
+      <svg class="flourish" viewBox="0 0 360 24" aria-hidden="true" fill="none" stroke="#C9A24C" stroke-width="1.5" stroke-linecap="round"><path d="M10 12 H150 M210 12 H350"/><path d="M150 12 c8-10 16-10 22 0 c6 10 14 10 22 0 M154 12 c6 8 12 8 18 0"/><circle cx="180" cy="12" r="3" fill="#C9A24C" stroke="none"/><path d="M10 12 l6-4 M10 12 l6 4 M350 12 l-6-4 M350 12 l-6 4"/></svg>
+      <div class="motto">Veritas · Fides</div>
+      <div class="title">Certificate of Completion</div>
+      <div class="certify">This is to certify that</div>
+      <div class="cname">${student.name}</div>
+      <p class="body">a scholar at the ${LEVEL_LABEL[student.level]||student.level} level, has successfully completed the formal assessment entitled <em>“${COURSE.assessment}”</em> attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}% (${correct} of ${QUESTIONS.length})</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
+      <div class="foot">
+        <div class="sigblock"><div class="above script">Robert P. Smith, Sr.</div><div class="line"></div><div class="label">Bishop Robert P. Smith, Sr.</div></div>
+        <div class="seal"><svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="sigblock"><div class="above">${date}</div><div class="line"></div><div class="label">Date</div></div>
+      </div>
+    </div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = QUESTIONS.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "In the picture of the cliff, what does the conveyor belt stand for?", "o": ["Bad habits that shorten life", "Time, which cannot be stopped and always outruns you", "The temptations of the world", "The pressure of other people"], "a": 1, "e": "Careful living is like running the other way, but the belt of time is faster. Everyone reaches the edge."}, {"q": "Why does the lesson say looking for God inside the universe with physical tests is foolish?", "o": ["Because God hides from scientists", "Because a designer is not inside the program He wrote, like a mainframe's designer is not inside the code", "Because science is always wrong", "Because only priests can find God"], "a": 1, "e": "An AI running code tests on itself will never find the mainframe's designer. The Creator stands outside creation."}, {"q": "Why does the lesson say a toilet counts as AI?", "o": ["Because it uses electricity", "Because it manages its own water with switches, the same principle as a microprocessor", "Because it was invented by engineers", "Because it cannot think"], "a": 1, "e": "Flush, suction, refill, stop: all switches. Layer enough switches and you get AI, but never real thinking."}, {"q": "How does the lesson reduce the Ten Commandments?", "o": ["To one rule: do no harm", "To two: love God with everything, and love others as yourself", "To four rules about worship", "To six rules about neighbors"], "a": 1, "e": "Four commandments are about loving God, six about loving others. The Ten expand those two."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",()=>{ buildExam(); goto(3); });
+</script>
+</body>
+</html>

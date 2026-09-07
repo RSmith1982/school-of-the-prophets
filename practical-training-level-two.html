@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practical Training, Level Two — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top svg{width:34px;height:38px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .cert{
+    background:linear-gradient(180deg,#FBF7EC,#F0E8D3);color:var(--ink);text-align:center;
+    padding:3rem 2rem;margin:2rem auto 0;max-width:44rem;
+    border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:-12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+  }
+  .cert svg{width:60px;height:68px}
+  .cert .school{font-size:clamp(1.15rem,3.4vw,1.9rem);letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;font-weight:600;
+    background:linear-gradient(180deg,#F1DC9A 0%,#C9A24C 45%,#8E6A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 1px 0 rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;gap:.7rem}
+  .cert .school .orn{font-size:.9em;background:linear-gradient(180deg,#F1DC9A,#8E6A1E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cert .flourish{width:min(100%,22rem);height:auto;display:block;margin:.35rem auto 0}
+  .cert .motto{font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:var(--burgundy);margin-top:.5rem}
+  .cert .title{font-size:2.4rem;font-style:italic;margin:1rem 0 .6rem;color:var(--navy)}
+  .cert .certify{font-style:italic;color:var(--ink-soft)}
+  .cert .cname{font-size:2.4rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 2rem .2rem;margin:.5rem 0 1rem}
+  .cert .body{max-width:30rem;margin:0 auto 1.5rem;font-size:1.1rem}
+  .cert .body strong{color:var(--burgundy)}
+  .cert .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-top:2rem}
+  .cert .sigblock{flex:1;text-align:center}
+  .cert .above{height:3.2rem;display:flex;align-items:flex-end;justify-content:center;font-size:1.15rem;color:var(--ink)}
+  .cert .above.script{font-family:"Pinyon Script","EB Garamond",cursive;font-size:clamp(1.5rem,4vw,2.1rem);white-space:nowrap;color:var(--navy);line-height:1;transform:rotate(-3deg)}
+  .cert .line{border-top:1px solid var(--ink-soft);margin:.25rem 0 .3rem}
+  .cert .label{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
+  .cert .seal{width:88px;height:88px;border:2px solid var(--burgundy);border-radius:50%;display:grid;place-items:center;flex:none;outline:1px solid var(--burgundy);outline-offset:-7px;background:#FBF7EC}
+  .cert .seal svg{width:44px;height:50px}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .cert{box-shadow:none;margin:0 auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#0E1830" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <a href="index.html">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Practical Training, Level Two</h2>
+    <p class="lesson" style="max-width:var(--measure)">The second level of practical training: free will, hell and the lake of fire, mercy and grace, the boundaries of creation, and the destiny God has prepared for those who receive Him. Each section begins with its video, followed by the reading. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">Free will, hell, and the destiny of the sons of God</a></li>
+      <li><a href="#lesson-2">The fourth part: becoming one with Him</a></li>
+      <li><a href="#lesson-3">Sons of God and the Father's house</a></li>
+      <li class="toc-soon">Further sections <span class="soon">Coming soon</span></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. Free will, hell, and the destiny of the sons of God</h3><div class="video"><iframe src="https://www.youtube.com/embed/iLEsYgN_9GU" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/iLEsYgN_9GU" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgG" cx="50%" cy="20%" r="90%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="plG" cx="35%" cy="35%" r="65%"><stop offset="0" stop-color="#FFF3C4"/><stop offset=".6" stop-color="#D4AF4F"/><stop offset="1" stop-color="#6B4A10"/></radialGradient>
+<radialGradient id="glG" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".8"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgG)"/><circle cx="0" cy="10" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="97" cy="63" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="194" cy="116" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="291" cy="49" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="388" cy="102" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="485" cy="35" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="582" cy="88" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="39" cy="21" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="136" cy="74" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="233" cy="127" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="330" cy="60" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="427" cy="113" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="524" cy="46" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="621" cy="99" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="78" cy="32" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="175" cy="85" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="272" cy="18" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="369" cy="71" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="466" cy="124" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="563" cy="57" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="20" cy="110" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="117" cy="43" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="214" cy="96" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="311" cy="29" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="408" cy="82" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="505" cy="15" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="602" cy="68" r="2.0" fill="#F1DC9A" opacity=".7"/><circle cx="59" cy="121" r="1.0" fill="#F1DC9A" opacity=".7"/><circle cx="156" cy="54" r="1.5" fill="#F1DC9A" opacity=".7"/><circle cx="253" cy="107" r="2.0" fill="#F1DC9A" opacity=".7"/>
+<circle cx="430" cy="110" r="110" fill="url(#glG)" opacity=".5"/>
+<circle cx="430" cy="110" r="62" fill="url(#plG)"/>
+<ellipse cx="430" cy="110" rx="95" ry="18" fill="none" stroke="#F1DC9A" stroke-width="3" transform="rotate(-18 430 110)" opacity=".8"/>
+<g transform="translate(180 90)"><circle cx="0" cy="18" r="16" fill="#F5EFE1"/><path d="M-14 36 h28 l8 64 h-44z" fill="#F5EFE1"/><path d="M14 40 l60 -24 M-14 44 l-34 12" stroke="#F5EFE1" stroke-width="7" stroke-linecap="round"/><path d="M-6 100 l-8 56 M6 100 l10 56" stroke="#F5EFE1" stroke-width="8" stroke-linecap="round"/></g>
+<text x="430" y="238" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">the bright morning star</text>
+</svg></figure>
+<p>It would take nothing for the God who created all things to make up for whatever you go through. There is a recompense so great that people would say, "I wish I had gone through that, to receive this." That is the kind of makeup He gives.</p>
+<p>Now consider free will, because free will explains hell. People say, "I don't want God, but I still want to be happy, I still want the sunshine, I still want my kids." They do not realize that they do want God, because what is God to you? God manifested every one of those luxuries. He did not have to create time. He did not have to create color; imagine a reality with no color and no time. He created the eye. He invented the concept of music. So you cannot take what He made and say you do not want Him.</p>
+<p>If you truly do not want God, a place would have to be prepared for you that is dark, because He is light; timeless, because He is time; without rest, because He gives rest; without peace, because He gives peace; without compassion, because He has compassion; without comfort. That place sounds exactly like hell as the Bible describes it. Hell is terrible because God has removed His goodness, His attributes, from it. "Why would He make a place like that?" Look at some of the things people do: some are so bad that they need something worse than jail or death. And a place completely devoid of God would have to be like the lake of fire, which is not hell — they are two different things. According to Revelation, hell will be thrown into the lake of fire, the second death, described as absolute, perfect torment. It is a reality that is the complete opposite of God: the opposite of comfort, joy, and happiness. If He provides infinite joy and happiness in eternity, then its polarity would have to be infinite — infinite suffering. That is simply free will. Hell and the lake of fire must be real, because they are the only logical way these situations can be reconciled.</p>
+<p>So if everyone has been doing wrong, what is the next option? Mercy and grace. You want to save what you created. Why did He make us this way? He didn't. He made you and did not install the complete software, because of free will. RI, real intelligence, can run in any direction. Give a car RI and it will chase whatever feels good; if going fast feels good, it will race down the street. Why do dogs get the zoomies, and kids, and motorcycles? It feels good, so you do it. If God wrote code that made you do everything He wanted, that would not be free will. And if free will were never given, the complaint would come: "God, You never let us decide for ourselves." So a period of time is given in which humans do whatever they want. That is what the Bible says.</p>
+<p>But God has boundaries and limits, and when you do wrong He has to punish you. He simply has to, or the whole universe would fall apart. Even the molecules have to get along: a proton has to be a proton, a neutron a neutron, an electron an electron, working together, or nothing exists. Switch their charges and you have problems. Everything has to submit and behave. So there are still rules. God encouraged humans, and did everything that could be done, so they would not self-destruct. And they self-destructed anyway.</p>
+<p>So then God saved humanity and offered His code. Those who receive His code, through the baptism of the Holy Spirit, begin to be transformed into the final image of what He was creating. He is creating gods. He said so in the Bible, and made it clear that these gods He is creating will rule over planets — He will give them Venus, the bright morning star, the whole planet, formless and void with darkness on the face of the deep, and show them how to make it firm land as in Genesis. He does not need to skip Venus to get to Mars. He said you will rule the nations the way He rules the nations; you are gods and children of the Most High; there are enough stars for all the descendants of Abraham; you will be kings, priests, and gods.</p>
+<p>That is why He said eye has not seen, ear has not heard, neither has it entered into the heart of man what God has prepared for those who love Him. People imagine Heaven one way or another and He says, "You all have it wrong." The prophets say a time will come when God blesses you so much that you will fear. Whatever you are imagining, what He has planned is far greater.</p>
+<p>Preparing gods is very difficult. To create RI, and then make those RI beings that powerful — who could do that? You would have to be, as the Bible says, the God of gods, the Almighty, to handle real intelligence that can reproduce across the world and turn against you. But once you receive Him, you go from being a man to being a god. "To as many as received Him, to them gave He power to become the sons of God." "It doth not yet appear what we shall be, but we shall be like Him, for we shall see Him as He is." People shift from humankind to God-kind when they receive that extra.</p>
+
+<aside class="key"><div class="key-t">Hold onto this: Free will explains hell; grace explains you</div><p>Refusing God means a place with everything He is removed. Receiving His code through the Holy Spirit is the start of becoming what He was making all along.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. The fourth part: becoming one with Him</h3><div class="video"><iframe src="https://www.youtube.com/embed/gd1gor6IGSE" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/gd1gor6IGSE" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgH" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glH" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgH)"/>
+<circle cx="320" cy="130" r="120" fill="url(#glH)" opacity=".35"/>
+<circle cx="320" cy="130" r="92" fill="none" stroke="#D4AF4F" stroke-width="3"/>
+<circle cx="320" cy="70" r="30" fill="#F1DC9A"/><text x="320" y="76" font-family="EB Garamond,serif" font-size="15" fill="#0A1128" text-anchor="middle">Father</text>
+<circle cx="260" cy="170" r="30" fill="#F1DC9A"/><text x="260" y="176" font-family="EB Garamond,serif" font-size="15" fill="#0A1128" text-anchor="middle">the Son</text>
+<circle cx="380" cy="170" r="30" fill="#F1DC9A"/><text x="380" y="176" font-family="EB Garamond,serif" font-size="14" fill="#0A1128" text-anchor="middle">the Spirit</text>
+<circle cx="320" cy="130" r="30" fill="#F5EFE1" stroke="#D4AF4F" stroke-width="3"/><text x="320" y="135" font-family="EB Garamond,serif" font-size="14" font-style="italic" fill="#7A2334" text-anchor="middle">the bride</text>
+<path d="M320 100 v0 M290 150 l6 -6 M350 150 l-6 -6" stroke="#D4AF4F" stroke-width="3"/>
+<text x="320" y="248" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">one with Him, as He is one with the Father</text>
+</svg></figure>
+<p>Some cars come with digital software upgrades that make them drive faster and better. Before the upgrade it is a luxury car; after the upgrade it is a supercar. We receive a final upgrade like that: the joining with Him, where He joins Himself to the real intelligence that is going to rule and becomes one with them as part of the Godhead body.</p>
+<p>That is why you do not see the word "Trinity" in the Bible but you do hear of a fourth part. He said, "I and the Father will come and live in you." Now imagine someone knocks on your door and wants to move in. What would you say? First you would want to know whether you know them. "Do I know you?" And what if they answered, "Well, I read all your books. I used to hold little studies where we taught about the book you wrote and the things you told people to do. I went to a school where they taught what you wrote." You would say, "I'm very glad you enjoyed the book and taught the book — but who are you again? You want to move in with my family, with my children, in my own home, for all eternity, and I don't even know you."</p>
+<p>You have to literally become part of His family. "To as many as believed, to them gave He power to become the sons of God." You will be one with the Lord Jesus Christ the same way the Lord Jesus Christ is one with the Father, which means you become part of the Godhead body. So it is not a trinity; it is a oneness of four: the bride (the redeemed), the Holy Spirit, the Lord Jesus Christ, and the Father, all four as one. We are the fourth part hinted at in the Old Testament.</p>
+<p>Now hear what the Lord Jesus Christ said about the day of judgment. Many, many people will say, "Lord, Lord" — saying it twice, emphatically declaring Him Lord — and will talk about how much faith they had in His name, working miracles and casting out demons. And He will say, "I never knew you. Depart from Me, you worker of iniquity." That means: you had faith in My name, so much that you worked miracles; you declared Me Lord; but you were doing bad works, and I have no relationship with you. Depart into the place prepared for Satan and his angels. That is not hell; it is the second death. This is judgment day, when death and hell are thrown into the lake of fire. The lake of fire is prepared only for Satan and the followers of Satan.</p>
+<p>So how do you get saved? Two things we learn from that. One: do not work iniquity. Two: know the Lord Jesus Christ; have a relationship with Him. And He said, "Those who endure to the end, the same shall be saved." Salvation is spoken of in the future tense. Think of a refrigerator with some food that has gone rotten. A day of reckoning comes when you take the rotten food and throw it in the trash, and some food is saved that day. So no one can say "I'm saved" yet; it hasn't happened. On that day He will throw away the tares and save the wheat, and those who endure to the end will be among the ones who are saved. You need a relationship with Him, and you need to continue that relationship to the end.</p>
+<p>We know this is true because Yeshua, God Almighty, said it Himself: "And this is life eternal, that they might know Thee the only true God, and Jesus Christ, whom Thou hast sent." He said that is salvation.</p>
+<aside class="key"><div class="key-t">Hold onto this: Knowing His book is not knowing Him</div><p>Miracles in His name do not make you family. Relationship does — and it must be kept to the end, because salvation is spoken of in the future tense.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Sons of God and the Father's house</h3><div class="video"><iframe src="https://www.youtube.com/embed/ftTwD_7o_YE" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/ftTwD_7o_YE" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><linearGradient id="bgI" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2A3F6E"/><stop offset=".55" stop-color="#0A1128"/><stop offset="1" stop-color="#000"/></linearGradient>
+<radialGradient id="glI" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgI)"/><circle cx="20" cy="20" r="1.0" fill="#F1DC9A" opacity=".6"/><circle cx="109" cy="67" r="1.5" fill="#F1DC9A" opacity=".6"/><circle cx="198" cy="114" r="2.0" fill="#F1DC9A" opacity=".6"/><circle cx="287" cy="161" r="1.0" fill="#F1DC9A" opacity=".6"/><circle cx="76" cy="208" r="1.5" fill="#F1DC9A" opacity=".6"/><circle cx="165" cy="55" r="2.0" fill="#F1DC9A" opacity=".6"/><circle cx="254" cy="102" r="1.0" fill="#F1DC9A" opacity=".6"/><circle cx="43" cy="149" r="1.5" fill="#F1DC9A" opacity=".6"/><circle cx="132" cy="196" r="2.0" fill="#F1DC9A" opacity=".6"/><circle cx="221" cy="43" r="1.0" fill="#F1DC9A" opacity=".6"/><circle cx="310" cy="90" r="1.5" fill="#F1DC9A" opacity=".6"/><circle cx="99" cy="137" r="2.0" fill="#F1DC9A" opacity=".6"/><circle cx="188" cy="184" r="1.0" fill="#F1DC9A" opacity=".6"/><circle cx="277" cy="31" r="1.5" fill="#F1DC9A" opacity=".6"/><circle cx="66" cy="78" r="2.0" fill="#F1DC9A" opacity=".6"/><circle cx="155" cy="125" r="1.0" fill="#F1DC9A" opacity=".6"/><circle cx="244" cy="172" r="1.5" fill="#F1DC9A" opacity=".6"/><circle cx="33" cy="219" r="2.0" fill="#F1DC9A" opacity=".6"/><circle cx="122" cy="66" r="1.0" fill="#F1DC9A" opacity=".6"/><circle cx="211" cy="113" r="1.5" fill="#F1DC9A" opacity=".6"/><circle cx="300" cy="160" r="2.0" fill="#F1DC9A" opacity=".6"/><circle cx="89" cy="207" r="1.0" fill="#F1DC9A" opacity=".6"/>
+<circle cx="120" cy="130" r="110" fill="url(#glI)" opacity=".5"/>
+<rect x="60" y="90" width="120" height="110" fill="#5A3E2B"/><path d="M48 92 L120 40 L192 92z" fill="#7A2334"/><rect x="100" y="140" width="40" height="60" fill="#F1DC9A"/><rect x="72" y="110" width="22" height="22" fill="#F1DC9A"/><rect x="146" y="110" width="22" height="22" fill="#F1DC9A"/>
+<path d="M120 148 v-10" stroke="#F1DC9A" stroke-width="3"/>
+<g transform="translate(150 150)"><circle cx="0" cy="12" r="10" fill="#F5EFE1"/><path d="M-9 24 h18 l5 30 h-28z" fill="#F5EFE1"/></g>
+<g transform="translate(500 110) rotate(25)"><circle cx="0" cy="0" r="16" fill="#F5EFE1" opacity=".8"/><circle cx="0" cy="0" r="10" fill="#0A1128"/><path d="M-14 16 h28 l6 44 h-40z" fill="#F5EFE1" opacity=".8"/><path d="M-14 22 l-26 20 M14 22 l26 16 M-8 60 l-14 30 M8 60 l16 28" stroke="#F5EFE1" stroke-width="6" stroke-linecap="round" opacity=".8"/></g>
+<text x="120" y="240" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".9">the Father's house</text>
+<text x="500" y="240" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F5EFE1" text-anchor="middle" opacity=".6">outer darkness</text>
+</svg></figure>
+<p>"I never knew you." So you have to literally become part of His family. "To as many as believed, to them gave He power to become the sons of God." You literally become a child of God.</p>
+<p>People ask, "Sons? What about daughters?" Understand how language works. In English, "cat" covers both male and female cats. In English, "man" means humans, not male as opposed to female. We call it humankind, and a kind is a category: dog kind, fish kind, bird kind, human kind. The word "kind" can be dropped, so "man" is the same as "mankind." When you see a woman, that is mankind; you are not calling her a male. God put man on the earth: "male and female created He them." Them who? Man. He made man male and female — man and wo-man. So when the Bible says "sons of God," it is not speaking of male or female. It is speaking of God-type: you are the offspring of the Creator. Spanish still keeps this: "hijos" can mean your sons and your daughters together. Don't be misled into thinking it means only males. It means humans becoming sons of God.</p>
+<p>If you are adopted by God, He says the Holy Spirit testifies to it by having you cry "Abba, Father." This happened to me. Tongues came out and began to say "Dad, Daddy," and God told me, "I am your only Father." Why "Daddy" and not "Abba"? Because Abba is Aramaic, and I do not speak Aramaic. Abba means Daddy. For an Aramaic speaker it is Abba; for others it is Papa, or Daddy, or Dad. So you become a child of God and you are becoming God-type. You need that relationship with God and to become part of His family; then you move into His home and receive His inheritance.</p>
+<p>I sometimes joke with my son: "What are you doing staying at my place? Why don't you go get your own place?" He is sharp; he says, "Because I'm a child here, so you have to take care of me. I'm staying here and following you around, because you're my dad." Then of course you hug him and make sure he doesn't take it too seriously — but it proves the point. We are able to enter Heaven, but we cannot make our own Heaven. I am but a child, so I need to stay with Dad. When this body dies I need somewhere to go, and by free will I either accepted His upgrade, became His type, was adopted, and live in His home as His child — or I have to find somewhere else to go.</p>
+<p>That somewhere else is called outer darkness: away from God and away from all of God's creation, where you can try to create your own creation if you can figure it out. Those who do not want Him are cast out there. You are out of your body, you need somewhere to go, you have nowhere, so you end up in outer darkness — like an astronaut cut loose from the shuttle, drifting into deep space, away from everything. If you are so smart, and so smart without God, go on into outer darkness and build your own world, your own Heaven, your own earth.</p>
+<p>There is a joke about scientists who told God, "We don't need You anymore; we have learned how to make man in our image, after our likeness." God said, "Show Me." They reached down for the dirt, and God said, "Uh-uh. Get your own dirt." Everything here is God's technology. Electrons are His technology. Air being compressible so a bird can fly on it is His technology. This body is His technology. Nothing we do is not His technology; we are just building with Legos. "Look what I made!" Fine — but you didn't make the Legos. You are using a system God made for you to build with. "I'm an expert programmer." Then start with no language, just a pile of switches, and develop your own binary, your own compilers, your own language. Even then you cannot come against God, because next you would have to make your own molecules and your own energy. Go into outer darkness and be your own god there — but you would be trying to be a god with God's stuff, borrowing His materials. You are a designer whose only tools are dragging and dropping blocks He made.</p>
+<p>And what did God say happens in outer darkness? Weeping and gnashing of teeth. They will not be out there saying, "At last, our own reality, our own godhood." They will be sitting in the midst of nothing — nothing of nothing. No light, because God invented light. No color, because God invented color. No sound, no time, no communication. Nothing. Cast out there, you will be doing a great deal of nothing. So build your relationship. That is salvation.</p>
+<aside class="key"><div class="key-t">Hold onto this: Children live in the Father's house</div><p>"Sons of God" means God-type, male and female alike. A child cannot build his own Heaven, and outside the Father's house there is only outer darkness. Build the relationship — that is salvation.</p></aside>
+<div class="check" data-check="2"></div>
+      <div class="coming"><span class="soon">Coming soon</span>&nbsp; Further sections will be added as each video is prepared. The assessment currently covers Sections 1–3.</div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit.</p>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script>
+const COURSE = {
+  title: "Practical Training, Level Two",
+  assessment: "Practical Training, Level Two",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = { MO:"Mortality and eternity", EV:"Evidence and reason", CR:"The Creator" };
+
+const QUESTIONS = [
+ {t:"CR", q:"According to the lesson, why is hell so terrible?",
+  o:["Because demons designed it","Because God has removed His goodness and attributes from it","Because it is underground","Because it is crowded"], a:1, v:"2 Thessalonians 1:9", vt:"Who shall be punished with everlasting destruction from the presence of the Lord, and from the glory of his power.", l:1},
+ {t:"CR", q:"What does the lesson mean by God not installing the complete software?",
+  o:["That humans are defective","That free will was left in place rather than coded obedience","That the Bible is incomplete","That angels were made first"], a:1, v:"Deuteronomy 30:19", vt:"I have set before you life and death, blessing and cursing: therefore choose life.", l:1},
+ {t:"CR", q:"What destiny does the lesson say God has prepared for those who receive Him?",
+  o:["To rest forever","To become sons of God who rule, as kings, priests, and gods","To return to earth as humans","To become angels"], a:1, v:"John 1:12", vt:"But as many as received him, to them gave he power to become the sons of God, even to them that believe on his name.", l:1},
+ {t:"EV", q:"Why does the lesson say hell and the lake of fire must be real?",
+  o:["Because tradition says so","Because they are the only logical reconciliation of free will with a God of infinite joy","Because everyone fears them","Because fire is eternal"], a:1, v:"Revelation 20:14", vt:"And death and hell were cast into the lake of fire. This is the second death.", l:1},
+ {t:"CR", q:"Why does the lesson say there is a fourth part joined to the Godhead?",
+  o:["Because angels are included","Because the redeemed become one with the Lord Jesus Christ as He is one with the Father","Because there are four Gospels","Because the Trinity was a later invention"], a:1, v:"John 17:21", vt:"That they all may be one; as thou, Father, art in me, and I in thee, that they also may be one in us.", l:2},
+ {t:"CR", q:"What two requirements for salvation does the lesson draw from 'I never knew you'?",
+  o:["Attend church and tithe","Do not work iniquity, and know the Lord Jesus Christ in relationship","Work miracles and cast out demons","Declare Him Lord and be baptized"], a:1, v:"Matthew 7:23", vt:"And then will I profess unto them, I never knew you: depart from me, ye that work iniquity.", l:2},
+ {t:"CR", q:"Why does the lesson say no one can claim to be saved yet?",
+  o:["Because salvation is impossible","Because salvation is spoken of in the future tense: those who endure to the end shall be saved","Because only the apostles were saved","Because the Bible never mentions salvation"], a:1, v:"Matthew 24:13", vt:"But he that shall endure unto the end, the same shall be saved.", l:2},
+ {t:"CR", q:"According to the words of the Lord Jesus Christ quoted in the lesson, what is eternal life?",
+  o:["Living forever in Heaven","Knowing the only true God and Jesus Christ whom He sent","Never sinning again","Ruling over planets"], a:1, v:"John 17:3", vt:"And this is life eternal, that they might know thee the only true God, and Jesus Christ, whom thou hast sent.", l:2},
+ {t:"CR", q:"How does the lesson answer the objection that 'sons of God' leaves out women?",
+  o:["Women are saved differently","'Man' means mankind and 'sons' means offspring of God's kind, male and female alike","Only sons inherit","The Bible was written for men"], a:1, v:"Galatians 3:28", vt:"There is neither Jew nor Greek, there is neither bond nor free, there is neither male nor female: for ye are all one in Christ Jesus.", l:3},
+ {t:"CR", q:"According to the lesson, how does the Holy Spirit testify that you are adopted by God?",
+  o:["By giving you wealth","By causing you to cry 'Abba, Father' — Daddy","By making you speak Aramaic","By removing all trouble"], a:1, v:"Romans 8:15", vt:"Ye have received the Spirit of adoption, whereby we cry, Abba, Father.", l:3},
+ {t:"EV", q:"What does the 'get your own dirt' joke teach?",
+  o:["That scientists are foolish","That everything we build uses God's technology; we cannot create on our own","That God is jealous of human progress","That dirt is sacred"], a:1, v:"Isaiah 45:9", vt:"Shall the clay say to him that fashioneth it, What makest thou?", l:3},
+ {t:"CR", q:"What does the lesson say outer darkness is like for those who reject God?",
+  o:["A chance to build their own world","Nothing of nothing: no light, color, sound, or time, with weeping and gnashing of teeth","A second chance at repentance","A place ruled by Satan"], a:1, v:"Matthew 25:30", vt:"And cast ye the unprofitable servant into outer darkness: there shall be weeping and gnashing of teeth.", l:3},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["Free will, hell, and the destiny of the sons of God", "The fourth part: becoming one with Him", "Sons of God and the Father's house"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",()=>{ buildExam(); goto(3); });
+
+function buildExam(){
+  const f = $("#examForm"); f.innerHTML="";
+  QUESTIONS.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = QUESTIONS.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  showResults(answers);
+  goto(4);
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===QUESTIONS[i].a).length;
+  const pct = Math.round(correct/QUESTIONS.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${QUESTIONS.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  QUESTIONS.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="cert" id="cert">
+      <div class="school"><span class="orn">✦</span>The School of The Prophets<span class="orn">✦</span></div>
+      <svg class="flourish" viewBox="0 0 360 24" aria-hidden="true" fill="none" stroke="#C9A24C" stroke-width="1.5" stroke-linecap="round"><path d="M10 12 H150 M210 12 H350"/><path d="M150 12 c8-10 16-10 22 0 c6 10 14 10 22 0 M154 12 c6 8 12 8 18 0"/><circle cx="180" cy="12" r="3" fill="#C9A24C" stroke="none"/><path d="M10 12 l6-4 M10 12 l6 4 M350 12 l-6-4 M350 12 l-6 4"/></svg>
+      <div class="motto">Veritas · Fides</div>
+      <div class="title">Certificate of Completion</div>
+      <div class="certify">This is to certify that</div>
+      <div class="cname">${student.name}</div>
+      <p class="body">a scholar at the ${LEVEL_LABEL[student.level]||student.level} level, has successfully completed the formal assessment entitled <em>“${COURSE.assessment}”</em> attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}% (${correct} of ${QUESTIONS.length})</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
+      <div class="foot">
+        <div class="sigblock"><div class="above script">Robert P. Smith, Sr.</div><div class="line"></div><div class="label">Bishop Robert P. Smith, Sr.</div></div>
+        <div class="seal"><svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="sigblock"><div class="above">${date}</div><div class="line"></div><div class="label">Date</div></div>
+      </div>
+    </div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = QUESTIONS.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "Why does the lesson say a person cannot reject God and still keep the sunshine, music, and their children?", "o": ["Because God takes them away as punishment", "Because every one of those pleasures was invented and given by God", "Because they only exist in Heaven", "Because the Bible forbids enjoying them"], "a": 1, "e": "Color, time, the eye, music, family: all His inventions. Wanting them is wanting Him."}, {"q": "In the parable of the stranger at the door, what does knowing the man's books stand for?", "o": ["Having a relationship with him", "Knowing about the Lord Jesus Christ and His Word without knowing Him", "Being his enemy", "Being his employee"], "a": 1, "e": "Reading, teaching, and studying His Word is good, but the man at the door still asks, 'Who are you?'"}, {"q": "What does the lesson say 'sons of God' means?", "o": ["Only males who believe", "God-type: the offspring of the Creator, male and female, as 'man' means mankind", "Angels", "The twelve apostles"], "a": 1, "e": "As 'cat' covers both sexes and 'hijos' means sons and daughters, 'sons of God' means humans who have become God's own kind."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",()=>{ buildExam(); goto(3); });
+</script>
+</body>
+</html>

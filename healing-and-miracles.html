@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healing and Miracles — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top svg{width:34px;height:38px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .pending-note{font-style:italic;color:var(--ink-soft);border:1px dashed var(--gold);padding:.8rem 1rem;max-width:var(--measure)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .cert{
+    background:linear-gradient(180deg,#FBF7EC,#F0E8D3);color:var(--ink);text-align:center;
+    padding:3rem 2rem;margin:2rem auto 0;max-width:44rem;
+    border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:-12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+  }
+  .cert svg{width:60px;height:68px}
+  .cert .school{font-size:clamp(1.15rem,3.4vw,1.9rem);letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;font-weight:600;
+    background:linear-gradient(180deg,#F1DC9A 0%,#C9A24C 45%,#8E6A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 1px 0 rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;gap:.7rem}
+  .cert .school .orn{font-size:.9em;background:linear-gradient(180deg,#F1DC9A,#8E6A1E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cert .flourish{width:min(100%,22rem);height:auto;display:block;margin:.35rem auto 0}
+  .cert .motto{font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:var(--burgundy);margin-top:.5rem}
+  .cert .title{font-size:2.4rem;font-style:italic;margin:1rem 0 .6rem;color:var(--navy)}
+  .cert .certify{font-style:italic;color:var(--ink-soft)}
+  .cert .cname{font-size:2.4rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 2rem .2rem;margin:.5rem 0 1rem}
+  .cert .body{max-width:30rem;margin:0 auto 1.5rem;font-size:1.1rem}
+  .cert .body strong{color:var(--burgundy)}
+  .cert .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-top:2rem}
+  .cert .sigblock{flex:1;text-align:center}
+  .cert .above{height:3.2rem;display:flex;align-items:flex-end;justify-content:center;font-size:1.15rem;color:var(--ink)}
+  .cert .above.script{font-family:"Pinyon Script","EB Garamond",cursive;font-size:clamp(1.5rem,4vw,2.1rem);white-space:nowrap;color:var(--navy);line-height:1;transform:rotate(-3deg)}
+  .cert .line{border-top:1px solid var(--ink-soft);margin:.25rem 0 .3rem}
+  .cert .label{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
+  .cert .seal{width:88px;height:88px;border:2px solid var(--burgundy);border-radius:50%;display:grid;place-items:center;flex:none;outline:1px solid var(--burgundy);outline-offset:-7px;background:#FBF7EC}
+  .cert .seal svg{width:44px;height:50px}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .cert{box-shadow:none;margin:0 auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#0E1830" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <a href="index.html">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Healing and Miracles</h2>
+    <p class="lesson" style="max-width:var(--measure)">A course on faith only in God for healing, the authority given to the believer, and the signs that follow those who believe — ending with a prayer you pray for yourself, so that the evidence is in your own body. Each section begins with its video, followed by the reading. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">A key to faith: the wheat and the tares</a></li>
+      <li><a href="#lesson-2">Three levels of faith: God can, God can through you, God is willing</a></li>
+      <li><a href="#lesson-3">God is good: troubleshooting when healing doesn't come</a></li>
+      <li class="toc-soon">Further sections <span class="soon">Coming soon</span></li>
+      <li><a href="#lesson-final">Receive your healing now</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. A key to faith: the wheat and the tares</h3><div class="video"><iframe src="https://www.youtube.com/embed/s3rRvqBnuFY" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/s3rRvqBnuFY" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgM" cx="50%" cy="20%" r="90%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glM" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgM)"/>
+<circle cx="540" cy="50" r="40" fill="#F1DC9A"/><circle cx="540" cy="50" r="90" fill="url(#glM)" opacity=".5"/>
+<path d="M0 260 V190 C160 170 480 170 640 190 V260z" fill="#2A3A29"/>
+<path d="M114 200 v-70 M114 130 c-14 6 -18 20 -14 32 M114 130 c14 6 18 20 14 32 M114 150 c-12 6 -14 18 -10 28 M114 150 c12 6 14 18 10 28" stroke="#D4AF4F" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M106 122 l8 -14 8 14z" fill="#D4AF4F"/><path d="M168 200 v-70 M168 130 c-14 6 -18 20 -14 32 M168 130 c14 6 18 20 14 32 M168 150 c-12 6 -14 18 -10 28 M168 150 c12 6 14 18 10 28" stroke="#D4AF4F" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M160 122 l8 -14 8 14z" fill="#D4AF4F"/><path d="M276 200 v-70 M276 130 c-14 6 -18 20 -14 32 M276 130 c14 6 18 20 14 32 M276 150 c-12 6 -14 18 -10 28 M276 150 c12 6 14 18 10 28" stroke="#D4AF4F" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M268 122 l8 -14 8 14z" fill="#D4AF4F"/><path d="M330 200 v-70 M330 130 c-14 6 -18 20 -14 32 M330 130 c14 6 18 20 14 32 M330 150 c-12 6 -14 18 -10 28 M330 150 c12 6 14 18 10 28" stroke="#D4AF4F" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M322 122 l8 -14 8 14z" fill="#D4AF4F"/><path d="M438 200 v-70 M438 130 c-14 6 -18 20 -14 32 M438 130 c14 6 18 20 14 32 M438 150 c-12 6 -14 18 -10 28 M438 150 c12 6 14 18 10 28" stroke="#D4AF4F" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M430 122 l8 -14 8 14z" fill="#D4AF4F"/><path d="M492 200 v-70 M492 130 c-14 6 -18 20 -14 32 M492 130 c14 6 18 20 14 32 M492 150 c-12 6 -14 18 -10 28 M492 150 c12 6 14 18 10 28" stroke="#D4AF4F" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M484 122 l8 -14 8 14z" fill="#D4AF4F"/>
+<path d="M60 200 v-60 M60 150 l-14 -18 M60 165 l14 -16 M60 140 l10 -20" stroke="#6E7F5A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M222 200 v-60 M222 150 l-14 -18 M222 165 l14 -16 M222 140 l10 -20" stroke="#6E7F5A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M384 200 v-60 M384 150 l-14 -18 M384 165 l14 -16 M384 140 l10 -20" stroke="#6E7F5A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M546 200 v-60 M546 150 l-14 -18 M546 165 l14 -16 M546 140 l10 -20" stroke="#6E7F5A" stroke-width="3" fill="none" stroke-linecap="round"/>
+<text x="320" y="245" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">let both grow together until the harvest</text>
+</svg></figure>
+<p>"If you seek Me, you will find Me, if you seek Me with all your heart." God is ready to speak if you are ready to listen. This is <em>Live for Jesus: Revelations of the Holy Ghost</em>, with Pastor Robert Smith.</p>
+<p>The Lord showed me a vision after I left the radio last time. I believe God wants the revelations He has been pouring out to be formed into a book; He showed me reading from a page, so that He can pour out prophetically the same way and have it recorded. So we are going to take our time and chew through every revelation, so that everyone listening, everyone at church, and everyone following online can really digest it. I believe God wants an increase among the children of God, and I am excited to be one of the many He is using for it.</p>
+<blockquote>Father God, I thank You. I welcome Your Holy Spirit into the homes of all who are listening, and into their very temples, even as You fill me with Your presence right now. I yield myself to You, Holy Spirit, that You will take over and deliver what You have given me to those who have an ear to hear what You are saying. Give the gift of supernatural understanding to me and to everyone, that we may all partake and be well fed. I give You all the praise and all the glory, in the mighty name of Jesus Christ. Amen.</blockquote>
+<p>Take your swords. I read from the King James translation, the Gospel of St. Matthew, chapter 13, where the Lord Jesus Christ, Yeshua, taught His disciples a parable that I believe many Christians today do not fully digest. It touches a heresy that sits in the hearts of many saints, and I know for a fact that it affects the number of miracles that take place, because after I began to understand God better through this revelation, the miracles and supernatural manifestations of God — which are the confirming of the Word — began to increase.</p>
+<blockquote>Another parable put he forth unto them, saying, The kingdom of heaven is likened unto a man which sowed good seed in his field: but while men slept, his enemy came and sowed tares among the wheat, and went his way. But when the blade was sprung up, and brought forth fruit, then appeared the tares also. So the servants of the householder came and said unto him, Sir, didst not thou sow good seed in thy field? from whence then hath it tares? He said unto them, An enemy hath done this. The servants said unto him, Wilt thou then that we go and gather them up? But he said, Nay; lest while ye gather up the tares, ye root up also the wheat with them. Let both grow together until the harvest: and in the time of harvest I will say to the reapers, Gather ye together first the tares, and bind them in bundles to burn them: but gather the wheat into my barn. <span class="ref">Matthew 13:24–30</span></blockquote>
+<p>If I had to title this revelation, I would call it <em>a key to faith</em>. I believe there are three levels of revelation required for faith to reach the level of miracles. And I like to talk about miracles because I have noticed three kinds of churches.</p>
+<p>There are churches that pray for healing but do not really think any healing will happen, and if one does, everyone — including the people who prayed — starts to think it was fake, or fraud, or emotionalism. The idea that someone could actually be healed, that the things in the Bible could actually manifest, seems foreign there. Then there are churches that do believe in miracles and healings, but the pressure people put on a man of God raises his stress until many will not move in healing at all, for fear that if it does not happen it will lower how they are perceived. If a miracle does happen, he is exalted to super-apostle; if it does not, he is talked down badly. So you do not see many miracles in those environments either. And then there are churches I visit where miracle healings are commonplace. If you are sick, people pray for you; if you are healed, wonderful — it happens all the time.</p>
+<p>The Lord Jesus Christ said, "These signs shall follow them that believe: in My name… they shall lay hands on the sick, and they shall recover." That should bother us. It should push us to say, "God, You said this. What is wrong? Where is it?" — until it is not just some churches where healing is no big deal, but all of them. Look at the fivefold ministry: workers of healings are not even listed near the top. You go through all the great callings and, working your way down, you come to healers. It was considered commonplace. Remember when Paul was blind and someone laid hands on him and the scales fell off. Who was that Christian? Not an apostle. Just a man who said, "The Lord has sent me, that you might receive your sight and be filled with the Holy Ghost." Some average Christian. That is how healing should be: an average thing, done by your average Christian.</p>
+<p>So, the three levels of faith required to reach the level of healing — that is where we go next.</p>
+<aside class="key"><div class="key-t">Hold onto this: Healing should be ordinary</div><p>Ananias was no apostle, just a Christian who obeyed. The Lord Jesus Christ said the signs follow those who believe; if they don't, keep asking Him why until they do.</p></aside>
+<div class="check" data-check="0"></div>
+      <h3 id="lesson-2">2. Three levels of faith: God can, God can through you, God is willing</h3><div class="video"><iframe src="https://www.youtube.com/embed/ffS9RXEtpIE" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/ffS9RXEtpIE" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgN" cx="50%" cy="30%" r="90%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<linearGradient id="gdN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1DC9A"/><stop offset="1" stop-color="#9A7326"/></linearGradient>
+<radialGradient id="glN" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgN)"/>
+<circle cx="540" cy="70" r="100" fill="url(#glN)" opacity=".5"/>
+<rect x="80" y="190" width="480" height="30" fill="url(#gdN)"/><rect x="160" y="130" width="400" height="30" fill="url(#gdN)"/><rect x="240" y="70" width="320" height="30" fill="url(#gdN)"/>
+<text x="100" y="212" font-family="EB Garamond,serif" font-size="18" fill="#0A1128">God can</text>
+<text x="180" y="152" font-family="EB Garamond,serif" font-size="18" fill="#0A1128">God can through me</text>
+<text x="260" y="92" font-family="EB Garamond,serif" font-size="18" fill="#0A1128">God is willing</text>
+<g transform="translate(120 130)"><circle cx="0" cy="12" r="12" fill="#F5EFE1"/><path d="M-10 26 h20 l4 34 h-28z" fill="#F5EFE1"/><path d="M10 30 l22 -18" stroke="#F5EFE1" stroke-width="5" stroke-linecap="round"/></g>
+<text x="320" y="248" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">three levels of faith</text>
+</svg></figure>
+<p>So, the three levels of faith required to reach the level of healing. Just this weekend a young lady came in with a cast on her wrist. Some bone was missing, the doctors had tried different things, and she was in pain. We began to pray, and the gift of faith was there; the power of God had pushed out the spirit of doubt. That is the supernatural effect where you simply know they are going to be healed — no doubt, no struggle, you just know. It was a sweet anointing; you could almost feel where the Lord was. We prayed a little, ministered on other things to give God time, and a few seconds later asked how she felt. Warmth and tingling in her hand, and all the pain had left. At our church that is commonplace. The board is filled with testimonies from the previous senior pastor and from the ministry now. I cannot remember a week going by without some supernatural healing. Not because of super-apostles — there are simply a few things in the Bible that, once you get them straight, you flow the way God commanded us to flow.</p>
+<p><strong>Level one: God can.</strong> That is the easy one. Is anything too hard for the Lord? Is His arm ever too short? He is almighty; He made your body. Surprisingly, many people are not even at this level, mostly non-believers. But once you come into the kingdom under the name of Jesus Christ, the majority of Christians already believe God can. It is a requirement.</p>
+<p><strong>Level two: God can through us.</strong> Ephesians 3:20: He is able to do exceedingly abundantly above all that we ask or think, according to the power that worketh in us. Whatever you think He can do through you, He can do far more. You need to sit and meditate and pray over that Scripture until it is hidden in your heart. David hid the Word in his heart that he might not sin. Hidden in your heart does not mean you read it or memorized it. It means you meditate and pray over it, and God takes you through things in your life where He proves that Scripture to you, so that you <em>know</em> it — know in the biblical sense. Today "know" means you have the data. In the Bible, the word "know" is the same word the translators recorded when Mary said, "How shall this be, seeing I know not a man?" and when Jesus said, "I never knew you." He is God; He knows everybody. He meant, "I had no relationship with you." So you want to know that Scripture the way Mary meant it: relationship with it.</p>
+<p>Pray over Ephesians 3:20 until you have a solid knowing that He is able to do exceedingly abundantly above all you ask or imagine — according to the power that works in you. Not just the power that works in Benny Hinn or Prophet T.B. Joshua. In you. Greater is He that is in you than he that is in the world. Jesus said, "If you keep My commandments, I and the Father will come and live in you." I am speaking to those who have the Holy Spirit — Romans 8:9 says if you have not the Spirit of God you are none of His, and that is something to work on — but if you have the Holy Spirit, God lives inside you. The same Spirit that hovered over the world when it was formless and void, that said "Let there be light" and there was light, that made dry land appear. Tremendous things on a vast scale, done by the same exact Spirit that works inside you.</p>
+<p>Write this down: there is a difference between theology that reads well and theology that works. You will notice a difference between the theology of people God uses in miracles and the theology of people who only talk about the Bible. Some things sound good, but when you are laying hands on the sick in hospitals, you find out quickly what is clever preaching and what is the Word of God, because the Word of God actually works. When lives and health are at stake there is no time for theological debate. The same Spirit that created the heavens and the earth lives in you if you have the Holy Spirit. Benny Hinn does not have one Holy Spirit, T.B. Joshua another, and you a little one that can't do much. First Corinthians 12, on the gifts, keeps repeating "by the same Spirit." It is the same Spirit.</p>
+<p><strong>Level three: God is willing.</strong> This is the big one; this is what changes things. Here is why so few Christians are used in miracle healing though the Lord Jesus Christ said the signs would follow those who believe: most believe God can; fewer believe God can through them personally; and fewer still believe God is willing each time.</p>
+<p>Notice in prayer a slight difference between His <em>will</em> and His <em>willingness</em>. I will say, "God, if it be in Your will," and sometimes, "God, if You are willing." From experience, the percentage of miracles was lower when I said "will." Even so, I often leave it in His will, because I am not chasing percentages; it is not love of God to hunt for what He is willing to do instead of His perfect will, what He really wants done. Unless a situation is truly hurting me and I really need it — then I say, "God, if You are willing." That is a concession from His perfect will, and it is biblical. He gave one to Mary when He told her, "It is not yet My time," and she told the servants, "Whatever He tells you to do, do it," and He worked a miracle before His time. Not His perfect will, but He was willing. Perhaps there would have been fewer difficulties had the miracles started at His exact time. But it shows He listens to prayer. If there were no willingness and no concession, there would be zero reason to pray. He has everything laid out; if not a single person prayed, His Word would still not return void. Yet with Mary He showed He would work a miracle before His time just because she asked. God is in love. He wants your feedback. He wants you used to relating to Him and asking Him for things. My perfect desire for my children is what is healthy for them; but if my daughter tells me there is a dessert she loves, I listen, and in the right circumstances I let her have it, though the sugar is no good for her, because I love her and I want her to talk to me, not sit there like a robot. God gives fathers and families as a prophetic type of His relationship with us.</p>
+<p>Now His perfect will. James 4 says you have not because you ask not. Most people grab that one line like a football and run with it. Read the next line: you ask and receive not, because you ask amiss, that you may consume it upon your lusts. Then they get mad at God. The whole Gospel is about the fact that we fail to move in love. The other loves are selfish, about how someone makes you feel; agape is denial of yourself for what someone else needs. A prayer for your own lust is a prayer outside of love, a selfish prayer, and that is why James says it is not received.</p>
+<p>I am not big on gimme-gimme theology, but some things people would call materialistic I asked for and received immediately, because I was not asking for wanting's sake. I prayed over a tablet: "God, I could preach from it, study from it, make free calls on it, use it for work overseas — it would help me provide for my family and serve You." I found one with three markdowns, ordered it, and they lost the order. To make up for it they gave me a free month, which after the discounts was worth more than the tablet; I was paid to get it. A year and a half later my wife dropped it, the repair shop lost it, and they sent me the next newest version. God upgraded it. Same with my pickup: "God, I could use this for contracting, for loading speakers and chairs for street outreach, and for carrying my family." The Holy Spirit directed me to the vehicle. A loved one received a sum of money that was exactly the old debt to the same creditor plus the down payment, with exactly ten percent left over for the tithe, and she was intent on giving it to me. After I went into full-time ministry, the banker called, furious that I had financed elsewhere, refinanced me, and forced me into a payment $250 cheaper. That is what comes of asking for things not to be spent on your own lust.</p>
+<p>And do not be tricky with God. He sees clean through you. Do not take something you want and mold your prayer to say, "Well, I could use it this way." Have a genuine desire in your heart to serve God, and that will modify your prayer, so that you ask for things you can do God's will with.</p>
+<p>Second Corinthians 1:20: the promises of God are yes and amen. God really wants His will accomplished. Remember how Jesus taught us to pray: "Thy kingdom come, Thy will be done on earth as it is in Heaven." There is no sickness in Heaven; there is fullness of joy. He taught us to pray that earth would be the way Heaven is. Of course God wants that — He centered Himself in Heaven. The way Heaven is decorated, not just the streets of gold but the way you set your own house up because it is the way you like it, is the way He likes it: no tears, no suffering, no sickness, filled with His glory, filled with worship and praise. That is how He wants it on earth. That is why He commanded us: if you want to know how to pray, disciples, pray that it be on earth as it is in Heaven.</p>
+<aside class="key"><div class="key-t">Hold onto this: God can, God can through you, God is willing</div><p>Most Christians stop at level one. The same Spirit that said "Let there be light" is in you, and the Father who bent His timing for Mary is willing. Pray in love, not lust, and pray Heaven onto earth.</p></aside>
+<div class="check" data-check="1"></div>
+      <h3 id="lesson-3">3. God is good: troubleshooting when healing doesn't come</h3><div class="video"><iframe src="https://www.youtube.com/embed/u9wtDfG0rZI" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/u9wtDfG0rZI" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgO" cx="75%" cy="35%" r="85%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glO" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".95"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgO)"/>
+<rect x="60" y="150" width="60" height="70" rx="4" fill="#1A2748" stroke="#D4AF4F" stroke-width="3"/><text x="90" y="192" font-family="EB Garamond,serif" font-size="14" fill="#F1DC9A" text-anchor="middle">POWER</text><circle cx="90" cy="165" r="5" fill="#4CAF50"/>
+<path d="M120 185 H250" stroke="#D4AF4F" stroke-width="5" stroke-linecap="round"/>
+<path d="M250 185 l22 -22" stroke="#D4AF4F" stroke-width="5" stroke-linecap="round"/>
+<path d="M300 185 H420" stroke="#D4AF4F" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 0"/>
+<circle cx="250" cy="185" r="6" fill="#F1DC9A"/><circle cx="300" cy="185" r="6" fill="#F1DC9A"/>
+<text x="275" y="220" font-family="EB Garamond,serif" font-size="14" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".9">the break</text>
+<circle cx="480" cy="110" r="95" fill="url(#glO)" opacity=".35"/>
+<path d="M480 50 c-34 0 -56 26 -56 56 c0 20 10 32 22 44 v20 h68 v-20 c12 -12 22 -24 22 -44 c0 -30 -22 -56 -56 -56z" fill="none" stroke="#F1DC9A" stroke-width="3"/>
+<path d="M470 170 v-24 l6 -8 -12 -10 12 -10 -12 -10 6 -6 M490 170 v-24 l-6 -8 12 -10 -12 -10 12 -10 -6 -6" stroke="#F1DC9A" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
+<path d="M452 178 h56 M458 190 h44" stroke="#F1DC9A" stroke-width="4" stroke-linecap="round"/>
+<path d="M420 185 H460 V190" stroke="#D4AF4F" stroke-width="5" stroke-linecap="round" fill="none"/>
+<text x="480" y="240" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">the power is on — find what is in the way</text>
+</svg></figure>
+<p>Heaven is the way He likes His home: no tears, no suffering, no sickness, filled with the glory of the Lord, filled with worship and praise. That is how He wants it on earth, and that is why He commanded His disciples to pray "on earth as it is in Heaven." If anyone has filled you with a theology that says otherwise, wash yourself of it in the Word.</p>
+<p>False theology is often guilt by association. If you cannot stand certain people and they love a certain pizza, you may go off that pizza, though the pizza did nothing wrong. When I talk about miracles, people say, "You must be one of those greedy pastors." No. Not everyone focused on power is focused on the things of this world. The true God really does want to move in this all the time.</p>
+<p>Some things make us wonder, openly or secretly, whether God always wants us healed. There was a priest in the early church who taught that the Father of the Old Testament and Jesus of the New were different gods, and even tried to separate the Bible so no one would read the Old Testament. People still quietly feel the God of the Old Testament was sterner and has loosened up. That cannot be, because God does not change. So what changed? Look at the fire. In the New Testament fire from Heaven is a wonderful thing; I love it when God sends fire down on the church, when you feel His power all over you, you touch people and they are healed, grief comes off them, things that would take years of counseling leave in a second. But in the Old Testament, every time the fire fell, something was destroyed. Did the fire change and become nice? No. We changed. Before, when the fire touched us in our sin, it destroyed us. Now God has imputed His righteousness to us and taken our sin, and the same fire is wonderful. And in Revelation the fire will destroy again — reserved for the day of judgment, for those who reject Christ. When the armies of Gog and Magog surround the kingdom the Lord Jesus Christ has set up, fire falls from Heaven and destroys everything around His inheritance without touching what is inside. The same fire; it just does different things. I have felt it: lay hands on one person and they say "Hallelujah"; lay hands on the next, who has an evil spirit, and they scream, "Don't touch me." One fire, blessing one and burning the other. The God of the Old Testament is not harsher than the God of the New. Jesus made a whip and drove men out of the temple, then turned and healed people. He does not get stuck like we do. The fruit of the Spirit is temperance: you can move in righteous indignation and then in compassion without getting so worked up that you cannot pray for the next person who asks.</p>
+<p>So what actually happened? Back to Matthew 13. God did not allow weeds to grow among us because He likes a garden with weeds. But many of us have reached the point of believing God wants us with the weeds because there are weeds in the garden. We look at what has happened to us and to our loved ones and think, "Maybe this is God's will, because it is happening." What did He say to the servant who had that thought? "Sir, didst not thou sow good seed? From whence then hath it tares?" He answered, "An enemy hath done this." And notice verse 25: "while men slept." Not while He slept. While <em>men</em> slept — the people who were supposed to tend the garden. From Genesis, where no man had tended the garden, God sent Adam and Eve to tend it: "Reproduce, and subdue it." We were supposed to keep the enemy and evil from growing up in this garden. We allowed weeds to grow, and from the evil in this world come sickness, depression, bondage, addiction, anxiety, and possession by spirits. Those are the weeds. God is saying, "This is not Me. I did not do this. I gave you the garden, commanded you to keep it, and gave you everything you need. So why are you looking at Me as if I enjoy this?" It is as if a commander handed you a sniper rifle, showed you where the enemy is holding people bound, and gave the order — and you sat there looking at the bound people saying, "Lord, why don't You do something?" while he is behind you yelling, "Shoot!" Anyone watching would ask what is wrong with you. But that is how it is: we have been given the orders. That is why judgment begins at the house of God.</p>
+<p>"If you don't know love, you don't know God, because God is love." What is love? English throws every kind into one bucket. Eros: I love you because you make me feel good — me, me, me. Philia: I love you because you are friendly to me. Storge, the love of family, is still selfish: I love you because there is some of me in you; a DNA test comes back wrong and suddenly the love is gone, which means it was never love, only love of you-and-them. It is why some love one child more than another: they love that father in them more. The only real love is agape, and it has nothing to do with feelings or hormones. It is denial of self for someone else's needs; a category of activities. "God so loved the world" does not mean He was mushy about it — He also said, "Love not the world." So if you do not know love, you do not know God, who is always concerned with what you are going through and always wants you well and better. He is even going to destroy this earth and make a new one, and change our flesh into glorified bodies, because He is starting over.</p>
+<p>How does the parable touch today? Many hearts will grow cold in the great falling away. "Let both grow together until the harvest" — the harvest is the end of the age, and it is here. He is uprooting the tares, and what He warned of in verse 29 is happening: "ye root up also the wheat with them." The great falling away is the damage to the roots as the tares come out. It is a separation, as in Genesis: water from land, waters above from waters below, light from darkness. Now good is being separated from evil, and it looks like the wicked becoming more and more wicked, so that what was once intertwined and hard to tell apart is becoming very clear. It does not take long anymore to see who is on which side.</p>
+<p>Then the word "good." I was in the Greek, but the Holy Ghost said, "Go into the Aramaic," because the disciples were Hebrews; the Greek came later. In the Peshitta, the word Jesus used in "Why callest thou Me good? there is none good but God" is the word used for grace, favor, kindness, and graciousness — the same word as "Give thanks unto the Lord, for He is good." God is good means He is gracious, kind, full of favor. So when He looks at you in your suffering, He suffers more than you do. He is grieved. He wants your loved one healed more than you want them healed; He loves them more than you do. Put that into the equation, and the tree of the knowledge of good and evil becomes the tree of the knowledge of what is God and what is not God. We question whether God is willing because we do not know God. He always wants us healed.</p>
+<p>Then what about when someone is not healed? If you know God wants them healed, you can look at it mechanically. As an electrician troubleshooting, my father taught me: first check that you have power. Once you have power, you troubleshoot from there. Electricity wants to go through resistance and heat it up. If the light does not come on, you will never say, "I guess it isn't the electricity's will." You say, "Something is blocking it." So if healing does not take place, look for what is in the way.</p>
+<p>Here it is: God wants your sins forgiven more than He wants you healed, so He will not heal you if it would keep you from repenting. Jesus said it is better to enter Heaven maimed than to be whole and go to hell — better even to injure yourself, He said, though that was parabolic; please do not. To the paralyzed man lowered through the roof He said, "Thy sins be forgiven thee," and then, to show He had authority to forgive sins, "Take up thy bed and walk." He connected sin and sickness. I notice that when you lay hands on unbelievers in the highways and byways, they are healed very quickly, because the gospel of salvation wipes away all previous sins and with them their effects. But when someone has received Jesus and gone back to sinning, the percentage drops. I go into churches and fewer are healed, because they have taken up new sins since they were saved. They say, "You're being legalistic; I'm saved, everything is fine." Then throw away "holiness, without which no man shall see the Lord," and "be ye holy, for I am holy," and "present yourselves a living sacrifice, holy." Why did the apostle say, "Confess your faults one to another, that ye may be healed"? Because he saw people in the church, not in the streets, who were not healed. And Scripture says that for those who go back to their sins after tasting salvation there remains no more sacrifice, seeing they crucify the Son of God afresh — a two-crucifixion Christianity: He died once for my sins and again so I can keep living in them. Brother Don, our church president, told me the previous pastor noticed the same: when he laid hands on someone and the power did not flow, that person had something to repent of or someone to forgive. Everyone who actually goes out and does healings holds this. None of them are unlimited-gracers. They all ask, "Are you saved?"</p>
+<p>If I pray for a believer and feel doubt that the Spirit and faith do not drive out, or the power does not flow though I have faith, they are not going to be healed, because God is more concerned that they deal with the thing. Sickness was originally meant as an indicator, like the nerves God put in your body. When you stub your toe it hurts, not because He does not love you, but because He wants you to handle that toe gently and know something is wrong. So when you pray for someone with faith and nothing moves, do not define your level by how they feel afterward. Stop that. You know the level you are at. If three people were healed before and this one is not, do not let your faith drop. Troubleshoot. "I know the power is flowing; I checked it. Where is the break?" Ask: is there anyone you need to forgive? Anything you need to repent of? If they say no, pray for God to reveal it. Often it is something they do not think is sin, like marijuana. I have tried many times: people boldly smoking marijuana do not get healed. The only ones I have seen healed were healed the moment they decided in their mind they would do it no more. We can wrestle over theology, but the Holy Ghost makes it clear. Carry a different mindset and you will wreck your own faith, praying for people who are not healed, feeling unworthy, in an endless cycle of doubt that only God can break through fasting and prayer. God always wants them healed, but He wants the sin gone. If they are not a believer, He will wipe out the sickness; they need to receive Jesus. If they are a believer and not healed, find where they are active in sin or unforgiveness, because God said He will not forgive your sins if you do not forgive others.</p>
+<p>God used Pastor Bert to train me to think as an electrician. Why electricity? God created it; it runs by His rules, and the same God who made natural power is the supernatural power, and they move the same way. He would answer my questions in dreams as electrical problems: I would be troubleshooting in the dream, and wake up knowing exactly where the problem was. So when someone did not get their miracle, I learned to troubleshoot what was blocking it. It does not mean God does not want them healed; something is in the way, or a mindset needs to change. In Pakistan, my brother-in-law's mother had been vexed with a spirit and had gone from one mega-ministry to another without deliverance. I prayed over the phone and she was delivered and has had no trouble since. The difference was that I did not just lay hands. I said, "If all these ministries could not set her free, something is there, and I will not ruin my faith dancing around it." We went through a long list of everything she might be doing that displeased God, and came to one thing — not even a bad deed, just a mindset of bad theology. Immediately it manifested; she got angry; we prayed; the Spirit of God fell; she spoke in tongues for the first time and was delivered. Now I keep getting invitations to fly overseas for healing conferences, and it is not because I am special. I found the sin. I troubleshot it.</p>
+<p>If you would like to move in this power, repeat after me: "Dear God, I thank You so much for the work You did on the cross. I openly confess to You right now everything I have done wrong" — do not generalize; go into detail — "and I forgive everybody, because I know You have more against me than I could ever have against anyone else. I believe You died for my sins and rose from the grave, and I receive You as my Lord, my Boss and Master, whom I will obey, and my Savior, who sets me free from the effects of sin in this world and its punishment in the next. Holy Ghost, fill me, in Jesus' name." Holy Ghost, touch them all, in Jesus' name. Touch the knee, touch the leg, be healed, be whole.</p>
+<aside class="key"><div class="key-t">Hold onto this: Check the power, then find the break</div><p>God does not change; we did. He is good — gracious, kind — and always wants you healed. When healing doesn't come, don't doubt the power; troubleshoot for sin and unforgiveness.</p></aside>
+<div class="check" data-check="2"></div>
+      <div class="coming"><span class="soon">Coming soon</span>&nbsp; Further sections will be added as each video is prepared. The assessment currently covers the sections whose readings are complete.</div>
+      <h3 id="lesson-final">4. Receive your healing now</h3><div class="video"><iframe src="https://www.youtube.com/embed/4anq17r34LA" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/4anq17r34LA" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgL" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glL" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".95"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgL)"/>
+<circle cx="320" cy="120" r="120" fill="url(#glL)" opacity=".45"/>
+<path d="M266 176 c-24 -32 -24 -72 0 -96 c16 -16 40 -8 48 8 c8 -16 32 -24 48 -8 c24 24 24 64 0 96 c-16 20 -32 32 -48 38 c-16 -6 -32 -18 -48 -38z" fill="#F1DC9A" opacity=".95"/>
+<path d="M320 100 v54 M298 122 h44" stroke="#7A2334" stroke-width="9" stroke-linecap="round"/>
+<path d="M320 120 L470 120" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L461 171" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L435 216" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L395 250" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L346 268" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L294 268" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L245 250" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L205 216" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L179 171" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L170 120" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L179 69" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L205 24" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L245 -10" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L294 -28" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L346 -28" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L395 -10" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L435 24" stroke="#F1DC9A" stroke-width="2" opacity=".25"/><path d="M320 120 L461 69" stroke="#F1DC9A" stroke-width="2" opacity=".25"/>
+<text x="320" y="245" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".9">put your hand where the pain is</text>
+</svg></figure>
+<p>This is the evidence. If you have any pain in your body, do this now. Put your hand wherever the pain is. But first, note how much it hurts right now. Check it and give it a number: a ten, a seven, whatever it is. Then say this:</p>
+<blockquote>"If Jesus Christ, as mentioned in the Holy Bible, is the only way to Heaven, I pray that You will heal me of this pain right now. If Jesus Christ, as mentioned in the Holy Bible, is the only way to Heaven, I pray that You will heal me even now. And I thank You that You love me so much that You are taking this pain away from me right now, Lord Jesus, who died and rose from the grave — that You are taking this pain away from me right now because You love me so much. And if You take this pain away from me, I promise that I will seek You, and seek to be a Christian, and I will tell others that You healed me, and thereby I know that You are the God of the Bible, and I will follow You and do what You want me to do in life, whether that is preaching or ministering to others, if You heal me of this. In the name of Jesus Christ, even now."</blockquote>
+<p>Now check it. Check it out. See where the pain is. Do something you could not do before. Note the number now. Note whether you feel any heat, any tingling, coolness, or new motion that you did not have. If you sincerely said that prayer, something happened. Guaranteed. And know that there are Satanists who know this is real and will try to throw you off by acting as though it did not work for them. Ignore them. You know what happened in your own body.</p>
+<p>And for anyone with an addiction, or any work of the enemy going on in their life: as evidence that the Lord Jesus, as mentioned in the Holy Bible, is the only way to Heaven, right now I command those demonic forces to let you go. All demonic attacks, let go now, as a testimony that Jesus is Lord. Everywhere, be free. Fire all through your body. Be set free of every demonic attack right now. Jesus Christ, as mentioned in the Holy Bible, is the only way to Heaven, and in the name of the Lord Jesus Christ who died and rose from the dead, be free now. Demons, get out of them, loose them, do not oppress them anymore, let go of them now in Jesus' name. Be healed now. Pain, go away. Weakness, go away. Sickness, go away. Infirmities, go away. Diseases are going away right now, in Jesus' name.</p>
+<p>I never thought I would be the one to say this, but I see someone with pain in their eye — from my perspective it looks like this eye, though in the Spirit it is sometimes the other way around, the left eye, like a sleepy eye. In Jesus' name, touch your eye right now and be healed, in the mighty name of Jesus Christ the Lord God Almighty. Intestinal tracts are being healed right now. Pain in the foot is being healed right now. Headaches are going away right now, in the mighty name of Jesus Christ. Thank You, Lord Jesus. Amen and amen.</p>
+<aside class="key"><div class="key-t">Hold onto this: The evidence is in your own body</div><p>Measure the pain, pray the prayer sincerely, and measure again. Then keep your promise: seek Him, follow Him, and tell others what He did.</p></aside>
+<div class="check" data-check="3"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit.</p>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script>
+const COURSE = {
+  title: "Healing and Miracles",
+  assessment: "Healing and Miracles",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = { HE:"Healing", AU:"Authority and deliverance", FA:"Faith and evidence" };
+
+const QUESTIONS = [
+ {t:"FA", q:"Which three kinds of churches does the broadcast describe regarding miracles?",
+  o:["Rich, poor, and middle-class","Those that don't expect healing, those afraid to attempt it, and those where healing is commonplace","Catholic, Protestant, and Orthodox","City, town, and country"], a:1, v:"Mark 16:17–18", vt:"And these signs shall follow them that believe… they shall lay hands on the sick, and they shall recover.", l:1},
+ {t:"HE", q:"What point does the broadcast draw from Ananias laying hands on Paul?",
+  o:["Only apostles can heal","Healing should be an average thing done by an average Christian","Paul healed himself","Blindness cannot be healed"], a:1, v:"Acts 9:17", vt:"Brother Saul, the Lord, even Jesus… hath sent me, that thou mightest receive thy sight, and be filled with the Holy Ghost.", l:1},
+ {t:"FA", q:"In the parable, why does the householder refuse to pull up the tares?",
+  o:["Because tares are valuable","Lest the wheat be rooted up with them; both grow together until the harvest","Because the servants were lazy","Because the enemy would return"], a:1, v:"Matthew 13:29–30", vt:"Nay; lest while ye gather up the tares, ye root up also the wheat with them. Let both grow together until the harvest.", l:1},
+ {t:"FA", q:"Which of the three levels of faith does the broadcast call the big one that changes things?",
+  o:["God can","God can through us","God is willing","God has decided"], a:2, v:"Matthew 8:2–3", vt:"Lord, if thou wilt, thou canst make me clean. And Jesus put forth his hand, and touched him, saying, I will; be thou clean.", l:2},
+ {t:"HE", q:"What does Ephesians 3:20 establish for the believer, as taught in the broadcast?",
+  o:["That God works only through famous ministers","That God can do exceedingly above what we ask, according to the power that works in us","That miracles ended with the apostles","That prayer is unnecessary"], a:1, v:"Ephesians 3:20", vt:"Now unto him that is able to do exceeding abundantly above all that we ask or think, according to the power that worketh in us.", l:2},
+ {t:"FA", q:"What does the wedding at Cana show about God's willingness?",
+  o:["That He never changes His timing","That He was willing to work a miracle before His time because Mary asked, so prayer has real effect","That wine is holy","That Mary was an apostle"], a:1, v:"John 2:4–5", vt:"Mine hour is not yet come. His mother saith unto the servants, Whatsoever he saith unto you, do it.", l:2},
+ {t:"HE", q:"Why does James say some prayers are not answered?",
+  o:["Because God is busy","Because they ask amiss, to consume it upon their lusts — prayer outside of love","Because the person is not a minister","Because they prayed too briefly"], a:1, v:"James 4:3", vt:"Ye ask, and receive not, because ye ask amiss, that ye may consume it upon your lusts.", l:2},
+ {t:"FA", q:"In the parable, whose sleep allowed the tares to be sown?",
+  o:["God's","The men who were supposed to tend the garden","The angels'","The enemy's"], a:1, v:"Matthew 13:25", vt:"But while men slept, his enemy came and sowed tares among the wheat, and went his way.", l:3},
+ {t:"FA", q:"What does the Aramaic word for 'good' in 'none good but God' convey, according to the broadcast?",
+  o:["Strictness and severity","Grace, favor, kindness, and graciousness","Power and might","Wisdom"], a:1, v:"Psalm 136:1", vt:"O give thanks unto the LORD; for he is good: for his mercy endureth for ever.", l:3},
+ {t:"HE", q:"What is the electrician's rule the broadcast applies to healing?",
+  o:["Replace the bulb first","First confirm the power is on; if the light doesn't come on, something is blocking it — troubleshoot, don't blame the power","Turn everything off","Call a professional"], a:1, v:"Mark 16:18", vt:"They shall lay hands on the sick, and they shall recover.", l:3},
+ {t:"HE", q:"According to the broadcast, why might a believer not be healed when an unbeliever is?",
+  o:["Because God prefers unbelievers","Because salvation wipes away past sins and their effects, but a believer who returns to sin or holds unforgiveness has something God wants dealt with first","Because believers are tested more","Because believers do not need healing"], a:1, v:"James 5:16", vt:"Confess your faults one to another, and pray one for another, that ye may be healed.", l:3},
+ {t:"HE", q:"What does the sniper-rifle picture teach?",
+  o:["That Christians should be soldiers","That God has given the orders and the weapon, and it is we who must act against the enemy's works, not ask why He does nothing","That God fights alone","That prayer is a weapon"], a:1, v:"Luke 10:19", vt:"Behold, I give unto you power to tread on serpents and scorpions, and over all the power of the enemy.", l:3},
+ {t:"FA", q:"What does the lesson say to look for after praying the healing prayer?",
+  o:["A feeling of guilt","A change in the pain level, heat, tingling, coolness, or motion you did not have before","A vision","Nothing; the results come later"], a:1, v:"Mark 16:17–18", vt:"And these signs shall follow them that believe; In my name shall they cast out devils… they shall lay hands on the sick, and they shall recover.", l:4},
+ {t:"HE", q:"What promise is built into the healing prayer?",
+  o:["To give money to a church","To seek Him, follow Him, and tell others that He healed you","To never see a doctor again","To pray only in Aramaic"], a:1, v:"Psalm 66:16", vt:"Come and hear, all ye that fear God, and I will declare what he hath done for my soul.", l:4},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["A key to faith: the wheat and the tares", "Three levels of faith: God can, God can through you, God is willing", "God is good: troubleshooting when healing doesn't come", "Receive your healing now"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",()=>{ buildExam(); goto(3); });
+
+function buildExam(){
+  const f = $("#examForm"); f.innerHTML="";
+  QUESTIONS.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = QUESTIONS.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  showResults(answers);
+  goto(4);
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===QUESTIONS[i].a).length;
+  const pct = Math.round(correct/QUESTIONS.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${QUESTIONS.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  QUESTIONS.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="cert" id="cert">
+      <div class="school"><span class="orn">✦</span>The School of The Prophets<span class="orn">✦</span></div>
+      <svg class="flourish" viewBox="0 0 360 24" aria-hidden="true" fill="none" stroke="#C9A24C" stroke-width="1.5" stroke-linecap="round"><path d="M10 12 H150 M210 12 H350"/><path d="M150 12 c8-10 16-10 22 0 c6 10 14 10 22 0 M154 12 c6 8 12 8 18 0"/><circle cx="180" cy="12" r="3" fill="#C9A24C" stroke="none"/><path d="M10 12 l6-4 M10 12 l6 4 M350 12 l-6-4 M350 12 l-6 4"/></svg>
+      <div class="motto">Veritas · Fides</div>
+      <div class="title">Certificate of Completion</div>
+      <div class="certify">This is to certify that</div>
+      <div class="cname">${student.name}</div>
+      <p class="body">a scholar at the ${LEVEL_LABEL[student.level]||student.level} level, has successfully completed the formal assessment entitled <em>“${COURSE.assessment}”</em> attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}% (${correct} of ${QUESTIONS.length})</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
+      <div class="foot">
+        <div class="sigblock"><div class="above script">Robert P. Smith, Sr.</div><div class="line"></div><div class="label">Bishop Robert P. Smith, Sr.</div></div>
+        <div class="seal"><svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="sigblock"><div class="above">${date}</div><div class="line"></div><div class="label">Date</div></div>
+      </div>
+    </div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = QUESTIONS.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "According to the broadcast, why is the wheat-and-tares parable connected to miracles?", "o": ["Because farmers need rain", "Because a heresy hidden in the hearts of many Christians reduces the miracles that take place, and this parable exposes it", "Because tares are a sickness", "Because the harvest is a healing service"], "a": 1, "e": "Pastor Smith says the miracles increased after he understood this revelation. The parable is the key to the heresy."}, {"q": "What does it mean to have a Scripture hidden in your heart, according to the broadcast?", "o": ["To memorize it word for word", "To meditate and pray over it until God proves it to you in your life and you know it in relationship", "To read it every morning", "To write it on your wall"], "a": 1, "e": "Know as Mary meant know: relationship, not data. God takes you through things that prove the verse to you."}, {"q": "What does the broadcast say the fire of God shows about God not changing?", "o": ["That the fire became gentler in the New Testament", "That the same fire destroys in sin and blesses in righteousness; we changed, not the fire", "That fire is only symbolic", "That the Old Testament God was a different god"], "a": 1, "e": "One fire: it consumed under the old covenant, it fills the church now, and it will destroy Gog and Magog while the kingdom inside worships."}, {"q": "Why does the lesson tell you to give the pain a number before you pray?", "o": ["So the prayer will work better", "So you have your own measurable evidence to compare against afterward", "Because numbers are required by the Bible", "So a doctor can review it"], "a": 1, "e": "Before-and-after is the point: the evidence is meant to be in your own body, not on someone else's word."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",()=>{ buildExam(); goto(3); });
+</script>
+</body>
+</html>

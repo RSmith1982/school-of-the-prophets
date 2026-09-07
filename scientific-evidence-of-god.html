@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scientific Evidence of God — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top svg{width:34px;height:38px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .cert{
+    background:linear-gradient(180deg,#FBF7EC,#F0E8D3);color:var(--ink);text-align:center;
+    padding:3rem 2rem;margin:2rem auto 0;max-width:44rem;
+    border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:-12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+  }
+  .cert svg{width:60px;height:68px}
+  .cert .school{font-size:clamp(1.15rem,3.4vw,1.9rem);letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;font-weight:600;
+    background:linear-gradient(180deg,#F1DC9A 0%,#C9A24C 45%,#8E6A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 1px 0 rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;gap:.7rem}
+  .cert .school .orn{font-size:.9em;background:linear-gradient(180deg,#F1DC9A,#8E6A1E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cert .flourish{width:min(100%,22rem);height:auto;display:block;margin:.35rem auto 0}
+  .cert .motto{font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:var(--burgundy);margin-top:.5rem}
+  .cert .title{font-size:2.4rem;font-style:italic;margin:1rem 0 .6rem;color:var(--navy)}
+  .cert .certify{font-style:italic;color:var(--ink-soft)}
+  .cert .cname{font-size:2.4rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 2rem .2rem;margin:.5rem 0 1rem}
+  .cert .body{max-width:30rem;margin:0 auto 1.5rem;font-size:1.1rem}
+  .cert .body strong{color:var(--burgundy)}
+  .cert .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-top:2rem}
+  .cert .sigblock{flex:1;text-align:center}
+  .cert .above{height:3.2rem;display:flex;align-items:flex-end;justify-content:center;font-size:1.15rem;color:var(--ink)}
+  .cert .above.script{font-family:"Pinyon Script","EB Garamond",cursive;font-size:clamp(1.5rem,4vw,2.1rem);white-space:nowrap;color:var(--navy);line-height:1;transform:rotate(-3deg)}
+  .cert .line{border-top:1px solid var(--ink-soft);margin:.25rem 0 .3rem}
+  .cert .label{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
+  .cert .seal{width:88px;height:88px;border:2px solid var(--burgundy);border-radius:50%;display:grid;place-items:center;flex:none;outline:1px solid var(--burgundy);outline-offset:-7px;background:#FBF7EC}
+  .cert .seal svg{width:44px;height:50px}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .cert{box-shadow:none;margin:0 auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#0E1830" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg>
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <a href="index.html">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Scientific Evidence of God</h2>
+    <p class="lesson" style="max-width:var(--measure)">A course on the reasons, evidence, and plain logic that point to the Creator, drawn from the video series <em>Man Proves He Received Communication from Creator of Our Reality</em>. Each section begins with its video, followed by the reading. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">Rewind to the beginning</a></li>
+      <li><a href="#lesson-2">Who created God?</a></li>
+      <li class="toc-soon">Section 3 <span class="soon">Coming soon</span></li>
+      <li class="toc-soon">Sections 4–9 <span class="soon">Coming soon</span></li>
+    </ol>
+
+    <div class="lesson">
+      <h3 id="lesson-1">1. Rewind to the beginning</h3><div class="video"><iframe src="https://www.youtube.com/embed/FPxuxsG2jkg" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/FPxuxsG2jkg" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgB" cx="20%" cy="50%" r="90%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glB" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".95"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgB)"/>
+<circle cx="90" cy="130" r="90" fill="url(#glB)" opacity=".7"/>
+<circle cx="90" cy="130" r="10" fill="#F1DC9A"/>
+<path d="M90 130 L230.0 130.0" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L205.54698608735498 209.04994627530493" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L140.7300856267343 260.4854720354117" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L58.19170674296784 266.33866832294734" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L-13.235120175774355 224.56484527716114" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L-48.59894952406236 149.75680112838143" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L-35.546178286780616 68.04713793872071" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L21.36348501230208 7.979391862097657" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L102.2498576815225 -9.463045237017695" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L178.85700263196873 21.81297174216172" stroke="#F1DC9A" stroke-width="2" opacity=".35"/><path d="M90 130 L224.42384013105124 90.88183025215038" stroke="#F1DC9A" stroke-width="2" opacity=".35"/>
+<path d="M100 130 C160 30 220 30 280 130 S400 230 460 130 S580 30 640 130" stroke="#D4AF4F" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M100 130 C160 30 220 30 280 130 S400 230 460 130 S580 30 640 130" stroke="#F1DC9A" stroke-width="1.5" fill="none" stroke-dasharray="6 8"/>
+<text x="90" y="245" font-family="EB Garamond,serif" font-size="18" font-style="italic" fill="#F1DC9A" text-anchor="middle">an origin</text>
+<text x="470" y="245" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" opacity=".8" text-anchor="middle">every wave has a start and a finish</text>
+</svg></figure>
+<p>Let's rewind to the beginning. The Big Bang is called the standard model, and the standard model has problems. Start with the one that matters most: for a claim to count as science, it has to be observable. If it is not observable, it is not science. And we have never observed a violation of the laws of thermodynamics — except in one kind of case, which we will come to.</p>
+<p>Take entropy. Left alone, things become simpler, not more complex. Picture a decaying building where a crack happens to look a little like a smiley face. That crack will not slowly become a more detailed face; it will fade, because it was never intended, just coincidence in the decay. But if you come back and the face is sharper, more defined, you know someone has been there chiseling. Mountains crumble, the earth is winding down, the sun is winding down. Nothing left to itself becomes more complicated. That is observable science.</p>
+<p>The same test applies to evolution between kinds — a fish becoming a monkey, a monkey becoming a man. It has never been observed. Darwin himself set the standard: if monkeys became humans, there should be millions of skeletons of all the steps in between. We have millions of monkey skeletons and millions of human skeletons, and not the millions of in-between skeletons his own theory requires. By his own reasoning, the theory fails.</p>
+<p>Now back to the beginning. If the universe was once a state of nothingness, or stillness, there is no reason for nothing to explode for no reason. That has never been observed. And if you answer, "Maybe pressure built up," then that pressure is energy, and energy has to come from somewhere. Things cannot sit pressurized for all eternity and then, countless eons later, decide for no logical reason to blow.</p>
+<p>This is usually where people start reaching. They will say, "Maybe it didn't start with a bang; maybe it was a series of bangs and contractions, a wave that has always been going." But that is against science too. We have never observed a force of energy without an initiation and a depreciation — every wave has a start and a finish. So even if we are somewhere in the middle of a wave, the wave itself began. However far you rewind, you arrive at an origin. That is observable, and that is unarguable.</p>
+<p>So here is the one exception. The laws of thermodynamics have never, ever been observed to be violated — except by the intervention of a self-conscious entity. The chiseled face on the decaying wall is the proof: order and complexity appearing against the flow of entropy is the signature of a mind at work. And the laws of thermodynamics make it absolutely impossible for the origin of everything to have started on its own. The only observed cause that ever produces that kind of beginning is a self-conscious entity.</p>
+<aside class="key"><div class="key-t">Hold onto this: The one exception to entropy</div><p>Left alone, everything winds down. The only observed cause of order rising against that flow is a self-conscious mind — and the universe had a beginning.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. Who created God?</h3><div class="video"><iframe src="https://www.youtube.com/embed/8-NzMtIQ_9M" title="Course video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="vlink">If the video does not appear here, <a href="https://youtu.be/8-NzMtIQ_9M" target="_blank" rel="noopener">watch it on YouTube</a>.</p></div><figure class="ill"><svg viewBox="0 0 640 260" aria-hidden="true">
+<defs><radialGradient id="bgC" cx="50%" cy="50%" r="80%"><stop offset="0" stop-color="#2A3F6E"/><stop offset="1" stop-color="#0A1128"/></radialGradient>
+<radialGradient id="glC" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F1DC9A" stop-opacity=".9"/><stop offset="1" stop-color="#F1DC9A" stop-opacity="0"/></radialGradient></defs>
+<rect width="640" height="260" fill="url(#bgC)"/>
+<circle cx="250" cy="130" r="95" fill="none" stroke="#D4AF4F" stroke-width="4"/>
+<circle cx="250" cy="130" r="82" fill="none" stroke="#D4AF4F" stroke-width="1.5" stroke-dasharray="3 9"/>
+<path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(0 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(30 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(60 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(90 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(120 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(150 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(180 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(210 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(240 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(270 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(300 250 130)" stroke-dasharray="0 82 13 0"/><path d="M250 130 l0 -95" stroke="#D4AF4F" stroke-width="2" transform="rotate(330 250 130)" stroke-dasharray="0 82 13 0"/>
+<path d="M250 130 L250 70 M250 130 L292 150" stroke="#F5EFE1" stroke-width="5" stroke-linecap="round"/>
+<circle cx="250" cy="130" r="5" fill="#F5EFE1"/>
+<text x="250" y="248" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle" opacity=".85">time</text>
+<circle cx="520" cy="110" r="70" fill="url(#glC)" opacity=".7"/>
+<path d="M520 110 L582.0 110.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L579.9 126.0" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L573.7 141.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L563.8 153.8" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L551.0 163.7" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L536.0 169.9" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L520.0 172.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L504.0 169.9" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L489.0 163.7" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L476.2 153.8" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L466.3 141.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L460.1 126.0" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L458.0 110.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L460.1 94.0" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L466.3 79.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L476.2 66.2" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L489.0 56.3" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L504.0 50.1" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L520.0 48.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L536.0 50.1" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L551.0 56.3" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L563.8 66.2" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><path d="M520 110 L573.7 79.0" stroke="#F1DC9A" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M520 110 L579.9 94.0" stroke="#F1DC9A" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><circle cx="520" cy="110" r="26" fill="#F1DC9A"/><circle cx="520" cy="110" r="14" fill="#FFF8DC"/>
+<text x="520" y="205" font-family="EB Garamond,serif" font-size="16" font-style="italic" fill="#F1DC9A" text-anchor="middle">outside of time</text>
+<path d="M455 100 L350 120" stroke="#F1DC9A" stroke-width="2" stroke-dasharray="5 7" opacity=".6"/>
+</svg></figure>
+<p>"Who created God?" Notice what happens the moment someone asks it. They have stepped into the God-believing conversation. You cannot ask about the origin of something you say does not exist. If I deny there is a distant star and then, once convinced it is there, ask how it got there, I am now talking about a star that exists. The question about origins comes <em>after</em> existence is established, not before.</p>
+<p>Second, if a rule of logic is true, it has to be true across the board. If "who created God?" counts as an argument against God existing, then "who created the universe?" counts as an argument against the universe existing. Nobody accepts that. The argument defeats itself.</p>
+<p>Third, and most important: the question is not even connected to the point. Whether God was created, was not created, or who created Him has nothing to do with whether He exists. Hold up a computer mouse. Who created this mouse? Whether you know, whether you don't, whether it was made or popped into being, has no bearing on the fact that the mouse is sitting in your hand. There is a technique in psychology where someone throws out a point you can't answer, hoping you will conclude that some other, unrelated point must therefore be false. Don't be tricked by it. "Who created the mouse?" cannot make the mouse disappear.</p>
+<p>For what it is worth, from what we know of God there is no creator of God, because God stands outside of time and made time. You can argue about that if you like, but it is a pointless argument, because it proves and disproves nothing about whether God exists.</p>
+<p>What we do know is this. We have existence. It is scientifically impossible for existence not to have had an origin, and it is scientifically impossible for that origin to have started on its own, because that would violate the laws of thermodynamics — which have never been observed violated except by the intervention of a self-conscious entity. So it is scientifically impossible for there not to be a God.</p>
+<p>That conclusion has support from an unexpected direction. Many astrophysicists studying string energy have found patterns that match computerized code, which is why a large number of scientists today take simulation theory seriously. But simulation theory is belief in a developer of the simulation: belief in a God by another name. And it is worth remembering that the greatest contributors to science in history, Darwin and Einstein among them, were believers in God. Those who deny God do not hold the high ground of scientific history; still, that point is beside the argument, so set it aside.</p>
+<p>Stay on the point that stands: a beginning without a self-conscious entity is not observable science, and so it is not science. Every recorded violation of the laws of thermodynamics has had a self-conscious entity behind it. Anyone who insists reality began without one has stepped outside of science. There is no profit in arguing with someone who wants to play around with that. Lay the argument down and move forward with those who are intelligent and humble enough to follow the evidence.</p>
+<aside class="key"><div class="key-t">Hold onto this: Origins do not erase existence</div><p>"Who created God?" is a question about origins, and origins come after existence is established. Whether or not you can answer it, the mouse is still in your hand.</p></aside>
+<div class="check" data-check="1"></div>
+<div class="coming"><span class="soon">Coming soon</span>&nbsp; Sections 3 through 9 are being added as each video is prepared. The assessment currently covers Sections 1–2.</div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit.</p>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script>
+const COURSE = {
+  title: "Scientific Evidence of God",
+  assessment: "Scientific Evidence of God",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = { MO:"Mortality and eternity", EV:"Evidence and reason", CR:"The Creator" };
+
+const QUESTIONS = [
+ {t:"EV", q:"According to the lesson, what must be true of a claim for it to count as science?",
+  o:["It must be popular among scientists","It must be observable","It must be mathematical","It must be older than a hundred years"], a:1, v:"1 Thessalonians 5:21", vt:"Prove all things; hold fast that which is good.", l:1},
+ {t:"CR", q:"What is the only observed exception to the laws of thermodynamics named in the lesson?",
+  o:["The Big Bang","Evolution between kinds","The intervention of a self-conscious entity","Pressure building over eons"], a:2, v:"Genesis 1:1", vt:"In the beginning God created the heaven and the earth.", l:1},
+ {t:"EV", q:"How does the lesson answer the idea that the universe is an endless series of bangs and contractions?",
+  o:["It agrees the universe has no beginning","Every force of energy ever observed has a start and a finish, so the wave itself began","Waves are only found in water","The Big Bang is proven by the Bible"], a:1, v:"Psalm 102:25–26", vt:"Of old hast thou laid the foundation of the earth… they shall perish, but thou shalt endure: yea, all of them shall wax old like a garment.", l:1},
+ {t:"EV", q:"What does the computer mouse illustrate in the lesson?",
+  o:["That God made everything, even small things","That who created a thing has no bearing on whether it exists","That mice evolved over time","That technology proves simulation theory"], a:1, v:"Romans 1:20", vt:"For the invisible things of him from the creation of the world are clearly seen, being understood by the things that are made.", l:2},
+ {t:"CR", q:"According to the lesson, why is there no creator of God?",
+  o:["Because God created Himself","Because God stands outside of time and made time","Because the question is forbidden","Because the universe created God"], a:1, v:"Psalm 90:2", vt:"Before the mountains were brought forth, or ever thou hadst formed the earth and the world, even from everlasting to everlasting, thou art God.", l:2},
+ {t:"CR", q:"Why does the lesson say simulation theory is really belief in a God?",
+  o:["Because it was invented by a church","Because a simulation requires a developer who made it","Because Einstein said so","Because it cannot be tested"], a:1, v:"Hebrews 3:4", vt:"For every house is builded by some man; but he that built all things is God.", l:2},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["Rewind to the beginning", "Who created God?"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",()=>{ buildExam(); goto(3); });
+
+function buildExam(){
+  const f = $("#examForm"); f.innerHTML="";
+  QUESTIONS.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = QUESTIONS.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  showResults(answers);
+  goto(4);
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===QUESTIONS[i].a).length;
+  const pct = Math.round(correct/QUESTIONS.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${QUESTIONS.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  QUESTIONS.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="cert" id="cert">
+      <div class="school"><span class="orn">✦</span>The School of The Prophets<span class="orn">✦</span></div>
+      <svg class="flourish" viewBox="0 0 360 24" aria-hidden="true" fill="none" stroke="#C9A24C" stroke-width="1.5" stroke-linecap="round"><path d="M10 12 H150 M210 12 H350"/><path d="M150 12 c8-10 16-10 22 0 c6 10 14 10 22 0 M154 12 c6 8 12 8 18 0"/><circle cx="180" cy="12" r="3" fill="#C9A24C" stroke="none"/><path d="M10 12 l6-4 M10 12 l6 4 M350 12 l-6-4 M350 12 l-6 4"/></svg>
+      <div class="motto">Veritas · Fides</div>
+      <div class="title">Certificate of Completion</div>
+      <div class="certify">This is to certify that</div>
+      <div class="cname">${student.name}</div>
+      <p class="body">a scholar at the ${LEVEL_LABEL[student.level]||student.level} level, has successfully completed the formal assessment entitled <em>“${COURSE.assessment}”</em> attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}% (${correct} of ${QUESTIONS.length})</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
+      <div class="foot">
+        <div class="sigblock"><div class="above script">Robert P. Smith, Sr.</div><div class="line"></div><div class="label">Bishop Robert P. Smith, Sr.</div></div>
+        <div class="seal"><svg viewBox="0 0 56 64" aria-hidden="true"><path d="M28 2 52 10v22c0 14-10 24-24 30C14 56 4 46 4 32V10z" fill="#14213D" stroke="#C9A24C" stroke-width="2"/><path d="M28 14v26M19 22h18" stroke="#C9A24C" stroke-width="4" stroke-linecap="round"/><path d="M14 44c8-3 20-3 28 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="sigblock"><div class="above">${date}</div><div class="line"></div><div class="label">Date</div></div>
+      </div>
+    </div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = QUESTIONS.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "On the decaying wall, what tells you a person has been there?", "o": ["The wall is very old", "The crack that looked like a face has become sharper and more defined", "The wall has many cracks", "The building is still standing"], "a": 1, "e": "Decay makes things simpler. When something becomes more defined against that flow, a mind is at work."}, {"q": "Why does the lesson say \"Who created God?\" is self-defeating as an argument against God's existence?", "o": ["Because God is too great to question", "Because the same logic would prove the universe does not exist either", "Because scientists never ask it", "Because the Bible forbids the question"], "a": 1, "e": "If not knowing an origin disproves a thing, the universe is disproved too. A rule of logic has to work across the board."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",()=>{ buildExam(); goto(3); });
+</script>
+</body>
+</html>
