@@ -120,39 +120,36 @@
   @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
   .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
 
-  .cert{
-    background:linear-gradient(180deg,#FBF7EC,#F0E8D3);color:var(--ink);text-align:center;
-    padding:3rem 2rem;margin:2rem auto 0;max-width:44rem;
-    border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:-12px;
-    box-shadow:0 20px 50px rgba(0,0,0,.2);
-  }
-  .cert svg{width:60px;height:68px}
-  .cert .school{font-size:clamp(1.15rem,3.4vw,1.9rem);letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;font-weight:600;
-    background:linear-gradient(180deg,#F1DC9A 0%,#C9A24C 45%,#8E6A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
-    text-shadow:0 1px 0 rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;gap:.7rem}
-  .cert .school .orn{font-size:.9em;background:linear-gradient(180deg,#F1DC9A,#8E6A1E);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .cert .flourish{width:min(100%,22rem);height:auto;display:block;margin:.35rem auto 0}
-  .cert .motto{font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:var(--burgundy);margin-top:.5rem}
-  .cert .title{font-size:2.4rem;font-style:italic;margin:1rem 0 .6rem;color:var(--navy)}
-  .cert .certify{font-style:italic;color:var(--ink-soft)}
-  .cert .cname{font-size:2.4rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--gold);display:inline-block;padding:0 2rem .2rem;margin:.5rem 0 1rem}
-  .cert .body{max-width:30rem;margin:0 auto 1.5rem;font-size:1.1rem}
-  .cert .body strong{color:var(--burgundy)}
-  .cert .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-top:2rem}
-  .cert .sigblock{flex:1;text-align:center}
-  .cert .above{height:3.2rem;display:flex;align-items:flex-end;justify-content:center;font-size:1.15rem;color:var(--ink)}
-  .cert .above.script{font-family:"Pinyon Script","EB Garamond",cursive;font-size:clamp(1.5rem,4vw,2.1rem);white-space:nowrap;color:var(--navy);line-height:1;transform:rotate(-3deg)}
-  .cert .line{border-top:1px solid var(--ink-soft);margin:.25rem 0 .3rem}
-  .cert .label{font-style:italic;font-size:.95rem;color:var(--ink-soft)}
-  .cert .seal{width:88px;height:88px;display:grid;place-items:center;flex:none}
-  .cert .seal img{width:88px;height:88px;display:block}
+  .certwrap{container-type:inline-size;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.75cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:63.4%;width:24.4%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.3%;left:14.5%;width:25%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:4.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:63.4%}
+  .cert .lab{top:89.2%;left:14.5%;width:25%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:63.4%}
   .fail{max-width:var(--measure);margin:0 auto}
 
   @media print{
     body{background:#fff}
     header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
     .panel{border:0;box-shadow:none;padding:0;margin:0}
-    .cert{box-shadow:none;margin:0 auto}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
   }
 </style>
 </head>
@@ -491,20 +488,18 @@ function showResults(answers){
   // Certificate
   const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
   $("#certWrap").innerHTML = passed ? `
-    <div class="cert" id="cert">
-      <div class="school"><span class="orn">✦</span>The School of The Prophets<span class="orn">✦</span></div>
-      <svg class="flourish" viewBox="0 0 360 24" aria-hidden="true" fill="none" stroke="#C9A24C" stroke-width="1.5" stroke-linecap="round"><path d="M10 12 H150 M210 12 H350"/><path d="M150 12 c8-10 16-10 22 0 c6 10 14 10 22 0 M154 12 c6 8 12 8 18 0"/><circle cx="180" cy="12" r="3" fill="#C9A24C" stroke="none"/><path d="M10 12 l6-4 M10 12 l6 4 M350 12 l-6-4 M350 12 l-6 4"/></svg>
-      <div class="motto">Veritas · Fides</div>
-      <div class="title">Certificate of Completion</div>
-      <div class="certify">This is to certify that</div>
-      <div class="cname">${student.name}</div>
-      <p class="body">a scholar at the ${LEVEL_LABEL[student.level]||student.level} level, has successfully completed the formal assessment entitled <em>“${COURSE.assessment}”</em> attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}% (${correct} of ${QUESTIONS.length})</strong>, and has thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</p>
-      <div class="foot">
-        <div class="sigblock"><div class="above script">Robert P. Smith, Sr.</div><div class="line"></div><div class="label">Bishop Robert P. Smith, Sr.</div></div>
-        <div class="seal"><img src="images/logo.svg" alt="Seal of The School of The Prophets"></div>
-        <div class="sigblock"><div class="above">${date}</div><div class="line"></div><div class="label">Date</div></div>
-      </div>
-    </div>` : "";
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs course">${COURSE.title}</div>
+      <div class="abs unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${QUESTIONS.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${QUESTIONS.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
   $("#printCert").hidden = !passed;
 
   // Review
