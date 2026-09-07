@@ -68,7 +68,7 @@
       radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,162,76,.16),transparent 70%),
       var(--navy);
   }
-  .seal{width:150px;height:170px;margin:0 auto 1.5rem;display:block}
+  .hero-anim{display:block;width:min(560px,92vw);aspect-ratio:16/9;margin:0 auto 1.8rem;border:1px solid var(--gold);box-shadow:0 12px 40px rgba(0,0,0,.45);background:var(--navy-deep);object-fit:cover}
   .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:.01em;color:#fff}
   .hero h1 em{font-style:italic;font-weight:400}
   .hero .rule{width:9rem;height:1px;background:var(--gold);margin:1.4rem auto}
@@ -222,22 +222,10 @@
 
 <section class="hero">
   <div class="wrap">
-    <svg class="seal" viewBox="0 0 150 170" aria-hidden="true">
-      <g fill="none" stroke="#C9A24C" stroke-width="2.2" stroke-linecap="round">
-        <path d="M32 150c-14-10-22-28-22-52"/><path d="M118 150c14-10 22-28 22-52"/>
-        <g id="leaf"><path d="M18 138c-6-2-10-7-10-13 6 0 11 4 12 10z" fill="#C9A24C" stroke="none"/></g>
-        <path d="M26 128c-7-1-12-6-13-12 6-1 12 3 14 9z" fill="#C9A24C" stroke="none"/>
-        <path d="M22 116c-7-1-12-7-12-14 6 0 11 5 13 11z" fill="#C9A24C" stroke="none"/>
-        <path d="M132 138c6-2 10-7 10-13-6 0-11 4-12 10z" fill="#C9A24C" stroke="none"/>
-        <path d="M124 128c7-1 12-6 13-12-6-1-12 3-14 9z" fill="#C9A24C" stroke="none"/>
-        <path d="M128 116c7-1 12-7 12-14-6 0-11 5-13 11z" fill="#C9A24C" stroke="none"/>
-      </g>
-      <path d="M75 10 125 26v44c0 30-22 52-50 64C47 122 25 100 25 70V26z" fill="#0E1830" stroke="#C9A24C" stroke-width="3"/>
-      <path d="M75 34v58M56 52h38" stroke="#C9A24C" stroke-width="8" stroke-linecap="round"/>
-      <path d="M46 106c12-5 46-5 58 0" stroke="#F5EFE1" stroke-width="6" stroke-linecap="round"/>
-      <path d="M52 100c10-4 36-4 46 0" stroke="#F5EFE1" stroke-width="3" stroke-linecap="round" opacity=".6"/>
-      <path d="M60 8l15-6 15 6" fill="none" stroke="#C9A24C" stroke-width="3" stroke-linecap="round"/>
-    </svg>
+    <video class="hero-anim" autoplay muted loop playsinline preload="metadata" poster="images/hero-poster.jpg" aria-label="A dove descending over an open Bible" >
+      <source src="images/hero-animation.mp4" type="video/mp4">
+      <img src="images/hero-poster.jpg" alt="A dove descending over an open Bible">
+    </video>
     <h1>The School <em>of</em> The Prophets</h1>
     <div class="rule"></div>
     <p>Study the Word, defend the faith, and be sent out. Five diplomas, earned through courses, examinations, and practical ministry under supervision.</p>
