@@ -148,6 +148,10 @@
   .cert .lab.r{left:61.5%}
   .fail{max-width:var(--measure);margin:0 auto}
 
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
   @media print{
     body{background:#fff}
     header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
@@ -306,7 +310,13 @@
   <section class="panel" id="s3" hidden>
     <div class="eyebrow">Section III</div>
     <h2>Assessment</h2>
-    <p class="lesson">The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit.</p>
+    <p class="lesson">The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the reading first</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
     <form id="examForm"></form>
     <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
     <div class="actions">
@@ -404,11 +414,45 @@ function begin(e){
 }
 $("#beginBtn").addEventListener("click",begin);
 $("#enrollForm").addEventListener("submit",begin);
-$("#toExam").addEventListener("click",()=>{ buildExam(); goto(3); });
+$("#toExam").addEventListener("click",()=>{ if(examGate()) buildExam(); goto(3); });
+
+
+// ---- Retake control: shuffled questions, and a waiting period after a failed attempt ----
+const LOCK_KEY = "sotp-lock-" + location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440]; // minutes: after the 1st, 2nd, 3rd, and every later failed attempt
+function lockState(){ try{ return JSON.parse(localStorage.getItem(LOCK_KEY)||"{}"); }catch(e){ return {}; } }
+function setLock(s){ try{ localStorage.setItem(LOCK_KEY, JSON.stringify(s)); }catch(e){} }
+function recordFail(){ const s=lockState(); s.fails=(s.fails||0)+1; const mins=WAITS[Math.min(s.fails-1,WAITS.length-1)]; s.until=Date.now()+mins*60000; setLock(s); }
+function recordPass(){ setLock({fails:0, until:0}); }
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function examGate(){
+  const s=lockState(); const left=(s.until||0)-Date.now();
+  const locked = left>0;
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  clearInterval(lockTimer);
+  if(locked){
+    const nextMins=WAITS[Math.min((s.fails||1),WAITS.length-1)];
+    $("#lockNote").textContent=`Attempt ${s.fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const tick=()=>{ const l=(lockState().until||0)-Date.now(); $("#lockClock").textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate(); } };
+    tick(); lockTimer=setInterval(tick,1000);
+    return false;
+  }
+  return true;
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
 
 function buildExam(){
+  makeExam();
   const f = $("#examForm"); f.innerHTML="";
-  QUESTIONS.forEach((qu,i)=>{
+  EXAM.forEach((qu,i)=>{
     const d = document.createElement("div"); d.className="q";
     d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
       <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
@@ -417,7 +461,7 @@ function buildExam(){
 }
 
 $("#submitExam").addEventListener("click",()=>{
-  const answers = QUESTIONS.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
   if(answers.includes(null)){ $("#warn").hidden=false; return; }
   $("#warn").hidden=true;
   showResults(answers);
@@ -425,11 +469,12 @@ $("#submitExam").addEventListener("click",()=>{
 });
 
 function showResults(answers){
-  const correct = answers.filter((a,i)=>a===QUESTIONS[i].a).length;
-  const pct = Math.round(correct/QUESTIONS.length*100);
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
   const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
   $("#pct").textContent = pct+"%";
-  $("#sub").textContent = `${correct} of ${QUESTIONS.length} questions answered correctly`;
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  if(passed) recordPass(); else recordFail();
   $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
   $("#msg").textContent = passed
     ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
@@ -437,7 +482,7 @@ function showResults(answers){
 
   // Breakdown by topic
   const by = {};
-  QUESTIONS.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
   $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
     <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
 
@@ -460,16 +505,16 @@ function showResults(answers){
       <div class="abs cname">${student.name}</div>
       <div class="abs ct-course">${COURSE.title}</div>
       <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
-      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${QUESTIONS.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
       <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
-      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${QUESTIONS.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
       <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
       <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
     </div></div>` : "";
   $("#printCert").hidden = !passed;
 
   // Review
-  $("#review").innerHTML = QUESTIONS.map((q,i)=>{
+  $("#review").innerHTML = EXAM.map((q,i)=>{
     const ok = answers[i]===q.a;
     return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
       <p class="prompt">${q.q}</p>
@@ -499,7 +544,7 @@ document.querySelectorAll(".check").forEach((el,idx)=>{
 });
 
 $("#printCert").addEventListener("click",()=>window.print());
-$("#retake").addEventListener("click",()=>{ buildExam(); goto(3); });
+$("#retake").addEventListener("click",()=>{ if(examGate()) buildExam(); goto(3); });
 </script>
 </body>
 </html>
