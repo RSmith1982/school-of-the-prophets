@@ -166,7 +166,7 @@
   <div class="wrap top">
     <img src="images/logo.svg" alt="" width="44" height="44">
     <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
-    <a href="index.html">Home</a>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
   </div>
 </header>
 
@@ -309,6 +309,8 @@
   </section>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js"></script>
 <script>
 const COURSE = {
   title: "Hearing from God",
@@ -364,32 +366,52 @@ function begin(e){
 }
 $("#beginBtn").addEventListener("click",begin);
 $("#enrollForm").addEventListener("submit",begin);
-$("#toExam").addEventListener("click",()=>{ if(examGate()) buildExam(); goto(3); });
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
 
 
-// ---- Retake control: shuffled questions, and a waiting period after a failed attempt ----
-const LOCK_KEY = "sotp-lock-" + location.pathname.split("/").pop().replace(/\.html$/,"");
-const WAITS = [15, 60, 240, 1440]; // minutes: after the 1st, 2nd, 3rd, and every later failed attempt
-function lockState(){ try{ return JSON.parse(localStorage.getItem(LOCK_KEY)||"{}"); }catch(e){ return {}; } }
-function setLock(s){ try{ localStorage.setItem(LOCK_KEY, JSON.stringify(s)); }catch(e){} }
-function recordFail(){ const s=lockState(); s.fails=(s.fails||0)+1; const mins=WAITS[Math.min(s.fails-1,WAITS.length-1)]; s.until=Date.now()+mins*60000; setLock(s); }
-function recordPass(){ setLock({fails:0, until:0}); }
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
 function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
 let lockTimer=null;
-function examGate(){
-  const s=lockState(); const left=(s.until||0)-Date.now();
-  const locked = left>0;
-  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+function showLock(kind, until, fails){
   clearInterval(lockTimer);
-  if(locked){
-    const nextMins=WAITS[Math.min((s.fails||1),WAITS.length-1)];
-    $("#lockNote").textContent=`Attempt ${s.fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
-    const tick=()=>{ const l=(lockState().until||0)-Date.now(); $("#lockClock").textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate(); } };
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
     tick(); lockTimer=setInterval(tick,1000);
-    return false;
   }
-  return true;
+  return false;
 }
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 let EXAM=[];
 function makeExam(){
@@ -414,8 +436,8 @@ $("#submitExam").addEventListener("click",()=>{
   const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
   if(answers.includes(null)){ $("#warn").hidden=false; return; }
   $("#warn").hidden=true;
-  showResults(answers);
-  goto(4);
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
 });
 
 function showResults(answers){
@@ -424,7 +446,6 @@ function showResults(answers){
   const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
   $("#pct").textContent = pct+"%";
   $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
-  if(passed) recordPass(); else recordFail();
   $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
   $("#msg").textContent = passed
     ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
@@ -494,7 +515,7 @@ document.querySelectorAll(".check").forEach((el,idx)=>{
 });
 
 $("#printCert").addEventListener("click",()=>window.print());
-$("#retake").addEventListener("click",()=>{ if(examGate()) buildExam(); goto(3); });
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
 </script>
 </body>
 </html>

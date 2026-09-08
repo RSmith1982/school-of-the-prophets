@@ -81,7 +81,7 @@
 <header><div class="wrap top">
 <img src="images/logo.svg" alt="" width="44" height="44">
 <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
-<a href="index.html">Home</a>
+<span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
 </div></header>
 
 <section class="hero"><div class="wrap">
@@ -114,12 +114,16 @@
 </main>
 <footer><div class="wrap">「初めに言があった。言は神と共にあった。言は神であった。」 — ヨハネによる福音書 1:1（口語訳）<br>© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js"></script>
 <script src="beautiful-reading-plan-ja-data.js"></script>
 <script>
 const root=document.getElementById('plan');
 const KEY='sotp-beautiful-plan-ja-done';
 let done=new Set(); try{done=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'))}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e){}}
+const PLAN_ID='japanese'; let USER=null;
+function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e){} if(USER) School.sb.from('reading_progress').upsert({user_id:USER.id,plan:PLAN_ID,done:[...done],updated_at:new Date().toISOString()}).then(r=>{ if(r.error) console.warn(r.error.message); });}
+async function syncFromServer(){ USER=await School.user(); if(!USER) return; const {data}=await School.sb.from('reading_progress').select('done').eq('user_id',USER.id).eq('plan',PLAN_ID).maybeSingle(); const before=done.size; (data&&data.done||[]).forEach(n=>done.add(n)); document.querySelectorAll('ol.plan li').forEach(li=>{ const n=+li.dataset.n; const c=li.querySelector('input'); if(done.has(n)){ c.checked=true; li.classList.add('done'); } }); progress(); if(done.size!==before || !data) save(); }
 const kan=n=>{const d=['','一','二','三','四','五','六','七','八','九'];if(n<10)return d[n];if(n<20)return '十'+d[n%10];if(n<100)return d[Math.floor(n/10)]+'十'+d[n%10];return '百'+(n%100<10?d[n%100]:(n%100<20?'十'+d[n%10]:d[Math.floor((n%100)/10)]+'十'+d[n%10]));};
 function refName(e){
   const b=DATA.books[e.book];
@@ -164,6 +168,7 @@ function progress(){const n=DATA.plan.length,k=[...done].filter(x=>x>=1&&x<=n).l
 document.getElementById('count').textContent=DATA.plan.length;
 progress();
 document.getElementById('year').textContent=new Date().getFullYear();
+syncFromServer();
 </script>
 </body>
 </html>

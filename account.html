@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>My Progress — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;--parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--measure:42rem;--green:#2F5D3A}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Georgia,serif;font-size:1.12rem;line-height:1.6;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  h1,h2,h3,h4{font-weight:500;line-height:1.25;margin:0}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;text-decoration:none}
+  .hero{color:var(--parchment);padding:2.4rem 0 2rem;text-align:center;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,162,76,.16),transparent 70%),var(--navy)}
+  .hero h1{font-size:clamp(2rem,5vw,3rem);color:#fff}
+  .hero p{max-width:var(--measure);margin:.6rem auto 0;color:var(--gold-soft)}
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel h2{font-size:1.7rem;color:var(--navy);margin-bottom:.8rem}
+  .panel h3{font-size:1.3rem;color:var(--burgundy);margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:1px solid var(--gold)}
+  label{display:block;font-size:.95rem;color:var(--ink-soft);margin:.9rem 0 .25rem}
+  input[type=text],input[type=email],input[type=password],select,textarea{font:inherit;width:100%;padding:.55rem .7rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--ink);border-radius:2px}
+  textarea{min-height:5rem}
+  .btn{font:inherit;font-size:1rem;padding:.55rem 1.2rem;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn.small{font-size:.9rem;padding:.3rem .8rem}
+  .row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+  .msg{color:var(--burgundy);font-style:italic;margin-top:.6rem;min-height:1.4em}
+  .tabs{display:flex;gap:.5rem;margin-bottom:1rem}
+  .tabs button{font:inherit;background:none;border:1px solid var(--gold);padding:.4rem 1rem;cursor:pointer;color:var(--navy);border-radius:2px}
+  .tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+  @media (max-width:640px){.two{grid-template-columns:1fr}}
+  .bar{height:.7rem;background:#E3D9BF;border:1px solid var(--gold);border-radius:2px;overflow:hidden;margin:.4rem 0 1rem}
+  .bar b{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--burgundy))}
+  table{width:100%;border-collapse:collapse;font-size:1.02rem}
+  th,td{text-align:left;padding:.5rem .4rem;border-top:1px solid var(--parchment-dark);vertical-align:top}
+  th{font-weight:500;color:var(--ink-soft);font-size:.92rem;letter-spacing:.04em;text-transform:uppercase}
+  .st{display:inline-block;padding:.1rem .55rem;border-radius:2px;font-size:.9rem;white-space:nowrap}
+  .st.none{background:#E3D9BF;color:var(--ink-soft)}
+  .st.reading{background:#F1E6C8;color:var(--navy)}
+  .st.passed{background:#DCE8DC;color:var(--green)}
+  .st.approved{background:var(--green);color:#fff}
+  .st.requested{background:#F3DFD0;color:var(--burgundy)}
+  .st.soon{background:transparent;border:1px dashed var(--gold);color:var(--ink-soft)}
+  .note{font-size:.95rem;color:var(--ink-soft)}
+  .check{display:flex;gap:.6rem;align-items:flex-start;margin:.6rem 0}
+  .check input{width:1.15rem;height:1.15rem;margin-top:.3rem;accent-color:var(--burgundy)}
+  .big{font-size:2.2rem;color:var(--burgundy);font-weight:600;line-height:1}
+  footer{padding:2rem 0;text-align:center;color:var(--gold-soft);background:var(--navy-deep);font-size:.95rem}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+<img src="images/logo.svg" alt="" width="44" height="44">
+<div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+<a href="index.html">Home</a>
+</div></header>
+
+<section class="hero"><div class="wrap"><h1 id="heroTitle">My Progress</h1><p id="heroSub">Sign in to keep your reading, your courses, and your diploma in one place.</p></div></section>
+
+<main class="wrap">
+
+<!-- ================= Signed out ================= -->
+<section class="panel" id="authPanel" hidden>
+  <div class="tabs"><button type="button" class="on" id="tabIn">Sign in</button><button type="button" id="tabUp">Create an account</button></div>
+  <form id="inForm">
+    <label for="inEmail">Email</label><input id="inEmail" type="email" autocomplete="email" required>
+    <label for="inPass">Password</label><input id="inPass" type="password" autocomplete="current-password" required>
+    <div class="row"><button class="btn gold" type="submit">Sign in</button><button class="btn ghost" type="button" id="forgot">Forgot password</button></div>
+    <div class="msg" id="inMsg"></div>
+  </form>
+  <form id="upForm" hidden>
+    <div class="two">
+      <div><label for="upName">Full name (as it should appear on your certificates)</label><input id="upName" type="text" autocomplete="name" required></div>
+      <div><label for="upEmail">Email</label><input id="upEmail" type="email" autocomplete="email" required></div>
+      <div><label for="upPass">Password (at least 8 characters)</label><input id="upPass" type="password" autocomplete="new-password" minlength="8" required></div>
+      <div><label for="upDiploma">Diploma you are pursuing</label><select id="upDiploma"><option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option><option>Bishop</option></select></div>
+      <div><label for="upPlan">Reading plan</label><select id="upPlan"><option value="english">The Beautiful Reading Plan (King James Version)</option><option value="japanese">日本語聖書研究 — Japanese (口語訳)</option></select></div>
+    </div>
+    <div class="row"><button class="btn gold" type="submit">Create my account</button></div>
+    <div class="msg" id="upMsg"></div>
+  </form>
+</section>
+
+<!-- ================= Password reset ================= -->
+<section class="panel" id="resetPanel" hidden>
+  <h2>Choose a new password</h2>
+  <form id="resetForm"><label for="newPass">New password</label><input id="newPass" type="password" minlength="8" required><div class="row"><button class="btn gold" type="submit">Save password</button></div><div class="msg" id="resetMsg"></div></form>
+</section>
+
+<!-- ================= Signed in ================= -->
+<div id="me" hidden>
+<section class="panel">
+  <h2 id="welcome"></h2>
+  <div class="two">
+    <div>
+      <div class="note">Diploma</div><div class="big" id="dipName"></div>
+      <div class="bar"><b id="dipBar" style="width:0"></b></div>
+      <div class="note" id="dipPct"></div>
+    </div>
+    <div>
+      <div class="note">Overall status</div>
+      <p id="overall" style="margin:.3rem 0 0"></p>
+      <div class="row"><a class="btn small ghost" href="#settings">Settings</a><button class="btn small ghost" type="button" id="signOut">Sign out</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>1. Enrollment</h2>
+  <p>Every student begins by sending the enrollment request from the <a href="index.html#enroll">Enroll section of the home page</a>. Tick the box once you have sent it; the Bishop confirms it here.</p>
+  <label class="check"><input type="checkbox" id="enrollSent"><span>I have sent my enrollment request.</span></label>
+  <p id="enrollStatus"></p>
+</section>
+
+<section class="panel">
+  <h2>2. Reading plan</h2>
+  <p id="planIntro"></p>
+  <div class="bar"><b id="planBar" style="width:0"></b></div>
+  <p id="planStatus"></p>
+  <div class="row"><a class="btn small" id="planLink" href="#">Open my reading plan</a></div>
+</section>
+
+<section class="panel">
+  <h2>3. Courses and examinations</h2>
+  <p class="note">A course is complete when its assessment is passed (80%; 90% with honors) and the Bishop has approved it.</p>
+  <div id="courses"></div>
+</section>
+
+<section class="panel">
+  <h2>4. Practical training</h2>
+  <p class="note">Each level has three parts: take the course, watch it done, then do it while being watched and graded. Report parts two and three here when they are done; the Bishop approves each one.</p>
+  <div id="practical"></div>
+</section>
+
+<section class="panel" id="settings">
+  <h2>Settings</h2>
+  <div class="two">
+    <div><label for="setName">Full name</label><input id="setName" type="text"></div>
+    <div><label for="setDiploma">Diploma you are pursuing</label><select id="setDiploma"><option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option><option>Bishop</option></select></div>
+    <div><label for="setPlan">Reading plan</label><select id="setPlan"><option value="english">The Beautiful Reading Plan (King James Version)</option><option value="japanese">日本語聖書研究 — Japanese (口語訳)</option></select></div>
+    <div><label for="setPass">New password (leave blank to keep)</label><input id="setPass" type="password" autocomplete="new-password"></div>
+  </div>
+  <div class="row"><button class="btn" type="button" id="saveSettings">Save</button></div>
+  <div class="msg" id="setMsg"></div>
+</section>
+</div>
+</main>
+<footer><div class="wrap">© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js"></script>
+<script>
+const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
+document.getElementById('year').textContent=new Date().getFullYear();
+
+// ---- signed-out UI
+$('#tabIn').onclick=()=>{$('#tabIn').classList.add('on');$('#tabUp').classList.remove('on');$('#inForm').hidden=false;$('#upForm').hidden=true;};
+$('#tabUp').onclick=()=>{$('#tabUp').classList.add('on');$('#tabIn').classList.remove('on');$('#inForm').hidden=true;$('#upForm').hidden=false;};
+if(location.hash==='#create') $('#tabUp').onclick();
+$('#inForm').onsubmit=async e=>{e.preventDefault(); $('#inMsg').textContent='Signing in…';
+  const {error}=await sb.auth.signInWithPassword({email:$('#inEmail').value.trim(),password:$('#inPass').value});
+  if(error){$('#inMsg').textContent=error.message;return;} location.hash=''; render();};
+$('#upForm').onsubmit=async e=>{e.preventDefault(); $('#upMsg').textContent='Creating your account…';
+  const name=$('#upName').value.trim();
+  const {error}=await sb.auth.signUp({email:$('#upEmail').value.trim(),password:$('#upPass').value,options:{data:{name,diploma:$('#upDiploma').value,plan:$('#upPlan').value}}});
+  if(error){$('#upMsg').textContent=error.message;return;}
+  $('#upMsg').textContent='Welcome. Your account is ready.'; location.hash=''; render();};
+$('#forgot').onclick=async()=>{const email=$('#inEmail').value.trim(); if(!email){$('#inMsg').textContent='Type your email first, then press Forgot password.';return;}
+  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+  $('#inMsg').textContent=error?error.message:'A password-reset link has been sent to '+email+'.';};
+$('#resetForm').onsubmit=async e=>{e.preventDefault(); const {error}=await sb.auth.updateUser({password:$('#newPass').value}); $('#resetMsg').textContent=error?error.message:'Saved. You are signed in.'; if(!error){ $('#resetPanel').hidden=true; render(); }};
+sb.auth.onAuthStateChange((ev)=>{ if(ev==='PASSWORD_RECOVERY'){ $('#authPanel').hidden=true; $('#me').hidden=true; $('#resetPanel').hidden=false; } });
+
+// ---- signed-in UI
+let U=null,P=null,APP={},CP={},RP={},PR=[];
+function approved(item){ return !!(APP[item]&&APP[item].approved); }
+function st(cls,txt){ return `<span class="st ${cls}">${txt}</span>`; }
+async function load(){
+  U=await S.user(); if(!U) return false;
+  const [p,a,c,r,q]=await Promise.all([
+    sb.from('profiles').select('*').eq('id',U.id).maybeSingle(),
+    sb.from('approvals').select('*').eq('user_id',U.id),
+    sb.from('course_progress').select('*').eq('user_id',U.id),
+    sb.from('reading_progress').select('*').eq('user_id',U.id),
+    sb.from('practical_requests').select('*').eq('user_id',U.id).order('requested_at'),
+  ]);
+  P=p.data||{name:U.email,diploma:'Disciple',plan:'english',enrollment_sent:false};
+  APP={}; (a.data||[]).forEach(x=>APP[x.item]=x);
+  CP={}; (c.data||[]).forEach(x=>CP[x.course]=x);
+  RP={}; (r.data||[]).forEach(x=>RP[x.plan]=x);
+  PR=q.data||[];
+  return true;
+}
+function courseRow(slug){
+  const c=S.COURSES[slug], cp=CP[slug]; let status, action='';
+  if(!c.built) status=st('soon','Coming soon');
+  else if(approved('course:'+slug)) status=st('approved','Approved by the Bishop');
+  else if(cp&&cp.status==='passed') status=st('passed',`Passed ${cp.best_score}%${cp.best_score>=90?' with honors':''}`)+' <span class="note">awaiting approval</span>';
+  else if(cp) status=st('reading',`In progress · best ${cp.best_score}%`);
+  else status=st('none','Not started');
+  if(c.built) action=`<a class="btn small ghost" href="${slug}.html">${cp&&cp.status==='passed'?'Open':'Begin'}</a>`;
+  return `<tr><td>${esc(c.title)}</td><td>${status}</td><td>${action}</td></tr>`;
+}
+function practicalBlock(level){
+  const page=S.PRACTICAL_PAGE[level], c=S.COURSES[page], cp=CP[page];
+  const names={'level-one':'Level One','level-two':'Level Two','level-three':'Level Three'};
+  const part1 = !c.built?st('soon','Coming soon'):approved('course:'+page)?st('approved','Approved'):(cp&&cp.status==='passed')?st('passed','Passed · awaiting approval'):cp?st('reading','In progress'):st('none','Not started');
+  const req=n=>PR.filter(x=>x.level===level&&x.part===n).slice(-1)[0];
+  const partN=(n,label)=>{ const key=`practical:${level}:${n}`; const r=req(n);
+    let s=approved(key)?st('approved','Approved by the Bishop'):r?st('requested','Reported · awaiting the Bishop'):st('none','Not yet');
+    let act=approved(key)?'':`<button class="btn small ghost" type="button" data-req="${level}|${n}">${r?'Report again':'Report done'}</button>`;
+    return `<tr><td>${label}</td><td>${s}${r&&r.note?`<div class="note">“${esc(r.note)}”</div>`:''}</td><td>${act}</td></tr>`; };
+  return `<h3>Practical Training ${names[level]}</h3><table><thead><tr><th>Part</th><th>Status</th><th></th></tr></thead><tbody>
+    <tr><td>1. Take the course</td><td>${part1}</td><td>${c.built?`<a class="btn small ghost" href="${page}.html">Open</a>`:''}</td></tr>
+    ${partN(2,'2. Watch it done')}${partN(3,'3. Do it while being watched and graded')}</tbody></table>`;
+}
+function render(){ load().then(ok=>{ $('#authPanel').hidden=ok; $('#me').hidden=!ok; if(ok) show(); else { $('#heroTitle').textContent='My Progress'; } }); }
+function show(){
+  const first=(P.name||'').split(' ')[0]||'';
+  $('#heroTitle').textContent=P.name||'My Progress'; $('#heroSub').textContent='Your reading, your courses, and your diploma, kept in one place.';
+  $('#welcome').textContent=`Welcome, ${P.name||U.email}.`;
+  const req=S.requirements(P.diploma); $('#dipName').textContent=P.diploma;
+  // progress: enrollment 1, reading plan 1, each course 1, each practical part 3 per level
+  let total=0, done=0;
+  total++; if(approved('enrollment')) done++;
+  const plan=S.PLANS[P.plan]||S.PLANS.english; const readDone=(RP[P.plan]&&RP[P.plan].done||[]).filter(n=>n>=1&&n<=plan.total).length;
+  total++; if(readDone>=plan.total) done++;
+  req.courses.forEach(s=>{ total++; if(approved('course:'+s)) done++; });
+  req.practical.forEach(l=>{ total+=3; if(approved('course:'+S.PRACTICAL_PAGE[l])) done++; if(approved(`practical:${l}:2`)) done++; if(approved(`practical:${l}:3`)) done++; });
+  const pct=Math.round(done/total*100); $('#dipBar').style.width=pct+'%'; $('#dipPct').textContent=`${done} of ${total} steps approved (${pct}%)`;
+  $('#overall').innerHTML = approved('diploma:'+P.diploma) ? `<span class="st approved">Diploma awarded — ${esc(P.diploma)}</span>` : pct===100 ? 'Every step is approved. The Bishop will award the diploma.' : 'Keep going, one step at a time. '+(req.chain.length>1?`The ${esc(P.diploma)} diploma builds on ${req.chain.slice(0,-1).join(' and ')}, so those requirements are included below.`:'');
+  // enrollment
+  $('#enrollSent').checked=!!P.enrollment_sent;
+  $('#enrollStatus').innerHTML = approved('enrollment')?st('approved','Enrollment confirmed by the Bishop'):P.enrollment_sent?st('requested','Sent · awaiting the Bishop’s confirmation'):st('none','Not yet sent');
+  // plan
+  $('#planIntro').innerHTML=`Your plan: <strong>${esc(plan.title)}</strong>. One complete reading plan — this one or the other — is required for every diploma. Tick each reading on the plan page and it is recorded here.`;
+  $('#planBar').style.width=Math.round(readDone/plan.total*100)+'%';
+  $('#planStatus').innerHTML=`${readDone} of ${plan.total} readings finished. `+(approved('reading:'+P.plan)?st('approved','Completed and approved'):readDone>=plan.total?st('passed','Completed · awaiting approval'):'');
+  $('#planLink').href=plan.page;
+  // courses
+  $('#courses').innerHTML=`<table><thead><tr><th>Course</th><th>Status</th><th></th></tr></thead><tbody>${req.courses.map(courseRow).join('')}</tbody></table>`;
+  // practical
+  $('#practical').innerHTML=req.practical.length?req.practical.map(practicalBlock).join(''):'<p class="note">No practical training is required for this diploma beyond the diplomas it builds on.</p>';
+  document.querySelectorAll('[data-req]').forEach(b=>b.onclick=async()=>{ const [level,part]=b.dataset.req.split('|');
+    const note=prompt(part==='2'?'Tell the Bishop when and where you watched it done (date, place, who ministered):':'Tell the Bishop when and where you did it under supervision (date, place, who watched):')||'';
+    const {error}=await sb.from('practical_requests').insert({user_id:U.id,level,part:+part,note}); if(error) alert(error.message); else render(); });
+  // settings
+  $('#setName').value=P.name||''; $('#setDiploma').value=P.diploma; $('#setPlan').value=P.plan;
+}
+$('#enrollSent').onchange=async e=>{ const {error}=await sb.from('profiles').update({enrollment_sent:e.target.checked,updated_at:new Date().toISOString()}).eq('id',U.id); if(error) alert(error.message); render(); };
+$('#saveSettings').onclick=async()=>{ $('#setMsg').textContent='Saving…';
+  const {error}=await sb.from('profiles').update({name:$('#setName').value.trim(),diploma:$('#setDiploma').value,plan:$('#setPlan').value,updated_at:new Date().toISOString()}).eq('id',U.id);
+  if(error){$('#setMsg').textContent=error.message;return;}
+  if($('#setPass').value){ const r=await sb.auth.updateUser({password:$('#setPass').value}); if(r.error){$('#setMsg').textContent=r.error.message;return;} $('#setPass').value=''; }
+  $('#setMsg').textContent='Saved.'; render(); };
+$('#signOut').onclick=async()=>{ await sb.auth.signOut(); render(); };
+render();
+</script>
+</body>
+</html>

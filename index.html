@@ -246,6 +246,7 @@
           </ul>
         </li>
         <li><a href="#enroll">Enroll</a></li>
+        <li><a href="account.html" id="navAccount">My progress</a></li>
       </ul>
     </nav>
   </div>
@@ -459,7 +460,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Enroll</h2>
-      <p>Tell us who you are and which diploma you are pursuing. Bishop Robert P. Smith, Sr. will reply with your first course and reading.</p>
+      <p>Two steps. First, <a href="account.html#create" style="color:var(--gold-soft)">create your student account</a>, where your reading, your courses, and your diploma are recorded. Then send the registration form below; Bishop Robert P. Smith, Sr. confirms your enrollment and approves each step as you go.</p>
     </div>
     <div class="actions" style="border:0;padding:0;margin:0 0 1.2rem;justify-content:flex-start">
       <button class="btn" type="button" id="showForm">Open the registration form</button>
@@ -494,5 +495,8 @@ document.getElementById('showForm').addEventListener('click',()=>{
 });
 document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js"></script>
+<script>School.user().then(u=>{ if(u) School.profile().then(p=>{ const a=document.getElementById("navAccount"); a.textContent=(p&&p.name?p.name.split(" ")[0]:"My")+"’s progress"; }); });</script>
 </body>
 </html>
