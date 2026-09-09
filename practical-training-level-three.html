@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Practical Training Level Three — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Practical Training Level Three</h2>
+    <p class="lesson" style="max-width:var(--measure)">The Bishop-level course of the school's practical training, covering the charge of oversight and three works that come with it: setting up a church, holding a miracle event, and ministering in a persecuted region. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">The Bishop&#x27;s Charge</a></li>
+      <li><a href="#lesson-2">Setting Up a Church</a></li>
+      <li><a href="#lesson-3">Holding a Miracle Event</a></li>
+      <li><a href="#lesson-4">Ministering in a Persecuted Region</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. The Bishop&#x27;s Charge</h3>
+<p>You have come a long way to stand here. Until now this school has been asking what God has done in you. From this level on it asks a different question: what will God do through you, for others, and will you answer for them? That is the whole difference between a disciple and a bishop.</p>
+<p>Paul begins where the flesh would never begin. <strong>"This is a true saying, If a man desire the office of a bishop, he desireth a good work."</strong> Not a good position. Not a good title. A good <em>work</em>. I have watched men chase the word "bishop" like it was a crown, and watched God hand the work to somebody who never asked for the name. If what you want is the platform and the seat at the front, God will let you have the name and withhold the work, and you will spend your life presiding over something that is not alive.</p>
+<p>Then Paul lists what the man must be, and every single item is character, not talent. <strong>"A bishop then must be blameless, the husband of one wife, vigilant, sober, of good behaviour, given to hospitality, apt to teach."</strong> Not given to wine, not greedy of filthy lucre, patient, not a brawler, ruling his own house well. And then this: <strong>"Not a novice, lest being lifted up with pride he fall into the condemnation of the devil."</strong> And this: he must have a good report of them which are without — the people outside the church, who have no reason to flatter you, must be able to say you are honest. God does not first ask what you can do. He asks what you are when nobody claps.</p>
+<p>To Titus the charge adds doctrine: the overseer is one <strong>"holding fast the faithful word as he hath been taught, that he may be able by sound doctrine both to exhort and to convince the gainsayers."</strong> Two hands there. One feeds the sheep; the other stands in the doorway and turns back the wolf. A man who can comfort but cannot correct is only half a bishop, and a man who can argue but cannot feed is not a bishop at all.</p>
+<p>Peter, restored by the Lord Jesus Christ Himself, gives us the heart of it. <strong>"Feed the flock of God which is among you, taking the oversight thereof, not by constraint, but willingly; not for filthy lucre, but of a ready mind; neither as being lords over God's heritage, but being ensamples to the flock."</strong> Three temptations are buried in one verse. Doing it because you are trapped in it. Doing it for what it pays. Doing it because you like the authority. Against all three Peter sets one word: <em>ensamples</em>. Your people will not become what you preach; they will become what you are.</p>
+<p>And oversight has a cost that no salary covers. <strong>"I am the good shepherd: the good shepherd giveth his life for the sheep."</strong> The hireling flees when he sees the wolf coming, because the sheep are not his own. Every shepherd finds out which one he is on the day the wolf shows up — the day the crowd thins and the money with it, the day loving one difficult family costs you a night's sleep every week for a year. You do not discover you are a shepherd in the pulpit. You discover it at the hospital at two in the morning.</p>
+<p>Now hear the part men forget. The bishop's work is not to gather people around himself; it is to raise other men and let them go. <strong>"For this cause left I thee in Crete, that thou shouldest set in order the things that are wanting, and ordain elders in every city, as I had appointed thee."</strong> Every city. Paul and Barnabas did the same, going back through the towns where they had just been run out, and <strong>"when they had ordained them elders in every church, and had prayed with fasting, they commended them to the Lord."</strong> Oversight that produces no other overseers is not oversight; it is ownership. If your ministry collapses the day you die, you built a monument, not a church.</p>
+<p>That is because oversight is fatherhood. <strong>"For though ye have ten thousand instructors in Christ, yet have ye not many fathers: for in Christ Jesus I have begotten you through the gospel."</strong> A man can teach a class and go home. A father cannot go home, because his children are his home. He corrects when it is unpopular, stays when the son is a fool, and rejoices when the son outgrows him. If you are only willing to instruct, teach — that is honourable. But do not take the oversight.</p>
+<p>And take this last thing with you into the rest of the course. You are not the top. <strong>"And when the chief Shepherd shall appear, ye shall receive a crown of glory that fadeth not away."</strong> The flock is not yours; it is His, bought with His own blood, lent to your hands for a few years. You will give account for every soul in it. That weight is meant to be felt, because a man who feels it will not preach carelessly, will not touch the money, and will not build a kingdom with his own name over the door. Carry the weight, and the crown will keep.</p>
+<aside class="key"><div class="key-t">Hold onto this: the office is a work, not a crown.</div><p>A bishop is made of character, feeds and guards the flock as a father, raises up other elders instead of gathering people around himself, and gives account to the Chief Shepherd whose flock it really is.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. Setting Up a Church</h3>
+<p>A church is not started by renting a hall. Most failed works were begun backwards — a building first, a name second, prayer somewhere down the list. In Acts the order is the other way round. The men at Antioch were <strong>"ministering to the Lord, and fasted"</strong> when the Holy Ghost said, <strong>"Separate me Barnabas and Saul for the work whereunto I have called them."</strong> The sending came out of the fasting. So before you gather anybody, gather whoever will pray with you and stay there until God speaks. If the Holy Ghost has not separated you for this place, no amount of organising will make it a church.</p>
+<p>Start small and do not despise it. Two or three in a front room with the Bible open and the Lord Jesus Christ honoured among them is a church in seed. The mistake is to act big before you are big. Let them learn to pray out loud, to confess their faults, to bring their neighbours, to give and see God multiply it. A small group that is alive will become a church; a crowd that is not alive will only become a larger crowd.</p>
+<p>What that gathering does is written so plainly that we have no excuse for inventing something else. <strong>"And they continued stedfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers."</strong> Four things. Sound teaching from the apostles and not from the culture. Real fellowship, where people know one another's troubles. The Lord's supper, kept reverently and often, discerning His body. And prayers — not one closing prayer, but a praying people. Where those four are steady, the rest follows: fear came upon every soul, wonders and signs were done, and the Lord added to the church daily such as should be saved. Notice who did the adding.</p>
+<p>Teach doctrine from the first week, and teach it in order. A young church fed on nothing but testimonies and excitement will not survive its first trouble. Take them through repentance, the blood of the Lord Jesus Christ, the new birth, holiness, the Holy Ghost, and the judgement to come. Write down what you believe. Doctrine settled early prevents division later.</p>
+<p>Now leadership, and here men are usually in too much of a hurry. Paul and Barnabas preached, made disciples, came back through the same cities, and only then <strong>"when they had ordained them elders in every church, and had prayed with fasting, they commended them to the Lord, on whom they believed."</strong> Elders were appointed after time had tested them, with fasting, and then handed over to God rather than kept on a leash. Do not make a man an elder because he is enthusiastic, or generous, or the only one who volunteered: <strong>"Not a novice, lest being lifted up with pride he fall into the condemnation of the devil."</strong> It is far easier to wait six months than to remove a man in six years.</p>
+<p>Order is not the enemy of the Spirit; it is the Spirit's own instruction. <strong>"Let all things be done decently and in order."</strong> Know who opens and closes the meeting, who may bring a word and who weighs it, who is at the door and who is with the children. When the power of God moves, order is what keeps the meeting from being spoiled — the flesh always tries to climb onto the platform when the Holy Ghost is working, and a settled order quietly shuts that door.</p>
+<p>Care for the poor from the first month, before you can afford it. The early church <strong>"sold their possessions and goods, and parted them to all men, as every man had need."</strong> A church that preaches and does not feed is a noise. Keep a small fund for widows and for the family whose rent came due, and administer it quietly.</p>
+<p>Keep the money clean and in the light. Two or more people count every offering and both sign. The one who preaches is not the one who holds the bank card. Books are open to the elders and, where the law requires it, to the authorities. Paul sent brethren with the collection on purpose, <strong>"providing for honest things, not only in the sight of the Lord, but also in the sight of men."</strong> Being honest is not enough; you must be seen to be honest, because one whisper about money closes more doors than a hundred sermons open.</p>
+<p>And build to send, not to keep. Antioch's greatest day was the day it lost its two best men to the mission field. If you count success by how many stay, you will hold people back from their calling to keep your numbers up. Send them, plant the next assembly in the next town, and ordain elders there too.</p>
+<p>Finally, remember what you are building on, and it is not your gift. <strong>"And I say also unto thee, That thou art Peter, and upon this rock I will build my church; and the gates of hell shall not prevail against it."</strong> He builds it. <strong>"For other foundation can no man lay than that is laid, which is Jesus Christ."</strong> Preach Him, exalt Him, and take heed how you build thereupon — because a work founded on a personality lasts exactly as long as the personality, and a work founded on the Lord Jesus Christ outlasts hell itself.</p>
+<aside class="key"><div class="key-t">Hold onto this: pray it into being before you organise it.</div><p>A church is begun in prayer and fasting, ordered by the pattern of Acts — doctrine, fellowship, the Lord's supper, prayers — led by tested elders, honest with its money, generous to the poor, and founded on the Lord Jesus Christ rather than on a man.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Holding a Miracle Event</h3>
+<p>A miracle event is not a show. I mean a gathering where the Gospel is preached and the sick are prayed for in the name of the Lord Jesus Christ, and God confirms His own word. Ministers such as T. B. Joshua have shown a generation of us that this is not a special department of the church but the normal overflow of a praying, holy life. So the first work is not on the platform. It is on your face, weeks before, in prayer and fasting. <strong>"Howbeit this kind goeth not out but by prayer and fasting."</strong> Whatever you have not gained in the secret place, you will not display in the public place.</p>
+<p>Prepare a team that agrees. Not merely available — agreed, praying together beforehand, without a quarrel among them and without a man living in secret sin. An unclean hand laid on a sick body carries nothing. I would rather go in with four fasted, humble helpers than four hundred volunteers in matching shirts.</p>
+<p>When the meeting begins, preach the Lord Jesus Christ plainly before you pray for one sick person. A healed body that goes to hell has gained a few years and lost everything. So preach the cross, the blood, repentance, and the resurrection. Let them believe on Him first, and then bring their bodies. The signs were never meant to replace the message: <strong>"And they went forth, and preached every where, the Lord working with them, and confirming the word with signs following. Amen."</strong> The word goes first; the signs follow it to confirm it.</p>
+<p>Set the people's faith on God, not on you. This is where events are ruined. The moment a crowd believes in a man's hands, God withdraws, because <strong>"my glory will I not give to another."</strong> When the lame man was healed, Peter turned on the astonished crowd: <strong>"why look ye so earnestly on us, as though by our own power or holiness we had made this man to walk?"</strong> Tell them there is nothing in your fingers, and not to touch your clothes. Point every eye to the Lord Jesus Christ.</p>
+<p>Now the three levels of faith, which you should be able to walk a sick person through in one minute. The first level is <em>God can</em>. Most people get that far. The second is <em>God can do it through you</em> — that He still works through ordinary men and has not retired. The third is the one that heals: <em>God is willing to do it for me</em>. That is where the leper stood when he said, "Lord, if thou wilt, thou canst make me clean" — he had the first two and was uncertain of the third. The answer came fast: <strong>"And Jesus put forth his hand, and touched him, saying, I will; be thou clean. And immediately his leprosy was cleansed."</strong> Get a man from "He can" to "He will, for me," and you will often find little left to do.</p>
+<p>Then pray in the name that has authority: <strong>"Silver and gold have I none; but such as I have give I thee: In the name of Jesus Christ of Nazareth rise up and walk."</strong> Call out the sicknesses as the Holy Ghost gives them, lay hands modestly, anoint with oil as James instructs, and command in that name. Expect it to work. <strong>"There came also a multitude out of the cities round about unto Jerusalem, bringing sick folks, and them which were vexed with unclean spirits: and they were healed every one."</strong> Healing and deliverance are not rare exceptions granted to famous men; they are ordinary, promised to them that believe.</p>
+<p>Keep the meeting orderly and the people safe. Crowds crush. Have stewards at every aisle and exit, a clear route out, a quiet room for those under deliverance, and women to attend to women. Do not announce a healing you have not verified. Nothing damages the Gospel in a town like a claimed miracle everybody knows did not happen.</p>
+<p>Give God every ounce of the glory, then do the unglamorous work: follow up the converts. Take names and put every one of them into the hands of a local assembly within the week. Paul went back into the very cities that had stoned him, <strong>"confirming the souls of the disciples, and exhorting them to continue in the faith."</strong> A miracle event that is not followed up is a firework — bright, loud, and gone by morning.</p>
+<p>Finally, what when the healing does not come? Remember the order: <em>check the power, then find the break.</em> The power is never the problem — it is God's, and it is not diminished. Do not begin by questioning God; look for the break in the line. Unconfessed sin, in me or in the meeting? Unforgiveness the person is holding? An occult object in the house, a charm, an oath, a covenant made in the family? Unbelief spoken? Have I prayed and fasted, or come in on yesterday's anointing? Is my motive clean? Search that honestly and quietly before God, never in a way that shames the sick person in front of a crowd — some are waiting on God's own timing and are not at fault in the least. Then go back and pray again. The disciples asked, "Why could not we cast him out?" and were answered plainly. He will answer you too.</p>
+<aside class="key"><div class="key-t">Hold onto this: preach Him first, and give Him the glory last.</div><p>A miracle event is prepared in prayer and fasting by an agreed team, preaches the Lord Jesus Christ before praying for the sick, sets faith on God alone, expects healing as ordinary, keeps order, gives God all the glory, follows up converts — and when healing does not come, checks the power and finds the break.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Ministering in a Persecuted Region</h3>
+<p>There are places on this earth where preaching the name of the Lord Jesus Christ costs a man his job, his liberty, or his life, and a bishop with any reach will sooner or later have brethren in such a place. We must talk about it soberly, because zeal without wisdom in a hostile country does not usually get the loud preacher killed — it gets the quiet local believers killed after he has flown home.</p>
+<p>The Lord Jesus Christ gave the rule Himself, and did not soften it. <strong>"Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves."</strong> Both halves are commanded. Harmless means you do not deceive, you do not lie about who you are when asked, you do not insult their officials, and you give the authorities no charge against you except the name of the Lord Jesus Christ. Wise means you notice who is listening, you do not say in a taxi what you would not say in a police station, and you assume the phone in your pocket is a witness for the prosecution.</p>
+<p>And when they take hold of you, do not rehearse a speech. <strong>"But when they deliver you up, take no thought how or what ye shall speak: for it shall be given you in that same hour what ye shall speak."</strong> I have heard testimony after testimony of believers who were not eloquent men, and words came out of their mouths before magistrates that shut the room up. Your preparation is holiness and prayer, not a script.</p>
+<p>Now the hardest question: when do you flee and when do you stay? The Lord gave permission to run. <strong>"But when they persecute you in this city, flee ye into another."</strong> Paul was let down over a wall in a basket, and there was no shame in it. Yet the same Paul went bound in the spirit to Jerusalem knowing that bonds and afflictions waited for him. So there is no formula. There is only the Holy Ghost, who forbade them to preach the word in Asia and would not suffer them to go into Bithynia, and who will tell you whether tonight is a night to move or to stand. The man who cannot hear from God has no business in a persecuted region.</p>
+<p>Care for the underground church the way they need, not the way that flatters you. Keep gatherings small and change the place. Teach them to memorise Scripture: a Bible can be taken from a house but not out of a heart. Raise many small leaders rather than one famous one, so an arrest removes a tenth of the work instead of all of it. Leave them what survives you: elders, sound doctrine, and the Lord's supper kept in a kitchen.</p>
+<p>Be disciplined about names and places. Do not photograph faces or put a village on the internet. Do not stand up in a comfortable country and read out the details of a man's imprisonment so a congregation can be moved to tears — those details travel, and the price of your story is paid by his wife. Say "a brother in a certain region," and keep no list you would not want found. Discretion is not cowardice; it is love with its eyes open.</p>
+<p>Where you cannot go, pray, and do not treat that as second best. The centurion did not ask the Lord Jesus Christ to walk to his house: <strong>"speak the word only, and my servant shall be healed."</strong> Distance is no barrier to God. The same power that heals a man in the front row reaches a man in a cell four thousand miles away. Name those regions in your prayer meetings and fast for them. Command in the name of the Lord Jesus Christ that doors open, that officials be restrained, that Bibles get through, that fear be broken off the believers. I have seen prisons opened in answer to prayer, and prisons stay shut while the man inside preached to his guards, and both were God answering.</p>
+<p>Prepare your own heart for suffering before it arrives. The school's course on martyrship becomes practical here: settle in advance, on a quiet ordinary day, that you have already given Him your body. <strong>"Yea, and all that will live godly in Christ Jesus shall suffer persecution."</strong> A man who has not settled it will negotiate when the pressure comes; a man who has settled it has nothing left to take. Remember also that you are one body with them: <strong>"Remember them that are in bonds, as bound with them; and them which suffer adversity, as being yourselves also in the body."</strong> Their chain is on your wrist too.</p>
+<p>And I will end where you would least expect a lesson on persecution to end — in joy. Sit with the persecuted church and you will come home rebuked, because they have almost nothing and they sing. When the apostles were beaten and forbidden to speak in that name, they walked out <strong>"rejoicing that they were counted worthy to suffer shame for his name."</strong> That is how they see it, and it is why the gates of hell keep failing against them. If God ever gives you a share in their sufferings, do not consider yourself unlucky. Consider yourself counted worthy, and give Him the glory.</p>
+<aside class="key"><div class="key-t">Hold onto this: wise as serpents, harmless as doves — and joyful either way.</div><p>Ministry under persecution needs wisdom and boldness together, the Holy Spirit's leading on whether to flee or stay, discretion with names and places, small durable underground leadership, believing prayer across any distance, a heart already settled for suffering, and the joy of those counted worthy to suffer for His name.</p></aside>
+<div class="check" data-check="3"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Twelve questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "Practical Training Level Three",
+  assessment: "Practical Training Level Three: The Work of Oversight",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"OV": "Oversight", "CH": "Setting up a church", "MR": "Miracle events", "PR": "Persecuted regions"};
+
+const QUESTIONS = [
+ {t:"OV", q:"A man tells you he wants to be a bishop because he has always wanted the title and the seat at the front. How does Paul's own words correct his desire?",
+  o:["Paul forbids anyone from desiring the office at all", "Paul says only apostles may appoint themselves", "Paul says the desire proves he is already qualified", "Paul says the desire is for a good work, not a good position"], a:3, v:"1 Timothy 3:1", vt:"This is a true saying, If a man desire the office of a bishop, he desireth a good work.", l:1},
+ {t:"OV", q:"Peter names the wrong motives for taking the oversight. Which set does he warn against?",
+  o:["Fear of men, love of study, and desire for travel", "Constraint, filthy lucre, and lording it over God's heritage", "Youth, poverty, and lack of education", "Singleness, hospitality, and patience"], a:1, v:"1 Peter 5:2", vt:"Feed the flock of God which is among you, taking the oversight thereof, not by constraint, but willingly; not for filthy lucre, but of a ready mind;", l:1},
+ {t:"OV", q:"Why does the school say that a ministry which collapses when its founder dies was never true oversight?",
+  o:["Because oversight includes ordaining elders in every city so the work outlives the man", "Because a bishop should never delegate anything he can do himself", "Because congregations should dissolve when their pastor dies", "Because only large ministries are genuine"], a:0, v:"Titus 1:5", vt:"For this cause left I thee in Crete, that thou shouldest set in order the things that are wanting, and ordain elders in every city, as I had appointed thee:", l:1},
+ {t:"CH", q:"A brother wants to launch a church next month by hiring a hall and advertising. What does the school say must come first?",
+  o:["A denominational licence", "Ministering to the Lord with fasting until the Holy Ghost speaks", "A published statement of finances", "A choir and a sound system"], a:1, v:"Acts 13:2", vt:"As they ministered to the Lord, and fasted, the Holy Ghost said, Separate me Barnabas and Saul for the work whereunto I have called them.", l:2},
+ {t:"CH", q:"Which four practices mark out the apostolic pattern that a new assembly should continue in steadfastly?",
+  o:["Doctrine, fellowship, breaking of bread, and prayers", "Music, giving, outreach, and administration", "Preaching, building, advertising, and membership", "Study, silence, fasting, and pilgrimage"], a:0, v:"Acts 2:42", vt:"And they continued stedfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers.", l:2},
+ {t:"CH", q:"Why does the school insist that offerings be counted and signed by two people and the books kept open?",
+  o:["Because Scripture forbids churches to receive offerings at all", "Because only elders are permitted to give", "Because money should never be discussed in a church", "Because honesty must be visible to men as well as to the Lord"], a:3, v:"2 Corinthians 8:21", vt:"Providing for honest things, not only in the sight of the Lord, but also in the sight of men.", l:2},
+ {t:"MR", q:"Why does the school insist the Lord Jesus Christ be preached plainly before any prayer for the sick?",
+  o:["Because signs are given to confirm the preached word, not to replace it", "Because healing is not promised to believers today", "Because preaching first reduces the size of the crowd", "Because the sick must earn healing by listening"], a:0, v:"Mark 16:20", vt:"And they went forth, and preached every where, the Lord working with them, and confirming the word with signs following. Amen.", l:3},
+ {t:"MR", q:"A crowd begins pressing forward to touch the minister's clothing, saying his hands carry the healing. What should he do?",
+  o:["Allow it, since faith of any kind brings healing", "Sell the garments to fund the meeting", "Turn the people's eyes off himself, denying that his own power or holiness heals", "End the meeting and refuse to pray for anyone"], a:2, v:"Acts 3:12", vt:"why look ye so earnestly on us, as though by our own power or holiness we had made this man to walk?", l:3},
+ {t:"MR", q:"When someone is not healed after prayer, what is the school's order of examination?",
+  o:["Conclude that God no longer heals in this generation", "Question whether the power of God is sufficient", "Announce the healing anyway and move on", "Trust that the power is God's and unfailing, then search for the break — sin, unforgiveness, occult ties, unbelief, or a lack of prayer and fasting"], a:3, v:"Matthew 17:21", vt:"Howbeit this kind goeth not out but by prayer and fasting.", l:3},
+ {t:"PR", q:"What double command did the Lord Jesus Christ give to those He sends among wolves?",
+  o:["Be silent and be patient", "Be bold and be armed", "Be wise as serpents and harmless as doves", "Be secretive and be suspicious"], a:2, v:"Matthew 10:16", vt:"Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves.", l:4},
+ {t:"PR", q:"A worker under threat asks whether fleeing to the next town would be a denial of his faith. What does the lesson answer?",
+  o:["Fleeing is always unbelief; he must stay and be arrested", "He should flee only if he has already been imprisoned once", "He should decide by the advice of the majority", "The Lord Himself permitted flight to another city; the Holy Spirit decides whether to move or stand"], a:3, v:"Matthew 10:23", vt:"But when they persecute you in this city, flee ye into another: for verily I say unto you, Ye shall not have gone over the cities of Israel, till the Son of man be come.", l:4},
+ {t:"PR", q:"How are believers in comfortable countries told to regard those in prison for the Gospel whom they cannot reach?",
+  o:["As a separate work best left to specialists", "As those who must have brought it upon themselves", "As fellow members of the same body, remembering them as though bound with them", "As examples to be admired from a distance but not prayed for"], a:2, v:"Hebrews 13:3", vt:"Remember them that are in bonds, as bound with them; and them which suffer adversity, as being yourselves also in the body.", l:4},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["The Bishop's Charge", "Setting Up a Church", "Holding a Miracle Event", "Ministering in a Persecuted Region"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "According to Paul's charge, what is the first thing that qualifies a man for oversight?", "o": ["The size of the congregation he has gathered", "His character and reputation, including with those outside the church", "His skill in preaching and public speaking", "His years of formal study"], "a": 1, "e": "The lists in 1 Timothy 3 and Titus 1 are almost entirely character; even the good report of them which are without is required."}, {"q": "In the pattern of Acts, when were elders ordained in the new churches?", "o": ["On the first day the group met", "On a return visit, after time had tested them, with prayer and fasting", "Only after a building was purchased", "By vote of the whole city"], "a": 1, "e": "Paul and Barnabas returned through the cities and ordained elders with prayer and fasting, commending them to the Lord."}, {"q": "In the three levels of faith, which level is the one a sick person most often still needs?", "o": ["That God exists", "That God can heal", "That God is willing to heal him personally", "That healing happened in Bible times"], "a": 2, "e": "The leper already believed God could; his uncertainty was whether God was willing, and the Lord answered, I will; be thou clean."}, {"q": "Why does the school say discretion with names, faces, and places is love rather than cowardice?", "o": ["Because believers should keep their faith secret permanently", "Because published details travel and the price is paid by the brethren who remain", "Because persecution reports are usually exaggerated", "Because the authorities should never be told anything true"], "a": 1, "e": "A moving story told carelessly in a safe country can cost a family in a dangerous one their liberty."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

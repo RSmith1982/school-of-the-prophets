@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Martyrship — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Martyrship</h2>
+    <p class="lesson" style="max-width:var(--measure)">The cost of discipleship: the witness of those who died for the faith, and what it means to count the cost today. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">Count the Cost</a></li>
+      <li><a href="#lesson-2">The Witness of Stephen and the Apostles</a></li>
+      <li><a href="#lesson-3">The Persecuted Church Through the Ages and Today</a></li>
+      <li><a href="#lesson-4">Standing Firm When It Comes</a></li>
+      <li><a href="#lesson-5">Faithful Unto Death: The Crown of Life</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. Count the Cost</h3>
+<p>There is a kind of preaching that invites people to the Lord Jesus Christ the way a salesman invites you to a bargain. Come and get your blessing, come and get your breakthrough, and nothing is ever said about what it costs. That is not how the Lord Jesus Christ Himself preached. When great multitudes came after Him, He did not thin out the message to keep the crowd. He turned around and told them plainly what following Him would mean, and He told them <em>before</em> they signed up.</p>
+<p>Listen to His words: <em>&quot;If any man come to me, and hate not his father, and mother, and wife, and children, and brethren, and sisters, yea, and his own life also, he cannot be my disciple. And whosoever doth not bear his cross, and come after me, cannot be my disciple.&quot;</em> Now understand what He is saying. He is not commanding you to despise your family. He is saying that when the love of your family and the love of the Lord Jesus Christ are set side by side, and one of them must give way, His claim comes first. Every other love in your life is a candle; His is the sun. Anything less than that is not discipleship, whatever else it may be.</p>
+<p>Then He tells two little stories, and they are not decoration. A man builds a tower and does not sit down first and count the cost, and he lays a foundation he can never finish, and the whole town laughs at the stump of it. A king goes out to war against a stronger king without asking himself whether ten thousand can meet twenty thousand. The Lord Jesus Christ is telling us that half-started discipleship shames the name of God. He would rather you sit down honestly, look at the price, and then rise up and pay it, than that you run forward on excitement and quit at the first hard winter. And He closes the matter with a word nobody can soften: <em>&quot;So likewise, whosoever he be of you that forsaketh not all that he hath, he cannot be my disciple.&quot;</em></p>
+<p>Notice something about the cross in this teaching. In our day people talk about a cross as though it means a headache, a difficult relative, a sickness they must put up with. But a man carrying a cross in that world was a man walking to his execution, and everyone who saw him knew it. So when the Lord Jesus Christ says, <em>&quot;If any man will come after me, let him deny himself, and take up his cross daily, and follow me,&quot;</em> He is describing a man who has already settled the question of his own life. He is not asking you to die once in a dramatic hour. He is asking you to die every morning, before the day even begins, so that when the hour of testing comes you are not deciding then; you decided long ago.</p>
+<p>Here is why that daily death is the safest place a believer can stand. A man who is still trying to save his life can be threatened. Take away his job, his reputation, his comfort, his safety, and you have leverage over him. But a man who has already handed his life over to the Lord Jesus Christ has nothing left that the enemy can seize. That is the meaning of the promise: <em>&quot;He that findeth his life shall lose it: and he that loseth his life for my sake shall find it.&quot;</em> This is not the loss of a good thing; it is an exchange, and the arithmetic of Heaven is entirely in your favour. You put down a life you could not keep anyway, and you receive back a life nobody can take.</p>
+<p>I have watched people learn this in small ways before they ever learn it in great ones. A young man told the truth in his workplace when the truth cost him a promotion. A sister refused to give a bribe and waited three years for a document. Nobody wrote a song about them. But the same grace that carried them through a small cost is the grace that has carried others to the stake, and it is one grace, not two. God does not have a stronger Spirit reserved for famous saints. He has the Holy Spirit, and He gives Him to those who obey Him.</p>
+<p>And there is a word here that settles all our complaining: <em>&quot;The disciple is not above his master, nor the servant above his lord.&quot;</em> If they called the Master of the house Beelzebub, what shall they call His household? We were never promised better treatment than He received. If the world crowned Him with thorns, it will not crown us with flowers. To be treated as He was treated is not a failure of our faith; it is the confirmation of it. The servant who is hated for his Lord's sake has been given the highest compliment the world knows how to pay.</p>
+<p>So count the cost. Sit down, as He said, and count it honestly. Look at what it may take from you, and then look at Him, and decide. Every believer who ever stood in fire stood there because that decision had already been made in a quiet room, on an ordinary day, long before the fire was lit.</p>
+<aside class="key"><div class="key-t">Hold onto this: decide before the fire, not in it.</div><p>The Lord Jesus Christ tells us the price before we follow Him, and a man who has already laid his life down each morning has nothing left that the enemy can seize.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. The Witness of Stephen and the Apostles</h3>
+<p>The word we translate <em>martyr</em> does not first mean somebody who dies. It means a <strong>witness</strong> — a man who stands up and tells what he has seen. Dying came to be attached to the word only because so many of those who told what they had seen were killed for telling it. Keep that order in your mind, because it changes everything. The Church was not built by people looking for a heroic death. It was built by people who could not stop telling the truth, and some of them paid with their blood for refusing to be quiet.</p>
+<p>Stephen is the first of them, and his story is given to us in full so that we would know what such a man looks like. He was chosen to serve tables, an ordinary practical assignment, and he was <em>full of faith and of the Holy Ghost</em>. When he preached, they could not resist the wisdom and the spirit by which he spoke, so they did what men always do when they cannot answer an argument: they attacked the man. And in the very hour of that hatred, God opened Heaven to him. <em>&quot;Behold, I see the heavens opened, and the Son of man standing on the right hand of God.&quot;</em></p>
+<p>Do not pass over the posture. Everywhere else the Scripture shows us the Lord Jesus Christ <em>seated</em> at the right hand of God, because His work is finished. Here He is <strong>standing</strong>. He rose to receive His servant. There is a sight for you when the stones begin to fly — the Lord Jesus Christ on His feet, watching, honouring, welcoming. And Stephen, going down under the stones, prayed twice: <em>&quot;Lord Jesus, receive my spirit,&quot;</em> and then, on his knees, <em>&quot;Lord, lay not this sin to their charge.&quot;</em> He died the way his Master died, forgiving. Standing there holding the coats was a young man named Saul, and no one that day would have guessed that the prayer of the dying man would be answered in the life of the man who approved his killing.</p>
+<p>Then the persecution spread to the apostles. Herod <em>&quot;killed James the brother of John with the sword,&quot;</em> and that is the whole record — one line for a man who had stood on the mount of transfiguration. Heaven wrote it briefly because Heaven was not impressed the way we are impressed. James had asked once to sit at the right hand in the kingdom, and the Lord Jesus Christ had asked him whether he could drink of the cup. He said he could, and he did.</p>
+<p>Paul gives us the long inventory of what a witness endures who is not killed at once. He speaks of labours more abundant, of stripes above measure, of prisons more frequent, of deaths oft; five times he received forty stripes save one, three times he was beaten with rods, once he was stoned, three times he suffered shipwreck, a night and a day in the deep; in perils of waters, of robbers, of his own countrymen, of the heathen, in the city, in the wilderness, in the sea, among false brethren; in weariness and painfulness, in watchings often, in hunger and thirst, in fastings often, in cold and nakedness. And after all that list he adds the thing that pressed him hardest — the daily care of all the churches. That is a martyr before he is ever executed. That is a man dying by inches for the sake of the sheep.</p>
+<p>The Church has long remembered how the rest of them went. Peter crucified in Rome, asking, so it is told, to be hung head downward because he was not worthy to die as his Lord died. Thomas carrying the gospel far to the east and slain there with a spear. Andrew on a cross, Bartholomew flayed, Matthew and Philip and Simon each in his own place and his own manner. John alone, so the tradition runs, died old, but only after exile on Patmos. The details come to us through the memory of the Church rather than through Scripture, and we hold them accordingly. But the pattern is not in doubt: with the sole exception of John, the men who had eaten fish with the risen Lord went to violent deaths, scattered across the world, with every motive to recant, and not one of them recanted.</p>
+<p>That is a fact worth setting before any honest sceptic. Men die for what they mistakenly believe to be true all the time. Nobody dies for what he knows to be a lie, and knows it because he was there. These men were either telling the truth about a risen Lord, or they were dying one by one in far countries for something they had invented themselves and could have escaped by a single sentence.</p>
+<p>And the Lord Jesus Christ knows every one of them by name. To the church in Pergamos He speaks of <em>&quot;Antipas... my faithful martyr, who was slain among you, where Satan dwelleth.&quot;</em> We know nothing else about Antipas. No book, no ministry, no following. Heaven required none of that. He was faithful where Satan's seat was, and the Lord Jesus Christ called him <strong>My faithful witness</strong>. If your name is never known on the earth, it is enough that it is spoken in Heaven like that.</p>
+<aside class="key"><div class="key-t">Hold onto this: a martyr is first of all a witness.</div><p>Stephen and the apostles died because they would not stop telling what they had seen, and Heaven honours the faithful witness whether or not the earth remembers his name.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. The Persecuted Church Through the Ages and Today</h3>
+<p>Persecution did not end with the book of Acts, and it has never taken a century off. When Rome saw that the Christians would not put a pinch of incense on the altar and say <em>Caesar is Lord</em>, it treated them as traitors. It was such a small thing to ask, a formality, a public loyalty; and it was precisely for that small thing that believers were thrown to beasts in the arena and burned as torches in the gardens of the emperor. They understood what many today do not: the confession <em>Jesus is Lord</em> is exclusive. It leaves no second throne.</p>
+<p>The historian of that age noticed something the persecutors never expected. The more they killed, the more the Church grew. Ordinary pagans came to the arena for sport and went home shaken, because they had seen old men and young mothers go to death singing, without cursing anybody. Death was the one thing Rome could threaten, and the Christians had already settled the question of death. When the strongest weapon in your hand no longer frightens the person you are pointing it at, you have already lost.</p>
+<p>At the Reformation the fires were lit again, and this time in Europe by men who claimed the name of the Church. Ordinary people were burned for owning Scripture in their own tongue, for translating it, for reading it aloud to their neighbours. Some who died were scholars and some could barely read the pages they died to keep. What they had in common was the conviction that the Word of God belongs to the people of God, and that no authority on earth may lock it away. We hold English Bibles because men and women paid for them with their bodies, and we ought never to open one carelessly.</p>
+<p>Then came the twentieth century, and it took more Christian lives than all the centuries before it put together. The great atheist states of that age understood the Church better than some churchmen did; they knew that a people who fear God cannot be wholly owned by the state. So there were labour camps, and pastors who preached from memory because every Bible had been confiscated, and congregations meeting in forests, and believers who spent decades in prison and came out with no bitterness in them at all. In other lands the killing came by mobs and machetes rather than by decree, and the graves are just as real.</p>
+<p>And it is going on this morning. In North Korea, to be found with a Bible condemns not only yourself but your family to the camps, and believers there worship in whispers and teach their children the Scriptures by memory alone. In parts of the Middle East, Christian communities whose faith goes back nearly to the apostles have been driven from their ancient towns. Across northern Nigeria whole farming villages have been attacked in the night and churches burned. In parts of India believers are beaten by mobs and their pastors arrested. In China congregations are watched, buildings demolished, and leaders disappear for months at a time. I speak in general terms because the details change from month to month, but the fact does not change: more of the family of God suffer for His name now than at any time in history.</p>
+<p>Hebrews describes this whole company in a passage we read too quickly. <em>&quot;And others had trial of cruel mockings and scourgings, yea, moreover of bonds and imprisonment: They were stoned, they were sawn asunder, were tempted, were slain with the sword: they wandered about in sheepskins and goatskins; being destitute, afflicted, tormented.&quot;</em> Then the Holy Spirit interrupts the list to say something astonishing about people the world threw away: <em>&quot;(Of whom the world was not worthy:) they wandered in deserts, and in mountains, and in dens and caves of the earth.&quot;</em> The world did not reject them because they were beneath it. The world rejected them because the world was beneath <em>them</em>, and could not hold anything so precious. That is Heaven's estimate of the persecuted, and it is the exact opposite of the world's.</p>
+<p>So what is required of us who are not at present in the fire? <em>&quot;Remember them that are in bonds, as bound with them; and them which suffer adversity, as being yourselves also in the body.&quot;</em> The word is <strong>remember</strong>, and it does not mean a passing sympathy. It means you pray for a man in a cell as though the cell were yours, because you are in the same body as he is, and a body does not ignore its own wounded member. Learn where they are. Name their countries in your prayers. Support the work that reaches them. Refuse to let comfort make you forget your own family.</p>
+<p>And let their example correct our idea of hardship. We complain of a critical remark, an inconvenience, a season of being overlooked, while our brethren are asked for their blood and give it gladly. Their faith rebukes our softness. It also encourages us, because the same God who holds a believer steady in a prison camp is the God we serve here, and He is not weaker on our side of the world.</p>
+<aside class="key"><div class="key-t">Hold onto this: of whom the world was not worthy.</div><p>From Rome to the Reformation to our own day the Church has been persecuted and has grown, and we are commanded to remember our brethren in bonds as though we were bound with them.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Standing Firm When It Comes</h3>
+<p>The question is not whether trouble may come to those who follow the Lord Jesus Christ; the Scripture has settled that. <em>&quot;Yea, and all that will live godly in Christ Jesus shall suffer persecution.&quot;</em> The question is what a believer does when it comes. And the answer begins where the Lord Jesus Christ began it: with the right fear. <em>&quot;And fear not them which kill the body, but are not able to kill the soul: but rather fear him which is able to destroy both soul and body in hell.&quot;</em></p>
+<p>Notice that He does not tell us to feel nothing. He tells us to move our fear. A man who fears men is a slave, but a man who fears God is free, because the One he fears also loves him and numbers the hairs of his head. Persecution is a contest between two fears, and whichever is greater in you will decide what you do when the door is kicked in. So the preparation for that hour is not the building of courage; it is the deepening of the fear of God until it towers over every other fear you have.</p>
+<p>Then there is the promise about your mouth, and it is a mercy to every believer who has ever thought, <em>I would not know what to say</em>. <em>&quot;And when they bring you unto the synagogues, and unto magistrates, and powers, take ye no thought how or what thing ye shall answer, or what ye shall say: For the Holy Ghost shall teach you in the same hour what ye ought to say.&quot;</em> The grace for the hour is given <strong>in</strong> the hour. That is why rehearsing imaginary tortures does you no good; you are trying to face tomorrow's fire with today's ration of grace, and God does not issue it that way. He gives the words when the words are needed, and never a moment before.</p>
+<p>But if we are not to rehearse the trial, what <em>do</em> we do beforehand? We build the man. A believer prepares for persecution the way he prepares for every other spiritual work: by prayer and by fasting, by feeding on the Word until it is inside him and not merely on his shelf, by holiness in the small hidden places of his life. When the disciples failed against a stubborn spirit, He answered, <em>&quot;This kind can come forth by nothing, but by prayer and fasting.&quot;</em> Fasting teaches the body that it is a servant and not a master. A man whose appetite already obeys him is harder to break with hunger, and a man who has spent years in the secret place already knows the voice that will speak to him in the cell. Believers in the hardest countries hide the Scriptures in memory because paper can be confiscated and the heart cannot be searched.</p>
+<p>Then there is forgiveness, and here is where the witness either shines or goes out. Stephen, under the stones, prayed for the men killing him. Our Lord had done the same from the cross, and He had commanded it long before: <em>&quot;Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you.&quot;</em> Anyone can be brave; soldiers have bravery, criminals have it. But to be beaten and to pray sincerely for the man holding the whip is not human courage at all, and everybody watching knows it. That is the point at which the persecutor is confronted not with a stubborn man but with the living God.</p>
+<p>It is because of that, and not merely because of the dying, that the blood of the martyrs has always been seed. Killing a believer who curses you proves nothing except that you are stronger. Killing a believer who blesses you plants something in the conscience of everyone present that will not stop growing. Saul held the coats at Stephen's stoning and heard that prayer, and he became the apostle who carried the gospel across the empire and died for it himself. God buried a witness and raised a harvest, and it is why the Church has never yet been stamped out anywhere it has been seriously attacked.</p>
+<p>This is why a school of the prophets must train ministers with the hard places in view and not only the comfortable ones. We are not preparing men and women merely to fill a pulpit in a safe city, but for regions where the register of members is a list of suspects and a pastor must shepherd a flock he can only meet in small groups. That minister must know the Scriptures by heart, must have a prayer life that does not depend on a building, must be free of the love of money and reputation, and must have forgiven in advance the people who will one day hurt him. As ministers such as T. B. Joshua have taught, the servant of God is made in the secret place long before he is seen in the public one.</p>
+<p>So settle it now, while nothing is threatening you. Decide today whom you will fear, whom you will forgive, and whose you are. Then if the hour never comes, you have lost nothing but a few illusions; and if it does come, the deciding was done long ago and there is nothing left to do but stand.</p>
+<aside class="key"><div class="key-t">Hold onto this: the grace for the hour is given in the hour.</div><p>Fear God rather than men, prepare by prayer and fasting and hidden holiness, forgive your persecutors as Stephen did, and trust the Holy Spirit to give the words when they are needed.</p></aside>
+<div class="check" data-check="3"></div>
+<h3 id="lesson-5">5. Faithful Unto Death: The Crown of Life</h3>
+<p>To a small, poor, frightened congregation the Lord Jesus Christ sent a letter, and He did not promise them that the trouble would pass them by. He told them plainly that some of them were going to prison, that they would have tribulation, and then He said this: <em>&quot;be thou faithful unto death, and I will give thee a crown of life.&quot;</em> Faithful unto death. Not faithful until it becomes costly, not faithful until the situation improves — faithful all the way to the end of the road, whatever the end of the road turns out to be.</p>
+<p>The crown He names is not the crown of a king; the word is the wreath given to the winner of a race, the victor's garland placed on the head of one who finished. That is how Heaven regards a believer who held on. He is not seen as a victim who was overpowered. He is seen as a runner coming through the tape. The world's cameras record a man being defeated; Heaven records a man finishing his course.</p>
+<p>Revelation shows us how the victory is actually won, and it is not won by force. <em>&quot;And they overcame him by the blood of the Lamb, and by the word of their testimony; and they loved not their lives unto the death.&quot;</em> There are three things there, and all three are needed. The blood of the Lamb is the ground — nothing in us, everything in what the Lord Jesus Christ has already done. The word of their testimony is the weapon — they kept telling the truth, they would not deny Him, they spoke when speaking was dangerous. And the third is the reason the first two could not be neutralised: they did not love their own lives more than they loved Him. The devil's entire strategy is built on the assumption that a man will save himself if you press him hard enough. Against a believer who has already laid his life down, that strategy has no purchase at all.</p>
+<p>John was also shown where such believers are now. <em>&quot;I saw under the altar the souls of them that were slain for the word of God, and for the testimony which they held.&quot;</em> Under the altar — the place where, in the old sacrifices, the blood of the offering was poured out. Their lives were an offering, and God received it as such. They are not lost, not asleep in defeat, not forgotten. They are conscious, they are near to Him, they are crying, <em>&quot;How long, O Lord, holy and true, dost thou not judge and avenge our blood on them that dwell on the earth?&quot;</em></p>
+<p>And observe God's answer to them, because it is instructive. White robes are given to every one of them, and they are told that they should rest yet for a little season, until their fellowservants and their brethren, that should be killed as they were, should be fulfilled. Two things are given: righteousness declared publicly, and rest. And one thing is asked: a little more patience. Justice is not denied; it is dated. God is not slow, and He is not indifferent to the blood of His servants. He is waiting until the last of the family has come home, and then He will answer that cry in a way the whole creation will see.</p>
+<p>Now weigh the exchange. Paul, who knew more of suffering than most of us will ever know, wrote that he reckoned the sufferings of this present time were not worthy to be compared with the glory which shall be revealed in us, and that our light affliction, which is but for a moment, worketh for us a far more exceeding and eternal weight of glory. He calls it <em>light</em>, and he had the scars of five whippings on his back when he wrote it. He was not pretending it did not hurt. He had set it on the scale opposite what is coming, and the scale would not move.</p>
+<p>And we are not asked to walk a road our Lord did not walk first. <em>&quot;Looking unto Jesus the author and finisher of our faith; who for the joy that was set before him endured the cross, despising the shame, and is set down at the right hand of the throne of God.&quot;</em> There was joy set before Him. He saw it, He kept His eyes on it, and because of it He endured what He endured and thought the shame of it not worth counting. That is how a believer stands: not by staring at the fire, but by looking past it at the One who is standing to receive him, as He stood for Stephen.</p>
+<p>Most of us will not be called to die for the faith. But every one of us is called to be a witness, and the only difference between the martyr and the ordinary faithful believer is the price the world happened to demand on that day. The surrender is the same. So live in such a way that if the demand were ever made of you, there would be nothing left to negotiate. Be faithful unto death — in your work, in your marriage, in your secret life, in your witness to your neighbour — and the crown of life is as certain as the promise of the One who cannot lie.</p>
+<aside class="key"><div class="key-t">Hold onto this: faithful unto death, and He will give thee a crown of life.</div><p>Those who loved not their lives unto the death are not defeated victims but victors, resting under the altar and awaiting a reward that outweighs everything it cost.</p></aside>
+<div class="check" data-check="4"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Fifteen questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "Martyrship",
+  assessment: "Martyrship: The Cost of Discipleship",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"CS": "Counting the cost", "WT": "The witnesses", "PR": "Persecution", "ST": "Standing firm and the reward"};
+
+const QUESTIONS = [
+ {t:"CS", q:"What does the Lord Jesus Christ say is required of anyone who would be His disciple, in terms of possessions and claims on his life?",
+  o:["That he give a fixed portion of his income", "That he separate from all family permanently", "That he wait until he is older and settled", "That he forsake all that he has"], a:3, v:"Luke 14:33", vt:"So likewise, whosoever he be of you that forsaketh not all that he hath, he cannot be my disciple.", l:1},
+ {t:"CS", q:"How often does the Lord Jesus Christ say the disciple is to take up his cross?",
+  o:["Once, at the beginning of the Christian life", "Only in seasons of persecution", "Daily", "Once each year at a solemn feast"], a:2, v:"Luke 9:23", vt:"And he said to them all, If any man will come after me, let him deny himself, and take up his cross daily, and follow me.", l:1},
+ {t:"CS", q:"According to the lesson, why should a believer not expect better treatment from the world than his Master received?",
+  o:["Because the world cannot distinguish believers from unbelievers", "Because persecution is a sign of a failing faith", "Because the servant is not greater than his lord, and the household is treated as the Master was", "Because believers are commanded to provoke opposition"], a:2, v:"Matthew 10:24", vt:"The disciple is not above his master, nor the servant above his lord.", l:1},
+ {t:"WT", q:"What did Stephen see as he was being condemned, and why was the posture significant?",
+  o:["An angel with a sword, signifying judgment on his accusers", "The Son of man standing on the right hand of God, risen to receive His servant", "A vision of the temple restored", "The book of life opened before the council"], a:1, v:"Acts 7:56", vt:"And said, Behold, I see the heavens opened, and the Son of man standing on the right hand of God.", l:2},
+ {t:"WT", q:"How did Stephen respond toward the men who were stoning him?",
+  o:["He called down judgment upon them", "He said nothing at all", "He prayed that the sin would not be laid to their charge", "He appealed to the Roman authorities"], a:2, v:"Acts 7:60", vt:"And he kneeled down, and cried with a loud voice, Lord, lay not this sin to their charge. And when he had said this, he fell asleep.", l:2},
+ {t:"WT", q:"What does the Lord Jesus Christ's word to the church in Pergamos about Antipas teach concerning obscure believers who suffer?",
+  o:["That the Lord Jesus Christ knows and names His faithful witness even where nothing else is recorded of him", "That only leaders of large works are remembered", "That faithfulness is only counted where the church is strong", "That suffering earns a believer his standing before God"], a:0, v:"Revelation 2:13", vt:"even in those days wherein Antipas was my faithful martyr, who was slain among you, where Satan dwelleth.", l:2},
+ {t:"PR", q:"How does Scripture describe the world's true relation to the persecuted saints who wandered destitute and afflicted?",
+  o:["The world was too advanced for them", "The world was not worthy of them", "The world had forgotten them entirely", "The world had judged them justly"], a:1, v:"Hebrews 11:38", vt:"(Of whom the world was not worthy:) they wandered in deserts, and in mountains, and in dens and caves of the earth.", l:3},
+ {t:"PR", q:"What does Scripture command believers to do concerning those imprisoned and suffering for the faith?",
+  o:["To leave their case entirely to God and say nothing", "To publish their names widely for their protection", "To wait until persecution reaches their own country", "To remember them as though bound with them, being themselves also in the body"], a:3, v:"Hebrews 13:3", vt:"Remember them that are in bonds, as bound with them; and them which suffer adversity, as being yourselves also in the body.", l:3},
+ {t:"PR", q:"What does the lesson teach about persecution as a normal experience of godly living?",
+  o:["It falls only on those who lack faith", "It is limited to the first century Church", "All that will live godly in the Lord Jesus Christ shall suffer persecution", "It comes only where governments are hostile"], a:2, v:"2 Timothy 3:12", vt:"Yea, and all that will live godly in Christ Jesus shall suffer persecution.", l:3},
+ {t:"ST", q:"Where does the Lord Jesus Christ tell the persecuted believer to place his fear?",
+  o:["In those who can kill the body, so that he may act wisely", "Nowhere at all, since fear is always sin", "In Him who is able to destroy both soul and body in hell, rather than in those who kill the body", "In the judgment of the church rather than of God"], a:2, v:"Matthew 10:28", vt:"And fear not them which kill the body, but are not able to kill the soul: but rather fear him which is able to destroy both soul and body in hell.", l:4},
+ {t:"ST", q:"What assurance is given to believers brought before magistrates and powers?",
+  o:["That the Holy Ghost shall teach them in the same hour what they ought to say", "That they will always be released unharmed", "That a trained advocate will be provided for them", "That they should prepare a written defence in advance"], a:0, v:"Luke 12:12", vt:"For the Holy Ghost shall teach you in the same hour what ye ought to say.", l:4},
+ {t:"PR", q:"According to the lesson, what makes the death of a martyr fruitful as seed in the conscience of those who watch?",
+  o:["The severity of the punishment inflicted", "The defiance and strength shown toward the persecutor", "The blessing and prayer offered for the persecutors, which mere human courage cannot explain", "The number of believers who die together"], a:2, v:"Matthew 5:44", vt:"But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you;", l:4},
+ {t:"ST", q:"By what three things does Revelation say the saints overcame the accuser?",
+  o:["By works, by wisdom, and by endurance", "By the blood of the Lamb, the word of their testimony, and not loving their lives unto the death", "By the law, the prophets, and the apostles", "By fasting, almsgiving, and silence"], a:1, v:"Revelation 12:11", vt:"And they overcame him by the blood of the Lamb, and by the word of their testimony; and they loved not their lives unto the death.", l:5},
+ {t:"ST", q:"What did John see under the altar, and what does it show about those slain for the faith?",
+  o:["Empty vessels, showing that their offering was rejected", "The names of the persecutors written for judgment", "The books of the law preserved from destruction", "The souls of them slain for the word of God, showing their lives were received as an offering and they are conscious before Him"], a:3, v:"Revelation 6:9", vt:"And when he had opened the fifth seal, I saw under the altar the souls of them that were slain for the word of God, and for the testimony which they held:", l:5},
+ {t:"ST", q:"How does Hebrews say the Lord Jesus Christ endured the cross, and what does that teach the suffering believer?",
+  o:["By ignoring the pain, teaching us to deny that suffering hurts", "By calling for deliverance, teaching us to expect escape", "For the joy that was set before Him, teaching us to look past the fire to what is promised", "By the help of the multitudes, teaching us to rely on numbers"], a:2, v:"Hebrews 12:2", vt:"Looking unto Jesus the author and finisher of our faith; who for the joy that was set before him endured the cross, despising the shame, and is set down at the right hand of the throne of God.", l:5},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["Count the Cost", "The Witness of Stephen and the Apostles", "The Persecuted Church Through the Ages and Today", "Standing Firm When It Comes", "Faithful Unto Death: The Crown of Life"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "Why did the Lord Jesus Christ tell the multitudes about the cost of following Him before they committed?", "o": ["To discourage people from following Him at all", "So that no one would begin what he was not prepared to finish", "Because only wealthy disciples could afford the cost", "To reserve discipleship for the twelve apostles"], "a": 1, "e": "His pictures of the unfinished tower and the outmatched king warn against beginning a discipleship you have not honestly priced."}, {"q": "What is the root meaning of the word translated 'martyr'?", "o": ["One who suffers", "A witness", "A sacrifice", "A soldier"], "a": 1, "e": "The word means a witness; it came to mean one who dies because so many who testified were killed for testifying."}, {"q": "Why did Rome regard the Christian confession as treason?", "o": ["Because Christians refused to pay any taxes", "Because confessing the Lord Jesus Christ as Lord left no room for a second lord", "Because Christians took up arms against the emperor", "Because Christians would not trade with pagans"], "a": 1, "e": "A pinch of incense and the words 'Caesar is Lord' seemed a formality, but the Christian confession is exclusive."}, {"q": "Why does the lesson say rehearsing imagined suffering does a believer no good?", "o": ["Because suffering will never actually come", "Because grace for that hour is supplied in that hour, not in advance", "Because fear is a sin that cannot be forgiven", "Because believers are told never to think about the future"], "a": 1, "e": "God gives the words and the strength when they are needed; the preparation beforehand is prayer, fasting, the Word and holiness."}, {"q": "What kind of crown is promised to the one who is faithful unto death?", "o": ["A royal diadem of earthly rule", "The victor's crown of life given to one who finished his course", "A crown given only to apostles", "A temporary honour within the local church"], "a": 1, "e": "The word is the wreath given to the winner of a race; Heaven sees the martyr as a runner finishing, not a victim overpowered."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

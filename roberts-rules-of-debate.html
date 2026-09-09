@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Robert&#x27;s Rules of Debate — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Robert's Rules of Debate</h2>
+    <p class="lesson" style="max-width:var(--measure)">How to argue a point in order, with courtesy and force, so the truth is heard and not shouted down. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">Why We Debate</a></li>
+      <li><a href="#lesson-2">The Rules Of Order</a></li>
+      <li><a href="#lesson-3">Logic And The Common Fallacies</a></li>
+      <li><a href="#lesson-4">Scripture As The Standard</a></li>
+      <li><a href="#lesson-5">Debating Each Worldview</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. Why We Debate</h3>
+<p>I want to begin by telling you plainly why this school trains you to debate at all. There are good people who believe that any argument about the faith is fleshly, that we ought simply to love folk and say nothing. I understand where that comes from, and I honour the tenderness in it. But it is not what the Scripture teaches. Jude sat down to write a warm letter about the common salvation, and the Holy Ghost turned his pen another way, so that he wrote instead that we should <em>earnestly contend for the faith which was once delivered unto the saints</em>. Contend. Not shrug, not mumble, not change the subject. Contend, and contend earnestly.</p>
+<p>Notice the two little words <em>once delivered</em>. The faith was handed to us finished. It is not being renegotiated in every generation, and it does not need our improvements. That is why we contend for it rather than construct it. A man who is defending something he built himself will defend it with pride, because his name is on it. A man defending what God delivered defends it with reverence, because God's name is on it. Everything I am about to teach you in this course grows out of that one difference.</p>
+<p>Look at how the Apostle Paul carried himself. In the seventeenth chapter of Acts we read, "And Paul, as his manner was, went in unto them, and three sabbath days reasoned with them out of the scriptures." His manner. It was his habit, his settled practice. He did not wait for a crowd to be friendly before he opened his mouth. A few verses later he is in the market place daily with them that met with him, and in the next chapter he is reasoning in the synagogue every sabbath and persuading the Jews and the Greeks. Synagogue and market place both. The religious room and the street. Paul would take the truth wherever people were willing to talk, and he would talk to them where they stood.</p>
+<p>But notice the word the Holy Ghost keeps using: he <em>reasoned</em>. He did not shout them down, and he did not bully them into agreement. He laid the Scriptures out and let them do their work. That is a different thing altogether from what most people mean today when they say they had an argument. Reasoning is a servant of truth. Quarrelling is a servant of pride. Two men can say the same sentence, and one is reasoning and the other is quarrelling, and the difference is not in the sentence at all. It is in the heart behind it.</p>
+<p>Paul wrote it out for Timothy so no minister could miss it. "And the servant of the Lord must not strive; but be gentle unto all men, apt to teach, patient, in meekness instructing those that oppose themselves; if God peradventure will give them repentance to the acknowledging of the truth." Read that again slowly, because it is the whole of my heart in this course. Not strive. Gentle unto all men — <em>all</em> men, including the man across the table who has just insulted your Saviour. Apt to teach, which means able to explain, not merely able to feel strongly. Patient. Meek. And then that beautiful reason at the end: <em>if God peradventure will give them repentance</em>. The aim is repentance. The aim is a soul.</p>
+<p>Here is where I must correct something that has crept into the church. Many believers have picked up the world's idea of debate, where the point is to score, to embarrass, to walk away with the crowd laughing on your side. That is not what we are doing. I have watched men win every exchange in a conversation and lose the man, and I tell you the truth, that is a loss. If you humiliate an atheist so thoroughly that he never speaks to a Christian again, you have not defended the faith; you have barricaded a door that the Lord Jesus Christ died to open.</p>
+<p>So set your goal correctly before you say your first word. The goal is not that you win. The goal is that the truth is heard. Those two things feel similar and they are not the same at all. When your goal is to win, you interrupt, because letting him finish might strengthen his case. When your goal is that the truth is heard, you let him finish, because a man who has been heard will listen. When your goal is to win, you hide the point you cannot answer. When your goal is that the truth is heard, you say honestly, "I do not know that one, let me find out," and your honesty preaches louder than the answer would have.</p>
+<p>And remember what the Apostle Peter said, that we are to be ready always to give an answer to every man that asketh us a reason of the hope that is in us <em>with meekness and fear</em>. Meekness toward the man. Fear toward God. Every rule I am going to give you in the next lesson is simply that verse worked out in practice. You are not defending yourself. You are standing for a King who does not need your temper to be true.</p>
+<aside class="key"><div class="key-t">Hold onto this: The goal is not that you win</div><p>We contend earnestly for a faith once delivered, reasoning as Paul did in the synagogue and the market place — so that the truth is heard, and God peradventure gives repentance.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. The Rules Of Order</h3>
+<p>Now I will give you the rules I use and the rules I expect of every student who represents this school in a public exchange. They are not clever tactics. They are the discipline that keeps a conversation honest, and they come out of the Scripture's own instruction that all things be done decently and in order. Learn them until they are habits, because in the heat of an exchange you will not have time to remember them; you will only be what you have practised.</p>
+<p>The first rule is this: define your terms before you begin. More arguments die of confusion than of disagreement. When a Hindu says God, he does not mean what you mean. When a Muslim says the Son of God, he may be hearing something physical and blasphemous that no Christian has ever taught. When a man says faith, he may mean believing without evidence. Ask him kindly, "When you say that word, what do you mean by it?" You will find half your quarrels vanish before they start, and the other half become clear enough to be settled. The second rule follows from it: one point at a time, and finish it before you move to the next. A man who throws six objections at you in one breath is not asking six questions; he is escaping. Say gently, "Let us take the first one and settle it, then I will gladly come to the rest," and then keep your word.</p>
+<p>The third rule is that you let the other person finish. Never interrupt. I mean it as an absolute. Solomon said, "He that answereth a matter before he heareth it, it is folly and shame unto him." Those are strong words, and they are God's assessment of the man who cuts in. When you interrupt, you tell everyone watching that you are afraid of what he might say next, and you lose the very information you need to answer him well. Let him talk all the way to the end of his thought.</p>
+<p>The fourth rule is the one that separates the mature from the immature, and it is this: state the other side's position so well that he agrees with your statement of it, before you answer it. Say to him, "Let me make sure I have you right," and then give his argument back in your own words, at its strongest. Ask him, "Is that fair?" When he says yes, you have earned the right to reply, and something has already happened in him — he has been heard by a Christian, perhaps for the first time in his life. Solomon warned us why this matters: "He that is first in his own cause seemeth just; but his neighbour cometh and searcheth him." Every position sounds right until it is examined, including yours.</p>
+<p>The fifth rule is that the burden of proof lies on the one making the claim. If a man says the universe made itself, he must show it. And this rule binds you too: when you make a claim, carry your own load and bring your evidence. The sixth rule is that there are no insults and no raised voices, and I will state it as strongly as I know how: the moment you shout, you have lost. Not lost the crowd's sympathy — lost. A soft answer turneth away wrath, but grievous words stir up anger, and a man who has been made angry cannot hear anything, including the gospel. Keep your voice low, especially when his goes high.</p>
+<p>The seventh rule is to concede what is true. If he makes a good point, say so out loud. "That is a fair point, and I will grant it." Some of you think that is surrender. It is not; it is credibility. The man who never concedes anything is understood by everyone in the room to be defending his pride rather than the truth, and nothing he says afterward carries weight. The eighth rule is that we keep to the Scripture as our standard and to the record of facts as our evidence. Feelings are not arguments. "I feel that a loving God would not do that" settles nothing, and neither does "I just feel it is true." Bring the Word, and bring what actually happened.</p>
+<p>The ninth rule is to agree in advance on what would settle the point. Ask him, "What would it take to change your mind?" and be ready to answer the same question yourself. If nothing whatsoever would change his mind, he is not reasoning, and you may lay the matter down in peace. If something would, you now know exactly what to bring. And the tenth rule is to end with courtesy and an open door. Thank him. Shake his hand. I have seen men come to the Lord Jesus Christ two years after a debate they thought they had won, because the door was left open and they remembered a Christian who was kind to them.</p>
+<p>Ten rules, and one spirit running through all of them: let your speech be alway with grace, seasoned with salt, that ye may know how ye ought to answer every man. Grace is the manner. Salt is the substance. Take away the salt and you have flattery. Take away the grace and you have noise.</p>
+<aside class="key"><div class="key-t">Hold onto this: The moment you shout, you have lost</div><p>Define your terms, take one point at a time, let him finish, state his case so well he agrees with it, carry the burden of your own claims, concede what is true, and end with an open door.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Logic And The Common Fallacies</h3>
+<p>God is not afraid of reasoning. He invites it. Hear Him in Isaiah: "Come now, and let us reason together, saith the LORD: though your sins be as scarlet, they shall be as white as snow." The God who made the mind calls men to use it, and He offers cleansing at the end of the reasoning. So when someone tells you that faith and thinking are enemies, he is not quoting our Book. Our Book opens the argument.</p>
+<p>Sound reasoning is simple in its shape. You begin with what is true, you move by steps that hold, and you arrive at a conclusion that follows. If the starting point is false, the conclusion is worthless however skilfully you argued; and if a single step does not hold, the conclusion is worthless too. That is all logic is — checking the starting points and checking the steps. A fallacy is a step that does not hold, dressed up so that it looks as if it does. Learn to see them, name them quietly to yourself, and refuse to use them even when they would help you.</p>
+<p>The first and commonest is attacking the person instead of the argument. "You only believe that because you were raised in church." Perhaps I was; that says nothing at all about whether it is true. A man's upbringing, his education, his failures — none of these touch the question on the table. And beware, because this one tempts believers as much as unbelievers. "You only deny God because you want to keep sinning" may sometimes be true, but it is not an argument. Answer the claim, not the man.</p>
+<p>The second is the straw man, which is building a weak copy of your opponent's position and knocking that down. If you tell a Muslim that he worships a moon god, or tell an atheist that he believes nothing came from nothing for no reason, when neither man would say those words, you have not answered him; you have answered someone who is not in the room. This is exactly why the fourth rule of order exists: if he agrees with your statement of his view before you answer it, you cannot be swinging at a straw man. The third is circular reasoning, where the conclusion is smuggled into the premise. "This book is true because it says it is true" proves nothing about any book, ours included. We do not defend the Scripture that way; we point to fulfilled prophecy, to preserved manuscripts, to the resurrection, and to the Spirit's own witness in the heart.</p>
+<p>The fourth is shifting the burden. Whoever makes the claim must support it, and neither man may demand that his opponent do his work for him. If he says the universe requires no cause, that is his claim to carry. The fifth is the false dilemma, where you are handed two doors when there are five. "Either you accept modern science or you accept the Bible" is a false dilemma; the foundations of modern science were largely laid by men who believed in a Creator. Never accept a choice of two until you have asked whether there is a third.</p>
+<p>The sixth is the appeal to numbers: "most scientists say," "everyone knows," "nobody believes that any more." Truth is not decided by counting hands; on the day the ark's door shut, the majority was outside it. The seventh is the red herring, dragging in something irrelevant to pull you off the trail. You are discussing whether the Lord Jesus Christ rose from the dead, and suddenly you are asked about the Crusades or a preacher's scandal. Answer briefly if honesty requires it, then say, "Now, let us come back to the resurrection," and come back.</p>
+<p>Then there is the question I am asked more than any other, and it is worth handling by itself, because we teach it fully in our course on the scientific evidence of God. "Who created God?" It sounds devastating and it is self-defeating. If not being able to name a thing's creator counts as evidence that the thing does not exist, then "who created the universe?" is evidence that the universe does not exist, and the man is standing in a universe he has just argued away. A rule of logic must work across the board or it is not a rule. Either both need a creator, in which case he has conceded our point, or something can exist uncaused — and if something can, the eternal God who stands outside of time and made time is exactly the Someone the evidence has been pointing to. Say it calmly, and let him think.</p>
+<p>One last word, and it is pastoral. Knowing the names of fallacies makes some students insufferable; they catalogue errors in every conversation like a man swatting flies, and they win nothing and love no one. Use this learning as a physician uses his knowledge of disease — quietly, to heal. The weapons of our warfare are mighty through God to the pulling down of strong holds, casting down imaginations and every high thing that exalteth itself against the knowledge of God. That is what a bad argument is: a stronghold in a man's mind, keeping him from his Maker. You are not there to be clever. You are there to pull it down and let the light in.</p>
+<aside class="key"><div class="key-t">Hold onto this: A rule of logic must work across the board</div><p>Refuse the fallacies — attacking the person, the straw man, circular reasoning, shifting the burden, false dilemmas, counting hands, and red herrings — and pull down strongholds to let the light in.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Scripture As The Standard</h3>
+<p>Every debate has a standard, whether the men in it admit one or not. Somewhere behind every argument there is a court of appeal, and when the two sides do not agree on the court, they will argue for hours and settle nothing. For us the standard is settled and it is the Word of God. Not my opinion, not my preference. The Word. If I cannot show it to you in the Book, I will not press it on you as doctrine, and I expect the same discipline from every student of this school.</p>
+<p>The first principle of handling that standard is this: the Bible interprets the Bible. Where a passage is dark, another passage is light on it, for the Holy Ghost is the Author of both and He does not contradict Himself. Precept must be upon precept, line upon line, here a little and there a little. When a man brings you a strange verse and asks what it means, your first move is not to guess and it is not to panic; it is to ask what the rest of Scripture says on that subject, and let the clear teach you the unclear. That single habit will keep you out of a hundred errors.</p>
+<p>The second principle is context, and I will say it as bluntly as I can: a text without its context is a pretext. Before you use any verse, read the verses on either side of it, know who is speaking, know to whom he is speaking, and know what he was answering. Some of the worst doctrines in the world are built out of true sentences lifted out of their setting. The devil himself did exactly that. Read the paragraph. Read the chapter. Where the subject is weighty, read the whole book, and you will find the meaning was never hidden — it was simply skipped over by men in a hurry.</p>
+<p>The third principle is the whole counsel of God. Paul could stand before the Ephesian elders and say, "For I have not shunned to declare unto you all the counsel of God." All of it. A man who preaches only mercy produces people who do not fear God; a man who preaches only judgment produces people who do not love Him. And in debate, a one-sided Bible is a gift to your opponent, because the first verse he brings from the side you have neglected will knock you off your feet.</p>
+<p>The fourth is Paul's charge to Timothy: "Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth." Study — there is labour in this. Rightly dividing — there is skill in this. Notice that a workman may be ashamed. It is a shameful thing to stand in public misusing the Word of the living God, and no amount of sincerity covers it. So do the work beforehand. The Bereans were called noble because they searched the scriptures daily whether those things were so, and they were searching the preaching of an apostle. If they may check, so may your opponent, and he will.</p>
+<p>Now, use your proof texts honestly. A proof text is a verse offered as evidence for a claim, and it is only evidence if it actually says what you are claiming. Never stretch a verse to cover ground it does not cover. Never quote half a sentence in a way that reverses the other half. Never build a doctrine on a single obscure verse while a dozen plain ones say otherwise. If a verse is a strong support, say so; if it is a suggestion rather than a proof, say that too. Honesty about the strength of your evidence costs a small point and gains the whole man's trust.</p>
+<p>And what do you do when your opponent quotes Scripture at you, and quotes it wrongly? Do not be shaken by the sound of a verse. Look at what happened in the wilderness. The devil came to the Lord Jesus Christ and quoted the ninety-first Psalm — real Scripture, accurately worded, and utterly misapplied, twisted to make presumption look like faith. And notice the answer: "Jesus said unto him, It is written again, Thou shalt not tempt the Lord thy God." <em>It is written again.</em> He did not deny the verse Satan quoted; He set beside it another passage that governed it. That is your pattern. When a man brings you a verse about the Father being greater, you do not deny it — you say, it is written again, "My Lord and my God." When a man brings a verse to excuse his sin, you do not argue about the words; you bring the Scriptures that stand over it. The whole Book against the misused fragment, every time.</p>
+<p>Peter warned that there are things in the Scriptures hard to be understood, which they that are unlearned and unstable wrest unto their own destruction. That word <em>wrest</em> means to twist, the way a man twists a limb out of joint. Handle the Word so carefully that no one could ever say you did that. The Bible is not a bag of stones to throw at people. It is the sword of the Spirit, and a sword is used with a steady hand, with the eyes open, and never in a temper.</p>
+<aside class="key"><div class="key-t">Hold onto this: It is written again</div><p>The Bible interprets the Bible. Read the context, declare the whole counsel of God, divide the Word rightly, and answer a misused verse with the Scripture that governs it.</p></aside>
+<div class="check" data-check="3"></div>
+<h3 id="lesson-5">5. Debating Each Worldview</h3>
+<p>In this school you will sit across the table from an atheist, a Muslim, a Hindu, a Buddhist, a Satanist, and a believer carrying a heresy. We do that on purpose. It is one thing to know the rules in a classroom and another to keep them when a man is smiling at you while denying your Saviour. And hear this first: none of these conversations is won by information. Pray before you go. It is not by might, nor by power, but by My Spirit, saith the LORD of hosts.</p>
+<p>With the atheist, take him to four things, one at a time. First, the beginning: the universe had one, so ask him kindly what caused it, and hold him to his own claim. Second, design: the information written into every living cell, and the fact that order left alone runs down and does not build itself up. For the invisible things of Him from the creation of the world are clearly seen, being understood by the things that are made. Third, the moral law: ask him whether cruelty to a child is truly wrong, or only unfashionable. If it is truly wrong, there is a law above men, and a law has a Lawgiver. Fourth — the ground I would rather stand on than any other — the resurrection of the Lord Jesus Christ: an empty tomb, and witnesses who died rather than deny what they saw.</p>
+<p>With the Muslim, begin with respect, and never mock. Mockery of his prophet or his book will close him for life and dishonours our own Lord, who told us to speak evil of no man. Three matters will come up: the deity of the Lord Jesus Christ, His crucifixion, and the reliability of the Gospel record. Define the Son of God properly, for he has been taught that we mean something physical and shameful; we mean the eternal Word who was with God and was God, made flesh. On the crucifixion, the record inside the Bible and outside it is early and united. And ask him lovingly where he finds assurance for his sin, for there is one God, and one mediator between God and men, the man Christ Jesus.</p>
+<p>With the Hindu you are not arguing against devotion; you will often meet real hunger for God there. You are arguing for one God rather than many. Hear, O Israel: The LORD our God is one LORD. Show him a God who is personal, holy, and knowable, not a force wearing many faces. Then come to karma and grace, for that is where the heart is. Karma says every debt must be paid by the one who owes it, life after life, and no one may forgive it. Grace says the debt was paid by Another, and the account is closed today. By grace are ye saved through faith; and that not of yourselves: it is the gift of God. Ask him whether he has met anyone who finished paying.</p>
+<p>With the Buddhist, honour his honesty about suffering, for he has looked at the world without flinching. But show him where the roads part. His way answers suffering by extinguishing desire, putting out the self like a candle. Our answer is a cross, where suffering was not avoided but entered and defeated by a Man who bore it for us. We do not tell him to stop wanting; we tell him Whom to want. There is a Person at the end of that road, not a silence: Come unto Me, all ye that labour and are heavy laden, and I will give you rest.</p>
+<p>With the Satanist, keep your head and keep your compassion. You are speaking to a person, and in almost every case a wounded one — someone hurt, often by people who used the name of God, who chose the other side out of pain more than philosophy. Do not perform outrage. Speak calmly of what is real: the devil exists, he is no symbol of freedom but a defeated liar, openly triumphed over at the cross. For this purpose the Son of God was manifested, that He might destroy the works of the devil. Know your authority — power over all the power of the enemy — but wear it quietly. Then ask about his life, and listen.</p>
+<p>And then the hardest table of all, the believer carrying a heresy. Hardest because you love him, and the flesh wants to crush an error in a brother in a way it would never dare with a stranger. Go slowly. Bring the Scripture in its context, not a barrage of verses. Distinguish a difference of understanding from what truly denies the faith. Be patient. Brethren, if a man be overtaken in a fault, ye which are spiritual, restore such an one in the spirit of meekness. Restore is a surgeon's word, setting a bone so the man can walk. And that last clause is for you: considering thyself. You are not the standard. The Word is.</p>
+<p>So before every one of these conversations, pray. Ask the Lord for the man's heart, not merely for good answers. Go in the power of the Holy Ghost, keep the rules of order, hold the Scripture as the standard, and leave the door open. Then whether he agrees that day or not, the truth will have been heard — and that was always the goal.</p>
+<aside class="key"><div class="key-t">Hold onto this: Pray first, then reason</div><p>Meet each worldview at its real question — beginning, design, morality and the resurrection; the deity and cross of the Lord Jesus Christ; one God, not many; grace against karma; a Person, not extinction; a defeated devil; and a brother restored in meekness.</p></aside>
+<div class="check" data-check="4"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Fifteen questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "Robert's Rules of Debate",
+  assessment: "Robert's Rules of Debate: Contending for the Faith in Order",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"WH": "Why we debate", "RL": "The rules", "LG": "Logic and fallacies", "SC": "Scripture as the standard", "WV": "Worldviews"};
+
+const QUESTIONS = [
+ {t:"WH", q:"According to the lesson, what is the goal of a debate for the believer?",
+  o:["To score points and win the crowd", "To avoid all disagreement for the sake of peace", "That the truth is heard, and that God may grant repentance", "To prove that you have studied more than your opponent"], a:2, v:"2 Timothy 2:25", vt:"In meekness instructing those that oppose themselves; if God peradventure will give them repentance to the acknowledging of the truth.", l:1},
+ {t:"WH", q:"Why does the Bishop say the faith is contended for rather than constructed?",
+  o:["Because it was once delivered to the saints and needs no improvement", "Because no one understands it fully", "Because arguments cannot change anything", "Because doctrine is a private matter"], a:0, v:"Jude 3", vt:"ye should earnestly contend for the faith which was once delivered unto the saints.", l:1},
+ {t:"WH", q:"How is the servant of the Lord told to conduct himself toward those who oppose him?",
+  o:["Strive hard until they submit", "Not strive, but be gentle unto all men, apt to teach, patient", "Refuse to speak with them at all", "Answer only in writing"], a:1, v:"2 Timothy 2:24", vt:"And the servant of the Lord must not strive; but be gentle unto all men, apt to teach, patient,", l:1},
+ {t:"RL", q:"Why does the Bishop insist that you never interrupt?",
+  o:["Because interrupting is impolite in most cultures", "Because answering a matter before hearing it is folly and shame", "Because the other person will interrupt you back", "Because silence intimidates an opponent"], a:1, v:"Proverbs 18:13", vt:"He that answereth a matter before he heareth it, it is folly and shame unto him.", l:2},
+ {t:"RL", q:"What does the sixth rule say happens the moment you raise your voice?",
+  o:["You have lost, whatever the argument was", "You have shown holy boldness", "You should quote Scripture louder still", "You should end the conversation immediately"], a:0, v:"Proverbs 15:1", vt:"A soft answer turneth away wrath: but grievous words stir up anger.", l:2},
+ {t:"RL", q:"According to the lesson, why must you state your opponent's position fairly before replying?",
+  o:["Because every position sounds just until it is searched out", "Because it wastes his time", "Because the rules of the school require a long introduction", "Because it hides your own argument"], a:0, v:"Proverbs 18:17", vt:"He that is first in his own cause seemeth just; but his neighbour cometh and searcheth him.", l:2},
+ {t:"LG", q:"What is the straw man fallacy, as the lesson describes it?",
+  o:["Answering a weak copy of the opponent's view instead of his actual view", "Refusing to answer at all", "Quoting Scripture out of context", "Insisting on evidence for every claim"], a:0, v:"Proverbs 18:17", vt:"He that is first in his own cause seemeth just; but his neighbour cometh and searcheth him.", l:3},
+ {t:"LG", q:"How does the lesson answer the appeal to numbers, that most people say otherwise?",
+  o:["By counting the believers in the world", "By agreeing that majorities are usually right", "Truth is not decided by counting hands", "By refusing to speak with unbelievers"], a:2, v:"Exodus 23:2", vt:"Thou shalt not follow a multitude to do evil;", l:3},
+ {t:"LG", q:"What does God Himself invite men to do in the book of Isaiah?",
+  o:["To argue until one side is silenced", "To reason together with Him", "To accept without thinking", "To wait for a sign before believing"], a:1, v:"Isaiah 1:18", vt:"Come now, and let us reason together, saith the LORD: though your sins be as scarlet, they shall be as white as snow;", l:3},
+ {t:"SC", q:"What does the lesson mean by rightly dividing the word of truth?",
+  o:["Studying with labour and skill so that the workman need not be ashamed", "Choosing only the verses that support your side", "Dividing the Bible between Old and New readers", "Leaving hard passages to scholars"], a:0, v:"2 Timothy 2:15", vt:"Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth.", l:4},
+ {t:"SC", q:"Why must a debater know the whole counsel of God and not only his favourite themes?",
+  o:["Because long quotations impress an audience", "Because a one-sided Bible leaves you open to the first verse from the side you neglected", "Because only ministers may quote the Old Testament", "Because the whole counsel is a modern requirement"], a:1, v:"Acts 20:27", vt:"For I have not shunned to declare unto you all the counsel of God.", l:4},
+ {t:"SC", q:"What were the Bereans commended for doing with the preaching they heard?",
+  o:["Accepting it without question", "Debating it publicly in the market", "Searching the scriptures daily whether those things were so", "Writing it down for later generations"], a:2, v:"Acts 17:11", vt:"they received the word with all readiness of mind, and searched the scriptures daily, whether those things were so.", l:4},
+ {t:"WV", q:"What is the central contrast the lesson draws between karma and the gospel?",
+  o:["Karma is ancient and the gospel is modern", "Karma says the debtor must pay it himself; grace says Another paid it and gives salvation as a gift", "Karma denies that sin exists", "Karma teaches many gods and grace teaches none"], a:1, v:"Ephesians 2:8", vt:"For by grace are ye saved through faith; and that not of yourselves: it is the gift of God:", l:5},
+ {t:"WV", q:"What did the cross accomplish concerning the devil, which we set before the Satanist?",
+  o:["It postponed his judgment", "It proved he was only a symbol", "It spoiled principalities and powers and triumphed over them openly", "It removed all conflict from the world"], a:2, v:"Colossians 2:15", vt:"And having spoiled principalities and powers, he made a shew of them openly, triumphing over them in it.", l:5},
+ {t:"WV", q:"How are we to deal with a brother who has been overtaken in a fault or an error?",
+  o:["Restore him in the spirit of meekness, considering ourselves", "Silence him publicly before others are affected", "Ignore it, since doctrine is private", "Debate him as we would an unbeliever"], a:0, v:"Galatians 6:1", vt:"Brethren, if a man be overtaken in a fault, ye which are spiritual, restore such an one in the spirit of meekness; considering thyself, lest thou also be tempted.", l:5},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["Why We Debate", "The Rules Of Order", "Logic And The Common Fallacies", "Scripture As The Standard", "Debating Each Worldview"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "What did Paul do, as his manner was, three sabbath days in the synagogue?", "o": ["Reasoned with them out of the scriptures", "Rebuked them and departed", "Kept silent until invited", "Wrote them a letter instead"], "a": 0, "e": "Acts 17:2 says Paul reasoned with them out of the scriptures — laying truth out, not shouting it down."}, {"q": "Before answering an opponent, what does the fourth rule require you to do?", "o": ["Quote a verse he cannot answer", "State his position so well that he agrees with your statement of it", "Point out the weakest thing he said", "Ask the audience who they agree with"], "a": 1, "e": "Giving his argument back at its strongest, and getting his agreement, earns you the right to answer it."}, {"q": "Why is \"Who created God?\" self-defeating as an argument against God's existence?", "o": ["Because believers are forbidden to ask questions", "Because the same rule would argue the universe out of existence", "Because no scientist has ever asked it", "Because God has never been seen"], "a": 1, "e": "If an unnamed creator disproves a thing, the universe is disproved too — so the rule defeats itself."}, {"q": "When the devil quoted a real psalm in the wilderness, how did the Lord Jesus Christ answer?", "o": ["He denied that the psalm was Scripture", "He refused to answer at all", "He said, It is written again, and set another Scripture beside it", "He rebuked the crowd"], "a": 2, "e": "He did not deny the verse; He brought the Scripture that governed it — the whole Book against the misused fragment."}, {"q": "How does the lesson say we should approach a Satanist?", "o": ["With performed outrage to show we are serious", "By refusing to speak with him at all", "Calmly, with compassion, knowing most are wounded people, and pointing to the devil's defeat at the cross", "By debating philosophy only and avoiding his life"], "a": 2, "e": "Most are wounded people; speak of the devil's real defeat at the cross, hold your authority quietly, and listen to his life."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

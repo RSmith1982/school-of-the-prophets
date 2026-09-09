@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Apologetics — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Apologetics</h2>
+    <p class="lesson" style="max-width:var(--measure)">Giving a reasoned answer for the hope within you, to skeptics and seekers alike. This course trains every believer to answer honestly and boldly from the Scriptures, and to do it in the power of the Holy Ghost. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">A Reason for the Hope</a></li>
+      <li><a href="#lesson-2">The Evidence That God Exists</a></li>
+      <li><a href="#lesson-3">Why the Bible Can Be Trusted</a></li>
+      <li><a href="#lesson-4">The Resurrection of the Lord Jesus Christ</a></li>
+      <li><a href="#lesson-5">Answering the Common Objections</a></li>
+      <li><a href="#lesson-6">Apologetics with Power</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. A Reason for the Hope</h3>
+<p>I want to begin this course where the Holy Ghost begins it, in the third chapter of the first epistle of Peter. <em>"But sanctify the Lord God in your hearts: and be ready always to give an answer to every man that asketh you a reason of the hope that is in you with meekness and fear."</em> That one verse is the whole subject. Everything else we will study is only the unfolding of it. Notice that Peter did not write this to scholars, or to a committee of trained debaters. He wrote it to scattered believers who were being mocked and pressured for their faith, ordinary saints with ordinary jobs, and he told them all to be ready.</p>
+<p>Look at the order Peter gives, because the order is everything. Before he says a single word about answering anybody, he says, <em>"sanctify the Lord God in your hearts."</em> That is where a reasoned answer is born, in a heart where the Lord Jesus Christ has been set apart and enthroned. A man who has not sanctified the Lord in his own heart has nothing to defend but an opinion. But when He is Lord within, the answer comes out of you with weight, because you are not repeating something you heard; you are reporting Someone you know.</p>
+<p>Then notice the word <em>always</em>. Not sometimes. Not when you feel prepared. The question rarely comes at a convenient hour. It comes from the coworker at the end of a hard week, from your own child at the kitchen table, from the man beside you on a long journey who has just buried somebody and wants to know if any of this is real. Readiness is not a mood; it is a condition you live in.</p>
+<p>And see what they ask you for: <em>"a reason of the hope that is in you."</em> Peter did not say a reason for your religion, or your denomination, or your customs. He said your hope. That means the world is meant to see something in a believer that requires explanation. If nothing about your life provokes a question, no one will ever ask you the question. The hope must be visible first. When you stand at a graveside without despair, when the diagnosis comes and you are still worshipping, men will come and say, what is it that holds you? That is the moment apologetics begins, and it begins because of how you carried yourself long before you opened your mouth.</p>
+<p>Now the manner. <em>"With meekness and fear."</em> God has attached a spirit to the assignment, and if you drop the spirit you have failed the assignment even when your facts are correct. Meekness means you are not out to humiliate the man. Fear means you tremble before God as you speak of Him, remembering that you are handling holy things and that you yourself were once in darkness. Paul told Timothy, <em>"And the servant of the Lord must not strive; but be gentle unto all men, apt to teach, patient."</em> Apt to teach and not given to strife — those two must travel together, or the one will destroy the other.</p>
+<p>Here is where many sincere believers go wrong, and I say it plainly because I have had to repent of it myself. There is a great difference between winning an argument and winning a soul. You can take a man apart piece by piece, leave him with nothing to say, walk away feeling like a champion, and have driven him further from God than you found him. A man who is humiliated does not repent; he retreats, and he hardens. Solomon said, <em>"The fruit of the righteous is a tree of life; and he that winneth souls is wise."</em> Wisdom is measured by souls, not by scores. If your goal is to be right, you will fight. If your goal is to see him saved, you will be patient, and you will leave a door open behind you.</p>
+<p>Paul gave the seasoning for our speech: <em>"Let your speech be alway with grace, seasoned with salt, that ye may know how ye ought to answer every man."</em> Salt gives flavour and salt preserves, but salt is measured. Nobody eats a handful of it. Truth without grace is a handful of salt thrown in a man's face. Grace without truth has no salt in it at all. And notice again that little word <em>alway</em>, and the phrase <em>every man</em> — the answer is fitted to the man in front of you. The proud scoffer, the grieving widow, and the honest student are not answered the same way, though the truth you carry to all three is the same truth.</p>
+<p>So let no believer excuse himself from this. Jude wrote that we <em>"should earnestly contend for the faith which was once delivered unto the saints."</em> Contending is not quarrelling; it is holding ground that has been entrusted to you. You do not need a degree to do it. You need the Lord Jesus Christ sanctified in your heart, a hope that people can see, a mouth that has been trained by the Word, and a spirit that is meek before men and trembling before God. Get that settled, and the rest of this course is simply putting weapons in your hands.</p>
+<aside class="key"><div class="key-t">Hold onto this: Ready always, with meekness and fear</div><p>Apologetics is not for scholars only; it is the duty of every believer who has sanctified the Lord God in his heart. The aim is never to win the argument but to win the soul.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. The Evidence That God Exists</h3>
+<p>Somewhere today a young believer is being told by someone he respects that there is no God, that everything came from nothing, and that only simple people believe otherwise. I want to arm you for that conversation, for the believer stands on the ground of reason and the atheist is the one who must keep explaining things away. God is not hiding. <em>"The fool hath said in his heart, There is no God. They are corrupt, they have done abominable works, there is none that doeth good."</em> Notice where the denial happens: not in his head first, but in his heart. We will come back to that.</p>
+<p>Begin with the beginning. Everyone now agrees, believer and unbeliever alike, that the universe has not always been here in its present form; it had a start. And that admission is a very large problem for a man who denies God, because nothing explodes for no reason. In all of observable science we have never once watched nothing produce something. If a man says pressure built up until it burst, ask him gently where the pressure came from, for pressure is energy and energy must be accounted for. If he says the universe expands and contracts forever, ask what set the first wave in motion, since every force of energy we have measured has a beginning and a running down. However far back you push the question, you arrive at a doorway, and Someone is standing in it. <em>"In the beginning God created the heaven and the earth."</em> That is not the retreat of reason; that is the only answer that does not collapse.</p>
+<p>Then look at what was made. <em>"The heavens declare the glory of God; and the firmament sheweth his handywork."</em> David wrote that with his eyes on the night sky, and he did not have a telescope. We have looked much further since then, and the further we look the louder the declaration becomes. The earth sits at exactly the distance from the sun that life requires. The smallest living cell carries instructions written in a code, and code has never in all of human experience written itself. Left alone, things wind down; they do not wind up. Every time we have seen order increase, a mind was behind it. Paul draws the conclusion: <em>"For the invisible things of him from the creation of the world are clearly seen, being understood by the things that are made, even his eternal power and Godhead; so that they are without excuse."</em></p>
+<p>Weigh that last phrase — <em>without excuse</em>. Paul does not say the evidence is faint. He says it is clearly seen, so plainly that no man will stand before God and say, I was never told. The house preaches the builder. <em>"For every house is builded by some man; but he that built all things is God."</em> Walk into a room and find a table set, the food warm, the chairs arranged, and you will not say the room did that to itself. Creation is a table far more finely set than that.</p>
+<p>Now come to the third witness, and this one is the hardest for the unbeliever to escape, because he carries it with him wherever he goes. There is a law written on the inside of a man. Paul says of those who never had the books of Moses that they <em>"shew the work of the law written in their hearts, their conscience also bearing witness, and their thoughts the mean while accusing or else excusing one another."</em> Every man alive knows that some things are wrong. He may argue that right and wrong are only opinion, but let somebody steal from him, or lie about him, or harm his child, and the argument vanishes and the law rises up in him like a flame. Where did that law come from? Matter does not produce morality. A law implies a Lawgiver, and a conscience that accuses you implies Somebody higher than you who wrote it.</p>
+<p>So the beginning of the universe, the design of the universe, and the law inside a man's chest all point the same direction. And still men refuse, which brings us back to Psalm fourteen and the heart. Notice what the psalm says next: <em>"They are corrupt, they have done abominable works."</em> The denial and the corruption travel together. In my experience most unbelief is not an intellectual problem wearing a moral coat; it is a moral problem wearing an intellectual coat. A man will not always tell you he loves his sin, so he tells you he cannot believe. That is why you must answer the question honestly and then go past the question to the heart, in prayer, and let the Holy Ghost do what argument cannot do.</p>
+<p>Understand also that these evidences do not save anybody; they clear the ground. <em>"Through faith we understand that the worlds were framed by the word of God, so that things which are seen were not made of things which do appear."</em> Faith is still faith. What the evidence does is take away the excuse that faith is unreasonable, and leave the man face to face with the God his own conscience already tells him is there. Then give him the Gospel, because it is the Gospel, not the argument, that has power to save.</p>
+<aside class="key"><div class="key-t">Hold onto this: The beginning, the design, and the law within</div><p>The universe had a start, creation bears the marks of a Maker, and a law is written on every man's heart. The evidence does not save a man, but it leaves him without excuse.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Why the Bible Can Be Trusted</h3>
+<p>Sooner or later the conversation turns to the Book. A man may grant you that there is a God and still ask why he should believe that this collection of writings is the Word of that God. It is a fair question, and the Bible is not afraid of it. <em>"All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness."</em> Given by inspiration — God-breathed. That is the claim. Now look at the credentials behind it, for I have never found this Book needing me to defend it so much as needing me to present it, the way a lion needs only to be let out of the cage.</p>
+<p>Start with prophecy, the evidence no other book can offer. Seven hundred years before the Lord Jesus Christ was born, Micah named the village: <em>"But thou, Bethlehem Ephratah, though thou be little among the thousands of Judah, yet out of thee shall he come forth unto me that is to be ruler in Israel; whose goings forth have been from of old, from everlasting."</em> Not merely the town, but the eternal nature of the One who would come out of it. Isaiah, in his fifty-third chapter, described a Man despised and rejected, silent before His accusers, numbered with the transgressors, and buried with the rich. <em>"But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed."</em> And David, writing a thousand years before, in a nation that stoned its criminals and had never seen a Roman cross, wrote, <em>"For dogs have compassed me: the assembly of the wicked have inclosed me: they pierced my hands and my feet."</em> He describes also the thirst, the mockery, and the lot cast for the vesture. No man arranges his own birthplace or the manner of his execution centuries in advance. Only God can tell you the end from the beginning.</p>
+<p>Come next to preservation. Men have burned this Book, banned it, and buried it, and it has outlived every one of them. <em>"Heaven and earth shall pass away, but my words shall not pass away."</em> The manuscript evidence is not thin; it is overwhelming, thousands of copies in many languages, scattered so widely that no king could gather them and no council could quietly alter them. Older copies brought up out of the ground have confirmed the message we already had, and the scribes who copied the Hebrew Scriptures counted the very letters of a page so that not one would be lost. <em>"But the word of the Lord endureth for ever. And this is the word which by the gospel is preached unto you."</em></p>
+<p>Now consider the unity, which to me is the quietest miracle of the whole Book. Sixty-six books, written over roughly sixteen centuries by about forty men — a lawgiver raised in a palace, a shepherd, a king, a fisherman, a physician, a scholar of the Pharisees — on three continents, in three languages, most never having met one another. Out of that comes one story, one moral standard, one Redeemer, from the promised Seed in Genesis to the Lamb upon the throne in the Revelation. Put forty men of one city and one generation in a room and ask them to agree on one doctrine, and you will see how impossible this is. There is one Author behind the many writers. <em>"For the prophecy came not in old time by the will of man: but holy men of God spake as they were moved by the Holy Ghost."</em></p>
+<p>Then there is the spade. Critics said there was no such people as the Hittites; their cities were uncovered. They said Belshazzar never existed; the inscriptions came to light. Time and again the ground itself has been a witness for the Book, and honest searching has never yet damaged the Word of God.</p>
+<p>But there is a further evidence, and it closes mouths in the street where a manuscript argument never will: changed lives. I have watched a drunkard set free in a moment and never return to the bottle, shattered homes rebuilt, and men their own families had given up on made new. No other book does that; the Word of God is living, and it converts the soul. Point out to the honest inquirer, too, that this Book does not flatter anybody. It records the failures of its own heroes — the drunkenness of Noah, the deceit of Abraham, the adultery of David, the denial of Peter. Men writing a religion to promote themselves do not write like that.</p>
+<p>Finally, understand who receives this evidence. The Bible discourages the proud and teaches the humble; God <em>"resisteth the proud, but giveth grace unto the humble."</em> David said, <em>"The meek will he guide in judgment: and the meek will he teach his way."</em> A man who comes with his arms folded, determined to sit in judgment on the Book, will find enough to keep him comfortable in his unbelief; God will not force Himself on a scorner. But the man who comes hungry and humble will find that the Book begins to read him. Present the evidence honestly, then invite him to open it and taste for himself. Many who came to examine the Scriptures have been examined by them and left on their knees.</p>
+<aside class="key"><div class="key-t">Hold onto this: A Book with credentials</div><p>Fulfilled prophecy, preservation against every attack, the unity of sixty-six books, the witness of the spade, and changed lives all stand behind the claim that all Scripture is given by inspiration of God.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. The Resurrection of the Lord Jesus Christ</h3>
+<p>Everything stands or falls here. Paul does not soften it: <em>"And if Christ be not risen, then is our preaching vain, and your faith is also vain."</em> And again, <em>"And if Christ be not raised, your faith is vain; ye are yet in your sins."</em> No other religion rests its entire weight on a single event in public history that can be investigated. Take the resurrection away and there is nothing left of us but good advice and hymns. But if the Lord Jesus Christ came out of that tomb, every claim He made about Himself is settled. So when a skeptic asks where to begin, I take him here.</p>
+<p>Begin with the tomb, for it was empty and everybody knew it. The authorities had every reason to end this movement in an hour, and the simplest means to do it: produce the body. Jerusalem was the very city where He had been crucified, and it was there, a few weeks later, that the apostles stood up and preached that God had raised Him. If a corpse could have been carried through those streets, the church would have died that day. It never was. Instead the authorities were reduced to paying men to say that the disciples stole Him away while they slept — a strange testimony, since a sleeping man is not a witness to anything. The angel's word stands: <em>"He is not here: for he is risen, as he said. Come, see the place where the Lord lay."</em></p>
+<p>And do not pass over who found it empty. In that day a woman's testimony carried little weight in a court, and men inventing a story to persuade their generation would never have written that the first witnesses were women. They wrote it because that is what happened. Honest witnesses report what occurred, even when it is inconvenient to them.</p>
+<p>Then take the witnesses themselves. Paul lays out the evidence like a man building a case: <em>"For I delivered unto you first of all that which I also received, how that Christ died for our sins according to the scriptures; And that he was buried, and that he rose again the third day according to the scriptures."</em> He names Cephas, then the twelve, then James, then all the apostles, then himself, and in the middle of the list he puts this: <em>"After that, he was seen of above five hundred brethren at once; of whom the greater part remain unto this present, but some are fallen asleep."</em> Consider what he is doing. He names a crowd of over five hundred and says most are still alive — an open invitation to go and ask them. A man inventing a tale sends you far away and long ago; a man telling the truth sends you down the road to a living witness. Luke says He <em>"shewed himself alive after his passion by many infallible proofs, being seen of them forty days."</em> They ate with Him and handled Him. This was no vision seen by one excitable man in the dark; these were appearances to groups over nearly six weeks.</p>
+<p>Now look at the men themselves, because the change in them is evidence you cannot forge. On the night He was betrayed they all forsook Him and fled. Peter, the boldest, was broken by a servant girl beside a fire and swore he never knew the Man. That is the raw material: frightened, scattered men behind locked doors. Something happened between that Friday and the day Peter stood in the open in Jerusalem and preached to thousands of the same people who had shouted for the crucifixion. A stolen body does not do that. They told what had happened to them: <em>"For we cannot but speak the things which we have seen and heard."</em> And James, His own brother, who during His ministry did not believe in Him, became a pillar of the church in Jerusalem and died for Him. What turns a mocking brother into a martyr?</p>
+<p>Which brings me to the strongest link in the chain. Follow those men to the end of their lives. They were beaten, imprisoned, driven out, and at last put to death, one after another, in different places and in different years — and not one of them ever recanted. Now, the world is full of sincere people who died for something they believed to be true but was not. That is not what we have here. These men were in a position to know. If they had moved the body, they knew where it was. A man will die for what he mistakenly believes; a man does not go to the sword for what he knows he made up, and not one of his fellow conspirators breaks silence under torture either. Their blood is the signature on their testimony. <em>"And they overcame him by the blood of the Lamb, and by the word of their testimony; and they loved not their lives unto the death."</em></p>
+<p>So set it before the skeptic simply. The tomb was empty and the enemies of the church could not fill it. The witnesses were many, named, and available. The men who had run away became men who could not be silenced, and they sealed their word with their lives. And add the witness no argument can take from you: I know He lives because He is alive in me.</p>
+<aside class="key"><div class="key-t">Hold onto this: An empty tomb the enemy could not fill</div><p>The Gospel rests on a public event: the tomb was empty, the witnesses were many and named, the frightened disciples became fearless, and they sealed their testimony with their blood.</p></aside>
+<div class="check" data-check="3"></div>
+<h3 id="lesson-5">5. Answering the Common Objections</h3>
+<p>If you tell people about the Lord Jesus Christ for any length of time, you will hear the same handful of objections. They come up in every nation and every generation, and there is mercy in that, because it means you can prepare. Here are short, honest answers to five of them. Keep them brief; a long answer often sounds like a nervous answer. And remember that behind the objection there is usually a wound or a sin, and it is the person, not the position, that you are after.</p>
+<p>The first and heaviest is suffering. Why does a good God allow it? Never answer it quickly or coldly; often the man asking has just buried somebody. Say first that God is not the author of the evil men do. He made a world that was good and made man free, because love that cannot be refused is not love, and man used that freedom to rebel. <em>"Wherefore, as by one man sin entered into the world, and death by sin; and so death passed upon all men, for that all have sinned."</em> Much of the suffering in the earth is the harvest of human choices. Then say the greater thing: God did not stay at a distance from our pain; He entered it. The Lord Jesus Christ was despised, rejected, betrayed and crucified, so you cannot say our God does not know what it is to suffer. And He has promised not exemption but victory: <em>"In the world ye shall have tribulation: but be of good cheer; I have overcome the world."</em> Add this too: the question itself assumes a standard of good and evil, and where did the man get that standard, unless there is a God?</p>
+<p>The second is about those who never heard. Here I answer with confidence and with restraint. The Judge of all the earth will do right; Abraham said so, and I stand on it. God judges every man according to the light he was given, and creation and conscience give every man some light. He has made men <em>"that they should seek the Lord, if haply they might feel after him, and find him, though he be not far from every one of us."</em> But notice what lies underneath the question. It is rarely asked out of concern for a tribe far away; it is asked to move the subject away from the man in front of you, who has heard. So answer it, then turn it back kindly: you have heard, and every one of us shall give account of himself to God.</p>
+<p>The third is hypocrites in the church. I never argue with this one, for it is often true, and the moment you defend the indefensible you have lost the man's trust. Yes, there are hypocrites; there was one among the twelve, and he walked with the Lord Jesus Christ Himself for three years. Then press it home: no man will stand at the judgment behind another man. <em>"So then every one of us shall give account of himself to God."</em> You are not asked to follow a preacher, but the Lord Jesus Christ, and He never failed anybody. If a bad doctor once treated you, you would not refuse medicine for life.</p>
+<p>The fourth is science against faith. Refuse the framing; science and faith are not rivals. Science is the study of what God made, and many who founded the modern sciences were believers who expected an orderly universe because they believed in an orderly Creator. Science answers how; the Bible answers Who and why, and no amount of studying how a house is built will tell you who built it. <em>"For every house is builded by some man; but he that built all things is God."</em> Say gently too that science studies what can be repeated and observed, so by its own rules it can say nothing about a Creator outside of nature.</p>
+<p>The fifth is the popular one: all religions are the same, all roads lead up the mountain. It sounds humble and it is not, for it demands that every faith deny what it actually teaches. They do not agree; they contradict each other on the questions that matter most — who God is, what man's problem is, and how it is answered. But the real difference is this: every other system tells you what you must do to reach up to God; the Gospel tells you what God has done to reach down to man. And the Lord Jesus Christ did not leave the option open. <em>"Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me."</em> Peter preached the same: <em>"Neither is there salvation in any other: for there is none other name under heaven given among men, whereby we must be saved."</em></p>
+<p>Now hear me on the manner of all five. Answer briefly, answer from Scripture, and do not pretend to know what God has not revealed; a humble "I do not know that, but here is what I do know" has won more people than a clever guess ever did. Keep your voice down and your love up. And do not stop at the answer — go for the heart, for no man was ever argued into the Kingdom. Clear the road, then preach the Lord Jesus Christ.</p>
+<aside class="key"><div class="key-t">Hold onto this: Answer the question, then go for the heart</div><p>Suffering, those who never heard, hypocrites, science, and the claim that all religions are the same each have a short and honest answer from Scripture. Clear the road, then preach the Lord Jesus Christ.</p></aside>
+<div class="check" data-check="4"></div>
+<h3 id="lesson-6">6. Apologetics with Power</h3>
+<p>I have saved the greatest evidence for last, and it is the one the church today is most likely to leave out. Paul was a trained man; he could reason in the synagogue and quote the poets. Yet listen to how he described his own ministry: <em>"And my speech and my preaching was not with enticing words of man's wisdom, but in demonstration of the Spirit and of power: That your faith should not stand in the wisdom of men, but in the power of God."</em> Notice his reason. It is not that argument is worthless; it is that a faith built on argument rests on the wisdom of men, and whatever a clever man talks you into, a cleverer man can talk you out of. But when the power of God has been demonstrated in front of you, no argument can undo it.</p>
+<p>He tells the Thessalonians the same thing: <em>"For our gospel came not unto you in word only, but also in power, and in the Holy Ghost, and in much assurance."</em> Not in word only. Words are in it, but words alone were never the whole of the apostolic message. The Lord Jesus Christ promised it plainly: <em>"And these signs shall follow them that believe; In my name shall they cast out devils; they shall speak with new tongues."</em> And when they obeyed and went, the account closes like this: <em>"And they went forth, and preached every where, the Lord working with them, and confirming the word with signs following."</em> The Lord working with them, confirming the word. That is God adding His own signature to the sermon, and He has not changed His method.</p>
+<p>I have watched what this does to a skeptical crowd. A man stands with his arms folded through the whole message, unmoved by every argument, and then his wife who has been in pain for years stands up and walks, and something breaks in him that no reasoning had touched. And when God answers prayer at a distance, in a place the sick person never left, the objection that it was mere excitement in the meeting falls to the ground as well. These things are not decorations on the Gospel; they are evidence of a kind the natural mind cannot argue with.</p>
+<p>Look at the ninth chapter of John. The Pharisees were the trained theologians, and they set out to argue the blind man out of his healing. He was no scholar and could not answer their theology. But he had one thing they could not remove, and he laid it on the table: <em>"He answered and said, Whether he be a sinner or no, I know not: one thing I know, that, whereas I was blind, now I see."</em> That is apologetics with power. He did not win the debate; he ended it.</p>
+<p>Now I must guard this, for power without holiness has wrecked many. We do not seek signs for a spectacle or perform for skeptics; the Lord Jesus Christ refused to do a trick for Herod's curiosity. What we are after is this: that in the ordinary course of obedient ministry — preaching, praying for the sick, casting out devils, believing God for the impossible — the Lord confirms His own word, as He said He would. The signs follow the preaching; they do not lead it. And the power flows out of a life given to prayer, fasting, and holiness, out of a heart that has sanctified the Lord God within.</p>
+<p>Two things must go with the power. The first is boldness. The apostles did not pray to be delivered from opposition; they prayed, <em>"And now, Lord, behold their threatenings: and grant unto thy servants, that with all boldness they may speak thy word."</em> And the place was shaken, and they were filled with the Holy Ghost and spoke the word of God with boldness. Boldness is not rudeness and it is not volume; it is the freedom to speak when speaking would cost you something. <em>"For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation to every one that believeth."</em></p>
+<p>The second is love, and without it all the rest is noise. Paul said that though he spoke with the tongues of men and of angels, and had all knowledge and all faith, without charity he was nothing. The skeptic can feel in thirty seconds whether you want to defeat him or to save him, and he decides how much of your evidence he will hear on the strength of that. Many a hard man has been melted not by an argument but by the plain fact that somebody cared for his soul.</p>
+<p>And so we come back to the simplest weapon you carry: your own testimony. You may not remember every prophecy or date, but no man on earth can cross-examine you out of what God has done in your life. They overcame him <em>"by the blood of the Lamb, and by the word of their testimony; and they loved not their lives unto the death."</em> The blood is His part; the testimony is yours. Sanctify the Lord God in your heart, keep your hope visible, know why you believe, walk in the power of the Holy Ghost, and be ready always — with meekness and fear — to tell any man who asks the reason of the hope that is in you.</p>
+<aside class="key"><div class="key-t">Hold onto this: Not in word only, but in power</div><p>Argument clears the ground, but the Lord confirms His word with signs following. Healing, deliverance, answered prayer, boldness, love, and your own testimony are evidence no skeptic can cross-examine away.</p></aside>
+<div class="check" data-check="5"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Twenty questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "Apologetics",
+  assessment: "Apologetics: Giving a Reasoned Answer",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"FD": "Foundations", "EX": "Evidence for God", "SC": "The Scriptures", "RS": "The resurrection", "OB": "Objections and power"};
+
+const QUESTIONS = [
+ {t:"FD", q:"Who does 1 Peter 3:15 place the duty of giving an answer upon?",
+  o:["Trained scholars and ministers only", "Only those with the gift of teaching", "Every believer, always, to every man that asks", "Elders appointed by the church"], a:2, v:"1 Peter 3:15", vt:"But sanctify the Lord God in your hearts: and be ready always to give an answer to every man that asketh you a reason of the hope that is in you with meekness and fear:", l:1},
+ {t:"FD", q:"Why does the lesson say the manner of our answer matters as much as its content?",
+  o:["Because God attaches a spirit to the assignment, and the answer is to be given with meekness and fear", "Because rudeness is against the law", "Because meek people are always right", "Because unbelievers are easily frightened"], a:0, v:"2 Timothy 2:24", vt:"And the servant of the Lord must not strive; but be gentle unto all men, apt to teach, patient,", l:1},
+ {t:"FD", q:"What difference does the lesson draw between winning an argument and winning a soul?",
+  o:["There is no difference, so long as the facts are correct", "Winning souls requires avoiding all argument", "Winning arguments is forbidden to believers", "A humiliated man usually retreats and hardens, while wisdom is measured by souls won"], a:3, v:"Proverbs 11:30", vt:"The fruit of the righteous is a tree of life; and he that winneth souls is wise.", l:1},
+ {t:"EX", q:"What does the lesson say is the problem with the claim that the universe began on its own?",
+  o:["Nothing explodes for no reason, and any pressure or energy still has to be accounted for", "Scientists have never studied the question", "The Bible forbids studying the universe", "Beginnings cannot be measured"], a:0, v:"Genesis 1:1", vt:"In the beginning God created the heaven and the earth.", l:2},
+ {t:"EX", q:"According to Romans 1:20, what is the effect of the evidence of God in creation?",
+  o:["It saves those who see it", "It is hidden from all but the wise", "It proves only that nature is beautiful", "It leaves men without excuse"], a:3, v:"Romans 1:20", vt:"For the invisible things of him from the creation of the world are clearly seen, being understood by the things that are made, even his eternal power and Godhead; so that they are without excuse:", l:2},
+ {t:"EX", q:"How does the lesson use the conscience as evidence for God?",
+  o:["It shows that men are naturally good", "A law written in the heart implies a Lawgiver higher than man", "It proves that morality is only opinion", "It shows that religion is invented by society"], a:1, v:"Romans 2:15", vt:"Which shew the work of the law written in their hearts, their conscience also bearing witness, and their thoughts the mean while accusing or else excusing one another;", l:2},
+ {t:"EX", q:"Where does Psalm 14:1 locate the denial of God, and why does that matter?",
+  o:["In the mind, so better arguments will always convert a man", "In the books of the philosophers", "In the heart, so much unbelief is a moral problem wearing an intellectual coat", "In the culture a man was raised in"], a:2, v:"Psalm 14:1", vt:"The fool hath said in his heart, There is no God. They are corrupt, they have done abominable works, there is none that doeth good.", l:2},
+ {t:"SC", q:"What claim does 2 Timothy 3:16 make about the Scriptures?",
+  o:["That they were written by wise men of many nations", "That all Scripture is given by inspiration of God and is profitable", "That only the prophets were inspired", "That they are useful chiefly as history"], a:1, v:"2 Timothy 3:16", vt:"All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness:", l:3},
+ {t:"SC", q:"Why is fulfilled prophecy such as Micah's naming of Bethlehem strong evidence?",
+  o:["Because prophecies are usually vague enough to fit anything", "Because Micah lived at the same time as the Lord Jesus Christ", "Because no man can arrange his own birthplace centuries beforehand; only God can tell the end from the beginning", "Because Bethlehem was the largest city in Judah"], a:2, v:"Micah 5:2", vt:"But thou, Bethlehem Ephratah, though thou be little among the thousands of Judah, yet out of thee shall he come forth unto me that is to be ruler in Israel; whose goings forth have been from of old, from everlasting.", l:3},
+ {t:"SC", q:"What does the lesson say Psalm 22 demonstrates about prophecy?",
+  o:["That a manner of death was described long before that form of execution was practised in Israel", "That David wrote about his own military victories", "That the psalms were written after the crucifixion", "That prophecy is only about future kings"], a:0, v:"Psalm 22:16", vt:"For dogs have compassed me: the assembly of the wicked have inclosed me: they pierced my hands and my feet.", l:3},
+ {t:"SC", q:"Who does the lesson say receives the evidence of the Scriptures, and who does not?",
+  o:["Only the highly educated receive it", "Everyone who reads it is convinced", "Only those raised in the church", "The Book discourages the proud and teaches the humble"], a:3, v:"Psalm 25:9", vt:"The meek will he guide in judgment: and the meek will he teach his way.", l:3},
+ {t:"RS", q:"According to Paul, what follows if the Lord Jesus Christ is not risen?",
+  o:["Our preaching and our faith are vain and we are yet in our sins", "We still have a good moral example to follow", "Only the apostles' ministry is affected", "The Scriptures remain unchanged"], a:0, v:"1 Corinthians 15:17", vt:"And if Christ be not raised, your faith is vain; ye are yet in your sins.", l:4},
+ {t:"RS", q:"Why does the lesson say Paul's mention of over five hundred witnesses is so telling?",
+  o:["Because five hundred is a symbolic number", "Because they all wrote letters", "Because they were all apostles", "Because he says most of them are still living, which invites anyone to go and ask them"], a:3, v:"1 Corinthians 15:6", vt:"After that, he was seen of above five hundred brethren at once; of whom the greater part remain unto this present, but some are fallen asleep.", l:4},
+ {t:"RS", q:"Why does the lesson treat the martyrdom of the apostles as evidence rather than mere sincerity?",
+  o:["Because dying for a belief always proves it true", "Because these men were in a position to know whether it happened, and men do not die for what they know they invented", "Because they died in one place at one time", "Because they were promised earthly reward"], a:1, v:"Acts 4:20", vt:"For we cannot but speak the things which we have seen and heard.", l:4},
+ {t:"OB", q:"According to the lesson, what is the double answer to the objection about suffering?",
+  o:["That suffering is not real, and that God will explain later", "That sin brought death into the world through man's rebellion, and that God Himself entered our suffering in the Lord Jesus Christ", "That God causes suffering to teach lessons", "That suffering only happens to the wicked"], a:1, v:"Romans 5:12", vt:"Wherefore, as by one man sin entered into the world, and death by sin; and so death passed upon all men, for that all have sinned:", l:5},
+ {t:"OB", q:"Why does the lesson refuse the framing of science against faith?",
+  o:["Because science is untrustworthy", "Because believers should not study nature", "Because science studies how the house was built, while the question of who built it lies outside its rules", "Because miracles can be repeated in a laboratory"], a:2, v:"Hebrews 3:4", vt:"For every house is builded by some man; but he that built all things is God.", l:5},
+ {t:"OB", q:"What is the lesson's answer to the claim that all religions are the same?",
+  o:["They contradict one another on who God is and how man is saved, and the Gospel alone is God reaching down to man", "They differ only in customs and language", "They are all partly true and partly false", "They all agree that men must work for salvation"], a:0, v:"John 14:6", vt:"Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me.", l:5},
+ {t:"OB", q:"According to Mark 16:20, what did the Lord do as the disciples went and preached?",
+  o:["He left them to their own strength", "He forbade them to pray for the sick", "He worked with them, confirming the word with signs following", "He sent them only to the learned"], a:2, v:"Mark 16:20", vt:"And they went forth, and preached every where, the Lord working with them, and confirming the word with signs following. Amen.", l:6},
+ {t:"OB", q:"What does the healed blind man of John 9 illustrate about apologetics with power?",
+  o:["That a testimony of what God has done cannot be argued away, even by trained opponents", "That theology is unnecessary", "That the Pharisees were persuaded by his argument", "That healing always ends persecution"], a:0, v:"John 9:25", vt:"He answered and said, Whether he be a sinner or no, I know not: one thing I know, that, whereas I was blind, now I see.", l:6},
+ {t:"OB", q:"What did the apostles ask God for in the face of threatenings?",
+  o:["That their enemies would be destroyed", "That they would be moved to a safer city", "That signs would cease for a season", "That they might speak His word with all boldness"], a:3, v:"Acts 4:29", vt:"And now, Lord, behold their threatenings: and grant unto thy servants, that with all boldness they may speak thy word,", l:6},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["A Reason for the Hope", "The Evidence That God Exists", "Why the Bible Can Be Trusted", "The Resurrection of the Lord Jesus Christ", "Answering the Common Objections", "Apologetics with Power"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "According to 1 Peter 3:15, what comes before giving an answer to any man?", "o": ["Studying philosophy", "Sanctifying the Lord God in your hearts", "Joining a debating class", "Waiting for a pastor to speak for you"], "a": 1, "e": "Peter puts the heart first: the Lord Jesus Christ must be set apart and enthroned within before a reasoned answer can carry any weight."}, {"q": "Why does the lesson say an eternal series of expansions and contractions still does not escape the question of a beginning?", "o": ["Because the Bible says the earth is young", "Because every force of energy ever observed has a start and a running down, so the wave itself began", "Because scientists have measured the first wave", "Because pressure cannot exist in space"], "a": 1, "e": "However far back the question is pushed, you arrive at an origin, and nothing explodes for no reason."}, {"q": "Why does the lesson call the unity of the Bible a quiet miracle?", "o": ["Because it was written by one man in one place", "Because about forty writers over sixteen centuries, on three continents, produced one story and one Redeemer", "Because it has never been translated", "Because its books were chosen by a single council"], "a": 1, "e": "Such agreement among so many scattered writers points to one Author behind the many hands."}, {"q": "Why is it significant that the apostles preached the resurrection in Jerusalem?", "o": ["It was the safest city for them", "It was the very city where the body could have been produced to end the movement at once", "It was far from the tomb", "It had the largest synagogue"], "a": 1, "e": "The authorities had every reason and every opportunity to produce the body, and they never did."}, {"q": "How does the lesson answer the objection about hypocrites in the church?", "o": ["By denying that hypocrites exist", "By admitting it, noting there was one among the twelve, and pressing that each man answers for himself", "By telling the person to change churches", "By refusing to discuss it"], "a": 1, "e": "Defending the indefensible loses the man's trust; the honest answer turns him from following men to following the Lord Jesus Christ."}, {"q": "Why did Paul refuse to rest his preaching on enticing words of man's wisdom?", "o": ["Because he was not an educated man", "So that the hearers' faith would stand in the power of God and not in the wisdom of men", "Because words are unimportant", "Because the Corinthians disliked debate"], "a": 1, "e": "Whatever a clever man argues you into, a cleverer man can argue you out of; a faith founded on the demonstrated power of God stands."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

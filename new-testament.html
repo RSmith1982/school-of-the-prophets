@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>The New Testament — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>The New Testament</h2>
+    <p class="lesson" style="max-width:var(--measure)">This course is completed through the school's reading plan — The Beautiful Reading Plan or the Japanese Holy Bible Study — and the examination below. Read the four guides, finish the plan, then sit the examination. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <p class="lesson" style="max-width:var(--measure)">The reading of this course is the New Testament itself, on <a href="the-beautiful-reading-plan.html">The Beautiful Reading Plan</a> or the <a href="japanese-bible-study.html">Japanese Holy Bible Study</a>. The four guides below walk with you through it. The examination opens when your reading plan is finished.</p>
+    <ol class="toc">
+      <li><a href="#lesson-1">How to Read the New Testament in the Order of the Story</a></li>
+      <li><a href="#lesson-2">The Gospel According to Luke: The Lord Jesus Christ From Bethlehem to the Ascension</a></li>
+      <li><a href="#lesson-3">The Acts of the Apostles and the Epistles in Their Places</a></li>
+      <li><a href="#lesson-4">Revelation and the End of the Story</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. How to Read the New Testament in the Order of the Story</h3>
+<p>Before you open this reading plan, understand why it is arranged the way it is. The Beautiful Reading Plan takes you through the New Testament in the order of the story, so that you never read a letter without knowing who wrote it and what trouble he was answering. You read the Bible itself on the plan page; these four guides walk beside you and prepare you for the examination.</p><p>We begin where eternity begins. <em>In the beginning was the Word, and the Word was with God, and the Word was God.</em> That is John chapter one, the doorway of the whole plan. Notice that John does not start with a manger or a census, but before the world was made, because the One we follow through Galilee and Jerusalem did not begin at Bethlehem. Then comes the sentence that bows the head of every honest reader: <em>And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.</em> Read those fourteen verses first and you will never read the Gospels as the story of a good man. You are reading the record of God visiting His own creation.</p><p>From there the plan makes Luke the spine. Why Luke? Because Luke tells us plainly what he set out to do. He had traced everything from the very first, and he wrote, in his own words, <em>to write unto thee in order, most excellent Theophilus.</em> An orderly account is what a student needs. Luke the physician gives us the fullest record of the birth, of the journey to Jerusalem, and of what followed the resurrection. We begin at Luke 1:5, in the temple with Zacharias, where Luke himself begins.</p><p>Here is the second reason, and it is the key to the whole plan. Luke wrote two books, not one. Open the first verse of Acts and you find the same man writing to the same friend: <em>The former treatise have I made, O Theophilus, of all that Jesus began both to do and teach.</em> Notice the word <strong>began</strong>. The Gospel is what the Lord Jesus Christ began to do and teach in His own body; the Acts is what He continued to do and teach by the Holy Ghost through His church. They are one story in two volumes, and reading them as Luke wrote them will teach you more than a year of scattered chapters.</p><p>Two things are added inside that spine. After Luke chapter six, where He teaches the multitude on the plain, the plan sends you to Matthew five through seven. Luke gives the short account; Matthew gives the long one, and placing it there lets you hear the whole sermon at the moment it was preached. Then, when you come to Luke 22 and the upper room, the plan opens John 14 through 17. Those four chapters are the private words of the Lord Jesus Christ to His own, spoken that same night at that same table, and they belong there.</p><p>After Luke 24 and the ascension we go into Acts from chapter 1:3, and the epistles are read at the point in the story where they were written. James after Acts 12, Galatians after the Jerusalem council of Acts 15, First and Second Thessalonians from Corinth in Acts 18, First Corinthians from Ephesus in Acts 19, Second Corinthians and Romans after Acts 20. Then, after Acts 28 leaves Paul a prisoner in Rome, come the prison epistles, Ephesians, Philippians, Colossians and Philemon, then the pastorals, First Timothy, Titus and Second Timothy, then Hebrews, First and Second Peter, Jude, the three letters of John, and the Revelation. Why? Because these are letters, not essays, carried by hand and read aloud to real people with real problems. Paul says so himself: <em>And when this epistle is read among you, cause that it be read also in the church of the Laodiceans.</em> Read Second Timothy knowing the executioner is at the door and every line burns.</p><p>Psalms are woven through the whole plan, and that is deliberate. The apostles prayed, quoted, and sang the psalms. Let the psalm of the day be your prayer before you read, and your reading will turn into worship rather than study.</p><p>Finally, the plan ends where you would least expect it. The last passage is Luke 3:23-38, the genealogy, and it runs backwards. Matthew’s runs down from Abraham; Luke’s climbs up out of Bethlehem, past David, past Abraham, past Noah, to the first man, and ends with these words: <em>which was the son of Adam, which was the son of God.</em> Do you see why that is saved for last? You have just read of the new Heaven and the new earth, and then you are walked back to the garden where it all went wrong. The last Adam has undone what the first Adam did, and the final word of your reading is not a name at all. It is <strong>God</strong>.</p><p>So take the plan daily and slowly, reading with a pen and asking of every chapter who is speaking, to whom, and where they are standing. The examination is written for a student who has actually walked this road, and if you walk it you will pass it without fear.</p>
+<aside class="key"><div class="key-t">Hold onto this: the Word first, the story in order, and Adam last</div><p>The plan opens with the eternal Word of John 1, follows Luke and Acts as one story, sets each epistle where it was written, and ends with the genealogy that climbs back to Adam, the son of God.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. The Gospel According to Luke: The Lord Jesus Christ From Bethlehem to the Ascension</h3>
+<p>Now let us walk the length of the Gospel according to Luke, for this book is the ground under your feet. Luke moves like a well-made road: it starts in the temple, climbs through Galilee, turns hard toward Jerusalem, goes down into the darkness of the cross, and comes out in resurrection light. Know its shape and you will never be lost in it.</p><p>It opens with two birth narratives set side by side, John the Baptist and the Lord Jesus Christ, an old barren couple and a young virgin, both households full of the Holy Ghost and singing. Luke gives us Gabriel, Mary’s song, the song of Zacharias, the shepherds in the field, and the announcement that is the heart of the whole book: <em>For unto you is born this day in the city of David a Saviour, which is Christ the Lord.</em> Then Simeon and Anna in the temple, and the boy of twelve about His Father’s business.</p><p>Chapter three brings the baptism, the heavens opened, the Spirit descending, and the voice of the Father; chapter four brings the temptation, where He answers the devil three times with <em>It is written</em>, and Nazareth, where He reads Isaiah and says the Scripture is fulfilled in their ears. <em>The Spirit of the Lord is upon me, because he hath anointed me to preach the gospel to the poor.</em> That verse is the programme of the next twenty chapters, and the reason Luke keeps showing you the poor, the sick, the demon-oppressed, and the outcast.</p><p>The Galilean ministry runs from chapter four to chapter nine: the calling of the fishermen, the healings, the raising of the widow’s son at Nain, the stilling of the storm, the Gadarene delivered from a legion of devils, and the raising of Jairus’ daughter. After the sermon on the plain in chapter six, the plan turns you to Matthew five through seven. Take your time there. The Beatitudes describe a person the world has never valued and Heaven always has, and among them stands the promise that quiets every argument about holiness: <em>Blessed are the pure in heart: for they shall see God.</em> Then the salt and the light, a righteousness that reaches the thought and not only the deed, giving and praying and fasting in secret, and two builders whose houses look the same until the storm comes.</p><p>At Luke 9:51 the road turns. <em>And it came to pass, when the time was come that he should be received up, he stedfastly set his face to go to Jerusalem.</em> From that verse to chapter nineteen you are on the journey, and in this travel section Luke stores his greatest treasures, most of which no other Gospel gives us: the good Samaritan, Mary and Martha, the rich fool, the lost sheep, the lost coin and the prodigal son, the rich man and Lazarus, the ten lepers, the Pharisee and the publican, and Zacchaeus up the tree, where the whole journey is summed up in one sentence: <em>For the Son of man is come to seek and to save that which was lost.</em></p><p>Four themes run through the book, and watching for them will make your reading twice as rich. The first is the <strong>Holy Ghost</strong>, who fills Elisabeth, Zacharias and Simeon, descends at the baptism, and is promised at the end of chapter twenty-four. The second is <strong>prayer</strong>: no Gospel shows the Lord Jesus Christ praying as often as Luke does, at His baptism, before choosing the twelve, in Gethsemane, and on the cross. The third is <strong>the poor and the lost</strong>, whom He never once despises. The fourth is <strong>joy</strong>: Luke begins with singing and ends with great joy and continual praise in the temple.</p><p>Chapters twenty-two and twenty-three bring the Passion, and in the upper room the plan opens John 14 through 17, spoken at that very table. There He says <em>I am the way, the truth, and the life: no man cometh unto the Father, but by me</em>, promises another Comforter to abide with us for ever, and teaches the vine and the branches: <em>He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing.</em> Then chapter seventeen, the high-priestly prayer, where He prays for Himself, for the eleven, and then for us, for them also which shall believe on Him through their word, asking the Father to sanctify us through the truth. Go back to Luke 22 after that, into Gethsemane, the trials, and the cross where He prays for those who drove the nails and opens Paradise to a dying thief.</p><p>Then chapter twenty-four. The women at the empty tomb, the angels asking why they seek the living among the dead, the two on the road to Emmaus whose hearts burned while He opened to them the Scriptures, the appearance to the eleven where He eats before them to prove He is no ghost, the promise of power from on high, and the ascension with hands lifted in blessing. He goes up blessing them, and they return with great joy. That is how the first volume closes, and if you have read it as it stands you are ready for the second, where the same Lord Jesus Christ goes on working by His Spirit through ordinary men and women like you.</p>
+<aside class="key"><div class="key-t">Hold onto this: Bethlehem, Galilee, the face set toward Jerusalem, the cross, the empty tomb, the ascension</div><p>Luke moves from the temple to the manger, through Galilee, along the road to Jerusalem where the lost are sought and found, into the Passion and the resurrection, and ends with hands lifted in blessing and a church full of joy.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. The Acts of the Apostles and the Epistles in Their Places</h3>
+<p>The Acts of the Apostles is the second half of Luke’s single account, and it is the most practical book in your Bible for anyone who intends to serve God. It opens with the risen Lord Jesus Christ giving one command and one promise. The command was to wait at Jerusalem; the promise was this: <em>But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me both in Jerusalem, and in all Judaea, and in Samaria, and unto the uttermost part of the earth.</em> That verse is the table of contents of the whole book.</p><p>Pentecost comes in chapter two, with the rushing mighty wind, the cloven tongues like as of fire, and the plain statement that <em>they were all filled with the Holy Ghost, and began to speak with other tongues, as the Spirit gave them utterance.</em> Peter, who weeks earlier denied his Lord to a servant girl, stands up and preaches, and three thousand are added. That is what the promise of power means in practice. Then the lame man at the Beautiful gate, the boldness before the council, Ananias and Sapphira, the seven chosen, and the martyrdom of Stephen, who prayed for his murderers while a young man named Saul kept the clothes.</p><p>The persecution that followed Stephen scattered the church, and the scattering became the mission. Philip goes to Samaria and then to a desert road to explain Isaiah to an Ethiopian officer. Saul is struck down on the Damascus road by a light and a voice, <em>Saul, Saul, why persecutest thou me?</em>, and the chief enemy becomes the chief apostle. Peter is sent to Cornelius, and the Holy Ghost falls on the Gentiles while he is yet speaking. Then Antioch, where <em>the disciples were called Christians first in Antioch.</em> Antioch becomes the sending church, and from chapter thirteen the three missionary journeys begin.</p><p>Now the letters take their places. <strong>James</strong>, read after Acts 12, is the earliest, written by the Lord’s brother who led the Jerusalem church, and it answers the man whose religion is all talk, for <em>as the body without the spirit is dead, so faith without works is dead also.</em> <strong>Galatians</strong> is read after the council of Acts 15, where it was settled that Gentiles need not be circumcised to be saved; it answers those who add law to grace, and its heart is <em>I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me.</em></p><p>From Corinth in Acts 18 come <strong>First and Second Thessalonians</strong>, answering a young persecuted church grieving over believers who had died and confused about the day of the Lord; there Paul teaches that the dead in Christ shall rise first. From Ephesus in Acts 19 comes <strong>First Corinthians</strong>, answering a divided and carnal church about factions, immorality, the Lord’s table, spiritual gifts, and the resurrection. After Acts 20 come <strong>Second Corinthians</strong>, where Paul glories in his infirmities because God’s strength is made perfect in weakness, and <strong>Romans</strong>, the greatest doctrinal letter ever written, under the banner: <em>For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation to every one that believeth.</em></p><p>The rest of Acts is the price of that gospel. Paul goes to Jerusalem though warned, is seized in the temple, stands before Felix, Festus and Agrippa, appeals to Caesar, survives shipwreck, and reaches Rome, a prisoner preaching the kingdom of God with all confidence and no man forbidding him. That is why the next four letters are read there. <strong>Ephesians</strong> shows the church as His body and arms us for warfare, teaching that <em>by grace are ye saved through faith; and that not of yourselves: it is the gift of God.</em> <strong>Philippians</strong> is the letter of joy from a jail. <strong>Colossians</strong> answers a teaching that made Him one power among many, showing Him as the fulness of the Godhead bodily. <strong>Philemon</strong> asks a master to receive a runaway slave as a brother.</p><p>Then the pastoral letters, written to two young ministers. <strong>First Timothy</strong> orders the house of God: sound doctrine, prayer for all men, the qualifications of bishops and deacons, and warning about the love of money. <strong>Titus</strong> sets a church in order on Crete and teaches us to live soberly, righteously and godly in this present world. <strong>Second Timothy</strong> is Paul’s last letter, written with death near, charging Timothy to preach the word in season and out of season and testifying that <em>All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness.</em></p><p>The general epistles close the collection. <strong>Hebrews</strong> was written to Hebrew believers tempted to go back, and proves the Lord Jesus Christ better than angels, better than Moses, better than Aaron, with a better covenant and a better sacrifice offered once for all. <strong>First Peter</strong> teaches suffering believers to be holy because He is holy; <strong>Second Peter</strong> warns of false teachers and of the day of the Lord coming as a thief. <strong>Jude</strong> commands us to <em>earnestly contend for the faith which was once delivered unto the saints.</em> <strong>First John</strong> gives the tests of true life, and <strong>Second and Third John</strong> are brief notes about truth and hospitality. Read each where the plan sets it.</p>
+<aside class="key"><div class="key-t">Hold onto this: power first, then witness from Jerusalem to the uttermost part of the earth</div><p>Acts is the Lord Jesus Christ continuing His work by the Holy Ghost through His church, and each epistle is a living letter answering a real crisis at the place in that story where it was written.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Revelation and the End of the Story</h3>
+<p>The Revelation is the last book on the plan, and the only book in the Bible that opens with a blessing on the one who reads it: <em>Blessed is he that readeth, and they that hear the words of this prophecy, and keep those things which are written therein: for the time is at hand.</em> Do not fear it. It is the Revelation of Jesus Christ, not the concealment, and the first thing John sees is the Lord Jesus Christ among the candlesticks, holding the keys of hell and death.</p><p>Chapters two and three are the letters to the seven churches of Asia, the most searching pages on this plan. Ephesus had left her first love. Smyrna was poor and told to be faithful unto death. Pergamos and Thyatira tolerated false teaching. Sardis had a name that she lived and was dead. Philadelphia had an open door no man could shut. Laodicea was lukewarm, rich in her own eyes and naked in His, and to her comes the tenderest verse in the book: <em>Behold, I stand at the door, and knock: if any man hear my voice, and open the door, I will come in to him, and will sup with him, and he with me.</em> Read them as though addressed to you, for each carries a promise to <strong>him that overcometh</strong>.</p><p>Then a door is opened in Heaven, and chapters four and five give the throne: the elders casting their crowns, the living creatures crying Holy, holy, holy, and a sealed book no man is able to open. John weeps, and an elder tells him not to weep, for <em>the Lion of the tribe of Juda, the Root of David, hath prevailed to open the book.</em> And when John turns to look for a Lion, what he sees is a Lamb as it had been slain. The whole book is governed by that picture. History is not in the hand of tyrants; it is in the pierced hands of the Lord Jesus Christ.</p><p>From chapter six the judgements move in three sevens. The seals bring the riders, the martyrs under the altar, and a multitude no man could number, who came out of great tribulation and washed their robes in the blood of the Lamb. The trumpets strike the earth and sea and rivers and sun, and men still repent not. Between them stand the two witnesses, the woman and the dragon, and the beast whose mark none may buy or sell without. Then the vials pour out the wrath of God upon the beast, and men gather at Armageddon.</p><p>Chapters seventeen and eighteen show Babylon, the great harlot, drunk with the blood of the saints, and her fall in one hour, with a voice from Heaven crying, <em>Come out of her, my people, that ye be not partakers of her sins.</em> The call is not to argue with Babylon but to come out of her.</p><p>Then Heaven breaks into singing in chapter nineteen: the great Hallelujah, the marriage of the Lamb is come, His wife hath made herself ready, and the angel says, <em>Blessed are they which are called unto the marriage supper of the Lamb.</em> Then Heaven opens and He comes, riding on a white horse, called Faithful and True, His name the Word of God, the armies of Heaven following Him. That is the return of the Lord Jesus Christ, and it settles every account in a moment.</p><p>Chapter twenty gives Satan bound a thousand years and those who reign with the Lord Jesus Christ in the millennium, of whom it is written that on such the second death hath no power. Afterward he is loosed a little season and cast into the lake of fire for ever. Then comes the scene no preacher can read without trembling: the great white throne, the dead small and great standing before God, the books opened and another book which is the book of life, every man judged by his works.</p><p>But the last two chapters are the sunrise: a new Heaven and a new earth, the holy city coming down from God, and the promise every grieving believer clings to, <em>And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away.</em> The city has no temple, for the Lord God Almighty and the Lamb are the temple of it; there is no more curse, and His servants shall see His face. Do you see why the plan then sends you back to the genealogy that ends at Adam and at God? The garden that was lost is given back.</p><p>So read this book with the fear of God and hope held together. Fear God, because these judgements are real. Hope, because the book that shows the throne of judgement shows the throne of grace, and the voice that warns the unbelieving says <em>Behold, I make all things new.</em> Take the promise to him that overcometh personally: <em>He that overcometh shall inherit all things; and I will be his God, and he shall be my son.</em> Overcoming is the calling of every believer who holds fast and loves not his life unto the death. When you finish this plan, the last prayer of the Bible should be your own: <em>Even so, come, Lord Jesus.</em></p>
+<aside class="key"><div class="key-t">Hold onto this: the Lion is the Lamb, and the Lamb wins</div><p>Revelation searches the churches, opens the throne, pours out the seals, trumpets and vials, brings down Babylon, calls us to the marriage supper, and ends with the new Jerusalem and a promise to him that overcometh.</p></aside>
+<div class="check" data-check="3"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Twenty questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "The New Testament",
+  assessment: "The New Testament: The Word, the Gospel, and the Church",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"GS": "The Gospels", "AC": "Acts", "EP": "The epistles", "RV": "Revelation"};
+
+const QUESTIONS = [
+ {t:"GS", q:"The plan opens with John 1:1-14 rather than a birth narrative. What does that opening establish about the One the plan follows?",
+  o:["That He was a great teacher raised up in Israel", "That He was created before the angels", "That He was the Word, who was with God and was God before anything was made", "That His life began at Bethlehem"], a:2, v:"John 1:1", vt:"In the beginning was the Word, and the Word was with God, and the Word was God.", l:1},
+ {t:"GS", q:"What reason does Luke himself give for writing his Gospel to Theophilus?",
+  o:["To correct the apostles' preaching", "To write the things in order, having had perfect understanding of all things from the very first", "To record only the miracles he had witnessed", "To provide a genealogy for the Roman census"], a:1, v:"Luke 1:3", vt:"It seemed good to me also, having had perfect understanding of all things from the very first, to write unto thee in order, most excellent Theophilus,", l:1},
+ {t:"AC", q:"How does the first verse of Acts show that the Gospel of Luke and the Acts are one continuing story?",
+  o:["It names Peter as the author of both books", "It says the two books were bound together in Rome", "It calls the Gospel a former treatise to the same Theophilus, of all that the Lord Jesus Christ began to do and teach", "It repeats the genealogy from Luke 3"], a:2, v:"Acts 1:1", vt:"The former treatise have I made, O Theophilus, of all that Jesus began both to do and teach,", l:1},
+ {t:"GS", q:"The plan finishes with Luke's genealogy. With what words does that genealogy end?",
+  o:["Which was the son of Abraham, which was the son of Terah", "Which was the son of David, which was the son of Jesse", "Which was the son of Noah, which was the son of Lamech", "Which was the son of Adam, which was the son of God"], a:3, v:"Luke 3:38", vt:"Which was the son of Enos, which was the son of Seth, which was the son of Adam, which was the son of God.", l:1},
+ {t:"EP", q:"What does Paul's instruction to the Colossians show about the nature of the epistles, which is why the plan reads each one at the point it was written?",
+  o:["They were private letters never meant to be heard by others", "They were letters carried to real congregations and read aloud among them", "They were written long after the events of Acts by later disciples", "They were theological essays composed for schools of philosophy"], a:1, v:"Colossians 4:16", vt:"And when this epistle is read among you, cause that it be read also in the church of the Laodiceans; and that ye likewise read the epistle from Laodicea.", l:1},
+ {t:"GS", q:"What happened at Luke 9:51 that changes the direction of the whole Gospel?",
+  o:["He withdrew into the wilderness to fast", "He chose the twelve apostles", "He stedfastly set His face to go to Jerusalem, the time being come that He should be received up", "He was transfigured before Peter, James and John"], a:2, v:"Luke 9:51", vt:"And it came to pass, when the time was come that he should be received up, he stedfastly set his face to go to Jerusalem,", l:2},
+ {t:"GS", q:"What did the angel announce to the shepherds in the field?",
+  o:["That a prophet had been born in Nazareth", "That a Saviour, which is Christ the Lord, was born that day in the city of David", "That the temple would be rebuilt in three days", "That Herod would seek the young child's life"], a:1, v:"Luke 2:11", vt:"For unto you is born this day in the city of David a Saviour, which is Christ the Lord.", l:2},
+ {t:"GS", q:"In the Beatitudes of the Sermon on the Mount, which blessing is joined to the promise of seeing God?",
+  o:["Blessed are the poor in spirit", "Blessed are they that mourn", "Blessed are the peacemakers", "Blessed are the pure in heart"], a:3, v:"Matthew 5:8", vt:"Blessed are the pure in heart: for they shall see God.", l:2},
+ {t:"GS", q:"In the upper room, how did the Lord Jesus Christ answer Thomas's question about the way?",
+  o:["By telling him to keep the commandments of Moses", "By saying He is the way, the truth, and the life, and that no man cometh unto the Father but by Him", "By sending him to the temple to enquire", "By promising to show him the Father in a vision"], a:1, v:"John 14:6", vt:"Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me.", l:2},
+ {t:"GS", q:"What does the figure of the vine and the branches teach about the disciple's fruitfulness?",
+  o:["That fruit comes from abiding in Him, and without Him we can do nothing", "That fruit is produced by careful effort apart from Him", "That branches bear fruit by their own life", "That fruitfulness is promised only to the apostles"], a:0, v:"John 15:5", vt:"I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing.", l:2},
+ {t:"AC", q:"What did the risen Lord Jesus Christ tell the apostles would follow the coming of the Holy Ghost upon them?",
+  o:["That they would rule the tribes of Israel", "That they would be kept from all suffering", "That they would receive power and be His witnesses in Jerusalem, Judaea, Samaria, and unto the uttermost part of the earth", "That they would immediately see the kingdom restored"], a:2, v:"Acts 1:8", vt:"But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me both in Jerusalem, and in all Judaea, and in Samaria, and unto the uttermost part of the earth.", l:3},
+ {t:"AC", q:"What happened to the whole company on the day of Pentecost?",
+  o:["They were all filled with the Holy Ghost and began to speak with other tongues as the Spirit gave them utterance", "They were baptized by John in Jordan", "They cast lots to replace Judas", "They were scattered abroad by persecution"], a:0, v:"Acts 2:4", vt:"And they were all filled with the Holy Ghost, and began to speak with other tongues, as the Spirit gave them utterance.", l:3},
+ {t:"AC", q:"In which city were the disciples first called Christians?",
+  o:["Jerusalem", "Damascus", "Antioch", "Ephesus"], a:2, v:"Acts 11:26", vt:"And the disciples were called Christians first in Antioch.", l:3},
+ {t:"EP", q:"James is read after Acts 12. What is the burden of his letter?",
+  o:["That the law of Moses must be kept by Gentile converts", "That a faith which produces nothing is dead, as the body without the spirit is dead", "That believers should withdraw from all labour", "That the resurrection is already past"], a:1, v:"James 2:26", vt:"For as the body without the spirit is dead, so faith without works is dead also.", l:3},
+ {t:"EP", q:"Ephesians is read after Acts 28 from Paul's imprisonment. How does it describe the ground of our salvation?",
+  o:["By grace through faith, not of ourselves, the gift of God", "By the works of the law faithfully performed", "By descent from Abraham", "By the wisdom of the Greeks"], a:0, v:"Ephesians 2:8", vt:"For by grace are ye saved through faith; and that not of yourselves: it is the gift of God:", l:3},
+ {t:"RV", q:"What does the Lord Jesus Christ say to lukewarm Laodicea about how He deals with those who hear His voice?",
+  o:["That He will send an angel to compel them", "That He stands at the door and knocks, and will come in and sup with any man who opens", "That He has already cast them off for ever", "That He will remove their candlestick without warning"], a:1, v:"Revelation 3:20", vt:"Behold, I stand at the door, and knock: if any man hear my voice, and open the door, I will come in to him, and will sup with him, and he with me.", l:4},
+ {t:"RV", q:"Who alone was found worthy to open the sealed book and loose its seven seals?",
+  o:["The angel who stood before the throne", "One of the four and twenty elders", "The Lion of the tribe of Juda, the Root of David", "The two witnesses of chapter eleven"], a:2, v:"Revelation 5:5", vt:"Behold, the Lion of the tribe of Juda, the Root of David, hath prevailed to open the book, and to loose the seven seals thereof.", l:4},
+ {t:"RV", q:"What is said of those who have part in the first resurrection?",
+  o:["That they shall be judged at the great white throne", "That the second death hath no power on them, and they shall reign with Him a thousand years", "That they shall remain asleep until the new earth", "That they shall be tried a second time when Satan is loosed"], a:1, v:"Revelation 20:6", vt:"Blessed and holy is he that hath part in the first resurrection: on such the second death hath no power, but they shall be priests of God and of Christ, and shall reign with him a thousand years.", l:4},
+ {t:"RV", q:"What takes place at the great white throne?",
+  o:["The dead, small and great, stand before God and are judged out of the books, according to their works", "The nations are gathered to Armageddon", "Babylon is judged by the ten kings", "The marriage supper of the Lamb is served"], a:0, v:"Revelation 20:12", vt:"And I saw the dead, small and great, stand before God; and the books were opened: and another book was opened, which is the book of life: and the dead were judged out of those things which were written in the books, according to their works.", l:4},
+ {t:"RV", q:"What does God promise concerning sorrow and death in the new Heaven and new earth?",
+  o:["That sorrow will be lessened but not removed", "That death will remain only for the nations outside the city", "That He shall wipe away all tears, and there shall be no more death, neither sorrow, nor crying, neither any more pain", "That the former things will be remembered for ever as a warning"], a:2, v:"Revelation 21:4", vt:"And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away.", l:4},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["How to Read the New Testament in the Order of the Story", "The Gospel According to Luke: The Lord Jesus Christ From Bethlehem to the Ascension", "The Acts of the Apostles and the Epistles in Their Places", "Revelation and the End of the Story"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="reading"){
+    h.textContent="Finish your reading plan first"; p.innerHTML=`This course is completed through the school's reading plan. You have finished <strong>${until}</strong> of ${fails} readings. <a href="account.html">Open your progress page</a> to continue the plan, then return here for the examination.`; clock.textContent=""; note.textContent="";
+  } else if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const prof = await School.profile(); const planId=(prof&&prof.plan)||"english"; const plan=School.PLANS[planId]||School.PLANS.english;
+  const rp = await School.sb.from("reading_progress").select("done").eq("user_id",u.id).eq("plan",planId).maybeSingle();
+  const readDone=((rp.data&&rp.data.done)||[]).filter(n=>n>=1&&n<=plan.total).length;
+  if(readDone<plan.total) return showLock("reading", readDone, plan.total);
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "Why does the plan read Luke and Acts back to back?", "o": ["Because they are the two longest books in the New Testament", "Because Luke wrote both to Theophilus as one orderly account, the second continuing what the Lord Jesus Christ began", "Because Acts was written before the Gospel of Luke", "Because the other Gospels are less reliable"], "a": 1, "e": "Acts opens by calling the Gospel the former treatise written to the same Theophilus, of all that the Lord Jesus Christ began both to do and teach."}, {"q": "Which verse marks the turn from the Galilean ministry to the journey to Jerusalem?", "o": ["Luke 4:18", "Luke 9:51", "Luke 15:11", "Luke 24:27"], "a": 1, "e": "At Luke 9:51 the time was come that He should be received up, and He stedfastly set His face to go to Jerusalem."}, {"q": "Which epistle does the plan read immediately after the Jerusalem council of Acts 15?", "o": ["James", "Galatians", "Romans", "Hebrews"], "a": 1, "e": "Galatians answers the very question the council settled: whether Gentiles must keep the law to be saved."}, {"q": "When John was told to behold the Lion of the tribe of Juda, what did he see?", "o": ["A throne without an occupant", "A Lamb as it had been slain", "An angel with a golden censer", "A city descending from Heaven"], "a": 1, "e": "The One worthy to open the book is both the Lion who prevailed and the Lamb who was slain."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Biblical Finances — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Biblical Finances</h2>
+    <p class="lesson" style="max-width:var(--measure)">Stewardship, tithing, giving, and handling money in the Church the way Scripture directs. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">It All Belongs to God</a></li>
+      <li><a href="#lesson-2">Tithes, Offerings, and Firstfruits</a></li>
+      <li><a href="#lesson-3">Sowing and Reaping</a></li>
+      <li><a href="#lesson-4">Debt, Work, and Contentment</a></li>
+      <li><a href="#lesson-5">Money in the House of God</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. It All Belongs to God</h3>
+<p>Before we say one word about tithes, offerings, or budgets, we must settle a question most people never settle in a lifetime: <strong>who owns it?</strong> Everything else in this course stands or falls there. David answered it in a single line: <em>The earth is the LORD'S, and the fulness thereof; the world, and they that dwell therein</em> (Psalm 24:1). The soil, the seed, the rain that waters it, the strength in your back, the breath in your lungs, the years He has numbered for you.</p>
+<p>Notice that God says the same thing about money specifically, in case we should think He owns the mountains but not the mint. Through the prophet Haggai He said, <em>The silver is mine, and the gold is mine, saith the LORD of hosts</em> (Haggai 2:8). Hear how final that is. God is not asking for a percentage of what belongs to you; He is telling you that the whole of it already belongs to Him, and that He has placed a portion of His own property into your hands for a season. That changes the conversation. The question is no longer how much of my money God wants, but what God wants done with His money that He has trusted to me.</p>
+<p>Scripture has a word for a man in that position. He is a <strong>steward</strong> — not the owner and not a slave, but a trusted servant who manages another man's goods and gives account for them. Hear the Lord Jesus Christ: <em>He that is faithful in that which is least is faithful also in much: and he that is unjust in the least is unjust also in much</em> (Luke 16:10). Then He drives it home — <em>If therefore ye have not been faithful in the unrighteous mammon, who will commit to your trust the true riches?</em> (Luke 16:11), and <em>if ye have not been faithful in that which is another man's, who shall give you that which is your own?</em> (Luke 16:12).</p>
+<p>There is a doorway in that. God uses money as a testing ground for greater things, watching how a man handles a small paycheque, another man's tools, the church's petty cash — and by that He decides what spiritual weight He can lay upon him. Many a believer has prayed for years for a bigger anointing while being careless with a small amount of money, and has never once connected the two. Paul stated the standard plainly: <em>Moreover it is required in stewards, that a man be found faithful</em> (1 Corinthians 4:2). Not required that a steward be brilliant, nor that he be rich. Required that he be faithful.</p>
+<p>This is the point of the parable of the talents in Matthew 25. A man travelling into a far country delivered unto his servants his goods — five talents, two talents, one talent, <em>to every man according to his several ability</em>. Notice two things. First, the goods were <em>his goods</em>, never theirs. Second, the unequal amounts were not unfair, because each man was measured only against what he himself had received. The man with two talents gained two more and heard exactly the same commendation as the man with five: <em>Well done, thou good and faithful servant: thou hast been faithful over a few things, I will make thee ruler over many things</em> (Matthew 25:21).</p>
+<p>Then there is the third servant, and look at him closely, because he is the most religious of the three and the most common in the Church. He did not steal the talent or gamble it away. He buried it, kept it clean, and handed it back exactly as he received it. His defence was a wrong idea of God — <em>I knew thee that thou art an hard man</em> — and out of that came fear, and out of fear came burial. His lord called him wicked and slothful and unprofitable. With God, doing nothing with what He gave you is not neutral; it is loss. The believer who says, I have little, so I will give nothing and risk nothing, has just repeated the third servant's speech in modern English.</p>
+<p>Now, if all of it is His, where did what I have in my hand come from? Moses warned Israel about the moment of arrival — when the houses are built and the heart begins to say, <em>My power and the might of mine hand hath gotten me this wealth</em>. Against that he set the truth: <em>But thou shalt remember the LORD thy God: for it is he that giveth thee power to get wealth, that he may establish his covenant which he sware unto thy fathers</em> (Deuteronomy 8:18). He does not always hand a man money; more often He hands him <strong>power to get wealth</strong> — a skill, a trade, a clear mind, a healthy body, an open door. And read the end of the verse, the part men leave out: He gives that power <em>that he may establish his covenant</em>. The increase has a purpose beyond your comfort.</p>
+<p>So begin here. Sit down with what you actually have — the income, the debts, the possessions, the hours in your week — and hand the ownership back to God out loud. Then keep the books like a man who will give account, because you will. Faithfulness in a small thing is not a small thing; it is the whole test.</p>
+<aside class="key"><div class="key-t">Hold onto this: you own nothing; you manage everything.</div><p>The earth and all its silver and gold belong to God, and He has placed a portion in your hands as a steward. What He requires of a steward is not brilliance or wealth, but faithfulness with what he has actually been given.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. Tithes, Offerings, and Firstfruits</h3>
+<p>Once you have settled that everything belongs to God, giving stops being a painful subtraction and becomes an act of worship. That is the right order, and if you reverse it, every offering will feel like a robbery. The tithe is not God taking from you. The tithe is you acknowledging, with the first and best of what came into your hands, that He is the Owner and the Source.</p>
+<p>Now let me show you something that settles a great many arguments. The tithe did not begin with the law of Moses. Turn back to Genesis 14, hundreds of years before Sinai, before there was a commandment about it. Abram returns from the slaughter of the kings and meets Melchizedek, priest of the most high God, and the account says, <em>And blessed be the most high God, which hath delivered thine enemies into thy hand. And he gave him tithes of all</em> (Genesis 14:20). No law compelled him. He gave a tenth because he had met God, and because he understood who had given him the victory. The tithe is older than the law, which is why it did not die with the law.</p>
+<p>Then there is Jacob at Bethel, a running man with a stone for a pillow, who saw the ladder and woke up afraid. Listen to what he counted as the proper response to God's promise: <em>And this stone, which I have set for a pillar, shall be God's house: and of all that thou shalt give me I will surely give the tenth unto thee</em> (Genesis 28:22). Notice the sequence again. Of all that <em>thou shalt give me</em> — Jacob knew the increase was coming from God's hand before it ever reached his own.</p>
+<p>By the days of Malachi, Israel had grown cold, and God pressed a charge against them that ought to make every believer sit up straight: <em>Will a man rob God? Yet ye have robbed me. But ye say, Wherein have we robbed thee? In tithes and offerings</em> (Malachi 3:8). Understand what makes that a robbery: you cannot steal what was never the owner's. God calls the withheld tithe theft precisely because it was already His. Then He does something He does almost nowhere else in Scripture — He invites men to test Him: <em>Bring ye all the tithes into the storehouse, that there may be meat in mine house, and prove me now herewith, saith the LORD of hosts, if I will not open you the windows of heaven, and pour you out a blessing, that there shall not be room enough to receive it</em> (Malachi 3:10). Mark the purpose clause in the middle of that verse: <em>that there may be meat in mine house</em>. The tithe is brought so the work goes on, the ministers are fed, the poor are helped, the Gospel is carried. It is not a coin in a machine to make Heaven pay out.</p>
+<p>Somebody always asks whether the Lord Jesus Christ said anything about the tithe. He did, and He said it while rebuking men who tithed. To the scribes and Pharisees who measured out the tenth of their garden herbs while trampling on people, He said: <em>Woe unto you, scribes and Pharisees, hypocrites! for ye pay tithe of mint and anise and cummin, and have omitted the weightier matters of the law, judgment, mercy, and faith: these ought ye to have done, and not to leave the other undone</em> (Matthew 23:23). Hear both halves. He did not excuse their tithing; He said <strong>these ought ye to have done</strong>. And He would not let the tithe stand in for judgment, mercy, and faith. A man who tithes and is cruel has not pleased God, and a man who is kind and keeps back what belongs to God has not pleased Him either.</p>
+<p>Beyond the tithe stand the offering and the firstfruits. The tithe is the tenth, measured and returned. The offering is what love adds on top, and there is no ceiling on it. The firstfruit is a matter of order — what comes off the top before anything else is touched. <em>Honour the LORD with thy substance, and with the firstfruits of all thine increase: So shall thy barns be filled with plenty, and thy presses shall burst out with new wine</em> (Proverbs 3:9-10). Anyone can give God what is left at the end of the month, and most months nothing is left. Firstfruits giving is deciding, before the bills line up, that God is honoured first.</p>
+<p>Now the manner of it, because God cares about the heart behind the hand. <em>Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver</em> (2 Corinthians 9:7). Three things there. <em>Purposeth in his heart</em> — decided beforehand, not squeezed out by an emotional appeal. <em>Not grudgingly, or of necessity</em> — no arm twisting, no shame, no manipulation. And <em>God loveth a cheerful giver</em> — He is looking at the heart, not merely the amount.</p>
+<p>So do not let anyone frighten you into giving, and do not let anyone talk you out of it either. Purpose it in your heart, take it off the top, bring it to the house where you are fed, and give it gladly as unto the Lord. Then let the blessing be His business.</p>
+<aside class="key"><div class="key-t">Hold onto this: the tithe is not God taking, it is you acknowledging.</div><p>Tithing began with Abraham long before the law and was affirmed by the Lord Jesus Christ, and God asks that it be brought so there is meat in His house. Offerings and firstfruits go further, and all of it is to be purposed in the heart and given cheerfully.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Sowing and Reaping</h3>
+<p>In our Practical Training we teach a principle that runs through the created order: <strong>sowing and reaping is the balance of the universe</strong>. Balance is a law, not a slogan. God did not merely make a rule about seed and harvest; He wove it into everything He made, so that no life escapes it. Paul stated the law without softening it: <em>Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap</em> (Galatians 6:7).</p>
+<p>Notice how that verse opens — <em>Be not deceived</em> — because men are constantly deceived here. They imagine they can sow selfishness and reap friendship, sow neglect and reap a strong family, sow nothing into the Kingdom and reap the blessing of God. It appears to work for a while, because the ground keeps its secrets until harvest. Then Paul adds the words that shut the door on every clever man: <em>God is not mocked</em>. He is not outwitted, not gotten around. You cannot mock a law of the universe; you can only obey it or be crushed by it.</p>
+<p>The law works in both directions, and that is what makes it a balance rather than a promise of easy money. A man who sows to the flesh reaps corruption; a man who sows to the Spirit reaps life everlasting. Money sown into the Gospel, into the poor, into the house of God comes back as a harvest. Money hoarded, or spent only on appetite, also produces a harvest — a shrunken heart and an anxious life. Something always grows; the only choice you have is what seed goes into the ground.</p>
+<p>Paul applies the law directly to giving: <em>But this I say, He which soweth sparingly shall reap also sparingly; and he which soweth bountifully shall reap also bountifully</em> (2 Corinthians 9:6). No man scatters a handful over ten acres and then complains about his harvest. But here is where a great deal of preaching has gone wrong. This is not a scheme for getting rich. God is not a machine where you put in a hundred and pull the lever for a thousand. Read the next verse and see what Paul says the harvest is for: <em>And God is able to make all grace abound toward you; that ye, always having all sufficiency in all things, may abound to every good work</em> (2 Corinthians 9:8). Sufficiency for you, abundance for <strong>every good work</strong>. God increases the giver so that He has a larger channel, not a larger reservoir. If your only interest in sowing is what you get back, you have found a new name for greed.</p>
+<p>The Lord Jesus Christ taught the same balance: <em>Give, and it shall be given unto you; good measure, pressed down, and shaken together, and running over, shall men give into your bosom</em> (Luke 6:38). It is not God's measure that determines the return; it is <em>your</em> measure, handed back to you full. Tight-fisted men live in a tight-fisted world. Generous men find that life keeps handing things back, and they cannot always explain how.</p>
+<p>There is no clearer picture of this than the widow of Zarephath in 1 Kings 17. Famine is on the land, and she is gathering two sticks to bake a last small cake for herself and her son, and then to die. A prophet arrives and says the hardest thing anyone could say to her: <em>Fear not; go and do as thou hast said: but make me thereof a little cake first, and bring it unto me, and after make for thee and for thy son</em> (1 Kings 17:13). <strong>First.</strong> That word is the whole test. She had every reason to reason her way out, and she did not. She sowed her last meal into the work of God, and the record says, <em>And the barrel of meal wasted not, neither did the cruse of oil fail, according to the word of the LORD, which he spake by Elijah</em> (1 Kings 17:16). Notice what she did not receive: not a fortune, not a barn full of grain, but a daily supply that did not fail through the whole famine. That is how God usually answers — not with a windfall to make you independent of Him, but with a supply that keeps you leaning on Him.</p>
+<p>Then there is the hardest part of the law, where most believers give up: <strong>the harvest is not immediate</strong>. Between seedtime and harvest lies a stretch where nothing appears to be happening at all. Paul knew we would grow tired in that gap: <em>And let us not be weary in well doing: for in due season we shall reap, if we faint not</em> (Galatians 6:9). Two conditions sit in that sentence. <em>In due season</em> — God, not you, sets the date. And <em>if we faint not</em> — the man who digs up his seed in the third week has destroyed his harvest.</p>
+<p>So sow deliberately. Sow into the preaching of the Gospel, into the widow and the orphan, into the brethren who have lost everything for the name of the Lord Jesus Christ. Sow kindness and prayer as well as money, because the law covers every kind of seed. Then leave it in the ground and let God bring the harvest in His own season. Balance is a law, and it has never once failed.</p>
+<aside class="key"><div class="key-t">Hold onto this: balance is a law, not a slogan.</div><p>Whatsoever a man soweth, that shall he also reap, and God is not mocked. Sow into the Gospel and the poor, and then wait without fainting, for God sets the season and increases the giver so that he may abound to every good work.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Debt, Work, and Contentment</h3>
+<p>A believer can tithe faithfully and still live in bondage over money, because giving is only one part of stewardship. What you do with the ninety per cent matters to God as much as what you do with the ten. So let us talk plainly about debt, work, and the quiet strength of a contented heart.</p>
+<p>Solomon put the matter of debt in one unforgettable line: <em>The rich ruleth over the poor, and the borrower is servant to the lender</em> (Proverbs 22:7). He is not calling borrowing a sin; he is telling you what it costs. When you borrow, you hand a portion of your freedom to another man, and he now has a claim on hours you have not yet worked and money you have not yet earned. I have watched believers who could not answer a call to the mission field, could not take a lower-paying post in ministry, could not leave a corrupt workplace, because their debts were giving the orders. A servant is not free to go where his master has not released him.</p>
+<p>Paul says it as a standing command: <em>Owe no man any thing, but to love one another: for he that loveth another hath fulfilled the law</em> (Romans 13:8). The only debt a Christian is meant to carry permanently is the debt of love, which he can never finish paying. Everything else is to be discharged. So make a list of what you owe — the whole truth of it, not the comfortable half — and set about paying it down deliberately. Stop borrowing to soothe a feeling. And where you have given your word to pay a man, pay him, even when it hurts, because your name in that man's mouth is part of your testimony.</p>
+<p>Now, debts are paid with work, and Scripture is not shy about work. Paul told the Thessalonians <em>that ye study to be quiet, and to do your own business, and to work with your own hands, as we commanded you; That ye may walk honestly toward them that are without, and that ye may have lack of nothing</em> (1 Thessalonians 4:11-12). Two aims are named there. <em>Walk honestly toward them that are without</em> — unbelievers form their opinion of the Gospel partly from whether you turn up on time and do good work. And <em>have lack of nothing</em> — honest labour is one of God's ordinary means of supply. Do not despise it while waiting for a miracle.</p>
+<p>To a group who had grown idle, waiting on the return of the Lord Jesus Christ while other people fed them, Paul was blunt: <em>For even when we were with you, this we commanded you, that if any would not work, neither should he eat</em> (2 Thessalonians 3:10). Read it exactly. He did not say <em>could not</em> work; he said <em>would not</em>. Scripture is full of tenderness for the man who cannot — the sick, the widow, the disabled — and the Church is commanded to carry him. The rebuke falls on the man who will not. Spiritual language is no cover for laziness.</p>
+<p>That is why Paul lays this at the door of the household: <em>But if any provide not for his own, and specially for those of his own house, he hath denied the faith, and is worse than an infidel</em> (1 Timothy 5:8). That is strong language, and it was meant to be. A man who is generous in the offering and neglectful at home has his priorities upside down. Feed your family, keep a roof over them, plan ahead for them. That, too, is holy work.</p>
+<p>But work and diligence carry their own danger, which is why Paul places contentment right beside them: <em>But godliness with contentment is great gain</em> (1 Timothy 6:6), and <em>having food and raiment let us be therewith content</em> (1 Timothy 6:8). Contentment is not poverty, and it is not laziness dressed up as spirituality. It is a settled heart that has stopped needing more in order to be at peace. And it is <strong>great gain</strong>, because a contented man is already rich and a covetous man is poor at any income.</p>
+<p>Hear the warning that follows, and hear it precisely: <em>For the love of money is the root of all evil: which while some coveted after, they have erred from the faith, and pierced themselves through with many sorrows</em> (1 Timothy 6:10). It does not say money is the root of all evil. It says the <em>love</em> of it is — and a poor man can love money as fiercely as a rich one. The Lord Jesus Christ named the same danger in the parable of the sower, where <em>the cares of this world, and the deceitfulness of riches, and the lusts of other things entering in, choke the word, and it becometh unfruitful</em> (Mark 4:19). Riches are called deceitful because they make promises they cannot keep. They promise security, and a market shifts. They promise respect, and it lasts as long as the money. They promise rest, and then demand more attention than any master you have ever served.</p>
+<p>So work hard, get out of debt, provide for your house, and keep your heart free. A believer who owes nothing, earns honestly, gives cheerfully, and is content with food and raiment is one of the freest men on earth — and God can send him anywhere.</p>
+<aside class="key"><div class="key-t">Hold onto this: a man who owes nothing and wants little can go anywhere God sends him.</div><p>Debt makes the borrower a servant to the lender, so owe no man anything but love. Work with your own hands, provide for your own house, and hold it all with a contented heart, for godliness with contentment is great gain.</p></aside>
+<div class="check" data-check="3"></div>
+<h3 id="lesson-5">5. Money in the House of God</h3>
+<p>So far we have spoken of the money in your hand. Now we come to the money that passes through the house of God, where the standard rises, because it is no longer your own. It is God's money, given sacrificially by His people and handled in His name. Nothing has damaged the credibility of the Gospel in this generation more than the careless and greedy handling of church funds.</p>
+<p>Begin with a sobering account. In Acts 5, Ananias and Sapphira sold a possession, kept back part of the price, and brought the rest as though it were the whole. Peter showed where the sin lay: <em>why hast thou conceived this thing in thine heart? thou hast not lied unto men, but unto God</em> (Acts 5:4). No one had commanded them to sell the land or required them to give all of it. They were free. Their sin was not a small gift but a false one — generosity performed for the eyes of the church. God is not deceived by presentation, nor honoured by it.</p>
+<p>There was a treasurer among the twelve. Of Judas, John writes, <em>This he said, not that he cared for the poor; but because he was a thief, and had the bag, and bare what was put therein</em> (John 12:6). Notice the mask. He objected to the ointment poured on the Lord Jesus Christ by talking about the poor. That is how money is stolen in the house of God — never openly, always under a spiritual justification. And Judas walked with the Lord Jesus Christ, saw the miracles, and still had his hand in the bag. Proximity to holy things does not make a man honest.</p>
+<p>Now look at how Paul handled the great collection for the poor saints. He did not carry it alone; he travelled with brethren chosen by the churches, and explained why in words every ministry ought to have framed on the wall: <em>Avoiding this, that no man should blame us in this abundance which is administered by us: Providing for honest things, not only in the sight of the Lord, but also in the sight of men</em> (2 Corinthians 8:20-21). There is the whole doctrine of church finance in two verses. An apostle of blameless character still refused to be alone with the money, protecting not himself only but the reputation of the Gospel. It was not enough that God knew he was honest; it had to be visible. He wrote elsewhere, <em>Provide things honest in the sight of all men</em> (Romans 12:17).</p>
+<p>From that flow some practical things, and there is nothing unspiritual about them. More than one set of eyes should count the offering, before it leaves the room. Two signatures should stand behind every payment. Records should be simple, written, and kept — what came in, what went out, for what purpose. What is designated for a particular need must go to that need and nowhere else. And leaders should welcome questions about money rather than resent them, for a ministry that cannot bear examination is already in trouble.</p>
+<p>Yet Scripture will not allow us to be suspicious of paying those who labour in the Word. Paul wrote, <em>Let the elders that rule well be counted worthy of double honour, especially they who labour in the word and doctrine</em> (1 Timothy 5:17), and gave the reason from Scripture — <em>The labourer is worthy of his reward</em> (1 Timothy 5:18). A man who gives his life to prayer, preaching, and the care of souls is working, and is to be provided for without grudging. That is God's order, not a favour done to him.</p>
+<p>Yet the same Paul requires that a bishop be <em>not greedy of filthy lucre; but patient, not a brawler, not covetous</em> (1 Timothy 3:3). Hold those two truths together and you have the balance. A minister is worthy of his support and must be free from the love of money. He is to be paid, and not to be for sale. The moment a man's message bends toward whatever brings in the most money, his ministry has been bought.</p>
+<p>Finally, remember where a great deal of the money is meant to go. When a complaint arose that certain widows were neglected in the daily ministration, the apostles did not dismiss it as a small matter; they told the church, <em>look ye out among you seven men of honest report, full of the Holy Ghost and wisdom, whom we may appoint over this business</em> (Acts 6:3). Men of honest report, full of the Holy Ghost and wisdom — over the food money. That is the standard God sets. And when the apostles gave Paul the right hand of fellowship, they attached one request: <em>Only they would that we should remember the poor; the same which I also was forward to do</em> (Galatians 2:10). Widows, orphans, the poor at your gate, and the brethren persecuted for the name of the Lord Jesus Christ are not a side project of the Church; they are near the centre of what the offering is for.</p>
+<p>So handle God's money as a man who will give account for it, because you will. Keep the records plain, keep more than one honest pair of eyes on every penny, pay those who labour, feed the poor, and let it all be so clean that any man may look at it.</p>
+<aside class="key"><div class="key-t">Hold onto this: it must be honest before God and visibly honest before men.</div><p>Money handled in God's name demands integrity, plain records, and more than one honest pair of eyes. Pay those who labour in the Word, keep them free from the love of money, and remember the widow, the poor, and the persecuted.</p></aside>
+<div class="check" data-check="4"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Fifteen questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "Biblical Finances",
+  assessment: "Biblical Finances: Stewardship in the House of God",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"ST": "Stewardship", "TG": "Tithes and giving", "SR": "Sowing and reaping", "DW": "Debt, work, and contentment", "CH": "Money in the Church"};
+
+const QUESTIONS = [
+ {t:"ST", q:"What is the foundation on which all biblical handling of money rests?",
+  o:["That God owns everything and we manage His property", "That believers should aim to become wealthy", "That money is inherently evil and should be avoided", "That a tenth belongs to God and the rest is ours to do as we please"], a:0, v:"Psalm 24:1", vt:"The earth is the LORD'S, and the fulness thereof; the world, and they that dwell therein.", l:1},
+ {t:"ST", q:"According to the Lord Jesus Christ, why does how we handle small amounts of money matter so much?",
+  o:["Because small amounts are all most believers will ever have", "Because faithfulness in the least is what qualifies a man to be trusted with much", "Because God rewards each gift with an exact cash return", "Because careful accounting is a sign of natural intelligence"], a:1, v:"Luke 16:10", vt:"He that is faithful in that which is least is faithful also in much: and he that is unjust in the least is unjust also in much.", l:1},
+ {t:"ST", q:"When a believer prospers through his own skill and hard work, what should he remember?",
+  o:["That his own power and ability have gotten him this wealth", "That prosperity is proof of superior faith", "That God gives the power to get wealth, and gives it to establish His covenant", "That he is now free from any obligation to give"], a:2, v:"Deuteronomy 8:18", vt:"But thou shalt remember the LORD thy God: for it is he that giveth thee power to get wealth, that he may establish his covenant which he sware unto thy fathers, as it is this day.", l:1},
+ {t:"TG", q:"What does Abraham's gift to Melchizedek show about the tithe?",
+  o:["That it was practised long before the law of Moses was given", "That it was invented by the priests of Israel", "That only kings and princes were expected to tithe", "That it applied only to spoils taken in battle"], a:0, v:"Genesis 14:20", vt:"And blessed be the most high God, which hath delivered thine enemies into thy hand. And he gave him tithes of all.", l:2},
+ {t:"TG", q:"What did the Lord Jesus Christ say to the Pharisees about their tithing of mint and anise and cummin?",
+  o:["That tithing had been abolished by His coming", "That they should have stopped tithing and shown mercy instead", "That they ought to have tithed, without leaving judgment, mercy, and faith undone", "That the tithe applied only to money and never to produce"], a:2, v:"Matthew 23:23", vt:"Woe unto you, scribes and Pharisees, hypocrites! for ye pay tithe of mint and anise and cummin, and have omitted the weightier matters of the law, judgment, mercy, and faith: these ought ye to have done, and not to leave the other undone.", l:2},
+ {t:"TG", q:"What kind of giving does God love, according to Paul?",
+  o:["Giving that is pressed out by an urgent appeal", "Giving that is purposed in the heart and cheerful, not grudging or forced", "Giving that is as large as possible regardless of the heart behind it", "Giving that is done publicly so others are provoked to follow"], a:1, v:"2 Corinthians 9:7", vt:"Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver.", l:2},
+ {t:"SR", q:"Why does Paul open his teaching on sowing and reaping with the words “Be not deceived”?",
+  o:["Because men constantly imagine they can sow one thing and reap another", "Because false teachers had denied that harvests exist", "Because the law of sowing applies only to farmers", "Because the Galatians were sowing too generously"], a:0, v:"Galatians 6:7", vt:"Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap.", l:3},
+ {t:"SR", q:"According to 2 Corinthians 9, what is God's purpose in making grace abound toward a generous giver?",
+  o:["To make him independent and free from further need of God", "To reward him with luxury as a sign of favour", "That he may have sufficiency and abound to every good work", "To prove that giving is a reliable way to become rich"], a:2, v:"2 Corinthians 9:8", vt:"And God is able to make all grace abound toward you; that ye, always having all sufficiency in all things, may abound to every good work.", l:3},
+ {t:"SR", q:"What does Scripture require of the believer during the long gap between sowing and harvest?",
+  o:["To give again immediately until the harvest appears", "To conclude that God has rejected the gift", "To seek out a different field to sow into", "Not to be weary in well doing, for in due season we shall reap if we faint not"], a:3, v:"Galatians 6:9", vt:"And let us not be weary in well doing: for in due season we shall reap, if we faint not.", l:3},
+ {t:"DW", q:"What does Proverbs teach about the effect of borrowing?",
+  o:["That borrowing is always a sin against God", "That the borrower becomes servant to the lender", "That the lender is cursed for lending at all", "That debt is a sign that God has withdrawn His favour"], a:1, v:"Proverbs 22:7", vt:"The rich ruleth over the poor, and the borrower is servant to the lender.", l:4},
+ {t:"DW", q:"What does Paul say about a man who fails to provide for his own household?",
+  o:["That he should be given more time to grow in faith", "That he has merely made a financial mistake", "That he should give the matter to the church to handle", "That he hath denied the faith, and is worse than an infidel"], a:3, v:"1 Timothy 5:8", vt:"But if any provide not for his own, and specially for those of his own house, he hath denied the faith, and is worse than an infidel.", l:4},
+ {t:"DW", q:"What exactly does Paul identify as the root of all evil?",
+  o:["The love of money, which some have coveted after and so erred from the faith", "Money itself, in whatever quantity it is held", "Poverty, which drives men to desperate acts", "Wealthy men, who oppress the poor"], a:0, v:"1 Timothy 6:10", vt:"For the love of money is the root of all evil: which while some coveted after, they have erred from the faith, and pierced themselves through with many sorrows.", l:4},
+ {t:"CH", q:"What was the sin of Ananias and Sapphira in Acts 5?",
+  o:["Selling land that had been consecrated to God", "Giving less than the tithe required by the law", "Lying to God by presenting a part of the price as though it were the whole", "Refusing to sell their possession when the apostles commanded it"], a:2, v:"Acts 5:4", vt:"Whiles it remained, was it not thine own? and after it was sold, was it not in thine own power? why hast thou conceived this thing in thine heart? thou hast not lied unto men, but unto God.", l:5},
+ {t:"CH", q:"What standard did Paul set for the administration of the gift he carried?",
+  o:["That the money be kept secret to avoid provoking envy", "That only apostles be permitted to touch it", "That it be counted after arrival by the receiving church alone", "That things be honest not only in the sight of the Lord, but also in the sight of men"], a:3, v:"2 Corinthians 8:21", vt:"Providing for honest things, not only in the sight of the Lord, but also in the sight of men.", l:5},
+ {t:"CH", q:"How does Scripture hold together the support of ministers and freedom from greed?",
+  o:["Ministers should never receive any support from the church", "Elders who rule well are worthy of double honour, yet a bishop must not be greedy of filthy lucre", "Ministers may take whatever the offering yields without question", "Only elders who work a secular trade may receive support"], a:1, v:"1 Timothy 3:3", vt:"Not given to wine, no striker, not greedy of filthy lucre; but patient, not a brawler, not covetous;", l:5},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["It All Belongs to God", "Tithes, Offerings, and Firstfruits", "Sowing and Reaping", "Debt, Work, and Contentment", "Money in the House of God"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "According to the parable of the talents, why was the third servant condemned?", "o": ["He stole part of what his lord had given him", "He gained less than the other two servants did", "He did nothing with what he had been given and buried it", "He refused to accept the talent in the first place"], "a": 2, "e": "He returned the talent untouched; with God, doing nothing with what He entrusted to you is not neutral, it is loss."}, {"q": "Why does God call withheld tithes and offerings a robbery in Malachi 3:8?", "o": ["Because the priests depended on the money for their comfort", "Because what was withheld already belonged to Him", "Because the people gave to other gods instead", "Because they gave less than their neighbours did"], "a": 1, "e": "You cannot steal what was never the owner's; God calls it robbery precisely because the tithe was already His."}, {"q": "What did the widow of Zarephath receive after she made the prophet a cake first?", "o": ["A large sum of money that ended her poverty", "A barrel of meal and cruse of oil that did not fail through the famine", "A promise of reward only in the life to come", "Immediate rain and the end of the famine"], "a": 1, "e": "God gave her a daily supply that did not fail rather than a windfall, keeping her leaning on Him through the famine."}, {"q": "Whom does Paul rebuke when he says that if any would not work, neither should he eat?", "o": ["Those who cannot work because of sickness or age", "Those who work in secular rather than ministry jobs", "Those who are able to work but refuse to", "Those who earn more than they need"], "a": 2, "e": "Paul wrote “would not”, not “could not”; Scripture commands the Church to carry those who genuinely cannot work."}, {"q": "Why did Paul travel with chosen brethren when carrying the collection for the saints?", "o": ["Because he did not trust the churches that had given", "So that no man could blame the handling of the gift, providing honest things in the sight of men", "Because the roads were dangerous and he needed guards", "Because apostles were forbidden to travel alone"], "a": 1, "e": "It was not enough that God knew he was honest; Paul made the handling of the money visibly above suspicion."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

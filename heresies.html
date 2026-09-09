@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Heresies — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Heresies</h2>
+    <p class="lesson" style="max-width:var(--measure)">The false teachings the Church has faced, how to recognize them, and how Scripture answers them. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">What Heresy Is and Why It Matters</a></li>
+      <li><a href="#lesson-2">The Early Heresies</a></li>
+      <li><a href="#lesson-3">Denying That the Lord Jesus Christ Is God</a></li>
+      <li><a href="#lesson-4">Errors About Salvation and Sin</a></li>
+      <li><a href="#lesson-5">Errors About the Holy Spirit and Healing</a></li>
+      <li><a href="#lesson-6">Guarding the Flock</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. What Heresy Is and Why It Matters</h3>
+<p>Let me begin where the apostle Peter begins, because he does not soften it. <em>"But there were false prophets also among the people, even as there shall be false teachers among you, who privily shall bring in damnable heresies, even denying the Lord that bought them, and bring upon themselves swift destruction."</em> Notice the word <strong>privily</strong>. It means quietly, secretly, alongside. False teaching almost never walks through the front door announcing itself. It slips a different message underneath a familiar sound. That is why Peter says false teachers will be <em>among you</em>, and not merely out there somewhere in the world.</p>
+<p>The word we translate <strong>heresy</strong> carries in the Greek the sense of a choosing, a taking for yourself, a picking out of one thing and a laying aside of another. That is exactly what it is. A man reads the Word of God, and instead of receiving the whole of it, he chooses. He keeps what pleases him, he trims what convicts him, and then he gathers people around his preference. Heresy is not first an intellectual mistake; it is first an act of the will.</p>
+<p>Set that beside the picture of the first church. <em>"And they continued stedfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers."</em> They did not continue in their own opinions. They continued in the apostles' doctrine — one body of teaching, received from the Lord Jesus Christ and delivered to the Church. So when I say a teaching is heresy, I am not saying it is unfashionable or strange. I am saying it has walked away from what the apostles handed down.</p>
+<p>Paul would not let anyone treat this as a small thing. <em>"But though we, or an angel from heaven, preach any other gospel unto you than that which we have preached unto you, let him be accursed."</em> And in case somebody thought he had spoken in a moment of heat, he says it again in the very next verse. Understand what he has done. He has put himself under the same sentence. The messenger never outranks the message — not an apostle, not an angel from Heaven, not the most gifted preacher you have ever heard.</p>
+<p>Jude felt the same urgency. He sat down to write a pleasant letter about the common salvation, and the Spirit of God turned his pen. <em>"Beloved, when I gave all diligence to write unto you of the common salvation, it was needful for me to write unto you, and exhort you that ye should earnestly contend for the faith which was once delivered unto the saints."</em> Once delivered — not delivered and then revised, not upgraded by a later prophet with a better revelation. And then Jude tells us how it goes wrong: <em>"For there are certain men crept in unawares... ungodly men, turning the grace of our God into lasciviousness, and denying the only Lord God, and our Lord Jesus Christ."</em> Crept in. Unawares. Nobody voted them in.</p>
+<p>So how do we test a teaching? The apostle John gives us the plainest instrument in the Bible. <em>"Beloved, believe not every spirit, but try the spirits whether they are of God: because many false prophets are gone out into the world."</em> That is a command given to ordinary believers, not to scholars only. And John tells us where to point it first: <em>"Every spirit that confesseth that Jesus Christ is come in the flesh is of God: And every spirit that confesseth not that Jesus Christ is come in the flesh is not of God: and this is that spirit of antichrist."</em> Begin every examination with the Lord Jesus Christ. Who does this teaching say He is? What does it do with His coming in the flesh, His blood, His death, His bodily resurrection? Answer that, and you have usually answered everything.</p>
+<p>Then take it to the Book. I love the Bereans for this. <em>"These were more noble than those in Thessalonica, in that they received the word with all readiness of mind, and searched the scriptures daily, whether those things were so."</em> Look at the balance. They were not hard-hearted; they received the word with all readiness of mind. But they were not gullible either; they searched the Scriptures daily — and Paul is the preacher they were checking. A preacher who resents being checked against the Word is telling you something about himself.</p>
+<p>And finally, watch the fruit. <em>"Beware of false prophets, which come to you in sheep's clothing, but inwardly they are ravening wolves."</em> The Lord Jesus Christ did not tell us to judge by eloquence, by crowd size, or by how many miracles are claimed. He said, <em>"Wherefore by their fruits ye shall know them."</em> Does the teaching make people holy, humble, prayerful, tender toward sin? Or proud, loose, and strangely comfortable with the very things the Word condemns? Paul described the end of it: <em>"Having a form of godliness, but denying the power thereof: from such turn away."</em></p>
+<p>This is not a course in suspicion; a man who trusts nobody has his own kind of sickness. It is a course in love — love for the Lord Jesus Christ, who is worth defending, and love for the flock, who can be devoured while we are being polite.</p>
+<aside class="key"><div class="key-t">Hold onto this: heresy is a choosing.</div><p>False teaching is a man choosing his own opinion over the apostles' doctrine, and it always comes in quietly. Test every spirit by what it says about the Lord Jesus Christ, search the Scriptures for yourself, and watch the fruit.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. The Early Heresies</h3>
+<p>The enemy is not creative. He is old, and he repeats himself. Nearly every error you will meet today is an old error wearing new clothes, and if you know the old shape you will recognize the new suit. So let me walk you through the early heresies the Church has already faced and already answered, because the answers still work.</p>
+<p>Begin with <strong>Gnosticism</strong>. Its two great claims were that salvation comes by secret knowledge available to an inner circle, and that matter itself is evil while spirit alone is good. If salvation comes by secret knowledge, then the Gospel is no longer good news for the poor, the unlettered, and the child; it becomes a club with a password. But Paul says, <em>"For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast."</em> A gift you must be clever enough to unlock is not a gift. And that spirit still walks among us in the teacher who hints that he has a revelation the rest of the Body has not received, and the ministry that keeps its real doctrine for those who have paid to go deeper.</p>
+<p>The second Gnostic claim, that matter is evil, gave birth to <strong>Docetism</strong> — the teaching that the Lord Jesus Christ only <em>seemed</em> to have a body, a phantom walking through a world too dirty for God to touch. This is the heresy John was aiming at when he wrote, <em>"And every spirit that confesseth not that Jesus Christ is come in the flesh is not of God: and this is that spirit of antichrist."</em> And the Lord Jesus Christ Himself settled it in the upper room after He rose. <em>"Behold my hands and my feet, that it is I myself: handle me, and see; for a spirit hath not flesh and bones, as ye see me have."</em> He invited their hands onto His wounds, because a phantom cannot bleed, cannot die, and cannot pay for your sin. If He did not truly come in flesh, He did not truly go to the cross, and nothing has been paid.</p>
+<p>Then came <strong>Arianism</strong>, which taught that the Son was a created being — the highest and first of creatures, but a creature still, made by God rather than God Himself come to us. Set that against the opening of John's Gospel: <em>"In the beginning was the Word, and the Word was with God, and the Word was God."</em> Not a word, not like God, not a lesser god. Set it against Thomas crying, <em>"My Lord and my God"</em> — and the Lord Jesus Christ did not correct him. Set it against Paul: <em>"For in him dwelleth all the fulness of the Godhead bodily."</em> Arianism did not merely demote the Lord Jesus Christ; it emptied the cross, because only God Himself could bear the sin of the whole world.</p>
+<p><strong>Marcion</strong> attacked from another direction. He decided the God of the Old Testament was a different and lesser being than the God revealed in the Lord Jesus Christ, so he took his scissors to the Bible until what remained was small enough to agree with him. Anytime a man tells you the Old Testament no longer matters, or that whole passages of the New must be set aside as culture, he is holding Marcion's scissors. But look at what the risen Lord Jesus Christ did on the road to Emmaus: <em>"And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself."</em> You cannot cut away the Scriptures that testify of Him and claim you are honouring Him.</p>
+<p><strong>Pelagianism</strong> came with a smiling face. It taught that man is not fallen in the way the Bible says, that he has it in himself to live right and so save himself. It flatters us, and that is why it sells. But if I could have saved myself, Calvary was cruelty. The blood of the Lord Jesus Christ was not poured out to help a good man finish; it was poured out to raise a dead man.</p>
+<p>And do not miss the very first heresy the Church had to fight, because it is the pattern for all the others. The <strong>Judaizers</strong> of Galatians did not deny the Lord Jesus Christ. They did not say He was less than God, and they did not say He never came in the flesh. They simply added something. Believe on Him — <em>and</em> keep the law. Paul, who was patient about so many things, refused to be patient about this one: <em>"Christ is become of no effect unto you, whosoever of you are justified by the law; ye are fallen from grace."</em> Heresy does not always subtract. Very often it adds, and the addition swallows the Gospel just as surely.</p>
+<p>So when a new teaching comes with a fresh name, run it through these old channels. Is it offering secret knowledge? Is it uneasy with His flesh and His blood? Is it shrinking who He is? Is it cutting the Book down to a comfortable size? Is it adding a requirement to His finished work? There is nothing new under the sun, and the answers the Church gave then are the answers we give now, because they are not the Church's answers. They are the Word of God.</p>
+<aside class="key"><div class="key-t">Hold onto this: the enemy repeats himself.</div><p>Gnosticism, Docetism, Arianism, Marcion, and Pelagianism are old errors in new clothes, and the Judaizers of Galatians show that heresy often adds to the Gospel rather than subtracting from it.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Denying That the Lord Jesus Christ Is God</h3>
+<p>Everything stands or falls here. You can be wrong about a hundred smaller things and still be saved; you cannot be wrong about who the Lord Jesus Christ is and be saved. That is why John did not soften it: <em>"Who is a liar but he that denieth that Jesus is the Christ? He is antichrist, that denieth the Father and the Son."</em> Every generation produces a new movement built on the same old denial, and they always sound reasonable, always sound moral, and often come with sincere and pleasant people at your door.</p>
+<p>The <strong>Jehovah's Witnesses</strong> revived Arianism and put it on a printing press. They teach that the Lord Jesus Christ is a created being, and they have adjusted their own translation of Scripture where the plain reading refuses to cooperate. When a movement must change the Book in order to keep its doctrine, it has already told you which one it loves more.</p>
+<p><strong>Mormonism</strong> takes another road to the same cliff. It sets alongside the Bible additional scriptures and a later revelation, and it teaches a God who was once a man and men who may become gods. Hear Jude again: the faith was <em>"once delivered unto the saints."</em> Any system that says the delivery was incomplete until its own founder arrived has placed its founder above the apostles, and Paul already answered that with the word <em>accursed</em>.</p>
+<p><strong>Liberal theology</strong> is the quietest of them, and in some ways the most successful, because it keeps every word of our vocabulary and empties every one of them. It will speak of the resurrection and mean an idea that lived on in the disciples' hearts. It will speak of the cross and mean an example of love rather than a payment for sin. Paul had no patience for a hollowed-out resurrection: <em>"And if Christ be not raised, your faith is vain; ye are yet in your sins."</em> A symbolic resurrection saves nobody.</p>
+<p>And <strong>Islam</strong> honours Him as a prophet but denies that He is God, denies that He was crucified, and therefore denies the very transaction that saves. To call Him a prophet and stop there is not partial honour; He never left that option open. He said, <em>"Verily, verily, I say unto you, Before Abraham was, I am."</em> He did not say <em>I was</em>; He took the name God gave to Moses at the bush and laid it on Himself, and the men listening picked up stones, because they knew exactly what He had claimed. A prophet does not talk that way.</p>
+<p>Now let me give you the answers, and I want you to have them in your mouth. He said, <em>"I and my Father are one."</em> Thomas, with the nail prints in front of him, said, <em>"My Lord and my God"</em> — and the Lord Jesus Christ received that confession instead of rebuking it, which no prophet and no angel in all the Bible ever does. Isaiah, seven hundred years ahead of the manger, wrote, <em>"For unto us a child is born, unto us a son is given: ... and his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace."</em> A child born who is called The mighty God. Paul told Titus we are <em>"Looking for that blessed hope, and the glorious appearing of the great God and our Saviour Jesus Christ."</em> And he summed the mystery up in a line to Timothy: <em>"God was manifest in the flesh."</em></p>
+<p>So why does this one denial destroy the whole Gospel? Picture a courtroom. You are guilty; the fine is more than everything you own and everything you will ever earn. The law requires the judge to pass sentence, so he does — the full fine, no discount, because a judge who waves away the law is not good, he is corrupt. And then the judge stands up, takes off his robe, walks down from the bench, and pays your fine himself. The law was satisfied. Justice was not bent. And you walk out free.</p>
+<p>Now take the deity of the Lord Jesus Christ out of that picture and see what you have left. If He is only a creature, only a prophet, only a good man, then a stranger paid your fine — and a stranger's payment settles nothing, because he owes his own debt and has nothing to spare. It is because the Judge Himself came down and paid it that the payment is infinite and the case is closed forever. That is why the blood of the Lord Jesus Christ can cover the sin of the whole world, and why <em>"Neither is there salvation in any other: for there is none other name under heaven given among men, whereby we must be saved."</em></p>
+<p>And this is where I want you to be tender as well as bold. The people who bring these teachings to your door are usually sincere, often more diligent than we are, and they are lost. Do not argue to win. Put the Lord Jesus Christ in front of them out of the Book — the I AM before Abraham, the Word who was God, the child called The mighty God, the hands Thomas touched — and pray, because it is the Holy Ghost who opens eyes, not our cleverness. But never trade the truth for a peaceful conversation. He is God, and everything else we preach depends on it.</p>
+<aside class="key"><div class="key-t">Hold onto this: the Judge Himself paid the fine.</div><p>Every movement that reduces the Lord Jesus Christ to a creature, a prophet, or a moral teacher empties the cross, because only God Himself could pay a debt that infinite.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Errors About Salvation and Sin</h3>
+<p>If the enemy cannot get you to deny who the Lord Jesus Christ is, he will go to work on what it means to be saved. Here he plays both ends against the middle: on one side he loads you down with law until grace disappears, and on the other he cuts you loose from all holiness until grace becomes a licence. Both roads lead away from the cross.</p>
+<p>Start with <strong>salvation by works and by law-keeping</strong>, because it is the oldest and it feels the most religious. It says your standing before God rests on your performance and your record. A man under that teaching either becomes proud, because he thinks he is keeping up, or collapses, because he knows he is not. Paul cuts it off at the root: <em>"Knowing that a man is not justified by the works of the law, but by the faith of Jesus Christ."</em> Hear me carefully, because this is where people stumble. Holiness is not the price of salvation; holiness is the life of the saved. We do not live clean in order to be bought; we live clean because we have been bought.</p>
+<p><strong>Universalism</strong> comes next, and it wears a kind face. It says everyone is saved in the end, that all roads arrive at the same house. But if everyone arrives anyway, then Calvary was a waste and the Great Commission a cruel errand, and the Lord Jesus Christ misled us when He said, <em>"Because strait is the gate, and narrow is the way, which leadeth unto life, and few there be that find it."</em> He is the one who told us the way is narrow. Love does not require us to make Him a liar.</p>
+<p>Then there is the abuse of eternal security — <strong>"once saved, always saved"</strong> taken up as a permission slip. I would never have a believer walking around in terror of losing salvation over a passing thought. But a doctrine that tells a man he may live in wilful, unrepented sin for forty years and land in Heaven on the strength of a prayer he prayed as a boy is not the Gospel. The Lord Jesus Christ said, <em>"But he that shall endure unto the end, the same shall be saved."</em> Repentance is not a ticket you tore once at the door; repentance is a direction. It is a turning of the whole life toward God, and the man who is truly turned keeps walking that way.</p>
+<p>Very near to that stands <strong>hyper-grace and antinomianism</strong>: the teaching that because we are under grace, the commands of God no longer bind us, that sin in the believer no longer matters because it is all covered in advance. Paul answered that argument before anyone could make it. <em>"What shall we say then? Shall we continue in sin, that grace may abound? God forbid. How shall we, that are dead to sin, live any longer therein?"</em> And Jude names it as the mark of men who crept into the church: <em>"ungodly men, turning the grace of our God into lasciviousness."</em> Grace turned into permission is the devil using the vocabulary of Calvary to keep a man in his chains. The Word still says, <em>"Follow peace with all men, and holiness, without which no man shall see the Lord."</em></p>
+<p>Now let me put a name to something I have preached for a long time: <strong>two-crucifixion Christianity</strong>. It is the mind of a man who treats the cross as a line of credit. He sins deliberately, plans to sin again, and comforts himself that another application of the blood is always available on demand — as if the Lord Jesus Christ could be sent back to Calvary whenever the balance ran low. The writer to the Hebrews will not allow it. Such men, he says, <em>"crucify to themselves the Son of God afresh, and put him to an open shame."</em> And again: <em>"For if we sin wilfully after that we have received the knowledge of the truth, there remaineth no more sacrifice for sins."</em> There is one cross. It is enough, it is finished, and it is not a machine you feed.</p>
+<p>And then the last of them, the <strong>denial of hell</strong> — the teaching that eternal punishment is a myth, a metaphor, or a temporary correction with a graduation at the end. But no one in all the Bible spoke about hell as often or as soberly as the Lord Jesus Christ Himself, and He used the same word for both destinies in one breath: <em>"And these shall go away into everlasting punishment: but the righteous into life eternal."</em> If <em>eternal</em> means eternal for the righteous, it means eternal for the lost. A preacher who removes hell has unplugged the alarm in his own pulpit.</p>
+<p>Look at what all of these have in common. Every one makes sin lighter than it is — pretending our works can pay for it, or that it does not matter, or that nobody will answer for it. And the man who believes sin is light will never value the blood. Keep the two together and you will not be moved: salvation is a free gift you could never earn, and it produces a changed life you cannot fake. <em>"For by grace are ye saved through faith."</em> That is the door. And <em>"he that shall endure unto the end, the same shall be saved."</em> That is the road.</p>
+<aside class="key"><div class="key-t">Hold onto this: grace is the door, endurance is the road.</div><p>Salvation is a free gift no man can earn, and it produces a changed life no man can fake. Every error about salvation makes sin lighter than it is.</p></aside>
+<div class="check" data-check="3"></div>
+<h3 id="lesson-5">5. Errors About the Holy Spirit and Healing</h3>
+<p>There is an error that shuts the door on the power of God, and there is an error that flings the door open and lets anything walk in. A minister has to guard both sides of the house, and I want you to be able to answer both without flinching.</p>
+<p>The first is <strong>cessationism</strong> — the teaching that the gifts of the Spirit, the healings, the miracles, the speaking with tongues, all ceased with the apostles. I understand why it is attractive. If the gifts have ceased, then a church without power is not a church in need of repentance; it is simply a church living in the right century. That doctrine is a blanket thrown over cold embers so nobody has to ask why the fire went out.</p>
+<p>But look at what the Lord Jesus Christ said as He was leaving. <em>"And these signs shall follow them that believe; In my name shall they cast out devils; they shall speak with new tongues; ... they shall lay hands on the sick, and they shall recover."</em> He did not say these signs shall follow the twelve. He said they shall follow <em>them that believe</em>. If you believe, you are in that sentence. And on the day of Pentecost, Peter took care to say how far the promise reached: <em>"For the promise is unto you, and to your children, and to all that are afar off, even as many as the Lord our God shall call."</em> Afar off in distance and afar off in time. That is us. And over it all stands the plainest verse in the argument: <em>"Jesus Christ the same yesterday, and to day, and for ever."</em> If He healed yesterday and He is the same to day, then either He still heals or that verse is not true.</p>
+<p>A cousin of that error reduces the Holy Ghost to a <strong>force</strong> — an influence, an energy, the way electricity is a power company's product. But you cannot lie to a force, and Peter said to Ananias, <em>"Why hath Satan filled thine heart to lie to the Holy Ghost?"</em> You cannot grieve a force, and Paul says, <em>"And grieve not the holy Spirit of God, whereby ye are sealed unto the day of redemption."</em> The Holy Ghost speaks, forbids, sends, comforts, teaches, and leads. He is not a current you plug into for power; He is God, to be obeyed and loved and never used.</p>
+<p>Now the other side of the house, and I say this to a Pentecostal people because it is our particular danger: <strong>chasing manifestations without holiness</strong>. There are believers who will drive four hours for a meeting where something spectacular is reported, and who will not spend forty minutes alone with God and His Word in a week. But the gifts were never given as entertainment. The Lord Jesus Christ warned that men would stand before Him listing wonderful works and hear, <em>"I never knew you."</em> Never knew you — after the works. Manifestations do not certify a man; character does, and the Word does. <em>"Be ye holy; for I am holy."</em> Where there is noise and no holiness, be careful.</p>
+<p>Then there is the error of the <strong>divided heart in the matter of healing</strong> — treating God as an assistant to the doctor. It sounds humble, but examine it. In that arrangement the real trust is placed in the arm of flesh, and God is invited in as a helper, a second opinion who may bless the treatment if He is willing. That is not faith in God; that is faith in something else with a prayer attached. The Word says, <em>"Cursed be the man that trusteth in man, and maketh flesh his arm, and whose heart departeth from the LORD."</em> And there is a king whose record carries a sad line: Asa was diseased in his feet, <em>"yet in his disease he sought not to the LORD, but to the physicians."</em> The Scripture does not record that as wisdom. My faith is in God alone for healing, and I have watched Him honour that faith again and again.</p>
+<p>And finally, the teaching that <strong>sickness is God's will for His children</strong> — that God has laid this disease on you to teach you something, and that to seek healing is to fight against Him. If that were so, then the Lord Jesus Christ spent His whole ministry undoing the will of His Father, for He healed them all. Watch the leper come to Him. He had no doubt about the power; his only question was the willingness: <em>"Lord, if thou wilt, thou canst make me clean."</em> And the answer came back without hesitation: <em>"I will; be thou clean."</em> Not <em>perhaps</em>. I will.</p>
+<p>So hold these three things together and preach them until the people can say them in their sleep. <strong>God can</strong> — He is Almighty, and there is no case too far gone for Him. <strong>God can through you</strong> — He has put the power in the hands of them that believe, and He said they shall lay hands on the sick, and they shall recover. And <strong>God is willing</strong> — He said <em>I will</em> to the leper, and He has not changed His mind since. <em>"Who forgiveth all thine iniquities; who healeth all thy diseases."</em> A church that believes those three sentences will pray differently, and will see what a doubting church never sees.</p>
+<aside class="key"><div class="key-t">Hold onto this: God can, God can through you, and God is willing.</div><p>The gifts did not cease, the Holy Ghost is not a force, manifestations without holiness prove nothing, and our faith for healing rests on God alone.</p></aside>
+<div class="check" data-check="4"></div>
+<h3 id="lesson-6">6. Guarding the Flock</h3>
+<p>Everything so far has been about recognizing error. Now let me talk to you as a pastor talks to a pastor, because the other half of the work is guarding a flock without wounding it, and answering error without becoming bitter.</p>
+<p>The first guard is <strong>Scripture in its context</strong>. Almost every heresy in the world is built on a verse, and that is what makes it dangerous. A man does not hand you a lie; he hands you a fragment of the truth with its surrounding words removed, and the fragment says something the whole passage never said. Peter warned about this in the letters of Paul, <em>"which they that are unlearned and unstable wrest, as they do also the other scriptures, unto their own destruction."</em> To <em>wrest</em> is to twist out of shape. So the discipline is simple: read the verse before and the verse after, find out who is speaking and to whom, and never build a doctrine on a sentence that stands alone against the rest of the Book.</p>
+<p>The second guard is <strong>the whole counsel of God</strong>. Paul could say to the Ephesian elders, <em>"For I have not shunned to declare unto you all the counsel of God."</em> All of it — grace and holiness, the love of God and the fear of God, Heaven and hell. Most heresies are built by preaching one truth so exclusively that it swallows the others. Preach grace and never repentance, and you raise a loose people. Preach holiness and never grace, and you raise a proud and exhausted people. A well-fed flock has less appetite for poison.</p>
+<p>The third guard is <strong>sound doctrine in the pulpit</strong>. Paul's charge to Titus describes the man fit to oversee: <em>"Holding fast the faithful word as he hath been taught, that he may be able by sound doctrine both to exhort and to convince the gainsayers."</em> Both — exhort the saints and convince the gainsayers, and both by sound doctrine, not by temper. And his charge to Timothy tells us when: <em>"Preach the word; be instant in season, out of season; reprove, rebuke, exhort with all longsuffering and doctrine."</em> Correction without patience produces broken people; patience without correction produces deceived people. And Paul tells us why the urgency never lifts. The time will come, he says, when they will not endure sound doctrine, but after their own lusts shall heap to themselves teachers, having itching ears. The teachers are not forced on the people; the people <em>heap</em> them up, choosing the voices that scratch the itch. That is why a heresy always finds a crowd waiting for it.</p>
+<p>The fourth guard is knowing when to <strong>mark and avoid</strong>. There comes a point when a man is no longer confused but committed. Paul is plain about that man: <em>"Now I beseech you, brethren, mark them which cause divisions and offences contrary to the doctrine which ye have learned; and avoid them."</em> Mark them — identify them plainly, so the flock knows. This is not unkindness; it is the shepherd standing in the gate. A pastor who cannot bring himself to name a wolf has decided that his reputation matters more than his sheep.</p>
+<p>But now hear the fifth guard, most often forgotten by men who are strong on doctrine. Most people caught in a false teaching are not wolves; they are sheep fed something poisonous by somebody they trusted. For them the instruction is entirely different: <em>"Brethren, if a man be overtaken in a fault, ye which are spiritual, restore such an one in the spirit of meekness; considering thyself lest thou also be tempted."</em> Restore — the word is used of setting a broken bone, and a bone is not set by kicking the man. And Paul tells Timothy the servant of the Lord must be <em>"In meekness instructing those that oppose themselves; if God peradventure will give them repentance to the acknowledging of the truth; And that they may recover themselves out of the snare of the devil, who are taken captive by him at his will."</em> Taken captive. The deceived person is not the enemy; he is a prisoner of war. You do not shoot the prisoner; you go in and get him out, in meekness, knowing that it is God who gives repentance and not your argument.</p>
+<p>And I add a sixth, which holds the others up. <strong>Pray and fast over your people.</strong> Doctrine is defended in the study, but people are delivered in the place of prayer. When a spirit of error has hold of a family, you will not talk it off them; it comes off in prayer, often with fasting, and distance is no barrier. As ministers such as T. B. Joshua have taught, a ministry that will not pay the price in prayer will have nothing in its hands when the real fight comes.</p>
+<p>Finally, hold fast. The Lord Jesus Christ said to the church at Thyatira, <em>"But that which ye have already hold fast till I come."</em> You do not need a new revelation or a teaching nobody has heard before. You have been given the Lord Jesus Christ, God manifest in the flesh, crucified for our sins, risen bodily, filling His people with the Holy Ghost, coming again. Feed the people on that until a lie tastes strange in their mouths, and you will have guarded the flock the way the Chief Shepherd asked you to.</p>
+<aside class="key"><div class="key-t">Hold onto this: the deceived man is a prisoner, not the enemy.</div><p>Guard the flock by reading Scripture in context, declaring the whole counsel of God, preaching sound doctrine with longsuffering, marking the divisive, and restoring the deceived in meekness.</p></aside>
+<div class="check" data-check="5"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Twenty questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "Heresies",
+  assessment: "Heresies: Recognizing and Answering False Teaching",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"DF": "Definitions and testing", "EH": "Early heresies", "DT": "The deity of the Lord Jesus Christ", "SV": "Salvation and sin", "HS": "The Holy Spirit and healing", "GD": "Guarding the flock"};
+
+const QUESTIONS = [
+ {t:"DF", q:"A visiting preacher brings a message that contradicts what the apostles taught, but he is gifted, humble, and greatly loved. According to Galatians, what settles the matter?",
+  o:["His character and gifting outweigh the doctrinal concern", "The congregation should vote on whether to receive him", "The message is accursed no matter who brings it, even an angel from Heaven", "He should be received as long as he does not repeat the message"], a:2, v:"Galatians 1:8", vt:"But though we, or an angel from heaven, preach any other gospel unto you than that which we have preached unto you, let him be accursed.", l:1},
+ {t:"DF", q:"John gives believers a first test to run on any teaching or spirit. Where does he tell us to point that test?",
+  o:["At whether the teaching produces large crowds", "At whether the teacher can perform signs and wonders", "At whether the teaching is new or ancient", "At what it confesses about the Lord Jesus Christ come in the flesh"], a:3, v:"1 John 4:2", vt:"Hereby know ye the Spirit of God: Every spirit that confesseth that Jesus Christ is come in the flesh is of God:", l:1},
+ {t:"DF", q:"The Bereans are called more noble than the Thessalonians. What made them so?",
+  o:["They refused to receive any preaching until it had been approved by elders", "They received the word readily and yet searched the Scriptures daily to verify it", "They accepted whatever Paul said without question because he was an apostle", "They rejected Paul's preaching until he showed them a miracle"], a:1, v:"Acts 17:11", vt:"These were more noble than those in Thessalonica, in that they received the word with all readiness of mind, and searched the scriptures daily, whether those things were so.", l:1},
+ {t:"EH", q:"Gnosticism taught that salvation comes through secret knowledge held by an inner circle. What is the plainest scriptural answer to that claim?",
+  o:["Salvation is a gift of God by grace through faith, not something earned or unlocked", "Salvation is available only to those taught by an apostle", "Salvation depends on how much of the Bible a person has memorized", "Salvation is given to those who separate themselves from all physical things"], a:0, v:"Ephesians 2:8", vt:"For by grace are ye saved through faith; and that not of yourselves: it is the gift of God:", l:2},
+ {t:"EH", q:"Arianism taught that the Son is the first and highest created being rather than God Himself. Which statement most directly answers it?",
+  o:["The Son was with God before creation as His chief servant", "The Word was with God, and the Word was God", "The Son was given authority after His resurrection", "The Son is greater than the angels though less than God"], a:1, v:"John 1:1", vt:"In the beginning was the Word, and the Word was with God, and the Word was God.", l:2},
+ {t:"EH", q:"Marcion cut the Old Testament away from the Christian Bible. What did the risen Lord Jesus Christ do on the road to Emmaus that answers him?",
+  o:["He told them the law and the prophets were now void", "He gave them a new set of writings to replace the old", "He expounded in all the Scriptures, beginning at Moses and the prophets, the things concerning Himself", "He warned them not to read the writings of Moses"], a:2, v:"Luke 24:27", vt:"And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself.", l:2},
+ {t:"DT", q:"When Thomas saw the risen Lord and called Him “My Lord and my God,” what is the significance of the response he received?",
+  o:["The Lord Jesus Christ corrected him for exaggerating", "The Lord Jesus Christ told him to worship the Father instead", "The Lord Jesus Christ received the confession rather than rebuking it", "Thomas was later disciplined by the other apostles for the statement"], a:2, v:"John 20:28", vt:"And Thomas answered and said unto him, My Lord and my God.", l:3},
+ {t:"DT", q:"Isaiah, centuries before the manger, described the coming child. Which of these does his prophecy actually say?",
+  o:["That the child would be a prophet greater than Moses", "That the child's name shall be called The mighty God", "That the child would be adopted as a son of God at his baptism", "That the child would be an angel sent in human likeness"], a:1, v:"Isaiah 9:6", vt:"For unto us a child is born, unto us a son is given: and the government shall be upon his shoulder: and his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.", l:3},
+ {t:"DT", q:"In the courtroom picture, why does the payment of the fine only work if the Judge Himself came down and paid it?",
+  o:["Because a stranger owes his own debt and has nothing spare to give", "Because the law allows only judges to make payments", "Because the guilty man must contribute part of the fine himself", "Because the sentence can be reduced only by the one who passed it"], a:0, v:"Colossians 2:9", vt:"For in him dwelleth all the fulness of the Godhead bodily.", l:3},
+ {t:"DT", q:"Liberal theology keeps the word “resurrection” but means only that an idea lived on in the disciples' hearts. How does Paul answer a merely symbolic resurrection?",
+  o:["He says the resurrection is a matter of personal conviction", "He says that if the Lord Jesus Christ be not raised, our faith is vain and we are yet in our sins", "He says the resurrection matters less than the crucifixion", "He says the disciples' experience is the proof that matters most"], a:1, v:"1 Corinthians 15:17", vt:"And if Christ be not raised, your faith is vain; ye are yet in your sins.", l:3},
+ {t:"SV", q:"A believer argues that since grace covers all sin in advance, continuing in sin does no harm. How does Paul answer that argument?",
+  o:["He allows it for the weak but not for leaders", "He agrees that sin no longer matters under grace", "He says God forbid, asking how those dead to sin can live any longer in it", "He says the question cannot be answered in this life"], a:2, v:"Romans 6:2", vt:"God forbid. How shall we, that are dead to sin, live any longer therein?", l:4},
+ {t:"SV", q:"How does this lesson describe the relationship between repentance and the Christian life?",
+  o:["Repentance is a single event that permits any manner of life afterward", "Repentance is a direction, a turning of the whole life toward God, and the saved endure to the end", "Repentance must be repeated formally every year to remain valid", "Repentance is only for those who have never heard the Gospel"], a:1, v:"Matthew 24:13", vt:"But he that shall endure unto the end, the same shall be saved.", l:4},
+ {t:"SV", q:"Universalism teaches that everyone will be saved in the end. Which word from the Lord Jesus Christ most directly contradicts it?",
+  o:["That the way is narrow and few there be that find it", "That the harvest is plenteous but the labourers are few", "That many are called and all are chosen", "That the gate stands open to all who admire Him"], a:0, v:"Matthew 7:14", vt:"Because strait is the gate, and narrow is the way, which leadeth unto life, and few there be that find it.", l:4},
+ {t:"SV", q:"Why does removing hell from our preaching damage the whole message?",
+  o:["Because church attendance depends on fear", "Because the Old Testament requires it though the New does not", "Because it removes the urgency the Lord Jesus Christ Himself placed on the choice, using the same word for both destinies", "Because it makes God appear too merciful to be just in the eyes of unbelievers"], a:2, v:"Matthew 25:46", vt:"And these shall go away into everlasting punishment: but the righteous into life eternal.", l:4},
+ {t:"HS", q:"Cessationism teaches that the signs and gifts were only for the apostles. Which statement of the Lord Jesus Christ most directly answers that?",
+  o:["These signs shall follow the twelve whom I have chosen", "These signs shall follow them that believe", "These signs shall cease when the apostles are gone", "These signs shall follow only in the city of Jerusalem"], a:1, v:"Mark 16:17", vt:"And these signs shall follow them that believe; In my name shall they cast out devils; they shall speak with new tongues;", l:5},
+ {t:"HS", q:"A believer says the power of God belonged to another era and cannot be expected today. Which verse settles the question of whether He has changed?",
+  o:["A verse promising that the Church will grow in every generation", "A verse declaring that Jesus Christ is the same yesterday, and to day, and for ever", "A verse promising wisdom to those who ask", "A verse declaring that the Scriptures are profitable for doctrine"], a:1, v:"Hebrews 13:8", vt:"Jesus Christ the same yesterday, and to day, and for ever.", l:5},
+ {t:"HS", q:"What is the danger this lesson warns of on the Pentecostal side of the house?",
+  o:["Praying too long in private", "Expecting God to heal the sick today", "Chasing manifestations while neglecting holiness and the Word", "Believing that the promise of the Spirit reaches those afar off"], a:2, v:"Hebrews 12:14", vt:"Follow peace with all men, and holiness, without which no man shall see the Lord:", l:5},
+ {t:"GD", q:"Paul tells Titus what a man fit for oversight must be able to do by sound doctrine. What is it?",
+  o:["To both exhort the saints and convince the gainsayers", "To settle every dispute by his own authority", "To avoid all controversial subjects in the pulpit", "To silence anyone who disagrees without explanation"], a:0, v:"Titus 1:9", vt:"Holding fast the faithful word as he hath been taught, that he may be able by sound doctrine both to exhort and to convince the gainsayers.", l:6},
+ {t:"GD", q:"A man in the congregation has been deceived by a false teaching but is teachable and grieved about it. How does Scripture direct the spiritual to deal with him?",
+  o:["Mark him publicly and put him out at once", "Ignore the matter until he raises it himself", "Restore such an one in the spirit of meekness, considering oneself", "Require him to prove his repentance for a full year before speaking to him"], a:2, v:"Galatians 6:1", vt:"Brethren, if a man be overtaken in a fault, ye which are spiritual, restore such an one in the spirit of meekness; considering thyself lest thou also be tempted.", l:6},
+ {t:"GD", q:"Another man is not merely confused but is deliberately building a following inside the church around teaching contrary to the doctrine received. What does Paul instruct?",
+  o:["Debate him publicly until the congregation decides", "Mark them which cause divisions and offences, and avoid them", "Give him a place on the platform to keep peace", "Say nothing, since God will deal with him in time"], a:1, v:"Romans 16:17", vt:"Now I beseech you, brethren, mark them which cause divisions and offences contrary to the doctrine which ye have learned; and avoid them.", l:6},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["What Heresy Is and Why It Matters", "The Early Heresies", "Denying That the Lord Jesus Christ Is God", "Errors About Salvation and Sin", "Errors About the Holy Spirit and Healing", "Guarding the Flock"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "Peter says false teachers will bring in damnable heresies “privily.” What does that tell us about how false teaching usually arrives?", "o": ["It arrives openly, announcing that it disagrees with the Bible", "It arrives quietly and from within, alongside familiar language", "It arrives only through unbelievers outside the church", "It arrives only in nations where the Gospel has never been preached"], "a": 1, "e": "“Privily” means secretly or alongside; Peter says such teachers will be among you, coming in quietly rather than announcing themselves."}, {"q": "Why did the Lord Jesus Christ tell the disciples to handle Him and see after He rose?", "o": ["To prove He was a spirit and no longer physical", "To show that His body had been exchanged for a heavenly one", "To prove He truly had flesh and bones, answering the claim that He only seemed to have a body", "To demonstrate that His wounds had disappeared"], "a": 2, "e": "He said a spirit hath not flesh and bones, as ye see me have, which answers Docetism directly."}, {"q": "Why does calling the Lord Jesus Christ only a great prophet fail to honour Him?", "o": ["Because prophets were never respected in Israel", "Because He claimed the name I AM, which no prophet ever did", "Because prophets did not perform miracles", "Because He never spoke about Himself"], "a": 1, "e": "In John 8:58 He took to Himself the name God gave Moses at the bush, and His hearers understood it as a claim to deity."}, {"q": "What is “two-crucifixion Christianity” as described in this lesson?", "o": ["The belief that the Lord Jesus Christ was crucified twice in history", "Treating the cross as a line of credit, sinning deliberately and expecting a fresh payment on demand", "The teaching that believers must be crucified with Him twice", "The idea that the crucifixion and the resurrection were the same event"], "a": 1, "e": "Hebrews warns that such men crucify to themselves the Son of God afresh; there is one cross, and it is not a machine to be fed."}, {"q": "The leper said, “Lord, if thou wilt, thou canst make me clean.” What was he uncertain about?", "o": ["The power of the Lord Jesus Christ", "The willingness of the Lord Jesus Christ", "Whether he was truly a leper", "Whether the disciples would allow him near"], "a": 1, "e": "He never doubted the power; his question was the willingness, and the answer came back, I will; be thou clean."}, {"q": "Why does this lesson say most heresies are built on a verse?", "o": ["Because the Bible contradicts itself in places", "Because a fragment of truth with its context removed is more persuasive than an obvious lie", "Because most people cannot read", "Because the King James Version is difficult to understand"], "a": 1, "e": "Peter says the unlearned and unstable wrest the Scriptures, twisting passages out of shape to say what the whole never said."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Heaven and Hell — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>Heaven and Hell</h2>
+    <p class="lesson" style="max-width:var(--measure)">What Scripture teaches about eternity, judgment, and the hope of the resurrection. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">What Scripture Says of Heaven</a></li>
+      <li><a href="#lesson-2">The Resurrection of the Body and the New Jerusalem</a></li>
+      <li><a href="#lesson-3">Hell, Death, and the Lake of Fire</a></li>
+      <li><a href="#lesson-4">The Two Judgments</a></li>
+      <li><a href="#lesson-5">Living in the Light of Eternity</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. What Scripture Says of Heaven</h3>
+<p>I have sat with people at the end of their lives, and I will tell you what they ask. They do not ask about their careers. They do not ask about their houses. They ask, <em>what is on the other side?</em> That is the honest question of every human heart, and God has not left us guessing. He has told us enough to fill us with hope, and He has left enough unsaid to keep us hungry. So let us open the Book and see what Scripture actually says of Heaven.</p>
+<p>Start where the Lord Jesus Christ started, on the last night before the cross, with His disciples' hearts breaking. He said, <em>"Let not your heart be troubled: ye believe in God, believe also in me. In my Father's house are many mansions: if it were not so, I would have told you. I go to prepare a place for you."</em> Notice three things in that one word. It is a <strong>house</strong> — a home, not a warehouse for souls. It is the <strong>Father's</strong> house — the place belongs to Him, and if you are His child you are not a visitor there. And it is <strong>prepared</strong> — by the same hands that were nailed to the tree. Heaven is not a reward you negotiate; it is a place a Person went to get ready for you.</p>
+<p>Scripture also calls it Paradise. When the thief on the cross had nothing left to offer — no time, no works, no reputation, only a cry — the Lord Jesus Christ said to him, <em>"Verily I say unto thee, To day shalt thou be with me in paradise."</em> Today. Not after centuries of waiting. The moment that man's breath stopped, he was with the Lord. And Paul, who knew that country by experience, wrote of a man <em>"caught up to the third heaven"</em> and <em>"caught up into paradise, and heard unspeakable words, which it is not lawful for a man to utter."</em> Understand what he is telling us. He was there. He saw it. And the language of earth could not carry it back.</p>
+<p>The third heaven is simply Scripture's way of naming the height of it. The first heaven is the sky where the birds fly; the second is the expanse where the stars burn; the third is the very dwelling of God. That is where Paul was taken, and that is the destination of the redeemed. And here is the heart of the whole matter: what makes Heaven <strong>Heaven</strong> is not the streets and it is not the gates. It is God Himself. David said it plainly, <em>"in thy presence is fulness of joy; at thy right hand there are pleasures for evermore."</em> Paul said he was <em>"willing rather to be absent from the body, and to be present with the Lord."</em> Take God out of Heaven and there is nothing left worth having.</p>
+<p>That is why Heaven is the exact opposite of hell in every direction. We have taught you that hell is the opposite of God — He is rest and peace, and there is no rest in that place. Turn it around and you have Heaven. Where God is fully present, there is fullness of joy, fullness of rest, fullness of peace. John saw it and wrote, <em>"And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away."</em></p>
+<p>Sit with that promise a moment, because it is more tender than we usually let it be. It does not say the tears are ignored. It says <em>God shall wipe them away</em> — His own hand to your face. Every funeral you have stood through, every hospital corridor, every night you cried where nobody heard you — He knows the count of them, and He Himself will end them. The mothers who buried children, the saints who suffered for the Gospel and were never thanked: their tears are dried by the hand of God.</p>
+<p>And then there is the word that stops all our speculation. <em>"But as it is written, Eye hath not seen, nor ear heard, neither have entered into the heart of man, the things which God hath prepared for them that love him."</em> Do not rush past that. It is not merely that you have not seen it. It has never even <em>entered into the heart of man</em>. The best thing you have ever imagined about Heaven is too small. Your finest hour of worship, your sweetest day of peace, the most beautiful place you ever stood — all of it is a shadow on the wall compared to what is prepared for those who love Him.</p>
+<p>So do not let anybody tell you the believer's hope is a vague, harp-playing boredom in the clouds. It is a home, prepared by the Lord Jesus Christ, in the presence of God, without tears, beyond imagination, and the sons of God will rule with Him there. The only question that matters is whether you belong to Him. Everything else in this course flows from that one question.</p>
+<aside class="key"><div class="key-t">Hold onto this: Heaven is a prepared place for a prepared people</div><p>The Father's house, Paradise, the presence of God with no more tears — and beyond what eye hath seen or the heart of man has ever imagined.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. The Resurrection of the Body and the New Jerusalem</h3>
+<p>Some believers think the whole hope of the Gospel is that your soul floats off somewhere pleasant when your body gives out. That is not the Christian hope. It is only half of it, and the smaller half. The full hope of the Gospel is <strong>resurrection</strong> — that this body, the one that aches and ages and is finally laid in the ground, will be raised. God is not finished with the dust He formed. He is going to raise it in glory.</p>
+<p>Paul lays it out like a farmer talking about a field. <em>"So also is the resurrection of the dead. It is sown in corruption; it is raised in incorruption: It is sown in dishonour; it is raised in glory: it is sown in weakness; it is raised in power: It is sown a natural body; it is raised a spiritual body."</em> Sown and raised — that is the language of planting, not of throwing away. What goes into the ground is not garbage; it is seed. And the body that comes up out of that ground is the same person, gloriously changed: no corruption in it, no dishonour on it, no weakness left in it.</p>
+<p>Then Paul tells us the mystery for those who are still alive when He comes. <em>"Behold, I shew you a mystery; We shall not all sleep, but we shall all be changed, In a moment, in the twinkling of an eye, at the last trump: for the trumpet shall sound, and the dead shall be raised incorruptible, and we shall be changed."</em> A moment. Faster than you can blink. And the reason it must happen is stated in the next breath: <em>"For this corruptible must put on incorruption, and this mortal must put on immortality."</em> Flesh as it now stands cannot carry eternity. So God will re-clothe us for the world He is bringing.</p>
+<p>Paul described the same day to a grieving church in Thessalonica. <em>"For the Lord himself shall descend from heaven with a shout, with the voice of the archangel, and with the trump of God: and the dead in Christ shall rise first: Then we which are alive and remain shall be caught up together with them in the clouds, to meet the Lord in the air: and so shall we ever be with the Lord."</em> Notice the order, because it comforts the bereaved: the dead go first. Those you have buried in the Lord are not behind in the line; they lead the procession. And notice the destination — not merely a place, but a Person. <em>So shall we ever be with the Lord.</em></p>
+<p>Now lift your eyes further, because God's plan is bigger than saving individuals out of a doomed world. He is remaking the world. <em>"And I saw a new heaven and a new earth: for the first heaven and the first earth were passed away; and there was no more sea."</em> And the great announcement that follows is the sentence the whole Bible has been building toward: <em>"Behold, the tabernacle of God is with men, and he will dwell with them, and they shall be his people, and God himself shall be with them, and be their God."</em> Eden was lost and God walked away from a garden; here God moves in permanently with His people.</p>
+<p>John was carried to a high mountain and shown the city, <em>"that great city, the holy Jerusalem, descending out of heaven from God."</em> He describes walls of jasper and gates of pearl, foundations garnished with precious stones, a street of pure gold, twelve gates that are never shut because night never comes. He tells us the city needs no temple, for the Lord God Almighty and the Lamb are the temple of it, and it needs no sun, <em>"for the glory of God did lighten it, and the Lamb is the light thereof."</em> Through the middle of it runs <em>"a pure river of water of life, clear as crystal, proceeding out of the throne of God and of the Lamb,"</em> and the tree of life stands on either side, bearing twelve manner of fruits, its leaves for the healing of the nations. This is not a myth. This is a real city with real citizens, and the gate of it is guarded by one requirement: nothing that defiles enters, but only <em>"they which are written in the Lamb's book of life."</em></p>
+<p>And what will the redeemed do there? Not drift. Not idle. Scripture says of the servants of God in that city, <em>"And there shall be no night there; and they need no candle, neither light of the sun; for the Lord God giveth them light: and they shall reign for ever and ever."</em> We have taught you already that the sons of God will rule with Him, and here is where that ruling is finally seen. All creation is waiting for it — <em>"For the earnest expectation of the creature waiteth for the manifestation of the sons of God."</em> The groaning earth is waiting to see who God's children really are.</p>
+<p>So bury your dead in hope. Carry your aching body in hope. That grave is a seedbed, and the God who raised the Lord Jesus Christ from the dead has bound Himself to raise you also. The last word over your life will not be spoken by a cemetery. It will be spoken by a trumpet.</p>
+<aside class="key"><div class="key-t">Hold onto this: The grave is a seedbed, not an ending</div><p>This body is sown in corruption and raised in incorruption, and God's people will dwell with Him in the new heaven, the new earth, and the holy city — and reign for ever.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Hell, Death, and the Lake of Fire</h3>
+<p>I do not preach on this subject because I enjoy it. I preach it because the Lord Jesus Christ preached it more than anyone else in Scripture, and a shepherd who will not warn the flock about the cliff is no shepherd. But we must be accurate. A great deal of confusion comes from lumping every word together and calling it all "hell." Scripture is more careful than that, and so must we be.</p>
+<p>In the Old Testament the word is <em>Sheol</em>; in the New Testament it is <em>hades</em>. That is the realm of the departed dead, the holding place where the souls of the unrighteous are kept, conscious and waiting, until the day of judgment. It is real and it is terrible, but it is not the final address. The other word the Lord Jesus Christ used is <em>Gehenna</em>, and Revelation calls it the lake of fire. <strong>Hell and the lake of fire are not the same thing.</strong> Hell is the prison cell before the trial; the lake of fire is the sentence after it. Revelation states it in one sentence: <em>"And death and hell were cast into the lake of fire. This is the second death."</em> If hell itself is cast into the lake of fire, then hell cannot be the lake of fire.</p>
+<p>What is that holding place like? The Lord Jesus Christ pulled the curtain back Himself in Luke 16. A rich man lived in luxury and stepped over a beggar named Lazarus at his gate every day. Both men died. And He said, <em>"And in hell he lift up his eyes, being in torments, and seeth Abraham afar off, and Lazarus in his bosom."</em> Look at what that account teaches. The man was fully conscious. He had his memory — he remembered his five brothers. He had his senses — he begged for a drop of water on his tongue. Death did not end him; it relocated him. And Abraham answered that <em>"between us and you there is a great gulf fixed,"</em> so that no one crosses over. There is no transfer window after death.</p>
+<p>Now understand what makes that place what it is. We have taught you that hell is the exact opposite of God. God is rest; God is peace; God is light; God is life. Strip a soul of God and you have unrest, torment, darkness, and death. That is why Scripture says of the damned that <em>"they have no rest day nor night."</em> The fire is real, but the deepest agony of that place is the absence of the One who is rest. Every good thing you have ever tasted came down from the Father of lights. Take Him away entirely, and what is left is hell.</p>
+<p>Then comes the day when the temporary becomes permanent. <em>"And the sea gave up the dead which were in it; and death and hell delivered up the dead which were in them: and they were judged every man according to their works."</em> The holding place empties out. Every soul stands before God. And then the final sentence: <em>"And whosoever was not found written in the book of life was cast into the lake of fire."</em> Scripture calls this <strong>the second death</strong> — not annihilation, but eternal separation, a death that never finishes dying. The first death separates the soul from the body. The second death separates the soul from God for ever.</p>
+<p>And here is a truth that answers half the arguments people bring. The lake of fire was never designed for you. The Lord Jesus Christ said, <em>"Depart from me, ye cursed, into everlasting fire, prepared for the devil and his angels."</em> Prepared for the devil and his angels. It was built as a prison for rebel spirits. No human being was ever in the blueprint. If a man ends up there, he has gone somewhere that was never made for him, following someone whose rebellion he chose to share.</p>
+<p>So the question comes, and it is a fair one: how can a loving God have a hell? The answer is <strong>free will</strong>, and it is the answer we teach without apology. God made you a person, not a puppet. Love that cannot be refused is not love. He sent His Son, He sends His preachers, He sends His Spirit to convict, He is <em>"not willing that any should perish, but that all should come to repentance"</em> — but He will not drag a soul into His presence against its settled will. A person who truly does not want God is finally given exactly what he asked for: a place without Him. Hell is not God's cruelty; it is God's terrible respect for a decision.</p>
+<p>Which is why I plead with you rather than frighten you. The Lord Jesus Christ said, <em>"fear not them which kill the body, but are not able to kill the soul: but rather fear him which is able to destroy both soul and body in hell."</em> Fear God, and you need fear nothing else. There is a cross standing between every sinner and that lake, and while you have breath the way is open. Do not wait for a more convenient day. There is a great gulf fixed on the other side, and no one has ever crossed it.</p>
+<aside class="key"><div class="key-t">Hold onto this: Hell is the holding place; the lake of fire is the second death</div><p>Hell is the exact opposite of God — no rest, no peace, no light — and the lake of fire was prepared for the devil and his angels. Free will, not cruelty, explains it.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. The Two Judgments</h3>
+<p>Everybody will stand before God. Nobody slips past. But Scripture does not describe one judgment; it describes two, and they are not for the same people, they do not use the same books, and they do not decide the same question. If you confuse them you will either terrify a believer who should be secure or comfort a sinner who should be trembling. So let us be careful and clear.</p>
+<p>The first is the judgment seat of the Lord Jesus Christ, and it is for His own. Paul wrote, <em>"For we must all appear before the judgment seat of Christ; that every one may receive the things done in his body, according to that he hath done, whether it be good or bad."</em> Notice who is speaking and to whom. Paul says <em>we</em> — apostles, elders, saints, the blood-bought church. This is not a trial to determine whether you are saved. That question was settled at the cross and answered when you believed. This is a review of your <strong>works</strong>: what you did with what He gave you.</p>
+<p>Paul illustrates it as a building inspection. <em>"For other foundation can no man lay than that is laid, which is Jesus Christ."</em> The foundation is fixed and it is not up for review. But then each of us builds on it, some with gold, silver and precious stones, some with wood, hay and stubble. And the inspection is by fire: <em>"Every man's work shall be made manifest: for the day shall declare it, because it shall be revealed by fire; and the fire shall try every man's work of what sort it is."</em> Fire does not destroy gold; it purifies it. Fire eats stubble in a second. The fire is not testing the quantity of your work but the <em>sort</em> of it — what it was made of, and who it was really for.</p>
+<p>Then Paul says something that should sober every one of us who preaches, sings, gives, or serves. <em>"If any man's work shall be burned, he shall suffer loss: but he himself shall be saved; yet so as by fire."</em> A man can reach Heaven and lose nearly everything he built on the way. Saved, yes — but empty-handed, watching a lifetime of showy religious activity go up in smoke because it was done for applause and not for the Lord. I would rather build small and build in gold. Let no man take your crown.</p>
+<p>Because there are crowns. Scripture is not shy about rewards, and it is not carnal to want them; it is obedient. Paul at the end of his life wrote, <em>"Henceforth there is laid up for me a crown of righteousness, which the Lord, the righteous judge, shall give me at that day: and not to me only, but unto all them also that love his appearing."</em> Peter promised the faithful shepherd <em>"a crown of glory that fadeth not away."</em> And the Lord Jesus Christ warned a whole church, <em>"Behold, I come quickly: hold that fast which thou hast, that no man take thy crown."</em> A crown can be lost while a soul is kept. Hold fast.</p>
+<p>The second judgment is another matter altogether, and Scripture names it the great white throne. John writes, <em>"And I saw a great white throne, and him that sat on it, from whose face the earth and the heaven fled away; and there was found no place for them."</em> Understand the picture. The universe itself cannot stand in that presence and flees; and a man who has refused the blood of the Lord Jesus Christ must stand there with nothing between himself and God. There is nowhere left to run. Creation itself has already run.</p>
+<p>And then the books are opened. <em>"And I saw the dead, small and great, stand before God; and the books were opened: and another book was opened, which is the book of life: and the dead were judged out of those things which were written in the books, according to their works."</em> Two kinds of record are named. The <strong>books</strong> hold the deeds — every word, every act, every hidden thing, exactly and honestly recorded, so that no one there can accuse God of injustice. The <strong>book of life</strong> holds the names. And the deciding question at that throne is not how your record compares with your neighbour's; it is whether your name is written. <em>"And whosoever was not found written in the book of life was cast into the lake of fire."</em> Small and great alike — the throne is no respecter of persons, and there is no lawyer, no bribe, no influence, no second appeal.</p>
+<p>So put the two side by side and let them do their work in you. If you belong to the Lord Jesus Christ, you will not stand at the great white throne, because your name is in the book of life and your sin was judged at Calvary; but you will give an account of your works, so live worthy of that day. If you do not belong to Him, no amount of decent living will help you at that throne, because the question there is your name, not your résumé. Get your name written. Then spend the rest of your life building with gold.</p>
+<aside class="key"><div class="key-t">Hold onto this: One judgment weighs a believer&#x27;s works; the other opens the book of life</div><p>At the judgment seat of the Lord Jesus Christ our works are tried by fire for reward or loss; at the great white throne the books are opened and the deciding question is whether your name is written.</p></aside>
+<div class="check" data-check="3"></div>
+<h3 id="lesson-5">5. Living in the Light of Eternity</h3>
+<p>Doctrine that never changes how you live on Monday is not doctrine; it is decoration. Everything we have studied — the Father's house, the resurrection, the city, the throne, the lake of fire — was not given to satisfy our curiosity. It was given to change the way we spend our days. So let me bring it home. How does a man or woman live who genuinely believes eternity is real?</p>
+<p>First, such a person changes where they put their money and their effort. The Lord Jesus Christ said, <em>"Lay not up for yourselves treasures upon earth, where moth and rust doth corrupt, and where thieves break through and steal: But lay up for yourselves treasures in heaven, where neither moth nor rust doth corrupt, and where thieves do not break through nor steal."</em> He is not scolding you for having a job or a savings account. He is telling you the plain economics of eternity: everything here rots, rusts, or gets stolen, and nothing there ever does. Then He gives the reason it matters so much: <em>"For where your treasure is, there will your heart be also."</em> Your heart follows your treasure, not the other way around. Move the treasure and the heart will come after it.</p>
+<p>Second, such a person guards their time. <em>"Redeeming the time, because the days are evil."</em> To redeem is to buy back. Paul is telling us that time is being stolen from us all day long and we must go and buy it back deliberately — from the screen, from the argument, from the endless entertainment that leaves nothing behind. I am not asking you to be grim. I am asking you to be awake. You have a fixed number of mornings, and not one of them can be returned to you. Get up and pray. Give Him hours nobody sees, because those are the hours that build in gold.</p>
+<p>Third, such a person <strong>endures</strong>. <em>"But he that shall endure unto the end, the same shall be saved."</em> Notice the Lord does not promise the crown to the one who starts loudest, or the one with the greatest gift, or the one with the largest congregation. He promises it to the one who is still standing at the end. I have watched people begin with fire and drift away over a disappointment, an offence, a betrayal, a season when God seemed silent. Beloved, hold on. Endurance is not glamorous; it is just refusing to quit on a God who has never once quit on you.</p>
+<p>Fourth, such a person cannot keep quiet. If what we studied about the lake of fire is true, then everyone you passed today is walking toward one destination or the other, and there is no crossing over afterward. That is the fire behind evangelism, and as ministers such as T. B. Joshua have taught, boldness for souls is not a personality type — it is what the fear of God and the love of God produce in an ordinary believer. Solomon said, <em>"he that winneth souls is wise."</em> Daniel said, <em>"they that turn many to righteousness as the stars for ever and ever."</em> There is no investment on this earth with a return like a soul. Speak to your neighbour, speak to the man at your work, speak to your own household, which is often the hardest place of all. And speak in this generation, because you do not have another one.</p>
+<p>Fifth, such a person is made clean by their own hope. John wrote, <em>"Beloved, now are we the sons of God, and it doth not yet appear what we shall be: but we know that, when he shall appear, we shall be like him; for we shall see him as he is. And every man that hath this hope in him purifieth himself, even as he is pure."</em> Do not miss the mechanism. Holiness here is not produced by fear of getting caught, or by rules pinned to a wall. It is produced by hope. A man who honestly expects to see the Lord Jesus Christ face to face, and to be made like Him, begins to clean up his life on his own — because he is getting ready for a Person. The hope purifies him.</p>
+<p>And so we set our affections deliberately. <em>"Set your affection on things above, not on things on the earth."</em> That is a command, which means it is a choice you make, not a mood you wait for. Paul said the things which are seen are temporal, but the things which are not seen are eternal. The mortgage feels more real than the throne. But feeling is not fact. The unseen things are the lasting ones, and the seen things are already passing away while you look at them.</p>
+<p>Let me close where we began this course. The sons of God will rule with Him. There is a home prepared, a body waiting to be raised, a city coming down, and tears that God Himself will wipe away with His own hand. That is your inheritance if you are His. So do not live small, and do not live for what rots. Lay up your treasure where it cannot be touched, buy back your time, endure to the end, open your mouth for souls, and keep yourself pure for the day you see His face.</p>
+<aside class="key"><div class="key-t">Hold onto this: Where your treasure is, there will your heart be also</div><p>Eternity is meant to change Monday: lay up treasure in Heaven, redeem the time, endure to the end, win souls, and let the hope of seeing Him purify you.</p></aside>
+<div class="check" data-check="4"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Fifteen questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "Heaven and Hell",
+  assessment: "Heaven and Hell: Eternity, Judgment, and Hope",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"HV": "Heaven", "RS": "Resurrection and the new creation", "HL": "Hell and the lake of fire", "JD": "Judgment and eternity"};
+
+const QUESTIONS = [
+ {t:"HV", q:"What does the Lord Jesus Christ say He has gone to do about the many mansions in the Father's house?",
+  o:["To prepare a place for His own", "To measure how many will fit", "To wait until the earth is destroyed", "To hold it back until we earn it"], a:0, v:"John 14:2", vt:"In my Father's house are many mansions: if it were not so, I would have told you. I go to prepare a place for you.", l:1},
+ {t:"HV", q:"The lesson teaches that the finest thing we can imagine about Heaven is still too small. Why?",
+  o:["Because Scripture says nothing at all about Heaven", "Because what God has prepared has never entered into the heart of man", "Because only prophets are permitted to think about it", "Because Heaven will be much like the present earth"], a:1, v:"1 Corinthians 2:9", vt:"But as it is written, Eye hath not seen, nor ear heard, neither have entered into the heart of man, the things which God hath prepared for them that love him.", l:1},
+ {t:"HV", q:"What does the lesson say God Himself will do with the tears of His people?",
+  o:["He will explain why each one was necessary", "He will leave sorrow untouched but add joy alongside it", "He will wipe them away, and death, sorrow, crying and pain shall be no more", "He will remove the memory of them but not the sorrow"], a:2, v:"Revelation 21:4", vt:"And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away.", l:1},
+ {t:"RS", q:"What contrast does Paul draw about the body that is buried and the body that is raised?",
+  o:["It is sown as flesh and raised as a memory only", "It is sown in glory and raised in humility", "It is sown in corruption, dishonour and weakness, and raised in incorruption, glory and power", "It is sown natural and raised as an angel"], a:2, v:"1 Corinthians 15:42-43", vt:"So also is the resurrection of the dead. It is sown in corruption; it is raised in incorruption: It is sown in dishonour; it is raised in glory: it is sown in weakness; it is raised in power.", l:2},
+ {t:"RS", q:"According to the lesson, what is the great announcement of the new heaven and new earth?",
+  o:["That the earth will be left empty for ever", "That God Himself will dwell with men and be their God", "That the redeemed will govern the old creation unchanged", "That the sea will be enlarged"], a:1, v:"Revelation 21:3", vt:"Behold, the tabernacle of God is with men, and he will dwell with them, and they shall be his people, and God himself shall be with them, and be their God.", l:2},
+ {t:"RS", q:"Why does the holy city have no need of the sun or the moon?",
+  o:["Because it is lit by lamps of gold", "Because its inhabitants no longer need to see", "Because it is always in shadow", "Because the glory of God lightens it, and the Lamb is the light thereof"], a:3, v:"Revelation 21:23", vt:"And the city had no need of the sun, neither of the moon, to shine in it: for the glory of God did lighten it, and the Lamb is the light thereof.", l:2},
+ {t:"HL", q:"What does Revelation call the lake of fire?",
+  o:["The great gulf", "The bottomless pit", "The second death", "The outer court"], a:2, v:"Revelation 20:14", vt:"And death and hell were cast into the lake of fire. This is the second death.", l:3},
+ {t:"HL", q:"For whom does Scripture say the everlasting fire was prepared?",
+  o:["For the devil and his angels", "For the nations that never heard", "For those who die without earthly riches", "For the disobedient children of Israel only"], a:0, v:"Matthew 25:41", vt:"Then shall he say also unto them on the left hand, Depart from me, ye cursed, into everlasting fire, prepared for the devil and his angels.", l:3},
+ {t:"HL", q:"What does the account of the rich man and Lazarus teach about the state of the lost after death?",
+  o:["They sleep without awareness until the judgment", "They may cross over once they repent of their choices", "They cease to exist entirely", "They are conscious and in torment, with a great gulf fixed that none can cross"], a:3, v:"Luke 16:23", vt:"And in hell he lift up his eyes, being in torments, and seeth Abraham afar off, and Lazarus in his bosom.", l:3},
+ {t:"JD", q:"According to Paul, what happens to a believer whose work is burned up at the judgment seat?",
+  o:["He loses his salvation with his reward", "His work is rebuilt for him by another", "He suffers loss, yet he himself is saved", "He is given a second opportunity to build"], a:2, v:"1 Corinthians 3:15", vt:"If any man's work shall be burned, he shall suffer loss: but he himself shall be saved; yet so as by fire.", l:4},
+ {t:"JD", q:"What is opened at the great white throne besides the books of men's works?",
+  o:["The law of Moses", "The book of life", "The scroll of the nations", "The register of the angels"], a:1, v:"Revelation 20:12", vt:"And I saw the dead, small and great, stand before God; and the books were opened: and another book was opened, which is the book of life: and the dead were judged out of those things which were written in the books, according to their works.", l:4},
+ {t:"JD", q:"Why does the lesson say that wanting a reward from the Lord is not carnal?",
+  o:["Because rewards replace the need for holiness", "Because Scripture openly promises crowns to those who are faithful and love His appearing", "Because the crowns are earthly honours given in this life", "Because every believer receives the same reward regardless"], a:1, v:"2 Timothy 4:8", vt:"Henceforth there is laid up for me a crown of righteousness, which the Lord, the righteous judge, shall give me at that day: and not to me only, but unto all them also that love his appearing.", l:4},
+ {t:"JD", q:"Why does the Lord Jesus Christ tell us to lay up treasure in Heaven rather than on earth?",
+  o:["Because earthly treasure is sinful to own", "Because earthly treasure corrupts and is stolen, and the heart follows the treasure", "Because Heaven requires payment at the gate", "Because poverty is itself a virtue"], a:1, v:"Matthew 6:21", vt:"For where your treasure is, there will your heart be also.", l:5},
+ {t:"JD", q:"To whom does the Lord Jesus Christ promise salvation in Matthew 24:13?",
+  o:["To the one who begins with the greatest zeal", "To the one with the greatest gift", "To the one who gathers the largest following", "To the one who endures unto the end"], a:3, v:"Matthew 24:13", vt:"But he that shall endure unto the end, the same shall be saved.", l:5},
+ {t:"HV", q:"What does John say the hope of seeing the Lord as He is does in the believer?",
+  o:["It causes him to purify himself, even as He is pure", "It removes all need for watchfulness", "It makes the believer indifferent to daily conduct", "It guarantees reward without faithfulness"], a:0, v:"1 John 3:3", vt:"And every man that hath this hope in him purifieth himself, even as he is pure.", l:5},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["What Scripture Says of Heaven", "The Resurrection of the Body and the New Jerusalem", "Hell, Death, and the Lake of Fire", "The Two Judgments", "Living in the Light of Eternity"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "According to the lesson, what makes Heaven what it is?", "o": ["The streets and the gates", "The absence of hardship alone", "The presence of God Himself", "The company of other believers"], "a": 2, "e": "Take God out of Heaven and nothing worth having remains; in His presence is fulness of joy."}, {"q": "In Paul's description of the coming of the Lord, who rises first?", "o": ["Those who are alive and remain", "The dead in Christ", "The angels", "The nations of the earth"], "a": 1, "e": "The dead in Christ rise first, and then those alive are caught up together with them."}, {"q": "Why does the lesson insist that hell and the lake of fire are not the same?", "o": ["Because the lake of fire is only a symbol", "Because Scripture says death and hell were themselves cast into the lake of fire", "Because hell is on earth and the lake of fire is in the sky", "Because only angels can enter hell"], "a": 1, "e": "If hell is cast into the lake of fire, hell cannot be the lake of fire; it is the holding place before the judgment."}, {"q": "What is being examined at the judgment seat of the Lord Jesus Christ?", "o": ["Whether the believer is truly saved", "The believer's works, tried by fire for reward or loss", "The sins already forgiven at the cross", "The record of the unbelieving dead"], "a": 1, "e": "The foundation is settled; the fire tries what sort each man's work is, and a man may be saved yet suffer loss."}, {"q": "According to the lesson, what produces holiness in the believer who expects to see the Lord Jesus Christ?", "o": ["Fear of being found out by others", "Rules kept out of duty alone", "The hope of being made like Him when He appears", "The approval of the congregation"], "a": 2, "e": "Every man that hath this hope in him purifieth himself, even as He is pure."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>

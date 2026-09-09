@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>The Old Testament — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;
+    --parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--green:#2F6B3A;--red:#8C2B2B;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-size:1.125rem;line-height:1.65;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-weight:500;line-height:1.15;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(100% - 2.5rem,60rem);margin-inline:auto}
+
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top a{color:var(--gold-soft);margin-left:auto;font-size:1rem;text-decoration:none}
+  .top a:hover{text-decoration:underline}
+
+  .progress{list-style:none;margin:0;padding:1.2rem 0;display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px solid var(--gold);counter-reset:s}
+  .progress li{display:flex;align-items:center;gap:.5rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .progress li::before{counter-increment:s;content:counter(s,upper-roman);width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:var(--parchment);border:1px solid var(--gold);color:var(--ink)}
+  .progress li.active::before{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .progress li.done{cursor:pointer}
+  .progress li.done::before{background:var(--gold);color:var(--navy-deep)}
+  @media (max-width:600px){.progress li span{display:none}}
+
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2.2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel[hidden]{display:none}
+  .eyebrow{font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .panel h2{font-size:clamp(1.9rem,4vw,2.5rem);color:var(--navy);margin:.2rem 0 1.2rem}
+  .panel h3{font-size:1.45rem;color:var(--burgundy);margin:1.8rem 0 .5rem}
+  .lesson{max-width:var(--measure)}
+  .lesson p,.lesson li{max-width:var(--measure)}
+  .lesson blockquote{margin:1rem 0;padding:.4rem 1rem;border-left:3px solid var(--gold);font-style:italic;color:var(--ink-soft)}
+  .lesson .ref{font-style:normal;font-size:.95rem}
+
+  .video{max-width:var(--measure);margin:.6rem 0 1rem}
+  .video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:var(--navy)}
+  .video .vlink{font-size:.95rem;color:var(--ink-soft);margin:.4rem 0 0}
+  .ill{margin:.6rem 0 1.2rem;max-width:var(--measure);box-shadow:0 10px 30px rgba(0,0,0,.25);border:1px solid var(--gold)}
+  .ill svg{display:block;width:100%;height:auto}
+  .key{max-width:var(--measure);margin:1.4rem 0 1.2rem;padding:1rem 1.2rem;background:#EFE6CF;border-left:4px solid var(--gold);border-radius:0 2px 2px 0}
+  .key .key-t{font-style:italic;color:var(--burgundy);font-size:1.05rem;margin-bottom:.2rem}
+  .key p{margin:0;font-size:1.05rem}
+  .side{float:right;width:15rem;margin:.3rem 0 1rem 1.5rem;padding:1rem 1.1rem;background:var(--navy);color:var(--parchment);border:1px solid var(--gold);font-size:1rem}
+  .side .key-t{font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin-bottom:.3rem}
+  .side p{margin:0}
+  @media (max-width:640px){.side{float:none;width:auto;margin:1rem 0}}
+  .check{clear:both;max-width:var(--measure);margin:0 0 1rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--gold)}
+  .check .ct{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.3rem}
+  .check .cq{font-size:1.1rem;margin:0 0 .7rem}
+  .check .co{display:grid;gap:.4rem}
+  .check button{font:inherit;font-size:1.02rem;text-align:left;padding:.5rem .8rem;border:1px solid var(--parchment-dark);background:var(--parchment);color:var(--ink);cursor:pointer;border-radius:2px}
+  .check button:hover{border-color:var(--gold)}
+  .check button.ok{border-color:var(--green);background:#EEF5EE}
+  .check button.no{border-color:var(--red);background:#F8ECEC}
+  .check .cf{margin:.7rem 0 0;font-style:italic;color:var(--ink-soft);font-size:1rem}
+  .check .cf[hidden]{display:none}
+  .toc a{color:var(--burgundy);text-decoration:none}
+  .toc .toc-soon{color:var(--ink-soft);list-style:none}
+  .soon{font-size:.75rem;color:#fff;background:var(--burgundy);padding:.1rem .5rem;border-radius:2px;letter-spacing:.03em;vertical-align:middle}
+  .coming{max-width:var(--measure);margin:2rem 0 0;padding:1.2rem 1.4rem;border:1px dashed var(--gold);color:var(--ink-soft);font-style:italic}
+  .toc a:hover{text-decoration:underline}
+  .panel h3{scroll-margin-top:1rem}
+  .toc{columns:2;column-gap:2rem;padding-left:1.2rem;font-size:1.05rem;margin-bottom:1.5rem}
+  @media (max-width:600px){.toc{columns:1}}
+
+  .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:2px;border:1px solid var(--navy);background:var(--navy);color:#fff;font:inherit;font-size:1.05rem;cursor:pointer;text-decoration:none}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn:hover{filter:brightness(1.1)}
+  .btn[hidden]{display:none}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gold)}
+
+  form.enroll{display:grid;gap:1rem;max-width:30rem}
+  label{display:grid;gap:.3rem;font-size:1rem;color:var(--ink-soft)}
+  input,select{font:inherit;padding:.55rem .7rem;border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:2px}
+
+  .q{padding:1.4rem 0;border-top:1px solid var(--parchment-dark)}
+  .q:first-of-type{border-top:0}
+  .q .label{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:.7rem;align-items:center}
+  .q .tag{font-size:.75rem;letter-spacing:.1em;padding:.1rem .5rem;border-radius:2px;color:#fff}
+  .q .tag.ok{background:var(--green)} .q .tag.no{background:var(--red)}
+  .q p.prompt{font-size:1.15rem;margin:.4rem 0 .7rem;max-width:var(--measure)}
+  .opts{display:grid;gap:.4rem;max-width:var(--measure)}
+  .opts label{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .8rem;border:1px solid var(--parchment-dark);background:#fff;cursor:pointer;color:var(--ink);font-size:1.05rem}
+  .opts label:hover{border-color:var(--gold)}
+  .opts input{margin-top:.35rem}
+  .opts label.correct{border-color:var(--green);background:#EEF5EE}
+  .opts label.wrong{border-color:var(--red);background:#F8ECEC}
+  .proof{max-width:var(--measure);margin:.8rem 0 .2rem;padding:.6rem .9rem;border-left:3px solid var(--gold);background:#EFE6CF;font-style:italic;font-size:1.02rem}
+  .proof .pr{font-style:normal;color:var(--burgundy);white-space:nowrap}
+  .rev{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .warn{color:var(--red);font-size:1rem;margin-top:1rem}
+  .warn[hidden]{display:none}
+
+  .result{background:#fff;border:1px solid var(--gold);padding:2rem 1.5rem;text-align:center;margin-bottom:2rem}
+  .result .pct{font-size:4rem;line-height:1;color:var(--navy)}
+  .result .sub{font-style:italic;color:var(--ink-soft)}
+  .result .verdict{font-size:1.7rem;margin:.6rem 0 .5rem;color:var(--navy)}
+  .result .msg{font-style:italic;max-width:32rem;margin:0 auto}
+  .bars{display:grid;gap:.6rem;max-width:34rem;margin:1.5rem auto 0;text-align:left;font-size:1rem}
+  .bar{display:grid;grid-template-columns:12rem 1fr 3.5rem;gap:.7rem;align-items:center}
+  .bar i{display:block;height:8px;background:var(--parchment-dark);border-radius:4px;overflow:hidden}
+  .bar i b{display:block;height:100%;background:var(--gold)}
+  .bar span:last-child{text-align:right;color:var(--ink-soft)}
+  @media (max-width:520px){.bar{grid-template-columns:7rem 1fr 3rem}}
+  .analysis{max-width:var(--measure);margin:1.5rem auto 0;text-align:left;font-size:1.05rem}
+
+  .certwrap{container-type:inline-size;width:100%;min-width:0;max-width:44rem;margin:2rem auto 0}
+  .cert{position:relative;aspect-ratio:1086/1448;background:url(images/cert-frame.jpg?v=2) center/100% 100% no-repeat;color:#1C2A55;text-align:center;font-family:"EB Garamond",Georgia,serif;box-shadow:0 20px 50px rgba(0,0,0,.25);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert .abs{position:absolute;left:0;right:0}
+  .cert .school1{top:18.4%;font-size:6.4cqw;letter-spacing:.07em;text-transform:uppercase;font-weight:600;line-height:1;color:#1C2A55}
+  .cert .school2{top:24.1%;font-size:2.5cqw;letter-spacing:.24em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1}
+  .cert .school2::before,.cert .school2::after{content:"";display:inline-block;width:6cqw;height:1px;background:#C9A24C;vertical-align:middle;margin:0 1.4cqw}
+  .cert .cname{top:43.2%;font-family:"Pinyon Script","EB Garamond",cursive;font-size:7.2cqw;line-height:1;color:#1C2A55;white-space:nowrap}
+  .cert .ct-course{top:52.5%;font-size:3.4cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;color:#1C2A55}
+  .cert .ct-unit{top:55.9%;font-size:2cqw;line-height:1.1;color:#1C2A55;left:12%;right:12%}
+  .cert .ct-body{top:58.9%;left:15%;right:15%;font-size:2cqw;line-height:1.35;color:#221A14}
+  .cert .ct-body strong{color:#6B1F2E}
+  .cert .col{top:65.6%;left:15%;width:21.5%;font-size:1.7cqw;line-height:1.5;color:#1C2A55;right:auto}
+  .cert .col.r{left:62.4%;width:23%}
+  .cert .col h4{margin:0 0 .8cqw;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;color:#6B1F2E;font-weight:600;line-height:1.1}
+  .cert .col .big{font-size:4.6cqw;color:#6B1F2E;font-weight:700;line-height:1.1;margin:.2cqw 0 .8cqw}
+  .cert .col .row{display:flex;justify-content:space-between;gap:1cqw;text-align:left}
+  .cert .col .row span:last-child{white-space:nowrap}
+  .cert .col .tot{margin-top:1cqw;border-top:1px solid #C9A24C;padding-top:.8cqw}
+  .cert .col .st{color:#6B1F2E;font-weight:700;letter-spacing:.04em}
+  .cert .sig{top:84.6%;left:12.5%;width:26%;right:auto;font-family:"Pinyon Script","EB Garamond",cursive;font-size:3.1cqw;line-height:1;color:#1C2A55;border-bottom:1px solid #1C2A55;padding-bottom:.8cqw;white-space:nowrap}
+  .cert .sig.r{left:61.5%}
+  .cert .lab{top:89.2%;left:12.5%;width:26%;right:auto;font-size:1.8cqw;color:#1C2A55}
+  .cert .lab.r{left:61.5%}
+  .fail{max-width:var(--measure);margin:0 auto}
+
+  .lock{border:1px solid var(--burgundy);background:#F8EEE9;padding:1.2rem 1.4rem;margin:1rem 0;max-width:var(--measure)}
+  .lock h3{margin:0 0 .5rem;color:var(--burgundy);font-size:1.3rem}
+  .lock .clock{font-size:1.8rem;color:var(--navy);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .lock p{margin:.3rem 0}
+  @media print{
+    body{background:#fff}
+    header,.progress,.actions,.result,.analysis,#review,.no-print{display:none!important}
+    .panel{border:0;box-shadow:none;padding:0;margin:0}
+    .certwrap{max-width:100%;margin:0}.cert{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <img src="images/logo.svg" alt="" width="44" height="44">
+    <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+    <span data-school-account style="margin-left:auto;font-size:.95rem"></span><a href="index.html" style="margin-left:1rem">Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol class="progress" id="progress">
+    <li class="active"><span>Enrollment</span></li>
+    <li><span>Reading</span></li>
+    <li><span>Assessment</span></li>
+    <li><span>Results</span></li>
+  </ol>
+
+  <!-- ============ I. ENROLLMENT ============ -->
+  <section class="panel" id="s1">
+    <div class="eyebrow">Section I</div>
+    <h2>The Old Testament</h2>
+    <p class="lesson" style="max-width:var(--measure)">A course in the deep teachings of the Old Testament: its revelations and covenants, the language of Biblical symbols and numbers, the Christophanies where the Lord Jesus Christ appeared before Bethlehem, the Types that picture Him, the gap between Genesis 1:1 and Genesis 1:2, and the prophetic timelines of Daniel and Ezekiel that run to the rebirth of Israel and to the cutting off of Messiah. Each section is a reading with a short check. Enter your name as it should appear on your certificate, then begin.</p>
+    <form class="enroll" id="enrollForm">
+      <label>Full name <input id="studentName" type="text" autocomplete="name"></label>
+      <label>Level
+        <select id="studentLevel">
+          <option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option>
+        </select>
+      </label>
+      <p class="warn" id="nameWarn" hidden>Enter your full name so it can appear on your certificate.</p>
+      <div><button class="btn gold" type="button" id="beginBtn">Begin the reading</button></div>
+    </form>
+  </section>
+
+  <!-- ============ II. READING ============ -->
+  <section class="panel" id="s2" hidden>
+    <div class="eyebrow">Section II</div>
+    <h2>Reading</h2>
+    <ol class="toc">
+      <li><a href="#lesson-1">The Old Testament Is the New Testament Concealed</a></li>
+      <li><a href="#lesson-2">Biblical Symbols and Numbers</a></li>
+      <li><a href="#lesson-3">Christophanies: The Angel of the LORD</a></li>
+      <li><a href="#lesson-4">Types of the Lord Jesus Christ</a></li>
+      <li><a href="#lesson-5">The Gap Theory: Genesis 1:1 and 1:2</a></li>
+      <li><a href="#lesson-6">Daniel&#x27;s Timeline and the Rebirth of Israel in 1948</a></li>
+      <li><a href="#lesson-7">The Seventy Weeks: Messiah Cut Off and the Temple Fulfilled</a></li>
+    </ol>
+
+    <div class="lesson">
+<h3 id="lesson-1">1. The Old Testament Is the New Testament Concealed</h3>
+<p>There is an old saying among the fathers of the faith, and I want you to carry it with you through this whole course: the Old Testament is the New Testament concealed, and the New Testament is the Old Testament revealed. They are not two books at war with each other. They are one book, one story, one Author, one Redeemer. When people tell me they have no use for the Old Testament, I know immediately that they have never seen the Lord Jesus Christ walking through it, because He is on every page for those who have eyes to see.</p>
+<p>Let the Lord Jesus Christ settle it Himself. On the road to Emmaus, with two heartbroken disciples who could not make sense of the cross, He did not begin with His own miracles. Notice where He began: <em>"And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself."</em> Moses. The prophets. All the Scriptures. And later that same evening He said that <em>"all things must be fulfilled, which were written in the law of Moses, and in the prophets, and in the psalms, concerning me."</em> Three divisions of the Hebrew Bible, and He claimed every one of them. The Old Testament is not background material. It is testimony.</p>
+<p>That is why He said to the religious men of His day, <em>"Search the scriptures; for in them ye think ye have eternal life: and they are they which testify of me."</em> The Scriptures they were searching were the Old Testament, and He said those very pages were bearing witness to Him. They had the letter and missed the Person. I do not want that for you. I want you to read Genesis and see the Lamb. I want you to read Leviticus and see the blood. I want you to read Ruth and see the Redeemer. I want you to read Daniel and see the calendar of Heaven.</p>
+<p>Here is why the Old Testament must be read together with the New. The Old gives you the shadow; the New gives you the substance. Paul put it plainly when he wrote that the ordinances and feasts <em>"are a shadow of things to come; but the body is of Christ."</em> A shadow is not nothing. A shadow proves that something real is standing in the light. But no man is saved by hugging a shadow. The law, he said, <em>"was our schoolmaster to bring us unto Christ, that we might be justified by faith."</em> The schoolmaster is honoured, not despised — and the schoolmaster's whole job was to walk us to the Door.</p>
+<p>Read it the other way and you fall into error just as fast. Take the New Testament without the Old and you will not know what sin is, what atonement means, why blood must be shed, who Israel is, or what a covenant is. Half the vocabulary of the New Testament is borrowed from the Old. Paul told the Romans that <em>"whatsoever things were written aforetime were written for our learning, that we through patience and comfort of the scriptures might have hope."</em> Written aforetime, for us. That is your license to dig.</p>
+<p>Now let me set before you the covenants, because the whole Old Testament is strung on them like beads on a cord. To Abraham God gave a covenant of promise and of seed: <em>"And I will establish my covenant between me and thee and thy seed after thee in their generations for an everlasting covenant, to be a God unto thee, and to thy seed after thee."</em> Abraham did nothing to earn it; he believed God, and it was counted to him for righteousness. That covenant is grace before Sinai ever smoked.</p>
+<p>To Moses God gave a covenant of law, at Sinai, with a tabernacle, a priesthood, a sacrifice, and a set of ordinances. It was holy, and it was temporary — a pattern shown in the mount, a picture of better things. To David God gave a covenant of a throne: <em>"And thine house and thy kingdom shall be established for ever before thee: thy throne shall be established for ever."</em> No son of David held that throne for ever. Only One could, and He is seated at the right hand of the Majesty on high.</p>
+<p>Then, through Jeremiah, God announced something the law could never do. <em>"Behold, the days come, saith the LORD, that I will make a new covenant with the house of Israel, and with the house of Judah."</em> And what would be new about it? <em>"I will put my law in their inward parts, and write it in their hearts; and will be their God, and they shall be my people."</em> Not on stone — in the heart. Not from the outside in — from the inside out. That promise was made hundreds of years before Bethlehem, and it was sealed in the blood of the Lord Jesus Christ. So when you open the Old Testament, open it as a believer, not as a tourist. The Author of it is your Saviour, and He wrote about Himself.</p>
+<aside class="key"><div class="key-t">Hold onto this: One book, one Redeemer</div><p>The Old Testament conceals what the New Testament reveals. The Lord Jesus Christ said the law, the prophets, and the psalms were all written concerning Him, so read every page looking for the Person.</p></aside>
+<div class="check" data-check="0"></div>
+<h3 id="lesson-2">2. Biblical Symbols and Numbers</h3>
+<p>God teaches with pictures. He is not being obscure when He does it; He is being merciful, because a picture will lodge in a man's memory long after an argument has slipped out of it. The Old Testament is full of these pictures, and the wonderful thing about them is that they are consistent. A symbol does not mean one thing in Exodus and the opposite thing in Hebrews. Once you learn the language, the whole Bible begins to speak with one voice.</p>
+<p>Begin with blood, because everything begins with blood. God Himself gave the meaning: <em>"For the life of the flesh is in the blood: and I have given it to you upon the altar to make an atonement for your souls: for it is the blood that maketh an atonement for the soul."</em> Blood is life poured out in the place of the guilty. That is why the writer to the Hebrews concluded that <em>"without shedding of blood is no remission."</em> From the coats of skins in Eden to the Lamb of God at Calvary, the line never breaks.</p>
+<p>Water carries two meanings that never contradict each other: cleansing and the word, and the Spirit poured out on the thirsty. Paul speaks of <em>"the washing of water by the word,"</em> and the Lord Jesus Christ stood in the temple and cried that out of the believer's inner man would flow rivers of living water. Oil is the settled symbol of the Holy Ghost and of anointing for service. When Samuel took the horn of oil and anointed David, <em>"the Spirit of the LORD came upon David from that day forward."</em> The oil is never the power; the oil marks the man on whom the power rests.</p>
+<p>Leaven is a symbol you must not soften. It always pictures the working of corruption — sin, false doctrine, hypocrisy — spreading quietly through the whole. <em>"A little leaven leaveneth the whole lump."</em> That is why the Passover was eaten with unleavened bread, and why the Lord Jesus Christ warned His disciples to beware of the leaven of the Pharisees and of the Sadducees. Sin is never static. Left alone in a house, a heart, or a church, it works.</p>
+<p>The lamb is innocence offered in the place of the guilty, and John the Baptist gathered up two thousand years of lambs in one sentence: <em>"Behold the Lamb of God, which taketh away the sin of the world."</em> The rock is the unmoving faithfulness of God and the smitten source of supply — Paul says of the wilderness rock that <em>"that Rock was Christ."</em> Light is God's presence, God's truth, and God's guidance; the psalmist said, <em>"Thy word is a lamp unto my feet, and a light unto my path,"</em> and the Lord Jesus Christ said, <em>"I am the light of the world."</em></p>
+<p>Then there is the veil. In the tabernacle and in the temple, a thick curtain stood between the people and the mercy seat, and it said one thing every day for fifteen hundred years: you cannot come in. Now notice what happened the moment the Lord Jesus Christ died. <em>"And, behold, the veil of the temple was rent in twain from the top to the bottom."</em> From the top — no man's hands did that. And Hebrews tells us plainly what the veil was a picture of: we enter <em>"by a new and living way, which he hath consecrated for us, through the veil, that is to say, his flesh."</em> His body torn is our open door.</p>
+<p>Numbers in Scripture carry meaning the same way. Three is the number of God Himself and of divine completeness — <em>"there are three that bear record in heaven, the Father, the Word, and the Holy Ghost: and these three are one"</em> — and it is the number of resurrection, three days and three nights. Seven is the number of completion and rest, because on the seventh day God ended His work and rested; it runs through the feasts, the lampstand, the sabbaths, and the seals. Twelve is the number of God's government and His people: twelve tribes, twelve apostles, and the wall of the city with <em>"twelve foundations, and in them the names of the twelve apostles of the Lamb."</em></p>
+<p>Forty is the number of testing and of a generation proved: forty days of rain, forty years in the wilderness, forty days of fasting by Moses, by Elijah, and by the Lord Jesus Christ Himself. And seventy is the number of appointed times and of nations — seventy elders, seventy years of captivity, seventy weeks determined upon Daniel's people. Handle these numbers soberly. We do not build doctrine out of arithmetic, and we do not go hunting for hidden codes. But when God repeats a number deliberately across a thousand years of Scripture, only a careless reader walks past it. Learn the language, and the Book will open to you.</p>
+<aside class="key"><div class="key-t">Hold onto this: Symbols are a language, and God keeps it consistent</div><p>Blood is life given for the guilty, oil is the Holy Ghost, leaven is corruption spreading, the veil is His flesh. Learn the language and the whole Bible speaks with one voice.</p></aside>
+<div class="check" data-check="1"></div>
+<h3 id="lesson-3">3. Christophanies: The Angel of the LORD</h3>
+<p>Now we come to one of the most thrilling revelations in all the Old Testament. Long before Bethlehem, long before the manger and the shepherds and the star, the Son of God was appearing to men. We call these appearances Christophanies — visible appearances of the Lord Jesus Christ before His incarnation. He did not begin at Bethlehem. Bethlehem is where He took flesh; it is not where He began.</p>
+<p>Start with the principle that governs the whole subject. John wrote, <em>"No man hath seen God at any time; the only begotten Son, which is in the bosom of the Father, he hath declared him."</em> No man has seen the Father. Yet the Old Testament repeatedly says that men saw God and lived. Both statements are true, and there is only one way to hold them together: the One who was seen is the Son, who has always been the One who declares and reveals the Father. And when the Lord Jesus Christ said, <em>"Before Abraham was, I am,"</em> He was not making a debating point. He was telling the men of Jerusalem that He was already there.</p>
+<p>Go to Genesis 18. Three men come to Abraham in the plains of Mamre, and Moses does not hesitate to say, <em>"And the LORD appeared unto him in the plains of Mamre."</em> Abraham feeds Him, walks with Him, and then stands and pleads with Him for Sodom. Notice how Abraham addresses this Visitor: <em>"Shall not the Judge of all the earth do right?"</em> He is not talking to a messenger. He is talking to the Judge of all the earth, in a body, eating a meal under a tree. That is our Lord Jesus Christ, prefiguring the day when He would sit and eat with sinners.</p>
+<p>Go to Genesis 32. Jacob is alone at the brook Jabbok, and a Man wrestles with him until the breaking of the day. The Man touches the hollow of his thigh and he is marked for life. Jacob will not let go until he is blessed, and then he names the place, and his own words are the interpretation: <em>"And Jacob called the name of the place Peniel: for I have seen God face to face, and my life is preserved."</em> Face to face with God, and he lived. That is the Son.</p>
+<p>Go to Exodus 3. <em>"And the angel of the LORD appeared unto him in a flame of fire out of the midst of a bush: and he looked, and, behold, the bush burned with fire, and the bush was not consumed."</em> Watch what happens next in the passage: the angel of the LORD speaks, and the text says God called to him out of the bush, and this Person tells Moses to take off his shoes because the ground is holy, and then declares His own name — <em>"I AM THAT I AM."</em> An angel does not accept worship and an angel does not own that Name. That is the same I AM who stood in the temple centuries later and said, Before Abraham was, I am.</p>
+<p>Go to Joshua 5. Joshua sees a Man with a drawn sword, and asks whose side He is on. The answer humbles him: <em>"Nay; but as captain of the host of the LORD am I now come."</em> Then comes the test that settles the matter every time. This Captain says, <em>"Loose thy shoe from off thy foot; for the place whereon thou standest is holy."</em> Joshua falls on his face and worships, and he is not rebuked. Every created angel in Scripture refuses worship. This One receives it, because He is God.</p>
+<p>Go to Judges 13. The angel of the LORD comes to Manoah and his wife to announce the birth of Samson. Manoah asks His name, and the answer is beautiful: <em>"Why askest thou thus after my name, seeing it is secret?"</em> The word carries the sense of wonderful — the very title Isaiah would later give to the Child born unto us. He ascends in the flame of the altar, and Manoah says to his wife, <em>"We shall surely die, because we have seen God."</em> He knew exactly who had visited his house.</p>
+<p>And go to Daniel 3. Three Hebrew young men will not bow, and they are thrown into a furnace heated seven times. Then a heathen king looks into the fire and says, <em>"Lo, I see four men loose, walking in the midst of the fire, and they have no hurt; and the form of the fourth is like the Son of God."</em> Four men, walking, loose. The only thing burned was the ropes. Beloved, that is the whole gospel in a furnace: the Lord Jesus Christ does not always keep His people out of the fire, but He goes into it with them, and He unties them while they are in there.</p>
+<p>So set this truth deep. The God who walked with Abraham, wrestled with Jacob, spoke from the bush, stood before Joshua with a sword, ascended in Manoah's flame, and walked in Nebuchadnezzar's furnace is the same Lord Jesus Christ who hung on Calvary and rose the third day. He is not a new God. He is the eternal Son, and He has always come near to His people.</p>
+<aside class="key"><div class="key-t">Hold onto this: He did not begin at Bethlehem</div><p>The Angel of the LORD who appeared to Abraham, Jacob, Moses, Joshua, Manoah, and the three Hebrew children accepted worship and bore the Name I AM. He is the pre-incarnate Lord Jesus Christ.</p></aside>
+<div class="check" data-check="2"></div>
+<h3 id="lesson-4">4. Types of the Lord Jesus Christ</h3>
+<p>A type is a real person, event, or object in the Old Testament that God deliberately shaped to picture something greater that was coming. It is not an allegory we invent; it is a portrait God painted. Paul uses the word himself when he says that Adam <em>"is the figure of him that was to come."</em> That word figure is the word type. We are not being clever here. We are following the Holy Ghost.</p>
+<p>Adam is the first. He is head of a race, and what he did reached every person in him. Paul draws the line straight: the first man Adam was made a living soul, the last Adam a quickening spirit. Adam brought death to all who were in him; the Lord Jesus Christ, the last Adam, brings life to all who are in Him. Adam was put to sleep and from his opened side God took a bride. Look at Calvary and see the second Adam sleeping in death, His side opened, His bride purchased.</p>
+<p>Then comes Isaac on Moriah. A father takes his only son, the son of promise, the son whom he loves, to a mountain in the land of Moriah. The son carries the wood up the hill on his own shoulders. He is old enough to resist and does not. And when he asks about the offering, Abraham answers with a prophecy larger than he knew: <em>"My son, God will provide himself a lamb for a burnt offering."</em> On that same range of hills, God did provide Himself a Lamb, and that time there was no ram in the thicket, because there was no substitute for the Substitute.</p>
+<p>Joseph is the fullest portrait of all. He is the beloved son of his father, sent to his brethren, and his brethren hate him and will not have him reign over them. He is stripped, thrown into a pit, sold for pieces of silver, and counted as dead. He is falsely accused and numbered with two condemned men, one saved and one lost. He is raised out of the prison to the right hand of the throne, given a name above every name in Egypt, and given a bride from among the nations. And when the famine comes, the only bread in the world is in the hand of the brother they rejected. When at last he reveals himself to them, he says, <em>"Ye thought evil against me; but God meant it unto good, to bring to pass, as it is this day, to save much people alive."</em> That is the cross in one sentence.</p>
+<p>The Passover lamb is the type God commanded a whole nation to act out every year. A lamb without blemish, kept up four days, killed at evening, not a bone broken, and the blood applied — not merely shed, but applied — to the door. And the promise was not, When you feel worthy, but <em>"when I see the blood, I will pass over you."</em> Paul does not leave us guessing: <em>"For even Christ our passover is sacrificed for us."</em></p>
+<p>Moses is the deliverer type. Born under a death decree, hidden, raised in a foreign court, refusing a palace to take the reproach of his brethren, sent back to a people who first refuse him and later follow him out of bondage. Moses himself said, <em>"The LORD thy God will raise up unto thee a Prophet from the midst of thee, of thy brethren, like unto me; unto him ye shall hearken."</em> He knew he was the shadow of a greater Deliverer.</p>
+<p>The brazen serpent is the strangest type and the plainest, because the Lord Jesus Christ interpreted it for us. The bitten and dying were told to look at a serpent of brass lifted on a pole — the very image of the thing that was killing them, hung up in judgement — and whoever looked, lived. <em>"And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up."</em> He who knew no sin was made sin for us. No struggling, no worthiness. Look and live.</p>
+<p>Boaz is the kinsman-redeemer, and the law required three things of such a man: he must be a near kinsman, he must be able to pay, and he must be willing. The Lord Jesus Christ took flesh to become our near kinsman; He alone was able to pay; and He was willing, for no one took His life from Him. Job, in the oldest book in the Bible, already knew Him: <em>"For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth."</em></p>
+<p>David is the shepherd-king, anointed long before he was crowned, rejected and hunted while another sat on the throne. Jonah is the sign of the resurrection, and the Lord Jesus Christ said so Himself: <em>"As Jonas was three days and three nights in the whale's belly; so shall the Son of man be three days and three nights in the heart of the earth."</em> And Melchizedek, king of Salem and priest of the most high God, who brought forth bread and wine and appears without genealogy, is <em>"made like unto the Son of God; abideth a priest continually."</em> Aaron's priesthood died and had to be replaced; this Priest never dies. Count them together and you are looking at one Face.</p>
+<aside class="key"><div class="key-t">Hold onto this: These are portraits God painted, not pictures we invented</div><p>Adam, Isaac, Joseph, the Passover lamb, Moses, the brazen serpent, Boaz, David, Jonah, and Melchizedek each carry one feature of the Lord Jesus Christ. Together they are one Face.</p></aside>
+<div class="check" data-check="3"></div>
+<h3 id="lesson-5">5. The Gap Theory: Genesis 1:1 and 1:2</h3>
+<p>Read the first two verses of the Bible slowly, and read them as they stand. <em>"In the beginning God created the heaven and the earth. And the earth was without form, and void; and darkness was upon the face of the deep."</em> Now ask yourself the question that honest reading forces on you: how did a creation that came from the hand of a perfect God end up without form and void, with darkness on the face of it? Something happened between verse one and verse two. That space is what we call the gap, and understanding it will unlock passages all over your Bible.</p>
+<p>Take God's own testimony about how He makes things. Through Isaiah He says, <em>"For thus saith the LORD that created the heavens; God himself that formed the earth and made it; he hath established it, he created it not in vain, he formed it to be inhabited: I am the LORD; and there is none else."</em> He created it not in vain. Now the word rendered <em>without form</em> in Genesis 1:2 is the same Hebrew word rendered <em>in vain</em> in Isaiah 45:18. So God says plainly, I did not create the earth in that condition. If He did not create it that way, then it came to be that way. The verb in Genesis 1:2 will bear the sense <em>became</em> — the earth became without form, and void.</p>
+<p>What could ruin a world God had made? Only rebellion, and Scripture tells us whose rebellion it was. Isaiah cries, <em>"How art thou fallen from heaven, O Lucifer, son of the morning! how art thou cut down to the ground, which didst weaken the nations!"</em> And the five great boasts follow, each one beginning with <em>I will</em>: <em>"I will ascend into heaven, I will exalt my throne above the stars of God: I will sit also upon the mount of the congregation, in the sides of the north: I will ascend above the heights of the clouds; I will be like the most High."</em> That is the first sin in the universe, and it was pride.</p>
+<p>Ezekiel takes us further back still. Speaking to the king of Tyrus but plainly reaching past him to the power behind him, God says, <em>"Thou hast been in Eden the garden of God,"</em> covered in precious stones, the anointed cherub that covereth, walking in the midst of the stones of fire. And then the sentence that fixes the whole doctrine: <em>"Thou wast perfect in thy ways from the day that thou wast created, till iniquity was found in thee."</em> He was created perfect. Iniquity was found in him afterward. And God's judgement followed: <em>"I will cast thee to the ground."</em> The Lord Jesus Christ, who was there, said, <em>"I beheld Satan as lightning fall from heaven."</em></p>
+<p>Now put Jeremiah beside Genesis. In Jeremiah 4 the prophet is given a vision of judgement, and listen to the words he chooses: <em>"I beheld the earth, and, lo, it was without form, and void; and the heavens, and they had no light."</em> That is the exact language of Genesis 1:2. He goes on: he beheld the mountains trembling, and no man, and the birds of the heavens fled, <em>"and, lo, the fruitful place was a wilderness, and all the cities thereof were broken down at the presence of the LORD, and by his fierce anger."</em> Cities broken down. A fruitful place made a wilderness by the fierce anger of God. Jeremiah is showing us what divine wrath does to a world, and he uses the very words of Genesis 1:2 to do it.</p>
+<p>Peter adds his witness, warning of men who are willingly ignorant <em>"that by the word of God the heavens were of old, and the earth standing out of the water and in the water: whereby the world that then was, being overflowed with water, perished."</em> The world that then was. There is an order of things that perished under water, and the earth of Genesis 1:2 lies under the deep, in darkness, exactly so.</p>
+<p>So here is the teaching, plainly. In the beginning, in an age whose length we are not given, God created the heavens and the earth perfect and inhabited, with Lucifer as the anointed cherub over it. Lucifer fell through pride, drew a host of angels with him, and the judgement of God fell, so that the earth became without form and void, covered with water and darkness. Then the Spirit of God moved upon the face of the waters, and the six days that follow are the restoring of a ruined earth for man. That is why God tells Adam and Eve to <em>"be fruitful, and multiply, and replenish the earth"</em> — to fill it again.</p>
+<p>Do not let this remain a curiosity of Bible study. It tells you why there is a devil at all, and why he hates this planet and the man God set over it. It tells you that pride is the oldest sin there is, and that God would not tolerate it in a cherub, so He will not tolerate it in a preacher. And it tells you that our God takes what is ruined, void, and dark, moves His Spirit upon it, speaks light into it, and makes it fruitful again. He did it to a planet. He will do it to you.</p>
+<aside class="key"><div class="key-t">Hold onto this: God created it not in vain</div><p>Between Genesis 1:1 and 1:2 lies the fall of Lucifer and the judgement that left the earth without form and void. The six days are God restoring a ruined earth — and He restores ruined lives the same way.</p></aside>
+<div class="check" data-check="4"></div>
+<h3 id="lesson-6">6. Daniel&#x27;s Timeline and the Rebirth of Israel in 1948</h3>
+<p>God does not keep time the way men keep time, but He does keep time, and He wrote some of it down in advance. In this lesson I want to walk you through a calculation from the prophets that lands on a date every one of us has lived to see: the fourteenth of May, 1948, when the nation of Israel was born in a single day after nineteen hundred years of exile. Take it slowly, step by step, and you will be able to work it out yourself with a pencil.</p>
+<p>Step one is Ezekiel 4. God tells the prophet to lie on his left side for three hundred and ninety days, and then on his right side for forty days, and He gives the key to the sign in the text itself: <em>"I have appointed thee each day for a year."</em> So three hundred and ninety days for the house of Israel and forty days for the house of Judah are three hundred and ninety years and forty years of punishment for the nation's iniquity. Add them: 390 plus 40 is 430 years of appointed chastisement.</p>
+<p>Step two is the seventy years of Babylon. Jeremiah had prophesied that <em>"these nations shall serve the king of Babylon seventy years,"</em> and that captivity ran its full course; Daniel himself says he understood by books the number of the years. So of the four hundred and thirty years of punishment, seventy were served in Babylon. Subtract them: 430 minus 70 leaves 360 years of the sentence still unserved when Cyrus let the people go.</p>
+<p>Step three is the most important, and it is where most people stop reading. When the seventy years ended, only a remnant went home, and the nation as a whole did not turn back to God with its whole heart. Now go to Leviticus 26, where God laid down His terms long before any of it happened. Four times over He says the same thing to a people who will not repent under chastisement: <em>"then I will punish you seven times more for your sins."</em> He repeats it in verse twenty-one, and in verse twenty-four, and again in verse twenty-eight — <em>"I, even I, will chastise you seven times for your sins."</em> The remaining sentence is therefore multiplied by seven. Take the 360 years still owing and multiply: 360 times 7 is 2,520 years.</p>
+<p>Step four is the length of a Bible year. Scripture does not reckon by our calendar; it reckons by a year of three hundred and sixty days, twelve months of thirty days each. You can prove it out of Revelation 11, where the same period is called <em>"forty and two months"</em> in verse two and then <em>"a thousand two hundred and threescore days"</em> in verse three. Forty-two months equal one thousand two hundred and sixty days, and that gives you exactly thirty days to a month and three hundred and sixty days to a year. So convert the sentence into days: 2,520 years times 360 days is 907,200 days.</p>
+<p>Step five is to lay those days out on the calendar we actually live by. A solar year is 365.24219 days. Divide: 907,200 divided by 365.24219 gives 2,483.78 solar years — that is two thousand four hundred and eighty-three years and about two hundred and eighty-five days.</p>
+<p>Step six is to start counting from the right place. The captivity ended and the return began under the decree of Cyrus, in 536 BC. Count 2,483 years forward from 536 BC. Subtract: 2,483 minus 536 is 1,947, and then you must add one year, because there is no year zero on our calendar — the year after 1 BC is AD 1. That brings you to 1948. And the remaining fraction, those two hundred and eighty-five days or so, falls inside that same year. The count runs out in 1948.</p>
+<p>Now look up from the arithmetic and look at what happened. On the fourteenth of May, 1948, the nation of Israel was declared and reborn, and a people scattered among all nations since AD 70 had a homeland again. Isaiah had asked the question centuries before with astonishment in his voice: <em>"Who hath heard such a thing? who hath seen such things? Shall the earth be made to bring forth in one day? or shall a nation be born at once? for as soon as Zion travailed, she brought forth her children."</em> A nation born at once. That is not poetry any more. That is history, and it happened in a single day.</p>
+<p>I am not telling you this so that you can win an argument, and I am certainly not telling you to go and set dates for things God has not dated. I am telling you because it will settle your faith. The God of Ezekiel counted out the years of a nation's chastisement before the chastisement began, wrote the terms of its multiplication in Leviticus before Israel ever entered the land, and brought the whole account to its end in a century that men now living can remember. <em>"Surely the Lord GOD will do nothing, but he revealeth his secret unto his servants the prophets."</em> If He is that exact with a nation, He is that exact with you. Not one word of His promises to you will fall to the ground.</p>
+<aside class="key"><div class="key-t">Hold onto this: 430 minus 70, times 7, is 2,520 years</div><p>Ezekiel's 430 years of punishment less the 70 years in Babylon leaves 360; multiplied seven times over per Leviticus 26 gives 2,520 biblical years, or 907,200 days, which run from 536 BC to 1948.</p></aside>
+<div class="check" data-check="5"></div>
+<h3 id="lesson-7">7. The Seventy Weeks: Messiah Cut Off and the Temple Fulfilled</h3>
+<p>Daniel 9 contains the most astonishing piece of arithmetic in the Bible. An old man in Babylon, reading Jeremiah and praying with fasting, is visited by Gabriel and given the exact number of years from a decree not yet issued to the arrival of Messiah the Prince. A student who sees this for himself never doubts the Scriptures again.</p>
+<p>Gabriel begins: <em>"Seventy weeks are determined upon thy people and upon thy holy city, to finish the transgression, and to make an end of sins, and to make reconciliation for iniquity, and to bring in everlasting righteousness."</em> The word rendered weeks means sevens, and here it is sevens of years, as Israel reckoned her sabbatical years. So seventy sevens is 70 times 7, which is 490 years determined upon Daniel's people and upon Jerusalem.</p>
+<p>Then Gabriel divides the 490 and gives the starting gun: <em>"from the going forth of the commandment to restore and to build Jerusalem unto the Messiah the Prince shall be seven weeks, and threescore and two weeks."</em> Seven weeks plus sixty-two weeks is sixty-nine weeks. Multiply: 69 times 7 is 483 years from the decree to Messiah the Prince.</p>
+<p>Which decree? Not the decree of Cyrus, which concerned the temple, but the commandment to restore and to build Jerusalem itself. That is Nehemiah 2, and we are told exactly when: <em>"And it came to pass in the month Nisan, in the twentieth year of Artaxerxes the king,"</em> and Nehemiah asks to be sent to rebuild the city of his fathers' sepulchres. That is the spring of 445 BC — the first of Nisan, the fourteenth of March on our calendar.</p>
+<p>Now do the arithmetic in prophetic years of three hundred and sixty days, as the last lesson established from Revelation 11. Multiply 483 years by 360 days: that is 173,880 days. Divide by 365.24219 to reach our solar reckoning: 476.06 years — four hundred and seventy-six years and about twenty-four days.</p>
+<p>Count them out. From 445 BC, four hundred and seventy-six years forward: 476 minus 445 is 31, and add one year because there is no year zero between 1 BC and AD 1, which brings you to AD 32. Add the remaining twenty-four days to the fourteenth of March, and you arrive at the sixth of April, AD 32. On that day the Lord Jesus Christ, who had again and again forbidden men to proclaim Him, sent for a colt, rode into Jerusalem, and received the shouts of the multitude as Zechariah had foretold — <em>"behold, thy King cometh unto thee: he is just, and having salvation; lowly, and riding upon an ass."</em> Messiah the Prince presented Himself to the city on the very day Gabriel had named to Daniel. And what did He weep over that afternoon? That they did not know <em>"the time of thy visitation."</em> The time had been written down. They had not done the sum.</p>
+<p>Read the next verse and feel its weight: <em>"And after threescore and two weeks shall Messiah be cut off, but not for himself."</em> Cut off — the word means executed, put to death, cut off from the land of the living. But notice the four words that hold the gospel: <em>"but not for himself."</em> He had no sin of His own to die for. He was cut off for you. He was cut off for me. Daniel knew that centuries before Calvary.</p>
+<p>Then the sequence continues, and it is exact. After Messiah is cut off, the people of the prince that shall come destroy the city and the sanctuary. The Lord Jesus Christ confirmed it as He came out of the temple, when the disciples pointed out its stones: <em>"See ye not all these things? verily I say unto you, There shall not be left here one stone upon another, that shall not be thrown down."</em> In AD 70 the armies of Rome under Titus took Jerusalem, burned the temple, and levelled it. Note the order: Messiah first cut off, then the sanctuary destroyed. Daniel put them in that order, and history obeyed. Note also that the seventieth week is not consumed in the sixty-nine; it stands still future.</p>
+<p>Now let me bring the Temple home, for that is where this lesson must land. When they demanded a sign, the Lord Jesus Christ answered, <em>"Destroy this temple, and in three days I will raise it up,"</em> and John adds the commentary: <em>"But he spake of the temple of his body."</em> The building of stone was only ever a picture. Rome threw down the stones; it could not touch the Temple that mattered, for that One was already raised.</p>
+<p>And here is the wonder of it. Having fulfilled the Temple in His own body, He makes His people the dwelling place of God: <em>"Know ye not that ye are the temple of God, and that the Spirit of God dwelleth in you?"</em> Not one stone of Herod's temple stands on another today, but the Holy Ghost lives in the redeemed all over this earth. Prophecy is not a puzzle for clever men; it is a summons to holiness. If the God who timed the entry of His Son into Jerusalem to the very day now lives in your body, handle that body, that mouth, and that life as the sanctuary it has become.</p>
+<aside class="key"><div class="key-t">Hold onto this: 69 weeks is 483 years, or 173,880 days</div><p>From the decree to rebuild Jerusalem in 445 BC, 173,880 days run to the day the Lord Jesus Christ rode into the city; then Messiah was cut off, but not for Himself, and the sanctuary fell in AD 70.</p></aside>
+<div class="check" data-check="6"></div>
+      </div>
+
+    <div class="actions">
+      <button class="btn gold" id="toExam" type="button">Take the assessment</button>
+      <button class="btn ghost" data-goto="1" type="button">Back</button>
+    </div>
+  </section>
+
+  <!-- ============ III. ASSESSMENT ============ -->
+  <section class="panel" id="s3" hidden>
+    <div class="eyebrow">Section III</div>
+    <h2>Assessment</h2>
+    <p class="lesson">Twenty-five questions. The passing standard is 80%; 90% or above is awarded with honors. Answer every question, then submit. The questions and their answers are placed in a different order every time.</p>
+    <div class="lock" id="lock" hidden>
+      <h3>Return to the Reading First</h3>
+      <p>The assessment was not passed. Go back through the reading, then come back. The assessment reopens in</p>
+      <div class="clock" id="lockClock">—</div>
+      <p class="lock-note" id="lockNote"></p>
+    </div>
+    <form id="examForm"></form>
+    <p class="warn" id="warn" hidden>Every question needs an answer before you submit.</p>
+    <div class="actions">
+      <button class="btn gold" id="submitExam" type="button">Submit assessment</button>
+      <button class="btn ghost" data-goto="2" type="button">Return to reading</button>
+    </div>
+  </section>
+
+  <!-- ============ IV. RESULTS ============ -->
+  <section class="panel" id="s4" hidden>
+    <div class="eyebrow">Section IV</div>
+    <h2>Assessment Results</h2>
+    <div class="result">
+      <div class="pct" id="pct"></div>
+      <div class="sub" id="sub"></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="msg" id="msg"></p>
+      <div class="bars" id="bars"></div>
+      <div class="analysis" id="analysis"></div>
+    </div>
+
+    <div id="certWrap"></div>
+
+    <h3 id="reviewHead" style="margin-top:2.5rem">Answer Review</h3>
+    <div id="review"></div>
+
+    <div class="actions no-print">
+      <button class="btn" id="printCert" type="button">Print or save certificate</button>
+      <button class="btn ghost" id="retake" type="button">Retake the assessment</button>
+      <a class="btn ghost" href="index.html">Home</a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=6"></script>
+<script>
+const COURSE = {
+  title: "The Old Testament",
+  assessment: "The Old Testament: Revelations, Types, and Prophecy",
+  pass: 80, honors: 90
+};
+
+// Topics used for the score breakdown.
+const T = {"RV": "Revelations and covenants", "SY": "Symbols and types", "CH": "Christophanies", "GP": "The gap theory", "DN": "Daniel and the timelines"};
+
+const QUESTIONS = [
+ {t:"RV", q:"What does the lesson mean by calling the Old Testament ordinances a shadow?",
+  o:["They were false and should be ignored", "They were unimportant details of Hebrew culture", "They were real pictures cast by the substance, which is the Lord Jesus Christ", "They were added by scribes long after Moses"], a:2, v:"Colossians 2:17", vt:"Which are a shadow of things to come; but the body is of Christ.", l:1},
+ {t:"RV", q:"What was promised as new about the new covenant announced through Jeremiah?",
+  o:["A larger temple in Jerusalem", "God's law written in the inward parts and in the heart", "The end of all sacrifice for Israel only", "A new set of stone tablets"], a:1, v:"Jeremiah 31:33", vt:"I will put my law in their inward parts, and write it in their hearts; and will be their God, and they shall be my people.", l:1},
+ {t:"RV", q:"According to the lesson, what did the covenant God made with David promise?",
+  o:["A throne established for ever", "A share in the Egyptian kingdom", "That his sons would never sin", "That the ark would never move again"], a:0, v:"2 Samuel 7:16", vt:"And thine house and thy kingdom shall be established for ever before thee: thy throne shall be established for ever.", l:1},
+ {t:"SY", q:"How does the lesson describe the purpose of the law given through Moses?",
+  o:["To make Israel superior to other nations", "To replace the promise given to Abraham", "To serve as a schoolmaster bringing us to the Lord Jesus Christ", "To provide a permanent way of justification"], a:2, v:"Galatians 3:24", vt:"Wherefore the law was our schoolmaster to bring us unto Christ, that we might be justified by faith.", l:1},
+ {t:"SY", q:"Why does the lesson say blood stands at the centre of the Old Testament symbols?",
+  o:["Because sacrifice was common in the ancient world", "Because the blood carries the life and God gave it upon the altar to make atonement", "Because red was the colour of the tabernacle", "Because priests needed a way to be paid"], a:1, v:"Leviticus 17:11", vt:"For the life of the flesh is in the blood: and I have given it to you upon the altar to make an atonement for your souls: for it is the blood that maketh an atonement for the soul.", l:2},
+ {t:"SY", q:"What did the rending of the temple veil at the death of the Lord Jesus Christ signify?",
+  o:["That the temple building was now worthless", "That the priesthood had failed in its duties", "That the way into the holiest was opened through His flesh", "That an earthquake had damaged the curtain"], a:2, v:"Hebrews 10:20", vt:"By a new and living way, which he hath consecrated for us, through the veil, that is to say, his flesh;", l:2},
+ {t:"SY", q:"In the lesson, what does oil consistently represent?",
+  o:["Wealth and prosperity", "The Holy Ghost and anointing for service", "The wisdom of the elders", "The covenant with Abraham"], a:1, v:"1 Samuel 16:13", vt:"Then Samuel took the horn of oil, and anointed him in the midst of his brethren: and the Spirit of the LORD came upon David from that day forward.", l:2},
+ {t:"SY", q:"What did Paul say the rock in the wilderness was?",
+  o:["A symbol of Moses' leadership", "An ordinary stone with a hidden spring", "The Lord Jesus Christ", "A picture of the law given at Sinai"], a:2, v:"1 Corinthians 10:4", vt:"And did all drink the same spiritual drink: for they drank of that spiritual Rock that followed them: and that Rock was Christ.", l:2},
+ {t:"CH", q:"How does the lesson reconcile \"No man hath seen God at any time\" with Jacob saying he saw God face to face?",
+  o:["Jacob was mistaken about what he saw", "The Old Testament writers exaggerated", "The One seen is the Son, who declares the Father whom no man has seen", "God changed His mind about being seen"], a:2, v:"John 1:18", vt:"No man hath seen God at any time; the only begotten Son, which is in the bosom of the Father, he hath declared him.", l:3},
+ {t:"CH", q:"What did Nebuchadnezzar say about the fourth man in the furnace?",
+  o:["That his form was like the Son of God", "That he was a Babylonian priest", "That he was one of the king's counsellors", "That he was a vision brought on by the heat"], a:0, v:"Daniel 3:25", vt:"He answered and said, Lo, I see four men loose, walking in the midst of the fire, and they have no hurt; and the form of the fourth is like the Son of God.", l:3},
+ {t:"CH", q:"What claim did the Lord Jesus Christ make that places Him in the Old Testament appearances?",
+  o:["That He had studied the prophets carefully", "That Abraham was His earthly ancestor", "That He would return to Jerusalem", "That before Abraham was, I am"], a:3, v:"John 8:58", vt:"Jesus said unto them, Verily, verily, I say unto you, Before Abraham was, I am.", l:3},
+ {t:"CH", q:"What did the Captain of the LORD's host require of Joshua?",
+  o:["To sound the trumpet immediately", "To loose his shoe from off his foot because the place was holy", "To offer a burnt sacrifice on the spot", "To choose between two armies"], a:1, v:"Joshua 5:15", vt:"And the captain of the LORD'S host said unto Joshua, Loose thy shoe from off thy foot; for the place whereon thou standest is holy. And Joshua did so.", l:3},
+ {t:"SY", q:"Why does the lesson call Adam a type of the Lord Jesus Christ?",
+  o:["Because he was sinless throughout his life", "Because he named the animals", "Because he is a head of a race whose act reached all who were in him", "Because he lived nine hundred years"], a:2, v:"Romans 5:14", vt:"Nevertheless death reigned from Adam to Moses, even over them that had not sinned after the similitude of Adam's transgression, who is the figure of him that was to come.", l:4},
+ {t:"SY", q:"What did the brazen serpent on the pole teach about salvation?",
+  o:["That the dying were healed simply by looking at what was lifted up", "That the bitten had to be carried to Moses first", "That only the strongest survived the wilderness", "That brass has healing properties"], a:0, v:"John 3:14", vt:"And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up:", l:4},
+ {t:"SY", q:"What sign did the Lord Jesus Christ say Jonah was?",
+  o:["A sign of repentance among the Gentiles only", "A sign of three days and three nights in the heart of the earth", "A sign of judgement upon Nineveh alone", "A sign that prophets must flee persecution"], a:1, v:"Matthew 12:40", vt:"For as Jonas was three days and three nights in the whale's belly; so shall the Son of man be three days and three nights in the heart of the earth.", l:4},
+ {t:"RV", q:"Why is the priesthood of Melchizedek greater than that of Aaron?",
+  o:["Because Melchizedek was older than Aaron", "Because Melchizedek offered more sacrifices", "Because Aaron's priests died and had to be replaced, while this Priest abides continually", "Because Melchizedek ruled a larger kingdom"], a:2, v:"Hebrews 7:3", vt:"Without father, without mother, without descent, having neither beginning of days, nor end of life; but made like unto the Son of God; abideth a priest continually.", l:4},
+ {t:"GP", q:"What does Isaiah 45:18 contribute to the gap teaching?",
+  o:["That the earth will be destroyed by fire", "That the heavens were made before the earth", "That creation took exactly six days", "That God created the earth not in vain but formed it to be inhabited"], a:3, v:"Isaiah 45:18", vt:"For thus saith the LORD that created the heavens; God himself that formed the earth and made it; he hath established it, he created it not in vain, he formed it to be inhabited: I am the LORD; and there is none else.", l:5},
+ {t:"GP", q:"According to Ezekiel, what was true of the anointed cherub before his fall?",
+  o:["He was created imperfect and grew worse", "He was never in the garden of God", "He was perfect in his ways from the day he was created, till iniquity was found in him", "He was made lower than the beasts of the field"], a:2, v:"Ezekiel 28:15", vt:"Thou wast perfect in thy ways from the day that thou wast created, till iniquity was found in thee.", l:5},
+ {t:"GP", q:"Why does the lesson point to Jeremiah 4:23 as evidence for the gap?",
+  o:["Because it names Lucifer directly", "Because it describes a scene of judgement in the exact words of Genesis 1:2", "Because it predicts the flood of Noah", "Because it gives the age of the earth"], a:1, v:"Jeremiah 4:23", vt:"I beheld the earth, and, lo, it was without form, and void; and the heavens, and they had no light.", l:5},
+ {t:"DN", q:"What rule does God give in Ezekiel 4 for reading the days the prophet lay on his side?",
+  o:["Each day stands for a month", "Each day stands for a generation", "Each day is appointed for a year", "Each day stands for a tribe of Israel"], a:2, v:"Ezekiel 4:6", vt:"And when thou hast accomplished them, lie again on thy right side, and thou shalt bear the iniquity of the house of Judah forty days: I have appointed thee each day for a year.", l:6},
+ {t:"DN", q:"Why is the remaining 360 years multiplied by seven in the calculation?",
+  o:["Because seven is the number of completion in Scripture", "Because Leviticus 26 warns of punishment seven times more for continued disobedience", "Because there were seven decades of captivity", "Because Daniel saw seven visions"], a:1, v:"Leviticus 26:18", vt:"And if ye will not yet for all this hearken unto me, then I will punish you seven times more for your sins.", l:6},
+ {t:"DN", q:"Which prophecy does the lesson say was fulfilled on the fourteenth of May, 1948?",
+  o:["That the temple would be rebuilt in seven years", "That Babylon would fall in a night", "That the seventy weeks would be completed", "That a nation would be born at once"], a:3, v:"Isaiah 66:8", vt:"Who hath heard such a thing? who hath seen such things? Shall the earth be made to bring forth in one day? or shall a nation be born at once? for as soon as Zion travailed, she brought forth her children.", l:6},
+ {t:"DN", q:"What starting point does Daniel 9:25 give for the sixty-nine weeks?",
+  o:["The going forth of the commandment to restore and to build Jerusalem", "The first year of Nebuchadnezzar", "The dedication of Solomon's temple", "The birth of Daniel"], a:0, v:"Daniel 9:25", vt:"Know therefore and understand, that from the going forth of the commandment to restore and to build Jerusalem unto the Messiah the Prince shall be seven weeks, and threescore and two weeks: the street shall be built again, and the wall, even in troublous times.", l:7},
+ {t:"DN", q:"What do the words \"but not for himself\" tell us about the cutting off of Messiah?",
+  o:["That He died accidentally", "That He had no sin of His own and was cut off for others", "That He was cut off only for Israel's leaders", "That His death was not truly a death"], a:1, v:"Daniel 9:26", vt:"And after threescore and two weeks shall Messiah be cut off, but not for himself: and the people of the prince that shall come shall destroy the city and the sanctuary; and the end thereof shall be with a flood, and unto the end of the war desolations are determined.", l:7},
+ {t:"DN", q:"How was the Temple ultimately fulfilled, according to the lesson?",
+  o:["In the rebuilding of the sanctuary after AD 70", "In the walls Nehemiah completed", "In the body of the Lord Jesus Christ, and then in His people as the temple of God", "In the ark being returned to Jerusalem"], a:2, v:"John 2:21", vt:"But he spake of the temple of his body.", l:7},
+];
+
+const LEVEL_LABEL = {Pastor:"Pastoral"};
+const LESSONS = ["The Old Testament Is the New Testament Concealed", "Biblical Symbols and Numbers", "Christophanies: The Angel of the LORD", "Types of the Lord Jesus Christ", "The Gap Theory: Genesis 1:1 and 1:2", "Daniel's Timeline and the Rebirth of Israel in 1948", "The Seventy Weeks: Messiah Cut Off and the Temple Fulfilled"];
+const $ = s => document.querySelector(s);
+const panels = ["s1","s2","s3","s4"];
+let student = { name:"", level:"Disciple" };
+
+$("#progress").addEventListener("click",e=>{const li=e.target.closest("li"); if(!li) return; const i=[...$("#progress").children].indexOf(li); if(li.classList.contains("done")) goto(i+1);});
+function goto(n){
+  panels.forEach((id,i)=>{ $("#"+id).hidden = (i!==n-1); });
+  [...$("#progress").children].forEach((li,i)=>{
+    li.classList.toggle("active", i===n-1);
+    li.classList.toggle("done", i<n-1);
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+function begin(e){
+  if(e) e.preventDefault();
+  const name = $("#studentName").value.trim();
+  if(!name){ $("#nameWarn").hidden=false; $("#studentName").focus(); return; }
+  $("#nameWarn").hidden=true;
+  student.name = name;
+  student.level = $("#studentLevel").value;
+  goto(2);
+}
+$("#beginBtn").addEventListener("click",begin);
+$("#enrollForm").addEventListener("submit",begin);
+$("#toExam").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+
+
+// ---- Student records: sign-in, server-kept waiting period, shuffled questions ----
+const SLUG = location.pathname.split("/").pop().replace(/\.html$/,"");
+const WAITS = [15, 60, 240, 1440];
+function fmt(ms){ const t=Math.max(0,Math.ceil(ms/1000)); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+"h ":"")+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"; }
+let lockTimer=null;
+function showLock(kind, until, fails){
+  clearInterval(lockTimer);
+  const locked = kind!=="ok";
+  $("#lock").hidden=!locked; $("#examForm").hidden=locked; $("#submitExam").hidden=locked; $("#warn").hidden=true;
+  if(!locked) return true;
+  const h=$("#lock h3"), p=$("#lock p"), clock=$("#lockClock"), note=$("#lockNote");
+  if(kind==="signin"){
+    h.textContent="Sign in to take the assessment"; p.innerHTML='Your results and your certificate are recorded in your student profile. <a href="account.html">Sign in or create your account</a>, then return here and continue from the reading.'; clock.textContent=""; note.textContent="";
+  } else {
+    h.textContent="Return to the reading first"; p.textContent="The assessment was not passed. Go back through the reading, then come back. The assessment reopens in";
+    const nextMins=WAITS[Math.min(fails||1,WAITS.length-1)];
+    note.textContent=`Attempt ${fails} was not passed. Each further attempt that is not passed adds a longer waiting period (the next would be ${nextMins>=60?nextMins/60+" hour"+(nextMins>=120?"s":""):nextMins+" minutes"}).`;
+    const end=new Date(until).getTime();
+    const tick=()=>{ const l=end-Date.now(); clock.textContent=fmt(l); if(l<=0){ clearInterval(lockTimer); examGate().then(ok=>{ if(ok) buildExam(); }); } };
+    tick(); lockTimer=setInterval(tick,1000);
+  }
+  return false;
+}
+async function examGate(){
+  const u = await School.user();
+  if(!u) return showLock("signin");
+  const {data,error} = await School.sb.rpc("exam_gate",{p_course:SLUG});
+  if(error){ alert("Could not reach the student records: "+error.message); return false; }
+  if(data.allowed) return showLock("ok");
+  if(data.reason==="signin") return showLock("signin");
+  return showLock("locked", data.until, data.fails);
+}
+let lastResult=null;
+async function recordResult(correct, total){
+  const {data,error} = await School.sb.rpc("submit_exam",{p_course:SLUG,p_correct:correct,p_total:total,p_pass:COURSE.pass,p_name:student.name,p_level:student.level});
+  if(error){ alert("Your result could not be recorded: "+error.message); return null; }
+  lastResult=data; return data;
+}
+async function fillFromProfile(){
+  const p = await School.profile();
+  if(p){ if(p.name && !$("#studentName").value) $("#studentName").value=p.name; if(p.diploma && $("#studentLevel").querySelector(`option[value="${p.diploma}"]`)) $("#studentLevel").value=p.diploma; }
+}
+fillFromProfile();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let EXAM=[];
+function makeExam(){
+  EXAM = shuffle(QUESTIONS.map(q=>{
+    const idx=shuffle(q.o.map((_,j)=>j));
+    return Object.assign({}, q, { o: idx.map(j=>q.o[j]), a: idx.indexOf(q.a) });
+  }));
+}
+
+function buildExam(){
+  makeExam();
+  const f = $("#examForm"); f.innerHTML="";
+  EXAM.forEach((qu,i)=>{
+    const d = document.createElement("div"); d.className="q";
+    d.innerHTML = `<div class="label">Question ${i+1}</div><p class="prompt">${qu.q}</p>
+      <div class="opts">${qu.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join("")}</div>`;
+    f.appendChild(d);
+  });
+}
+
+$("#submitExam").addEventListener("click",()=>{
+  const answers = EXAM.map((_,i)=>{ const c=document.querySelector(`input[name=q${i}]:checked`); return c? +c.value : null; });
+  if(answers.includes(null)){ $("#warn").hidden=false; return; }
+  $("#warn").hidden=true;
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  recordResult(correct, EXAM.length).then(r=>{ if(r && r.accepted===false){ goto(3); showLock("locked", r.until, r.fails); return; } showResults(answers); goto(4); });
+});
+
+function showResults(answers){
+  const correct = answers.filter((a,i)=>a===EXAM[i].a).length;
+  const pct = Math.round(correct/EXAM.length*100);
+  const passed = pct>=COURSE.pass, honors = pct>=COURSE.honors;
+  $("#pct").textContent = pct+"%";
+  $("#sub").textContent = `${correct} of ${EXAM.length} questions answered correctly`;
+  $("#verdict").textContent = passed ? (honors?"With Honors — Assessment Passed":"Assessment Passed") : "Assessment Not Yet Passed";
+  $("#msg").textContent = passed
+    ? `Congratulations, ${student.name}. You have met the School's standard of ${COURSE.pass}%. Your formal Certificate of Completion is awarded below.`
+    : `${student.name}, the School's standard is ${COURSE.pass}%. Review the topics marked below, return to the reading, and take the assessment again.`;
+
+  // Breakdown by topic
+  const by = {};
+  EXAM.forEach((q,i)=>{ by[q.t] ??= {c:0,n:0}; by[q.t].n++; if(answers[i]===q.a) by[q.t].c++; });
+  $("#bars").innerHTML = Object.entries(by).map(([k,v])=>`
+    <div class="bar"><span>${T[k]}</span><i><b style="width:${v.c/v.n*100}%"></b></i><span>${v.c} / ${v.n}</span></div>`).join("");
+
+  // Analysis
+  const weak = Object.entries(by).filter(([,v])=>v.c<v.n).sort((a,b)=>(a[1].c/a[1].n)-(b[1].c/b[1].n));
+  const strong = Object.entries(by).filter(([,v])=>v.c===v.n).map(([k])=>T[k]);
+  let an = "";
+  if(strong.length) an += `<p>Full marks in ${strong.join(", ")}.</p>`;
+  if(weak.length) {const names=weak.map(([k])=>T[k]); const list=names.length>1?names.slice(0,-1).join(", ")+" and "+names.at(-1):names[0];
+   an += `<p>Return to the reading on <strong>${list}</strong>, where ${weak.length===1?"a question was":"questions were"} missed.</p>`;}
+  else an += `<p>Every topic was answered perfectly.</p>`;
+  $("#analysis").innerHTML = an;
+
+  // Certificate
+  const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  $("#certWrap").innerHTML = passed ? `
+    <div class="certwrap" id="cert"><div class="cert">
+      <div class="abs school1">The School</div>
+      <div class="abs school2">of The Prophets</div>
+      <div class="abs cname">${student.name}</div>
+      <div class="abs ct-course">${COURSE.title}</div>
+      <div class="abs ct-unit">${LEVEL_LABEL[student.level]||student.level} level &middot; ${COURSE.assessment}</div>
+      <div class="abs ct-body">attaining a ${honors?"meritorious":"passing"} score of <strong>${pct}%</strong> (${correct} of ${EXAM.length}), and having thereby demonstrated diligent study of the Scriptures and a thorough comprehension of the appointed reading.</div>
+      <div class="abs col"><h4>Score summary</h4><div>Total Score:</div><div class="big">${pct}%</div><div>Passing Mark: ${COURSE.pass}%</div><div>Honors Mark: ${COURSE.honors}%</div><div style="margin-top:.8cqw">Grade: <strong>${honors?"With Honors":"Pass"}</strong></div><div>Status: <span class="st">PASSED</span></div></div>
+      <div class="abs col r"><h4>Assessment summary</h4>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${T[k]}</span><span>${v.c} / ${v.n}</span></div>`).join("")}<div class="row tot"><span>Total Questions:</span><span>${EXAM.length}</span></div><div class="row"><span>Correct Answers:</span><span>${correct}</span></div><div class="row"><span>Accuracy:</span><span>${pct}%</span></div></div>
+      <div class="abs sig">Robert P. Smith, Sr.</div><div class="abs lab">Bishop Robert P. Smith, Sr.</div>
+      <div class="abs sig r">${date}</div><div class="abs lab r">Date</div>
+    </div></div>` : "";
+  $("#printCert").hidden = !passed;
+
+  // Review
+  $("#review").innerHTML = EXAM.map((q,i)=>{
+    const ok = answers[i]===q.a;
+    return `<div class="q"><div class="label">Question ${i+1} <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p class="prompt">${q.q}</p>
+      <div class="opts">${q.o.map((o,j)=>`<label class="${j===q.a?"correct":(j===answers[i]?"wrong":"")}"><span>${o}</span></label>`).join("")}</div>
+      <p class="proof"><span class="pv">“${q.vt}”</span> <span class="pr">— ${q.v}</span></p>
+      <p class="rev">Review: Lesson ${q.l}, ${LESSONS[q.l-1]}</p></div>`;
+  }).join("");
+}
+
+
+// Ungraded check questions after each lesson
+const CHECKS = [{"q": "On the road to Emmaus, where did the Lord Jesus Christ begin His teaching?", "o": ["With His own miracles", "At Moses and all the prophets", "With the book of Revelation", "With the traditions of the elders"], "a": 1, "e": "He began at Moses and the prophets and expounded in all the Scriptures the things concerning Himself."}, {"q": "What does leaven consistently picture in Scripture?", "o": ["The growth of faith", "The corruption of sin and false doctrine spreading through the whole", "The blessing of abundance", "The Holy Ghost"], "a": 1, "e": "A little leaven leaveneth the whole lump; that is why the Lord Jesus Christ warned of the leaven of the Pharisees."}, {"q": "What test in the lesson shows the Angel of the LORD is more than a created angel?", "o": ["He appeared in bright light", "He receives worship and holy ground is where He stands", "He spoke Hebrew", "He appeared more than once"], "a": 1, "e": "Created angels in Scripture refuse worship; this One receives it and calls the ground holy, because He is God."}, {"q": "What three requirements did the law place on a kinsman-redeemer, pictured in Boaz?", "o": ["Wealthy, older, and married", "Near kinsman, able to pay, and willing", "A priest, a Levite, and a landowner", "Firstborn, blameless, and childless"], "a": 1, "e": "The Lord Jesus Christ became our near kinsman in the flesh, was alone able to pay, and was willing."}, {"q": "Which verse is used to show God did not create the earth in the condition described in Genesis 1:2?", "o": ["Psalm 23:1", "Isaiah 45:18", "Genesis 3:15", "Job 1:6"], "a": 1, "e": "Isaiah 45:18 says He created it not in vain, using the same word rendered without form in Genesis 1:2."}, {"q": "Where does the figure of 360 years come from in the calculation?", "o": ["It is the number of days Ezekiel lay on his left side", "It is 430 years of punishment minus the 70 years served in Babylon", "It is the number of years from Abraham to Moses", "It is the length of the Babylonian empire"], "a": 1, "e": "Ezekiel's 390 plus 40 gives 430 years; the 70 years of captivity were served, leaving 360 years unserved."}, {"q": "How many days are in the sixty-nine weeks of Daniel 9:25?", "o": ["490 days", "2,520 days", "173,880 days", "1,260 days"], "a": 2, "e": "Sixty-nine weeks is 483 prophetic years, and 483 multiplied by 360 days gives 173,880 days."}];
+document.querySelectorAll(".check").forEach((el,idx)=>{
+  const c = CHECKS[idx]; if(!c) return;
+  el.innerHTML = `<div class="ct">Check your understanding</div><p class="cq">${c.q}</p>
+    <div class="co">${c.o.map((o,j)=>`<button type="button" data-i="${j}">${o}</button>`).join("")}</div>
+    <p class="cf" hidden></p>`;
+  const fb = el.querySelector(".cf");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll("button").forEach(x=>x.classList.remove("ok","no"));
+    const i=+b.dataset.i;
+    b.classList.add(i===c.a?"ok":"no");
+    if(i!==c.a) el.querySelector(`button[data-i="${c.a}"]`).classList.add("ok");
+    fb.textContent = (i===c.a?"Correct. ":"Not quite. ") + c.e;
+    fb.hidden=false;
+  }));
+});
+
+$("#printCert").addEventListener("click",()=>window.print());
+$("#retake").addEventListener("click",async()=>{ goto(3); if(await examGate()) buildExam(); });
+</script>
+</body>
+</html>
