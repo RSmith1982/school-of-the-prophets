@@ -201,6 +201,7 @@
   .levels h3 span{display:block;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--burgundy);margin-top:.2rem}
   .levels .lead{color:var(--ink-soft);font-style:italic;margin:.4rem 0 .6rem}
   .levels ul{margin:0;padding-left:1.1rem;columns:1;line-height:1.6}
+  .levels .sub{font-size:.9em;color:var(--ink-soft);font-style:italic}
   .practical{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
   @media (max-width:760px){.practical{grid-template-columns:1fr}}
   .practical article{border-top:2px solid var(--burgundy);padding-top:1rem}
@@ -448,12 +449,12 @@
       <article>
         <h3>Level One <span>Disciple</span></h3>
         <p class="lead">The works every believer is sent to do.</p>
-        <ul><li>Sharing The Gospel</li><li>Street Evangelism</li><li>Healing the Sick</li><li>Casting Out Demons</li><li>Baptizing in Water</li><li>Baptizing in The Holy Spirit</li><li>Baptizing in Fire</li><li>Ushering</li><li>Children's Ministry</li></ul>
+        <ul><li>Sharing The Gospel</li><li>Street Evangelism</li><li>Healing the Sick</li><li>Casting Out Demons</li><li>Baptizing in Water <span class="sub">— be baptized yourself, or show proof of it, and give account of it</span></li><li>Baptizing in The Holy Spirit</li><li>Baptizing in Fire</li><li>Ushering</li><li>Children's Ministry</li></ul>
       </article>
       <article>
         <h3>Level Two <span>Evangelist and Pastor</span></h3>
         <p class="lead">Proclaiming and defending the faith, and shepherding the flock.</p>
-        <ul><li>Preaching</li><li>Teaching</li><li>Giving a Prophetic Word</li><li>Ministerial Counseling</li><li>Leading Communion</li><li>Giving a Sermon at a Funeral</li><li>Starting a Small Group</li><li>Arranging an Event</li><li>Debating an Atheist</li><li>Debating a Muslim</li><li>Debating a Hindu</li><li>Debating a Buddhist</li><li>Debating a Satanist</li><li>Debating a Believer with a Heresy</li></ul>
+        <ul><li>Baptizing in Water <span class="sub">— perform it; Pastors also teach others to perform it</span></li><li>Preaching</li><li>Teaching</li><li>Giving a Prophetic Word</li><li>Ministerial Counseling</li><li>Leading Communion</li><li>Giving a Sermon at a Funeral</li><li>Starting a Small Group</li><li>Arranging an Event</li><li>Debating an Atheist</li><li>Debating a Muslim</li><li>Debating a Hindu</li><li>Debating a Buddhist</li><li>Debating a Satanist</li><li>Debating a Believer with a Heresy</li></ul>
       </article>
       <article>
         <h3>Level Three <span>Bishop</span></h3>
@@ -525,7 +526,7 @@ document.getElementById('showForm').addEventListener('click',()=>{
 document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js?v=4"></script>
+<script src="school.js?v=5"></script>
 <script>School.user().then(u=>{ if(u) School.profile().then(p=>{ const a=document.getElementById("navAccount"); a.textContent=(p&&p.name?p.name.split(" ")[0]:"My")+"’s progress"; }); });</script>
 </body>
 </html>

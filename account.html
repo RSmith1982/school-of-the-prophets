@@ -231,7 +231,8 @@ function practicalBlock(pr){
     if(r) return `<td class="pc"><button class="chip requested" type="button" data-req="${level}|${slug}|${n}" title="Reported ${new Date(r.requested_at).toLocaleDateString()} — awaiting the Bishop. Click to report again.">Reported</button></td>`;
     return `<td class="pc"><button class="chip" type="button" data-req="${level}|${slug}|${n}">Report</button></td>`; };
   const head=pr.parts.map(n=>`<th title="${S.PRACTICAL_PARTS[n]}">${n}</th>`).join('');
-  const rows=acts.map(([slug,name])=>`<tr><td>${esc(name)}</td>${pr.parts.map(n=>cell(slug,n)).join('')}</tr>`).join('');
+  const rows=acts.map(act=>{ const [slug,name]=act; const parts=S.activityParts(act,pr); const o=act[2]||{};
+    return `<tr><td>${esc(name)}${o.note?`<div class="note">${esc(o.note)}</div>`:''}</td>${pr.parts.map(n=>parts.includes(n)?cell(slug,n):'<td class="pc"><span class="note">—</span></td>').join('')}</tr>`; }).join('');
   const legend=pr.parts.map(n=>`<li><b>${n}.</b> ${S.PRACTICAL_PARTS[n]}</li>`).join('');
   return `<h3>Practical Training ${S.PRACTICAL_NAMES[level]}</h3><ul class="legend">${legend}</ul><table class="ptable"><thead><tr><th>Activity</th>${head}</tr></thead><tbody>${rows}</tbody></table>`;
 }
@@ -248,7 +249,7 @@ function show(){
   const plan=S.PLANS[P.plan]||S.PLANS.english; const readDone=(RP[P.plan]&&RP[P.plan].done||[]).filter(n=>n>=1&&n<=plan.total).length;
   total++; if(readDone>=plan.total) done++;
   req.courses.forEach(s=>{ total++; if(approved('course:'+s)) done++; });
-  req.practical.forEach(pr=>{ (S.PRACTICAL_ACTIVITIES[pr.level]||[]).forEach(([slug])=>pr.parts.forEach(n=>{ total++; if(approved(`practical:${pr.level}:${slug}:${n}`)) done++; })); });
+  req.practical.forEach(pr=>{ (S.PRACTICAL_ACTIVITIES[pr.level]||[]).forEach(act=>S.activityParts(act,pr).forEach(n=>{ total++; if(approved(`practical:${pr.level}:${act[0]}:${n}`)) done++; })); });
   const pct=Math.round(done/total*100); $('#dipBar').style.width=pct+'%'; $('#dipPct').textContent=`${done} of ${total} steps approved (${pct}%)`;
   $('#overall').innerHTML = approved('diploma:'+P.diploma) ? `<span class="st approved">Diploma awarded — ${esc(P.diploma)}</span>` : pct===100 ? 'Every step is approved. The Bishop will award the diploma.' : 'Keep going, one step at a time. '+(req.chain.length>1?`The ${esc(P.diploma)} diploma builds on ${req.chain.slice(0,-1).join(' and ')}, so those requirements are included below.`:'');
   // enrollment
@@ -265,7 +266,7 @@ function show(){
   $('#practical').innerHTML=req.practical.length?req.practical.map(practicalBlock).join(''):'<p class="note">No practical training is required for this diploma beyond the diplomas it builds on.</p>';
   document.querySelectorAll('[data-req]').forEach(b=>b.onclick=async()=>{ const [level,slug,part]=b.dataset.req.split('|');
     const name=(S.PRACTICAL_ACTIVITIES[level].find(x=>x[0]===slug)||[])[1]||slug;
-    const asks={1:`${name} — part 1. Tell the Bishop when, where, and from whom you received live training:`,2:`${name} — part 2. Tell the Bishop when and where you witnessed it, and which approved instructor completed it:`,3:`${name} — part 3. Tell the Bishop when and where you performed it, and who supervised you:`,4:`${name} — part 4. Tell the Bishop whom you taught, and when and where:`};
+    const asks={1:`${name} — part 1. Tell the Bishop when, where, and from whom you received live training:`,2: slug==='baptizing-in-water' ? `${name} — part 2. Tell the Bishop when and where you were baptized in water, and by whom (or what proof you can show):` : `${name} — part 2. Tell the Bishop when and where you witnessed it, and which approved instructor completed it:`,3:`${name} — part 3. Tell the Bishop when and where you performed it, and who supervised you:`,4:`${name} — part 4. Tell the Bishop whom you taught, and when and where:`};
     const note=prompt(asks[part]); if(note===null) return;
     const {error}=await sb.from('practical_requests').insert({user_id:U.id,level,activity:slug,part:+part,note:note||''}); if(error) alert(error.message); else render(); });
   // settings

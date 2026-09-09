@@ -44,13 +44,14 @@
       ['street-evangelism','Street Evangelism'],
       ['healing-the-sick','Healing the Sick'],
       ['casting-out-demons','Casting Out Demons'],
-      ['baptizing-in-water','Baptizing in Water'],
+      ['baptizing-in-water','Baptizing in Water',{parts:[1,2],note:'Be baptized in water yourself, or show proof of it, and tell the Bishop about it — that is the witness for this activity.'}],
       ['baptizing-in-the-holy-spirit','Baptizing in The Holy Spirit'],
       ['baptizing-in-fire','Baptizing in Fire'],
       ['ushering','Ushering'],
       ['childrens-ministry',"Children's Ministry"],
     ],
     'level-two': [ // Evangelist and Pastor — proclaiming and defending the faith, and shepherding the flock
+      ['baptizing-in-water','Baptizing in Water',{parts:[3],teach:true,note:'Evangelists and Pastors perform water baptisms; Pastors and Bishops also teach others to perform them.'}],
       ['preaching','Preaching'],
       ['teaching','Teaching'],
       ['giving-a-prophetic-word','Giving a Prophetic Word'],
@@ -81,8 +82,14 @@
     const seen=new Set(); const courses=[]; const practical={}; const chain=[];
     (function walk(d){ if(!DIPLOMAS[d]||seen.has(d)) return; seen.add(d); DIPLOMAS[d].requires.forEach(walk); chain.push(d);
       DIPLOMAS[d].courses.forEach(c=>{ if(!courses.includes(c)) courses.push(c); });
-      const lv=DIPLOMAS[d].practical; if(lv){ practical[lv]=practical[lv]||{level:lv,parts:[1,2,3]}; if(DIPLOMAS[d].teach && !practical[lv].parts.includes(4)) practical[lv].parts.push(4); } })(diploma);
+      const lv=DIPLOMAS[d].practical; if(lv){ practical[lv]=practical[lv]||{level:lv,parts:[1,2,3],teach:false}; if(DIPLOMAS[d].teach){ practical[lv].teach=true; if(!practical[lv].parts.includes(4)) practical[lv].parts.push(4); } } })(diploma);
     return {chain, courses, practical:Object.values(practical)};
+  }
+  // the parts required for one activity at one level (some activities are special, e.g. water baptism)
+  function activityParts(act, pr){
+    const o=act[2]||{};
+    if(o.parts){ const p=o.parts.slice(); if(o.teach && pr.teach && !p.includes(4)) p.push(4); return p; }
+    return pr.parts;
   }
 
   async function user(){ const {data}=await sb.auth.getSession(); return data.session?data.session.user:null; }
@@ -100,6 +107,6 @@
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function fmtDate(d){ return d? new Date(d).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):''; }
 
-  window.School = { sb, COURSES, DIPLOMAS, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PRACTICAL_ACTIVITIES, PLANS, ADMIN_EMAIL, requirements, user, profile, isAdminUser, mountWidget, escapeHtml, fmtDate };
+  window.School = { sb, COURSES, DIPLOMAS, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PRACTICAL_ACTIVITIES, PLANS, ADMIN_EMAIL, requirements, activityParts, user, profile, isAdminUser, mountWidget, escapeHtml, fmtDate };
   document.addEventListener('DOMContentLoaded', mountWidget);
 })();

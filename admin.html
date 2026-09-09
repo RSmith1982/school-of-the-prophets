@@ -109,8 +109,8 @@ function draw(){
       return `<tr><td>${esc(c.title)}</td><td>${status}${hist}</td><td>${(cp&&cp.status==='passed')||DATA.ap.find(x=>x.user_id===uid&&x.item==='course:'+slug)?approveBtn(uid,'course:'+slug):''}</td></tr>`; }).join('');
     const practical=req.practical.map(pr=>{ const level=pr.level, acts=S.PRACTICAL_ACTIVITIES[level]||[];
       const rows=[`<tr><td colspan="${pr.parts.length+1}"><strong>${esc(S.COURSES[S.PRACTICAL_PAGE[level]].title)}</strong> <span class="note">parts: ${pr.parts.map(n=>n+' '+S.PRACTICAL_PARTS[n].toLowerCase()).join(' · ')}</span></td></tr>`];
-      acts.forEach(([slug,name])=>{
-        const cells=pr.parts.map(n=>{ const key=`practical:${level}:${slug}:${n}`; const r=DATA.pr.filter(x=>x.user_id===uid&&x.level===level&&x.activity===slug&&x.part===n).slice(-1)[0];
+      acts.forEach(act=>{ const [slug,name]=act; const parts=S.activityParts(act,pr);
+        const cells=pr.parts.map(n=>{ if(!parts.includes(n)) return '<td class="pc"><span class="note">—</span></td>'; const key=`practical:${level}:${slug}:${n}`; const r=DATA.pr.filter(x=>x.user_id===uid&&x.level===level&&x.activity===slug&&x.part===n).slice(-1)[0];
           const a=DATA.ap.find(x=>x.user_id===uid&&x.item===key&&x.approved);
           if(a) return `<td class="pc">${stt('approved','✓ '+n)} <button class="btn ghost" data-un="${uid}|${key}">Undo</button></td>`;
           return `<td class="pc">${r?`<span class="st requested" title="${esc(r.note)}">Reported ${new Date(r.requested_at).toLocaleDateString()}</span>${r.note?`<div class="note">“${esc(r.note)}”</div>`:''}`:stt('none','—')} <button class="btn ok" data-ok="${uid}|${key}">Approve ${n}</button></td>`; }).join('');
