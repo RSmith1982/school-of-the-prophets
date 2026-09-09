@@ -24,21 +24,30 @@
     'practical-training-level-three':{title:'Practical Training Level Three', built:false, practical:'level-three'},
   };
   const DIPLOMAS = {
-    Disciple:  {courses:['scientific-evidence-of-god','full-gospel','new-testament','apologetics','martyrship','healing-and-miracles'], practical:'level-one', requires:[]},
-    Evangelist:{courses:['roberts-rules-of-debate','deliverance','heaven-and-hell'], practical:'level-two', requires:['Disciple']},
-    Pastor:    {courses:['old-testament','heresies','biblical-finances'], practical:'level-two', requires:['Disciple']},
-    Prophet:   {courses:['hearing-from-god'], practical:null, requires:['Pastor']},
-    Bishop:    {courses:[], practical:'level-three', requires:['Evangelist','Pastor']},
+    Disciple:  {courses:['scientific-evidence-of-god','full-gospel','new-testament','apologetics','martyrship','healing-and-miracles','practical-training-level-one'], practical:'level-one', teach:false, requires:[]},
+    Evangelist:{courses:['roberts-rules-of-debate','deliverance','heaven-and-hell','practical-training-level-two'], practical:'level-two', teach:false, requires:['Disciple']},
+    Pastor:    {courses:['old-testament','heresies','biblical-finances','practical-training-level-two'], practical:'level-two', teach:true, requires:['Disciple']},
+    Prophet:   {courses:['hearing-from-god'], practical:null, teach:false, requires:['Pastor']},
+    Bishop:    {courses:['practical-training-level-three'], practical:'level-three', teach:true, requires:['Evangelist','Pastor']},
   };
+  const PRACTICAL_PARTS = {
+    1:'Receive live training on the activity',
+    2:'Witness the activity completed by an approved instructor',
+    3:'Perform the activity under supervision',
+    4:'Successfully teach someone else the activity',
+  };
+  const PRACTICAL_NAMES = {'level-one':'Level One','level-two':'Level Two','level-three':'Level Three'};
   const PRACTICAL_PAGE = {'level-one':'practical-training-level-one','level-two':'practical-training-level-two','level-three':'practical-training-level-three'};
   const PLANS = {english:{title:'The Beautiful Reading Plan', page:'the-beautiful-reading-plan.html', total:355}, japanese:{title:'日本語聖書研究 — Japanese Holy Bible Study', page:'japanese-bible-study.html', total:355}};
 
   // everything a diploma needs, including the diplomas it builds on
+  // practical: [{level, parts:[1,2,3] or [1,2,3,4]}] — parts 1–3 for every diploma, part 4 (teaching) for Pastor and Bishop
   function requirements(diploma){
-    const seen=new Set(); const courses=[]; const practical=new Set(); const chain=[];
+    const seen=new Set(); const courses=[]; const practical={}; const chain=[];
     (function walk(d){ if(!DIPLOMAS[d]||seen.has(d)) return; seen.add(d); DIPLOMAS[d].requires.forEach(walk); chain.push(d);
-      DIPLOMAS[d].courses.forEach(c=>{ if(!courses.includes(c)) courses.push(c); }); if(DIPLOMAS[d].practical) practical.add(DIPLOMAS[d].practical); })(diploma);
-    return {chain, courses, practical:[...practical]};
+      DIPLOMAS[d].courses.forEach(c=>{ if(!courses.includes(c)) courses.push(c); });
+      const lv=DIPLOMAS[d].practical; if(lv){ practical[lv]=practical[lv]||{level:lv,parts:[1,2,3]}; if(DIPLOMAS[d].teach && !practical[lv].parts.includes(4)) practical[lv].parts.push(4); } })(diploma);
+    return {chain, courses, practical:Object.values(practical)};
   }
 
   async function user(){ const {data}=await sb.auth.getSession(); return data.session?data.session.user:null; }
@@ -56,6 +65,6 @@
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function fmtDate(d){ return d? new Date(d).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):''; }
 
-  window.School = { sb, COURSES, DIPLOMAS, PRACTICAL_PAGE, PLANS, ADMIN_EMAIL, requirements, user, profile, isAdminUser, mountWidget, escapeHtml, fmtDate };
+  window.School = { sb, COURSES, DIPLOMAS, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PLANS, ADMIN_EMAIL, requirements, user, profile, isAdminUser, mountWidget, escapeHtml, fmtDate };
   document.addEventListener('DOMContentLoaded', mountWidget);
 })();

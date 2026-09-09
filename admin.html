@@ -105,10 +105,10 @@ function draw(){
       let status=!c.built?stt('none','Coming soon'):cp&&cp.status==='passed'?stt('passed',`Passed ${cp.best_score}%`):cp?stt('reading',`In progress · best ${cp.best_score}% · ${cp.fails} failed`):stt('none','Not started');
       const hist=att.length?`<div class="note">${att.map(a=>`${a.score}%${a.passed?' ✓':''} ${new Date(a.taken_at).toLocaleDateString()}`).join(' · ')}</div>`:'';
       return `<tr><td>${esc(c.title)}</td><td>${status}${hist}</td><td>${(cp&&cp.status==='passed')||DATA.ap.find(x=>x.user_id===uid&&x.item==='course:'+slug)?approveBtn(uid,'course:'+slug):''}</td></tr>`; }).join('');
-    const practical=req.practical.map(level=>{ const page=S.PRACTICAL_PAGE[level]; const cp=DATA.cp.find(x=>x.user_id===uid&&x.course===page);
-      const rows=[`<tr><td>${esc(S.COURSES[page].title)} — part 1 (course)</td><td>${cp&&cp.status==='passed'?stt('passed',`Passed ${cp.best_score}%`):cp?stt('reading','In progress'):stt('none','Not started')}</td><td>${(cp&&cp.status==='passed')||DATA.ap.find(x=>x.user_id===uid&&x.item==='course:'+page)?approveBtn(uid,'course:'+page):''}</td></tr>`];
-      [2,3].forEach(n=>{ const r=DATA.pr.filter(x=>x.user_id===uid&&x.level===level&&x.part===n).slice(-1)[0];
-        rows.push(`<tr><td>Part ${n} — ${n===2?'watched it done':'did it, watched and graded'}</td><td>${r?stt('requested','Reported '+new Date(r.requested_at).toLocaleDateString())+(r.note?`<div class="note">“${esc(r.note)}”</div>`:''):stt('none','Not reported')}</td><td>${approveBtn(uid,`practical:${level}:${n}`)}</td></tr>`); });
+    const practical=req.practical.map(pr=>{ const level=pr.level;
+      const rows=[`<tr><td colspan="3"><strong>${esc(S.COURSES[S.PRACTICAL_PAGE[level]].title)}</strong></td></tr>`];
+      pr.parts.forEach(n=>{ const r=DATA.pr.filter(x=>x.user_id===uid&&x.level===level&&x.part===n).slice(-1)[0];
+        rows.push(`<tr><td>${n}. ${S.PRACTICAL_PARTS[n]}</td><td>${r?stt('requested','Reported '+new Date(r.requested_at).toLocaleDateString())+(r.note?`<div class="note">“${esc(r.note)}”</div>`:''):stt('none','Not reported')}</td><td>${approveBtn(uid,`practical:${level}:${n}`)}</td></tr>`); });
       return rows.join(''); }).join('');
     return `<div class="student"><h3>${esc(s.name||'(no name)')} <small>${esc(s.email)} · ${esc(s.diploma)} · joined ${S.fmtDate(s.created_at)}</small></h3>
       <div class="grid">
@@ -116,7 +116,7 @@ function draw(){
              <h4 style="margin-top:.8rem">Reading plan — ${esc(plan.title)}</h4><table><tr><td>${readDone} of ${plan.total} readings</td><td>${readDone>=plan.total?stt('passed','Complete'):stt('reading',Math.round(readDone/plan.total*100)+'%')}</td><td>${approveBtn(uid,'reading:'+s.plan)}</td></tr></table>
              <h4 style="margin-top:.8rem">Diploma</h4><table><tr><td>${esc(s.diploma)}</td><td></td><td>${approveBtn(uid,'diploma:'+s.diploma,'Awarded','— award the diploma')}</td></tr></table></div>
         <div><h4>Courses</h4><table>${courses}</table></div>
-        <div><h4>Practical training</h4><table>${practical||'<tr><td class="note">None required</td></tr>'}</table></div>
+        <div><h4>Practical Training</h4><table>${practical||'<tr><td class="note">None required</td></tr>'}</table></div>
       </div></div>`;
   }).join('')||'<p class="note">No students yet.</p>';
   document.querySelectorAll('[data-ok]').forEach(b=>b.onclick=async()=>{const [uid,item]=b.dataset.ok.split('|'); const {error}=await sb.from('approvals').upsert({user_id:uid,item,approved:true,approved_at:new Date().toISOString()}); if(error) alert(error.message); start();});
