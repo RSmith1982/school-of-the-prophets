@@ -68,7 +68,7 @@
 </section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js"></script>
+<script src="school.js?v=3"></script>
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 $('#f').onsubmit=async e=>{e.preventDefault(); $('#m').textContent='Signing in…'; const {error}=await sb.auth.signInWithPassword({email:$('#e').value.trim(),password:$('#p').value}); $('#m').textContent=error?error.message:''; start();};

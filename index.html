@@ -501,7 +501,7 @@ document.getElementById('showForm').addEventListener('click',()=>{
 document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js"></script>
+<script src="school.js?v=3"></script>
 <script>School.user().then(u=>{ if(u) School.profile().then(p=>{ const a=document.getElementById("navAccount"); a.textContent=(p&&p.name?p.name.split(" ")[0]:"My")+"’s progress"; }); });</script>
 </body>
 </html>
