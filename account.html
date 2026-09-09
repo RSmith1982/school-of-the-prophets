@@ -58,6 +58,13 @@
   .note{font-size:.95rem;color:var(--ink-soft)}
   .check{display:flex;gap:.6rem;align-items:flex-start;margin:.6rem 0}
   .check input{width:1.15rem;height:1.15rem;margin-top:.3rem;accent-color:var(--burgundy)}
+  .ptable td.pc{text-align:center;white-space:nowrap}
+  .ptable th{text-align:center}
+  .ptable th:first-child,.ptable td:first-child{text-align:left}
+  .chip{font:inherit;font-size:.85rem;padding:.1rem .6rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--navy);border-radius:2px;cursor:pointer}
+  .chip.requested{background:#F3DFD0;color:var(--burgundy);border-color:#D9B7A6}
+  .legend{list-style:none;padding:0;margin:.2rem 0 .8rem;font-size:.95rem;color:var(--ink-soft);display:grid;grid-template-columns:1fr 1fr;gap:.2rem 1rem}
+  @media (max-width:640px){.legend{grid-template-columns:1fr}}
   .big{font-size:2.2rem;color:var(--burgundy);font-weight:600;line-height:1}
   footer{padding:2rem 0;text-align:center;color:var(--gold-soft);background:var(--navy-deep);font-size:.95rem}
   [hidden]{display:none!important}
@@ -143,7 +150,7 @@
 
 <section class="panel">
   <h2>4. Practical Training</h2>
-  <p class="note">Each level is completed in order: receive live training on the activity, witness the activity completed by an approved instructor, and perform the activity under supervision. The Pastor and Bishop diplomas add a fourth part: successfully teach someone else the activity. Report each part here when it is done; the Bishop approves each one. The course pages for each level are listed under Courses above.</p>
+  <p class="note">Each activity of a level is completed in parts, in order: receive live training on the activity, witness the activity completed by an approved instructor, and perform the activity under supervision. The Pastor and Bishop diplomas add a fourth part: successfully teach someone else the activity. Press a part to report it done, with a note to the Bishop; he approves each one. The course pages for each level are listed under Courses above.</p>
   <div id="practical"></div>
 </section>
 
@@ -163,7 +170,7 @@
 <footer><div class="wrap">© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js?v=3"></script>
+<script src="school.js"></script>
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 document.getElementById('year').textContent=new Date().getFullYear();
@@ -217,13 +224,16 @@ function courseRow(slug){
   return `<tr><td>${esc(c.title)}</td><td>${status}</td><td>${action}</td></tr>`;
 }
 function practicalBlock(pr){
-  const level=pr.level;
-  const req=n=>PR.filter(x=>x.level===level&&x.part===n).slice(-1)[0];
-  const partN=n=>{ const key=`practical:${level}:${n}`; const r=req(n);
-    let s=approved(key)?st('approved','Approved by the Bishop'):r?st('requested','Reported · awaiting the Bishop'):st('none','Not yet');
-    let act=approved(key)?'':`<button class="btn small ghost" type="button" data-req="${level}|${n}">${r?'Report again':'Report done'}</button>`;
-    return `<tr><td>${n}. ${S.PRACTICAL_PARTS[n]}</td><td>${s}${r&&r.note?`<div class="note">“${esc(r.note)}”</div>`:''}</td><td>${act}</td></tr>`; };
-  return `<h3>Practical Training ${S.PRACTICAL_NAMES[level]}</h3><table><thead><tr><th>Part</th><th>Status</th><th></th></tr></thead><tbody>${pr.parts.map(partN).join('')}</tbody></table>`;
+  const level=pr.level, acts=S.PRACTICAL_ACTIVITIES[level]||[];
+  const req=(slug,n)=>PR.filter(x=>x.level===level&&x.activity===slug&&x.part===n).slice(-1)[0];
+  const cell=(slug,n)=>{ const key=`practical:${level}:${slug}:${n}`; const r=req(slug,n);
+    if(approved(key)) return `<td class="pc"><span class="st approved" title="Approved by the Bishop">✓ Approved</span></td>`;
+    if(r) return `<td class="pc"><button class="chip requested" type="button" data-req="${level}|${slug}|${n}" title="Reported ${new Date(r.requested_at).toLocaleDateString()} — awaiting the Bishop. Click to report again.">Reported</button></td>`;
+    return `<td class="pc"><button class="chip" type="button" data-req="${level}|${slug}|${n}">Report</button></td>`; };
+  const head=pr.parts.map(n=>`<th title="${S.PRACTICAL_PARTS[n]}">${n}</th>`).join('');
+  const rows=acts.map(([slug,name])=>`<tr><td>${esc(name)}</td>${pr.parts.map(n=>cell(slug,n)).join('')}</tr>`).join('');
+  const legend=pr.parts.map(n=>`<li><b>${n}.</b> ${S.PRACTICAL_PARTS[n]}</li>`).join('');
+  return `<h3>Practical Training ${S.PRACTICAL_NAMES[level]}</h3><ul class="legend">${legend}</ul><table class="ptable"><thead><tr><th>Activity</th>${head}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 function render(){ load().then(ok=>{ $('#authPanel').hidden=ok; $('#me').hidden=!ok; if(ok) show(); else { $('#heroTitle').textContent='My Progress'; } }); }
 function show(){
@@ -238,7 +248,7 @@ function show(){
   const plan=S.PLANS[P.plan]||S.PLANS.english; const readDone=(RP[P.plan]&&RP[P.plan].done||[]).filter(n=>n>=1&&n<=plan.total).length;
   total++; if(readDone>=plan.total) done++;
   req.courses.forEach(s=>{ total++; if(approved('course:'+s)) done++; });
-  req.practical.forEach(pr=>{ pr.parts.forEach(n=>{ total++; if(approved(`practical:${pr.level}:${n}`)) done++; }); });
+  req.practical.forEach(pr=>{ (S.PRACTICAL_ACTIVITIES[pr.level]||[]).forEach(([slug])=>pr.parts.forEach(n=>{ total++; if(approved(`practical:${pr.level}:${slug}:${n}`)) done++; })); });
   const pct=Math.round(done/total*100); $('#dipBar').style.width=pct+'%'; $('#dipPct').textContent=`${done} of ${total} steps approved (${pct}%)`;
   $('#overall').innerHTML = approved('diploma:'+P.diploma) ? `<span class="st approved">Diploma awarded — ${esc(P.diploma)}</span>` : pct===100 ? 'Every step is approved. The Bishop will award the diploma.' : 'Keep going, one step at a time. '+(req.chain.length>1?`The ${esc(P.diploma)} diploma builds on ${req.chain.slice(0,-1).join(' and ')}, so those requirements are included below.`:'');
   // enrollment
@@ -253,10 +263,11 @@ function show(){
   $('#courses').innerHTML=`<table><thead><tr><th>Course</th><th>Status</th><th></th></tr></thead><tbody>${req.courses.map(courseRow).join('')}</tbody></table>`;
   // practical
   $('#practical').innerHTML=req.practical.length?req.practical.map(practicalBlock).join(''):'<p class="note">No practical training is required for this diploma beyond the diplomas it builds on.</p>';
-  document.querySelectorAll('[data-req]').forEach(b=>b.onclick=async()=>{ const [level,part]=b.dataset.req.split('|');
-    const asks={1:'Tell the Bishop when, where, and from whom you received live training on the activity:',2:'Tell the Bishop when and where you witnessed the activity, and which approved instructor completed it:',3:'Tell the Bishop when and where you performed the activity, and who supervised you:',4:'Tell the Bishop whom you taught the activity, and when and where:'};
-    const note=prompt(asks[part])||'';
-    const {error}=await sb.from('practical_requests').insert({user_id:U.id,level,part:+part,note}); if(error) alert(error.message); else render(); });
+  document.querySelectorAll('[data-req]').forEach(b=>b.onclick=async()=>{ const [level,slug,part]=b.dataset.req.split('|');
+    const name=(S.PRACTICAL_ACTIVITIES[level].find(x=>x[0]===slug)||[])[1]||slug;
+    const asks={1:`${name} — part 1. Tell the Bishop when, where, and from whom you received live training:`,2:`${name} — part 2. Tell the Bishop when and where you witnessed it, and which approved instructor completed it:`,3:`${name} — part 3. Tell the Bishop when and where you performed it, and who supervised you:`,4:`${name} — part 4. Tell the Bishop whom you taught, and when and where:`};
+    const note=prompt(asks[part]); if(note===null) return;
+    const {error}=await sb.from('practical_requests').insert({user_id:U.id,level,activity:slug,part:+part,note:note||''}); if(error) alert(error.message); else render(); });
   // settings
   $('#setName').value=P.name||''; $('#setDiploma').value=P.diploma; $('#setPlan').value=P.plan;
 }

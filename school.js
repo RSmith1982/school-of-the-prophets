@@ -37,6 +37,41 @@
     4:'Successfully teach someone else the activity',
   };
   const PRACTICAL_NAMES = {'level-one':'Level One','level-two':'Level Two','level-three':'Level Three'};
+  // The activities of each level of practical training. Each activity is completed in the parts above.
+  const PRACTICAL_ACTIVITIES = {
+    'level-one': [ // Disciple — the works every believer is sent to do
+      ['sharing-the-gospel','Sharing The Gospel'],
+      ['street-evangelism','Street Evangelism'],
+      ['healing-the-sick','Healing the Sick'],
+      ['casting-out-demons','Casting Out Demons'],
+      ['baptizing-in-water','Baptizing in Water'],
+      ['baptizing-in-the-holy-spirit','Baptizing in The Holy Spirit'],
+      ['baptizing-in-fire','Baptizing in Fire'],
+      ['ushering','Ushering'],
+      ['childrens-ministry',"Children's Ministry"],
+    ],
+    'level-two': [ // Evangelist and Pastor — proclaiming and defending the faith, and shepherding the flock
+      ['preaching','Preaching'],
+      ['teaching','Teaching'],
+      ['giving-a-prophetic-word','Giving a Prophetic Word'],
+      ['ministerial-counseling','Ministerial Counseling'],
+      ['leading-communion','Leading Communion'],
+      ['giving-a-sermon-at-a-funeral','Giving a Sermon at a Funeral'],
+      ['starting-a-small-group','Starting a Small Group'],
+      ['arranging-an-event','Arranging an Event'],
+      ['debating-an-atheist','Debating an Atheist'],
+      ['debating-a-muslim','Debating a Muslim'],
+      ['debating-a-hindu','Debating a Hindu'],
+      ['debating-a-buddhist','Debating a Buddhist'],
+      ['debating-a-satanist','Debating a Satanist'],
+      ['debating-a-believer-with-a-heresy','Debating a Believer with a Heresy'],
+    ],
+    'level-three': [ // Bishop — the work of oversight
+      ['setting-up-a-church','Setting up a Church'],
+      ['holding-a-miracle-event','Holding a Miracle Event'],
+      ['ministering-in-a-persecuted-region','Ministering in a Persecuted Region'],
+    ],
+  };
   const PRACTICAL_PAGE = {'level-one':'practical-training-level-one','level-two':'practical-training-level-two','level-three':'practical-training-level-three'};
   const PLANS = {english:{title:'The Beautiful Reading Plan', page:'the-beautiful-reading-plan.html', total:355}, japanese:{title:'日本語聖書研究 — Japanese Holy Bible Study', page:'japanese-bible-study.html', total:355}};
 
@@ -65,6 +100,6 @@
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function fmtDate(d){ return d? new Date(d).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):''; }
 
-  window.School = { sb, COURSES, DIPLOMAS, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PLANS, ADMIN_EMAIL, requirements, user, profile, isAdminUser, mountWidget, escapeHtml, fmtDate };
+  window.School = { sb, COURSES, DIPLOMAS, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PRACTICAL_ACTIVITIES, PLANS, ADMIN_EMAIL, requirements, user, profile, isAdminUser, mountWidget, escapeHtml, fmtDate };
   document.addEventListener('DOMContentLoaded', mountWidget);
 })();

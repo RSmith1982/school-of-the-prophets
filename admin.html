@@ -40,6 +40,8 @@
   .st{display:inline-block;padding:.05rem .5rem;border-radius:2px;font-size:.88rem;white-space:nowrap}
   .st.none{background:#E3D9BF;color:var(--ink-soft)} .st.reading{background:#F1E6C8;color:var(--navy)} .st.passed{background:#DCE8DC;color:var(--green)} .st.approved{background:var(--green);color:#fff} .st.requested{background:#F3DFD0;color:var(--burgundy)}
   .note{font-size:.92rem;color:var(--ink-soft)}
+  td.pc{white-space:nowrap;vertical-align:middle}
+  td.pc .note{white-space:normal;max-width:16rem}
   .msg{color:var(--burgundy);font-style:italic}
   input[type=email],input[type=password]{font:inherit;padding:.5rem .7rem;border:1px solid var(--gold);background:#FBF7EC;border-radius:2px;width:100%;max-width:26rem;display:block;margin:.3rem 0 .8rem}
   .filter{margin:.4rem 0 .8rem}
@@ -68,7 +70,7 @@
 </section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js?v=3"></script>
+<script src="school.js"></script>
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 $('#f').onsubmit=async e=>{e.preventDefault(); $('#m').textContent='Signing in…'; const {error}=await sb.auth.signInWithPassword({email:$('#e').value.trim(),password:$('#p').value}); $('#m').textContent=error?error.message:''; start();};
@@ -105,10 +107,14 @@ function draw(){
       let status=!c.built?stt('none','Coming soon'):cp&&cp.status==='passed'?stt('passed',`Passed ${cp.best_score}%`):cp?stt('reading',`In progress · best ${cp.best_score}% · ${cp.fails} failed`):stt('none','Not started');
       const hist=att.length?`<div class="note">${att.map(a=>`${a.score}%${a.passed?' ✓':''} ${new Date(a.taken_at).toLocaleDateString()}`).join(' · ')}</div>`:'';
       return `<tr><td>${esc(c.title)}</td><td>${status}${hist}</td><td>${(cp&&cp.status==='passed')||DATA.ap.find(x=>x.user_id===uid&&x.item==='course:'+slug)?approveBtn(uid,'course:'+slug):''}</td></tr>`; }).join('');
-    const practical=req.practical.map(pr=>{ const level=pr.level;
-      const rows=[`<tr><td colspan="3"><strong>${esc(S.COURSES[S.PRACTICAL_PAGE[level]].title)}</strong></td></tr>`];
-      pr.parts.forEach(n=>{ const r=DATA.pr.filter(x=>x.user_id===uid&&x.level===level&&x.part===n).slice(-1)[0];
-        rows.push(`<tr><td>${n}. ${S.PRACTICAL_PARTS[n]}</td><td>${r?stt('requested','Reported '+new Date(r.requested_at).toLocaleDateString())+(r.note?`<div class="note">“${esc(r.note)}”</div>`:''):stt('none','Not reported')}</td><td>${approveBtn(uid,`practical:${level}:${n}`)}</td></tr>`); });
+    const practical=req.practical.map(pr=>{ const level=pr.level, acts=S.PRACTICAL_ACTIVITIES[level]||[];
+      const rows=[`<tr><td colspan="${pr.parts.length+1}"><strong>${esc(S.COURSES[S.PRACTICAL_PAGE[level]].title)}</strong> <span class="note">parts: ${pr.parts.map(n=>n+' '+S.PRACTICAL_PARTS[n].toLowerCase()).join(' · ')}</span></td></tr>`];
+      acts.forEach(([slug,name])=>{
+        const cells=pr.parts.map(n=>{ const key=`practical:${level}:${slug}:${n}`; const r=DATA.pr.filter(x=>x.user_id===uid&&x.level===level&&x.activity===slug&&x.part===n).slice(-1)[0];
+          const a=DATA.ap.find(x=>x.user_id===uid&&x.item===key&&x.approved);
+          if(a) return `<td class="pc">${stt('approved','✓ '+n)} <button class="btn ghost" data-un="${uid}|${key}">Undo</button></td>`;
+          return `<td class="pc">${r?`<span class="st requested" title="${esc(r.note)}">Reported ${new Date(r.requested_at).toLocaleDateString()}</span>${r.note?`<div class="note">“${esc(r.note)}”</div>`:''}`:stt('none','—')} <button class="btn ok" data-ok="${uid}|${key}">Approve ${n}</button></td>`; }).join('');
+        rows.push(`<tr><td>${esc(name)}</td>${cells}</tr>`); });
       return rows.join(''); }).join('');
     return `<div class="student"><h3>${esc(s.name||'(no name)')} <small>${esc(s.email)} · ${esc(s.diploma)} · joined ${S.fmtDate(s.created_at)}</small></h3>
       <div class="grid">
@@ -116,7 +122,7 @@ function draw(){
              <h4 style="margin-top:.8rem">Reading plan — ${esc(plan.title)}</h4><table><tr><td>${readDone} of ${plan.total} readings</td><td>${readDone>=plan.total?stt('passed','Complete'):stt('reading',Math.round(readDone/plan.total*100)+'%')}</td><td>${approveBtn(uid,'reading:'+s.plan)}</td></tr></table>
              <h4 style="margin-top:.8rem">Diploma</h4><table><tr><td>${esc(s.diploma)}</td><td></td><td>${approveBtn(uid,'diploma:'+s.diploma,'Awarded','— award the diploma')}</td></tr></table></div>
         <div><h4>Courses</h4><table>${courses}</table></div>
-        <div><h4>Practical Training</h4><table>${practical||'<tr><td class="note">None required</td></tr>'}</table></div>
+        <div style="grid-column:1 / -1"><h4>Practical Training</h4><table>${practical||'<tr><td class="note">None required</td></tr>'}</table></div>
       </div></div>`;
   }).join('')||'<p class="note">No students yet.</p>';
   document.querySelectorAll('[data-ok]').forEach(b=>b.onclick=async()=>{const [uid,item]=b.dataset.ok.split('|'); const {error}=await sb.from('approvals').upsert({user_id:uid,item,approved:true,approved_at:new Date().toISOString()}); if(error) alert(error.message); start();});

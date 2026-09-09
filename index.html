@@ -194,6 +194,13 @@
   @media (max-width:520px){.bar{grid-template-columns:6.5rem 1fr 2.6rem}}
 
   /* ---------- practical ---------- */
+  .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2.5rem}
+  @media (max-width:860px){.levels{grid-template-columns:1fr}}
+  .levels article{border-top:2px solid var(--gold);padding-top:1rem}
+  .levels h3{font-size:1.4rem;color:var(--navy)}
+  .levels h3 span{display:block;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--burgundy);margin-top:.2rem}
+  .levels .lead{color:var(--ink-soft);font-style:italic;margin:.4rem 0 .6rem}
+  .levels ul{margin:0;padding-left:1.1rem;columns:1;line-height:1.6}
   .practical{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
   @media (max-width:760px){.practical{grid-template-columns:1fr}}
   .practical article{border-top:2px solid var(--burgundy);padding-top:1rem}
@@ -413,7 +420,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Practical Training</h2>
-      <p>Knowledge alone does not make a minister. Every diploma includes hands-on training, completed in order and approved step by step by the Bishop. The first three parts are required for every diploma; the fourth is required for the Pastor and Bishop diplomas.</p>
+      <p>Knowledge alone does not make a minister. Every diploma includes hands-on training in the activities of ministry, each one completed in parts, in order, and approved step by step by the Bishop. The first three parts are required for every diploma; the fourth is required for the Pastor and Bishop diplomas.</p>
     </div>
     <div class="practical">
       <article>
@@ -435,6 +442,23 @@
         <div class="step">Part Four — Pastor and Bishop</div>
         <h3>Teach Someone Else</h3>
         <p>Successfully teach someone else the activity, so that the practice is carried on through you.</p>
+      </article>
+    </div>
+    <div class="levels">
+      <article>
+        <h3>Level One <span>Disciple</span></h3>
+        <p class="lead">The works every believer is sent to do.</p>
+        <ul><li>Sharing The Gospel</li><li>Street Evangelism</li><li>Healing the Sick</li><li>Casting Out Demons</li><li>Baptizing in Water</li><li>Baptizing in The Holy Spirit</li><li>Baptizing in Fire</li><li>Ushering</li><li>Children's Ministry</li></ul>
+      </article>
+      <article>
+        <h3>Level Two <span>Evangelist and Pastor</span></h3>
+        <p class="lead">Proclaiming and defending the faith, and shepherding the flock.</p>
+        <ul><li>Preaching</li><li>Teaching</li><li>Giving a Prophetic Word</li><li>Ministerial Counseling</li><li>Leading Communion</li><li>Giving a Sermon at a Funeral</li><li>Starting a Small Group</li><li>Arranging an Event</li><li>Debating an Atheist</li><li>Debating a Muslim</li><li>Debating a Hindu</li><li>Debating a Buddhist</li><li>Debating a Satanist</li><li>Debating a Believer with a Heresy</li></ul>
+      </article>
+      <article>
+        <h3>Level Three <span>Bishop</span></h3>
+        <p class="lead">The work of oversight.</p>
+        <ul><li>Setting up a Church</li><li>Holding a Miracle Event</li><li>Ministering in a Persecuted Region</li></ul>
       </article>
     </div>
   </div>
@@ -501,7 +525,7 @@ document.getElementById('showForm').addEventListener('click',()=>{
 document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js?v=3"></script>
+<script src="school.js?v=4"></script>
 <script>School.user().then(u=>{ if(u) School.profile().then(p=>{ const a=document.getElementById("navAccount"); a.textContent=(p&&p.name?p.name.split(" ")[0]:"My")+"’s progress"; }); });</script>
 </body>
 </html>
