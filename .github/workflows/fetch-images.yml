@@ -8,16 +8,25 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
       - name: Download images listed in images.json
         run: |
           mkdir -p images
-          python3 - <<'PY'
-          import json, urllib.request
-          for name, url in json.load(open('images.json')).items():
-              data = urllib.request.urlopen(url, timeout=60).read()
-              open(f'images/{name}', 'wb').write(data)
-              print(name, len(data))
-          PY
+          node - <<'JS'
+          const fs = require('fs');
+          const list = JSON.parse(fs.readFileSync('images.json', 'utf8'));
+          (async () => {
+            for (const [name, url] of Object.entries(list)) {
+              const res = await fetch(url);
+              if (!res.ok) throw new Error(name + ': HTTP ' + res.status);
+              const data = Buffer.from(await res.arrayBuffer());
+              fs.writeFileSync('images/' + name, data);
+              console.log(name, data.length);
+            }
+          })().catch(e => { console.error(e); process.exit(1); });
+          JS
       - name: Commit images
         run: |
           git config user.name "github-actions"
