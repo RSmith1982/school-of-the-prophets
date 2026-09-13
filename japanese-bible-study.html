@@ -56,6 +56,7 @@
   .vert{writing-mode:vertical-rl;text-orientation:mixed;height:27rem;font-size:1.15rem;line-height:2.1;letter-spacing:.06em;flex:none}
   .vert .vn{font-size:.7em;color:var(--burgundy);margin-block:0 .2em;text-combine-upright:all}
   .vert p{margin:0 0 0 1.2em}
+  .vert p.easy{color:#1F4FA3;font-size:.95em;margin-left:.5em;letter-spacing:.04em}
   .vtitle{writing-mode:vertical-rl;height:27rem;font-size:1.3rem;color:var(--navy);font-weight:500;flex:none;padding-left:.6rem;border-left:1px solid var(--gold)}
   .reader .src{font-size:.9rem;color:var(--ink-soft);font-style:italic;margin:0 0 .4rem}
   @media (max-width:600px){ol.plan li{grid-template-columns:2.4rem 1.2rem 1fr}ol.plan .tools{grid-column:3}.vert,.vtitle{height:22rem}}
@@ -94,7 +95,7 @@
 <main class="wrap">
 <section class="panel intro">
 <h2>この計画について</h2>
-<p>本文は<strong>口語訳聖書</strong>（日本聖書協会、新約 1954 年・旧約 1955 年）を用いる。著作権の保護期間が満了した、時を超えて読み継がれてきた訳である。新共同訳・新改訳・NIV 系の訳は用いない。すべての箇所の本文をこの頁に収め、<em>縦書き</em>で表示する。「読む」を押すと本文が開き、「すべて開く」で計画全体を一冊の本のように印刷できる。</p>
+<p>本文は<strong>口語訳聖書</strong>（日本聖書協会、新約 1954 年・旧約 1955 年）を用いる。著作権の保護期間が満了した、時を超えて読み継がれてきた訳である。新共同訳・新改訳・NIV 系の訳は用いない。すべての箇所の本文をこの頁に収め、<em>縦書き</em>で表示する。各節のとなりには、同じ節を<span style="color:#1F4FA3">青い字のやさしい日本語</span>で添えてある。はじめて聖書を読む人も、日本語を学んでいる人も、そのまま意味がわかるように言いかえたものであり、本文は黒い字の口語訳である。「読む」を押すと本文が開き、「すべて開く」で計画全体を一冊の本のように印刷できる。</p>
 <p>順序には意味がある。ヨハネの序文で始まり、ルカによる福音書は物語の始まりから読む（ルカの序文と系図は別に置く）。マタイの山上の説教はルカの平地の説教のあとに加え、両方を聞く。二階座敷での主イエス・キリストの言葉、ヨハネ 14–17 章は最後の晩餐の夜の中に置く。続いて使徒行伝を読み、それぞれの手紙は書かれた時点で読む。詩篇はときおり一篇だけ、響き合う箇所のそばに置く ― 二篇続けることはなく、詩篇と詩篇の間には物語の箇所を三つ以上はさみ、物語が主役であるようにする。ヨセフからアダムにさかのぼる系図は黙示録のあとに読み、まだ読んでいない詩篇は主題ごとにまとめて計画を締めくくる ― 賛美、王とシオン、守りと信頼、苦難、悔い改め、正しい歩み。</p>
 <div class="source">この計画は <span id="count"></span> の箇所からなる。読み終えた箇所にしるしを付けると、この端末に記憶される。</div>
 </section>
@@ -117,6 +118,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="school.js?v=6"></script>
 <script src="beautiful-reading-plan-ja-data.js"></script>
+<script src="beautiful-reading-plan-ja-easy-data.js"></script>
 <script>
 const root=document.getElementById('plan');
 const KEY='sotp-beautiful-plan-ja-done';
@@ -139,9 +141,9 @@ function vtitle(e,i,n){
 function renderText(e){
   const d=document.createElement('div'); d.className='reader';
   const chunks=[]; let cur=[],len=0;
-  for(const v of e.text){ if(len>380&&cur.length){chunks.push(cur);cur=[];len=0;} cur.push(v); len+=v[1].length; }
+  for(const v of e.text){ if(len>380&&cur.length){chunks.push(cur);cur=[];len=0;} cur.push(v); len+=v[1].length+((EASY[e.book+' '+e.ch+':'+v[0]]||'').length*0.6); }
   if(cur.length) chunks.push(cur);
-  d.innerHTML=chunks.map((ch,i)=>`<div class="vert-wrap"><div class="vtitle">${vtitle(e,i,chunks.length)}</div><div class="vert">${ch.map(v=>`<p><span class="vn">${v[0]}</span>${v[1]}</p>`).join('')}</div></div>`).join('')+`<p class="src">口語訳聖書</p>`;
+  d.innerHTML=chunks.map((ch,i)=>`<div class="vert-wrap"><div class="vtitle">${vtitle(e,i,chunks.length)}</div><div class="vert">${ch.map(v=>{const y=EASY[e.book+' '+e.ch+':'+v[0]];return `<p><span class="vn">${v[0]}</span>${v[1]}</p>`+(y?`<p class="easy">${y}</p>`:'');}).join('')}</div></div>`).join('')+`<p class="src">黒＝口語訳聖書　青＝やさしい日本語</p>`;
   return d;
 }
 let part=null, ol=null;
