@@ -77,7 +77,7 @@
 <header><div class="wrap top">
 <img src="images/logo.svg" alt="" width="44" height="44">
 <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
-<a href="index.html">Home</a>
+<a href="index.html">Home</a> &nbsp; <a href="#" id="navOut" hidden>Sign out</a>
 </div></header>
 
 <section class="hero"><div class="wrap"><h1 id="heroTitle">My Progress</h1><p id="heroSub">Sign in to keep your reading, your courses, and your diploma in one place.</p></div></section>
@@ -248,7 +248,7 @@ function practicalBlock(pr){
   const m=S.MASTERY[pr.mastery];
   return `<h3>Practical Training ${S.PRACTICAL_NAMES[level]} <small class="note">— to level ${pr.mastery}, ${m.title==="Witness"?"Witness":m.title+" each activity"} · ${done} of ${total} levels approved${pend?`, ${pend} awaiting verification`:""}</small></h3><table><thead><tr><th>Activity</th><th>Title held</th><th>Levels approved</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
-function render(){ load().then(ok=>{ $('#authPanel').hidden=ok; $('#me').hidden=!ok; if(ok) show(); else { $('#heroTitle').textContent='My Progress'; } }); }
+function render(){ load().then(ok=>{ $('#authPanel').hidden=ok; $('#me').hidden=!ok; $('#navOut').hidden=!ok; if(ok) show(); else { $('#heroTitle').textContent='My Progress'; } }); }
 function show(){
   const first=(P.name||'').split(' ')[0]||'';
   $('#heroTitle').textContent=P.name||'My Progress'; $('#heroSub').textContent='Your reading, your courses, and your diploma, kept in one place.';
@@ -288,6 +288,7 @@ $('#saveSettings').onclick=async()=>{ $('#setMsg').textContent='Saving…';
   if($('#setPass').value){ const r=await sb.auth.updateUser({password:$('#setPass').value}); if(r.error){$('#setMsg').textContent=r.error.message;return;} $('#setPass').value=''; }
   $('#setMsg').textContent='Saved.'; render(); };
 $('#signOut').onclick=async()=>{ await sb.auth.signOut(); render(); };
+$('#navOut').onclick=async e=>{ e.preventDefault(); await sb.auth.signOut(); render(); };
 render();
 </script>
 </body>

@@ -53,7 +53,7 @@
 <header><div class="wrap top">
 <img src="images/logo.svg" alt="" width="44" height="44">
 <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
-<a href="index.html">Home</a> &nbsp; <a href="people.html">People</a> &nbsp; <a href="competencies.html">Competencies</a>
+<a href="index.html">Home</a> &nbsp; <a href="account.html">My progress</a> &nbsp; <a href="people.html">People</a> &nbsp; <a href="competencies.html">Competencies</a> &nbsp; <a href="#" id="navOut" hidden>Sign out</a>
 </div></header>
 <section class="hero"><div class="wrap"><h1>Administration</h1><p>Bishop Robert P. Smith, Sr. — approvals and student records</p></div></section>
 <main class="wrap">
@@ -85,12 +85,14 @@
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 $('#f').onsubmit=async e=>{e.preventDefault(); $('#m').textContent='Signing in…'; const {error}=await sb.auth.signInWithPassword({email:$('#e').value.trim(),password:$('#p').value}); $('#m').textContent=error?error.message:''; start();};
 $('#out').onclick=async()=>{await sb.auth.signOut(); start();};
+$('#navOut').onclick=async e=>{e.preventDefault(); await sb.auth.signOut(); start();};
 let DATA=null;
 async function start(){
   const u=await S.user();
+  $('#navOut').hidden=!u;
   if(!u){ $('#gate').hidden=false; $('#board').hidden=true; $('#pendingPanel').hidden=true; $('#authPanel').hidden=true; return; }
   if(!S.isAdminUser(u)){ $('#gate').hidden=false; $('#board').hidden=true; $('#m').textContent='This page is for the Bishop only. You are signed in as '+u.email+'.'; return; }
-  $('#gate').hidden=true; $('#board').hidden=false;
+  $('#gate').hidden=true; $('#board').hidden=false; $('#navOut').hidden=false;
   const [st,ap,cp,rp,pr,at,au]=await Promise.all([
     sb.rpc('admin_students'), sb.from('approvals').select('*'), sb.from('course_progress').select('*'),
     sb.from('reading_progress').select('*'), sb.from('practical_requests').select('*').order('requested_at'), sb.from('exam_attempts').select('*').order('taken_at'),

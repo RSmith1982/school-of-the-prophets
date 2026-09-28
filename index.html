@@ -528,6 +528,7 @@ document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="school.js?v=8"></script>
-<script>School.user().then(u=>{ if(u) School.profile().then(p=>{ const a=document.getElementById("navAccount"); a.textContent=(p&&p.name?p.name.split(" ")[0]:"My")+"’s progress"; }); });</script>
+<script>School.user().then(u=>{ const a=document.getElementById("navAccount"); a.textContent = u ? "My progress" : "Sign in";
+  if(u){ const li=document.createElement("li"); const o=document.createElement("a"); o.href="#"; o.textContent="Sign out"; o.onclick=async e=>{ e.preventDefault(); await School.sb.auth.signOut(); location.reload(); }; li.appendChild(o); a.parentElement.after(li); } });</script>
 </body>
 </html>

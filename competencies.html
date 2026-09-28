@@ -85,7 +85,7 @@
 <header><div class="wrap top">
 <img src="images/logo.svg" alt="" width="44" height="44">
 <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
-<nav><a href="index.html">Home</a><a href="account.html">My progress</a><a href="admin.html" id="adminLink" hidden>Administration</a></nav>
+<nav><a href="index.html">Home</a><a href="account.html">My progress</a><a href="admin.html" id="adminLink" hidden>Administration</a><a href="#" id="signOut" hidden>Sign out</a></nav>
 </div></header>
 
 <section class="hero"><div class="wrap"><h1 id="heroTitle">Competencies</h1><p id="heroSub">Every activity of practical training, mastered level by level, each level reported to an authorized person and confirmed.</p></div></section>
@@ -155,6 +155,8 @@
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 document.getElementById('year').textContent=new Date().getFullYear();
+$('#signOut').onclick=async e=>{ e.preventDefault(); await sb.auth.signOut(); location.reload(); };
+S.user().then(u=>{ $('#signOut').hidden=!u; });
 $('#inForm').onsubmit=async e=>{e.preventDefault(); $('#inMsg').textContent='Signing in…';
   const {error}=await sb.auth.signInWithPassword({email:$('#inEmail').value.trim(),password:$('#inPass').value});
   if(error){$('#inMsg').textContent=error.message;return;} render();};
