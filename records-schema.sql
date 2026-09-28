@@ -320,17 +320,23 @@ drop policy if exists "history bishop only" on public.people_history;
 create policy "history bishop only" on public.people_history for select using (public.is_admin());
 
 -- Every change of level is kept in the history (Bishop only).
+
+create or replace function public.people_touch() returns trigger
+language plpgsql as $
+begin new.updated_at := now(); return new; end $;
+drop trigger if exists people_touch on public.people;
+create trigger people_touch before update on public.people for each row execute procedure public.people_touch();
+
 create or replace function public.people_log() returns trigger
-language plpgsql security definer set search_path = public as $$
+language plpgsql security definer set search_path = public as $
 begin
   if tg_op = 'INSERT' or new.level is distinct from old.level or new.note is distinct from old.note then
     insert into public.people_history (person_id, level, note, changed_by) values (new.id, new.level, new.note, auth.uid());
   end if;
-  new.updated_at := now();
   return new;
-end $$;
-drop trigger if exists people_log on public.people;
-create trigger people_log before insert or update on public.people for each row execute procedure public.people_log();
+end $;
+create trigger people_log after insert or update on public.people for each row execute procedure public.people_log();
+
 
 -- The list shown when a new student signs up: every unclaimed name, with only Disciple-level names selectable.
 create or replace function public.claimable_people()
