@@ -103,7 +103,6 @@
       <div><label for="upName">Full name (as it should appear on your certificates)</label><input id="upName" type="text" autocomplete="name" required></div>
       <div><label for="upEmail">Email</label><input id="upEmail" type="email" autocomplete="email" required></div>
       <div><label for="upPass">Password (at least 8 characters)</label><input id="upPass" type="password" autocomplete="new-password" minlength="8" required></div>
-      <div><label for="upDiploma">Diploma you are pursuing</label><select id="upDiploma"><option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option><option>Bishop</option></select></div>
       <div><label for="upPlan">Reading plan</label><select id="upPlan"><option value="english">The Beautiful Reading Plan (King James Version)</option><option value="japanese">日本語聖書研究 — Japanese (口語訳)</option></select></div>
     </div>
     <div class="row"><button class="btn gold" type="submit">Create my account</button></div>
@@ -174,7 +173,7 @@
   <h2>Settings</h2>
   <div class="two">
     <div><label for="setName">Full name</label><input id="setName" type="text"></div>
-    <div><label for="setDiploma">Diploma you are pursuing</label><select id="setDiploma"><option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option><option>Bishop</option></select></div>
+    <div><label>Diploma you are pursuing</label><div id="setDiploma" style="padding:.55rem 0"></div><div class="note">Every student begins with the Disciple diploma; the Bishop sets the next one when it is time.</div></div>
     <div><label for="setPlan">Reading plan</label><select id="setPlan"><option value="english">The Beautiful Reading Plan (King James Version)</option><option value="japanese">日本語聖書研究 — Japanese (口語訳)</option></select></div>
     <div><label for="setPass">New password (leave blank to keep)</label><input id="setPass" type="password" autocomplete="new-password"></div>
   </div>
@@ -203,7 +202,7 @@ $('#inForm').onsubmit=async e=>{e.preventDefault(); $('#inMsg').textContent='Sig
   if(error){$('#inMsg').textContent=error.message;return;} location.hash=''; render();};
 $('#upForm').onsubmit=async e=>{e.preventDefault(); $('#upMsg').textContent='Creating your account…';
   const name=$('#upName').value.trim();
-  const {error}=await sb.auth.signUp({email:$('#upEmail').value.trim(),password:$('#upPass').value,options:{data:{name,diploma:$('#upDiploma').value,plan:$('#upPlan').value}}});
+  const {error}=await sb.auth.signUp({email:$('#upEmail').value.trim(),password:$('#upPass').value,options:{data:{name,diploma:'Disciple',plan:$('#upPlan').value}}});
   if(error){$('#upMsg').textContent=error.message;return;}
   const pid=$('#upPerson').value; if(pid){ const r=await sb.rpc('claim_person',{p_id:+pid}); if(r.error) $('#upMsg').textContent='Account created, but your name could not be connected: '+r.error.message; }
   $('#upMsg').textContent='Welcome. Your account is ready.'; location.hash=''; render();};
@@ -284,11 +283,11 @@ function show(){
   // reports waiting for me (authorized people and the Bishop)
   S.pendingForMe().then(q=>{ $("#queueBanner").hidden=!q.length; if(q.length) $("#queueText").textContent=`${q.length} competency report${q.length>1?"s":""} named you as the instructor or witness and await your confirmation.`; });
   // settings
-  $('#setName').value=P.name||''; $('#setDiploma').value=P.diploma; $('#setPlan').value=P.plan;
+  $('#setName').value=P.name||''; $('#setDiploma').textContent=P.diploma; $('#setPlan').value=P.plan;
 }
 $('#enrollSent').onchange=async e=>{ const {error}=await sb.from('profiles').update({enrollment_sent:e.target.checked,updated_at:new Date().toISOString()}).eq('id',U.id); if(error) alert(error.message); render(); };
 $('#saveSettings').onclick=async()=>{ $('#setMsg').textContent='Saving…';
-  const {error}=await sb.from('profiles').update({name:$('#setName').value.trim(),diploma:$('#setDiploma').value,plan:$('#setPlan').value,updated_at:new Date().toISOString()}).eq('id',U.id);
+  const {error}=await sb.from('profiles').update({name:$('#setName').value.trim(),plan:$('#setPlan').value,updated_at:new Date().toISOString()}).eq('id',U.id);
   if(error){$('#setMsg').textContent=error.message;return;}
   if($('#setPass').value){ const r=await sb.auth.updateUser({password:$('#setPass').value}); if(r.error){$('#setMsg').textContent=r.error.message;return;} $('#setPass').value=''; }
   $('#setMsg').textContent='Saved.'; render(); };
