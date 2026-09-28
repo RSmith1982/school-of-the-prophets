@@ -43,6 +43,13 @@
     7:{title:'Instructor of', stage:'Training with Witness to Confirm Competency',    short:'Train another before a witness',   tell:'Tell the Bishop whom you trained in this ministry, when and where, and which approved witness confirmed your competency.'},
   };
   const MASTERY_MAX = 7;
+  // Where a person stands, as recorded by the one who met them — up to Disciple; above that the diplomas take over.
+  const PEOPLE_LEVELS = [
+    ["oppressed","Oppressed"],["possessed","Possessed"],["replaced","Replaced"],["unknown","Unknown"],
+    ["atheist","Atheist"],["agnostic","Agnostic"],["non-christian-heretic","Non-Christian Heretic"],["christian-heretic","Christian Heretic"],["disciple","Disciple"],
+  ];
+  function peopleLevelName(k){ const l=PEOPLE_LEVELS.find(x=>x[0]===k); return l?l[1]:k; }
+  async function canAddPeople(){ const {data}=await sb.rpc("can_add_people"); return !!data; }
   // Who the authorized person was for each level, as the student reports it (the first is the usual one)
   const ROLES = {
     1:['Minister — ministered it to me','Witness'],
@@ -140,6 +147,6 @@
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function fmtDate(d){ return d? new Date(d).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):''; }
 
-  window.School = { sb, COURSES, DIPLOMAS, MASTERY, MASTERY_MAX, ROLES, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PRACTICAL_ACTIVITIES, PLANS, ADMIN_EMAIL, requirements, activityParts, masteryTitle, user, profile, authorizedPeople, isAuthorized, pendingForMe, activityName, isAdminUser, mountWidget, escapeHtml, fmtDate };
+  window.School = { sb, COURSES, DIPLOMAS, MASTERY, MASTERY_MAX, ROLES, PEOPLE_LEVELS, peopleLevelName, canAddPeople, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PRACTICAL_ACTIVITIES, PLANS, ADMIN_EMAIL, requirements, activityParts, masteryTitle, user, profile, authorizedPeople, isAuthorized, pendingForMe, activityName, isAdminUser, mountWidget, escapeHtml, fmtDate };
   document.addEventListener('DOMContentLoaded', mountWidget);
 })();

@@ -85,7 +85,7 @@
 <header><div class="wrap top">
 <img src="images/logo.svg" alt="" width="44" height="44">
 <div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
-<nav><a href="index.html">Home</a><a href="levels-of-mastery.html">Levels of mastery</a><a href="account.html">My progress</a><a href="admin.html" id="adminLink" hidden>Administration</a></nav>
+<nav><a href="index.html">Home</a><a href="account.html">My progress</a><a href="admin.html" id="adminLink" hidden>Administration</a></nav>
 </div></header>
 
 <section class="hero"><div class="wrap"><h1 id="heroTitle">Competencies</h1><p id="heroSub">Every activity of practical training, mastered level by level, each level reported to an authorized person and confirmed.</p></div></section>
@@ -115,7 +115,7 @@
 <!-- ================= Report a competency ================= -->
 <section class="panel" id="report">
   <h2>Report a Competency</h2>
-  <p class="note">Choose the activity and the level of mastery you are ready to have verified, say when it happened and who the authorized person was, and describe what happened. The person you choose sees your report when they sign in and confirms or rejects it. <a href="levels-of-mastery.html#seven">The seven levels, explained.</a></p>
+  <p class="note">Choose the activity and the level of mastery you are ready to have verified, say when it happened and who the authorized person was, and describe what happened. The person you choose sees your report when they sign in and confirms or rejects it. </p>
   <form id="repForm">
     <div class="two">
       <div><label for="rLevel">Level of training</label><select id="rLevel"></select></div>
@@ -151,7 +151,7 @@
 <footer><div class="wrap">© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js?v=7"></script>
+<script src="school.js?v=8"></script>
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 document.getElementById('year').textContent=new Date().getFullYear();

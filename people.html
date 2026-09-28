@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>People — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;--parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--measure:42rem;--green:#2F5D3A}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Georgia,serif;font-size:1.12rem;line-height:1.6;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  h1,h2,h3,h4{font-weight:500;line-height:1.25;margin:0}
+  .wrap{width:min(100% - 2.5rem,62rem);margin-inline:auto}
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0;flex-wrap:wrap}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top nav{margin-left:auto;display:flex;gap:1rem;flex-wrap:wrap}
+  .top a{color:var(--gold-soft);text-decoration:none}
+  .hero{color:var(--parchment);padding:2.2rem 0 1.8rem;text-align:center;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,162,76,.16),transparent 70%),var(--navy)}
+  .hero h1{font-size:clamp(2rem,5vw,3rem);color:#fff}
+  .hero p{max-width:var(--measure);margin:.6rem auto 0;color:var(--gold-soft)}
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel h2{font-size:1.7rem;color:var(--navy);margin-bottom:.8rem}
+  label{display:block;font-size:.95rem;color:var(--ink-soft);margin:.9rem 0 .25rem}
+  input[type=text],input[type=email],input[type=password],select,textarea{font:inherit;width:100%;padding:.55rem .7rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--ink);border-radius:2px}
+  textarea{min-height:5rem;resize:vertical}
+  .btn{font:inherit;font-size:1rem;padding:.55rem 1.2rem;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn.small{font-size:.9rem;padding:.3rem .8rem}
+  .row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+  .msg{color:var(--burgundy);font-style:italic;margin-top:.6rem;min-height:1.4em}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 1.2rem}
+  @media (max-width:640px){.two{grid-template-columns:1fr}}
+  .note{font-size:.95rem;color:var(--ink-soft)}
+  table{width:100%;border-collapse:collapse;font-size:1rem}
+  th,td{text-align:left;padding:.5rem .4rem;border-top:1px solid var(--parchment-dark);vertical-align:top}
+  th{font-weight:500;color:var(--ink-soft);font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+  td select{width:auto;padding:.25rem .4rem;font-size:.95rem}
+  .st{display:inline-block;padding:.1rem .55rem;border-radius:2px;font-size:.88rem;white-space:nowrap}
+  .st.none{background:#E3D9BF;color:var(--ink-soft)}
+  .st.approved{background:var(--green);color:#fff}
+  .st.disciple{background:#DCE8DC;color:var(--green)}
+  .tscroll{overflow-x:auto}
+  footer{padding:2rem 0;text-align:center;color:var(--gold-soft);background:var(--navy-deep);font-size:.95rem}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+<img src="images/logo.svg" alt="" width="44" height="44">
+<div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+<nav><a href="index.html">Home</a><a href="account.html">My progress</a><a href="competencies.html">Competencies</a><a href="admin.html" id="adminLink" hidden>Administration</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap"><h1>People</h1><p>Those you have met in ministry, where each one stands, and how far they have come. When a person reaches Disciple, they may create their own student account and connect it to their name.</p></div></section>
+
+<main class="wrap">
+
+<section class="panel" id="authPanel" hidden>
+  <h2>Sign In</h2>
+  <form id="inForm">
+    <label for="inEmail">Email</label><input id="inEmail" type="email" autocomplete="email" required>
+    <label for="inPass">Password</label><input id="inPass" type="password" autocomplete="current-password" required>
+    <div class="row"><button class="btn gold" type="submit">Sign in</button></div>
+    <div class="msg" id="inMsg"></div>
+  </form>
+</section>
+
+<section class="panel" id="noPanel" hidden>
+  <h2>Not Yet</h2>
+  <p>Adding people to the system is for students whose Disciple diploma has been awarded, for those the Bishop has authorized, and for the Bishop. Keep going with your courses and practical training on your <a href="account.html">progress page</a>.</p>
+</section>
+
+<div id="me" hidden>
+<section class="panel">
+  <h2>Add a Person</h2>
+  <p class="note">Someone you met on the street, in a home, at a meeting. Record their name and where they stand today; you can raise their level as they come along, as far as Disciple. Only you and the Bishop can see the people you add.</p>
+  <form id="addForm">
+    <div class="two">
+      <div><label for="aName">Name</label><input id="aName" type="text" required placeholder="Their full name"></div>
+      <div><label for="aLevel">Where they stand</label><select id="aLevel"></select></div>
+    </div>
+    <label for="aNote">Note (optional)</label>
+    <textarea id="aNote" placeholder="Where you met, what was said, what they need."></textarea>
+    <div class="row"><button class="btn gold" type="submit">Add to the system</button></div>
+    <div class="msg" id="aMsg"></div>
+  </form>
+</section>
+
+<section class="panel">
+  <h2 id="listTitle">People I Have Added</h2>
+  <p class="note">Change a person's level as they move. Once a person is marked Disciple, their name becomes selectable when they create a student account; after they connect it, their record is in the Bishop's hands.</p>
+  <div id="list"></div>
+</section>
+</div>
+</main>
+<footer><div class="wrap">© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=8"></script>
+<script>
+const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
+document.getElementById('year').textContent=new Date().getFullYear();
+$('#inForm').onsubmit=async e=>{e.preventDefault(); $('#inMsg').textContent='Signing in…';
+  const {error}=await sb.auth.signInWithPassword({email:$('#inEmail').value.trim(),password:$('#inPass').value});
+  if(error){$('#inMsg').textContent=error.message;return;} render();};
+let U=null, ADMIN=false, PEOPLE=[], HIST=[];
+const levelOpts=(v)=>S.PEOPLE_LEVELS.map(l=>`<option value="${l[0]}" ${l[0]===v?'selected':''}>${esc(l[1])}</option>`).join('');
+async function render(){
+  U=await S.user(); $('#authPanel').hidden=!!U; $('#me').hidden=true; $('#noPanel').hidden=true; if(!U) return;
+  ADMIN=S.isAdminUser(U); $('#adminLink').hidden=!ADMIN;
+  const can=await S.canAddPeople(); if(!can){ $('#noPanel').hidden=false; return; }
+  $('#me').hidden=false; $('#aLevel').innerHTML=levelOpts('unknown');
+  const q=await sb.from('people').select('*').order('updated_at',{ascending:false}); PEOPLE=q.data||[];
+  if(ADMIN){ const h=await sb.from('people_history').select('*').order('changed_at'); HIST=h.data||[]; $('#listTitle').textContent='Everyone in the System'; }
+  list();
+}
+function list(){
+  if(!PEOPLE.length){ $('#list').innerHTML='<p class="note">No one yet.</p>'; return; }
+  const rows=PEOPLE.map(p=>{ const claimed=!!p.user_id; const hist=ADMIN?HIST.filter(h=>h.person_id===p.id):[];
+    const lvl = (claimed&&!ADMIN) ? S.peopleLevelName(p.level) : `<select data-lvl="${p.id}">${levelOpts(p.level)}</select>`;
+    return `<tr><td>${esc(p.name)}<div class="note">added ${S.fmtDate(p.added_at)}${claimed?' · <span class="st approved">Connected to a student account</span>':p.level==='disciple'?' · <span class="st disciple">May now create an account</span>':''}</div></td>
+      <td>${lvl}</td>
+      <td><input type="text" data-note="${p.id}" value="${esc(p.note||'')}" placeholder="Note" ${claimed&&!ADMIN?'disabled':''}></td>
+      <td>${(claimed&&!ADMIN)?'':`<button class="btn small ghost" data-save="${p.id}">Save</button>`}</td></tr>`+
+      (ADMIN&&hist.length?`<tr><td colspan="4" class="note" style="padding-left:1.5rem">History (Bishop only): ${hist.map(h=>`${S.peopleLevelName(h.level)} — ${new Date(h.changed_at).toLocaleDateString()}${h.note?` “${esc(h.note)}”`:''}`).join(' → ')}</td></tr>`:''); }).join('');
+  $('#list').innerHTML=`<div class="tscroll"><table><thead><tr><th>Name</th><th>Where they stand</th><th>Note</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.querySelectorAll('[data-save]').forEach(b=>b.onclick=async()=>{ const id=+b.dataset.save; const level=$(`[data-lvl="${id}"]`).value, note=$(`[data-note="${id}"]`).value.trim();
+    b.disabled=true; const {error}=await sb.from('people').update({level,note}).eq('id',id); if(error) alert(error.message); render(); });
+}
+$('#addForm').onsubmit=async e=>{ e.preventDefault(); const name=$('#aName').value.trim(); if(!name) return; $('#aMsg').textContent='Adding…';
+  const {error}=await sb.from('people').insert({name,level:$('#aLevel').value,note:$('#aNote').value.trim(),added_by:U.id});
+  if(error){ $('#aMsg').textContent=error.message; return; } $('#aMsg').textContent=`${name} added.`; $('#aName').value=''; $('#aNote').value=''; render(); };
+render();
+</script>
+</body>
+</html>

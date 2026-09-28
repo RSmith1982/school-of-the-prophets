@@ -271,3 +271,89 @@ end $$;
 grant execute on function public.is_authorized() to authenticated;
 grant execute on function public.authorized_people() to authenticated;
 grant execute on function public.decide_request(bigint,text,text) to authenticated;
+-- People met in ministry: added by anyone who is at least a Disciple, with a level up to Disciple.
+-- A person at Disciple level may claim their record when they create a student account.
+-- The record's history of earlier levels is visible to the Bishop only.
+
+create table if not exists public.people (
+  id bigserial primary key,
+  name text not null,
+  level text not null default 'unknown',  -- oppressed | possessed | replaced | unknown | atheist | agnostic | non-christian-heretic | christian-heretic | disciple
+  note text not null default '',
+  added_by uuid references auth.users(id) on delete set null,
+  added_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  user_id uuid unique references auth.users(id) on delete set null   -- the student account that claimed this record
+);
+create table if not exists public.people_history (
+  id bigserial primary key,
+  person_id bigint not null references public.people(id) on delete cascade,
+  level text not null,
+  note text not null default '',
+  changed_by uuid references auth.users(id) on delete set null,
+  changed_at timestamptz not null default now()
+);
+alter table public.people enable row level security;
+alter table public.people_history enable row level security;
+
+-- Who may add people: the Bishop, anyone he has authorized, and any student whose Disciple (or higher) diploma has been awarded.
+create or replace function public.can_add_people() returns boolean
+language sql stable security definer set search_path = public as $$
+  select auth.uid() is not null and (
+    public.is_admin()
+    or exists (select 1 from public.authorized where user_id = auth.uid())
+    or exists (select 1 from public.approvals where user_id = auth.uid() and approved and item in ('diploma:Disciple','diploma:Evangelist','diploma:Pastor','diploma:Prophet','diploma:Bishop'))
+  );
+$$;
+
+drop policy if exists "people read" on public.people;
+create policy "people read" on public.people for select
+  using (public.is_admin() or (public.can_add_people() and added_by = auth.uid()) or user_id = auth.uid());
+drop policy if exists "people insert" on public.people;
+create policy "people insert" on public.people for insert
+  with check (public.can_add_people() and added_by = auth.uid() and level in ('oppressed','possessed','replaced','unknown','atheist','agnostic','non-christian-heretic','christian-heretic','disciple'));
+drop policy if exists "people update" on public.people;
+create policy "people update" on public.people for update
+  using (public.is_admin() or (public.can_add_people() and added_by = auth.uid() and user_id is null))
+  with check (level in ('oppressed','possessed','replaced','unknown','atheist','agnostic','non-christian-heretic','christian-heretic','disciple'));
+drop policy if exists "history bishop only" on public.people_history;
+create policy "history bishop only" on public.people_history for select using (public.is_admin());
+
+-- Every change of level is kept in the history (Bishop only).
+create or replace function public.people_log() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' or new.level is distinct from old.level or new.note is distinct from old.note then
+    insert into public.people_history (person_id, level, note, changed_by) values (new.id, new.level, new.note, auth.uid());
+  end if;
+  new.updated_at := now();
+  return new;
+end $$;
+drop trigger if exists people_log on public.people;
+create trigger people_log before insert or update on public.people for each row execute procedure public.people_log();
+
+-- The list shown when a new student signs up: every unclaimed name, with only Disciple-level names selectable.
+create or replace function public.claimable_people()
+returns table (id bigint, name text, claimable boolean) language sql stable security definer set search_path = public as $$
+  select id, name, (level = 'disciple') as claimable from public.people where user_id is null order by name;
+$$;
+
+-- A new student claims their record. Only a Disciple-level, unclaimed record can be claimed.
+create or replace function public.claim_person(p_id bigint) returns jsonb
+language plpgsql security definer set search_path = public as $$
+declare p public.people;
+begin
+  if auth.uid() is null then raise exception 'sign in first'; end if;
+  select * into p from public.people where id = p_id;
+  if p.id is null then raise exception 'that name is not in the system'; end if;
+  if p.user_id is not null then raise exception 'that name has already been connected to an account'; end if;
+  if p.level <> 'disciple' then raise exception 'that name cannot be selected yet'; end if;
+  if exists (select 1 from public.people where user_id = auth.uid()) then raise exception 'this account is already connected to a name'; end if;
+  update public.people set user_id = auth.uid() where id = p_id;
+  update public.profiles set name = p.name, updated_at = now() where id = auth.uid() and (name = '' or name is null);
+  return jsonb_build_object('ok', true, 'name', p.name);
+end $$;
+
+grant execute on function public.can_add_people() to authenticated;
+grant execute on function public.claimable_people() to anon, authenticated;
+grant execute on function public.claim_person(bigint) to authenticated;

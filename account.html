@@ -95,6 +95,7 @@
   </form>
   <form id="upForm" hidden>
     <div class="two">
+      <div><label for="upPerson">Were you added to the system by someone who met you? Select your name</label><select id="upPerson"><option value="">— I am new, or my name is not listed —</option></select></div>
       <div><label for="upName">Full name (as it should appear on your certificates)</label><input id="upName" type="text" autocomplete="name" required></div>
       <div><label for="upEmail">Email</label><input id="upEmail" type="email" autocomplete="email" required></div>
       <div><label for="upPass">Password (at least 8 characters)</label><input id="upPass" type="password" autocomplete="new-password" minlength="8" required></div>
@@ -125,7 +126,7 @@
     <div>
       <div class="note">Overall Status</div>
       <p id="overall" style="margin:.3rem 0 0"></p>
-      <div class="row"><a class="btn small ghost" href="#settings">Settings</a><a class="btn small gold" href="admin.html" id="adminLink" hidden>Administration — approve students</a><button class="btn small ghost" type="button" id="signOut">Sign out</button></div>
+      <div class="row"><a class="btn small ghost" href="#settings">Settings</a><a class="btn small gold" href="admin.html" id="adminLink" hidden>Administration — approve students</a><a class="btn small" href="people.html" id="peopleLink" hidden>People I have met</a><button class="btn small ghost" type="button" id="signOut">Sign out</button></div>
     </div>
   </div>
 </section>
@@ -160,7 +161,7 @@
 
 <section class="panel">
   <h2>4. Competencies</h2>
-  <p class="note">Each activity of practical training is mastered through <a href="levels-of-mastery.html">seven levels of mastery</a>, in order, and each level carries a title: <strong>Witness</strong> (level 1), <strong>Disciple of</strong> the activity (levels 2–4), <strong>Minister of</strong> it (levels 5–6), and <strong>Instructor of</strong> it (level 7). The Disciple diploma requires level 4 in every activity, the Evangelist and Prophet diplomas level 5, and the Pastor and Bishop diplomas level 7. Report each level on the competencies page — when it happened, which authorized person was there, and what happened — and that person confirms it.</p>
+  <p class="note">Each activity of practical training is mastered through seven levels of mastery, in order, and each level carries a title: <strong>Witness</strong> (level 1), <strong>Disciple of</strong> the activity (levels 2–4), <strong>Minister of</strong> it (levels 5–6), and <strong>Instructor of</strong> it (level 7). The Disciple diploma requires level 4 in every activity, the Evangelist and Prophet diplomas level 5, and the Pastor and Bishop diplomas level 7. Report each level on the competencies page — when it happened, which authorized person was there, and what happened — and that person confirms it.</p>
   <div id="practical"></div>
   <div class="row"><a class="btn" href="competencies.html">Open my competencies</a></div>
 </section>
@@ -181,7 +182,7 @@
 <footer><div class="wrap">© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js?v=7"></script>
+<script src="school.js?v=8"></script>
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 document.getElementById('year').textContent=new Date().getFullYear();
@@ -190,6 +191,8 @@ document.getElementById('year').textContent=new Date().getFullYear();
 $('#tabIn').onclick=()=>{$('#tabIn').classList.add('on');$('#tabUp').classList.remove('on');$('#inForm').hidden=false;$('#upForm').hidden=true;};
 $('#tabUp').onclick=()=>{$('#tabUp').classList.add('on');$('#tabIn').classList.remove('on');$('#inForm').hidden=true;$('#upForm').hidden=false;};
 if(location.hash==='#create') $('#tabUp').onclick();
+sb.rpc('claimable_people').then(({data})=>{ (data||[]).forEach(p=>{ const o=document.createElement('option'); o.value=p.claimable?p.id:''; o.textContent=p.name; o.disabled=!p.claimable; $('#upPerson').appendChild(o); }); });
+$('#upPerson').onchange=()=>{ const o=$('#upPerson').selectedOptions[0]; if(o&&o.value) $('#upName').value=o.textContent; };
 $('#inForm').onsubmit=async e=>{e.preventDefault(); $('#inMsg').textContent='Signing in…';
   const {error}=await sb.auth.signInWithPassword({email:$('#inEmail').value.trim(),password:$('#inPass').value});
   if(error){$('#inMsg').textContent=error.message;return;} location.hash=''; render();};
@@ -197,6 +200,7 @@ $('#upForm').onsubmit=async e=>{e.preventDefault(); $('#upMsg').textContent='Cre
   const name=$('#upName').value.trim();
   const {error}=await sb.auth.signUp({email:$('#upEmail').value.trim(),password:$('#upPass').value,options:{data:{name,diploma:$('#upDiploma').value,plan:$('#upPlan').value}}});
   if(error){$('#upMsg').textContent=error.message;return;}
+  const pid=$('#upPerson').value; if(pid){ const r=await sb.rpc('claim_person',{p_id:+pid}); if(r.error) $('#upMsg').textContent='Account created, but your name could not be connected: '+r.error.message; }
   $('#upMsg').textContent='Welcome. Your account is ready.'; location.hash=''; render();};
 $('#forgot').onclick=async()=>{const email=$('#inEmail').value.trim(); if(!email){$('#inMsg').textContent='Type your email first, then press Forgot password.';return;}
   const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
@@ -249,7 +253,7 @@ function show(){
   const first=(P.name||'').split(' ')[0]||'';
   $('#heroTitle').textContent=P.name||'My Progress'; $('#heroSub').textContent='Your reading, your courses, and your diploma, kept in one place.';
   $('#welcome').textContent=`Welcome, ${P.name||U.email}.`;
-  $('#adminLink').hidden=!S.isAdminUser(U);
+  $('#adminLink').hidden=!S.isAdminUser(U); S.canAddPeople().then(c=>{ $('#peopleLink').hidden=!c; });
   const req=S.requirements(P.diploma); $('#dipName').textContent=P.diploma;
   // progress: enrollment 1, reading plan 1, each course 1, each practical part 3 per level
   let total=0, done=0;
