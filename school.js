@@ -23,35 +23,55 @@
     'practical-training-level-two':{title:'Practical Training Level Two', built:true, practical:'level-two'},
     'practical-training-level-three':{title:'Practical Training Level Three', built:true, practical:'level-three'},
   };
+  // mastery: the level of mastery (1–7, see MASTERY below) every activity of the diploma's practical training must reach
   const DIPLOMAS = {
-    Disciple:  {courses:['scientific-evidence-of-god','full-gospel','new-testament','apologetics','martyrship','healing-and-miracles','practical-training-level-one'], practical:'level-one', teach:false, requires:[]},
-    Evangelist:{courses:['roberts-rules-of-debate','deliverance','heaven-and-hell','practical-training-level-two'], practical:'level-two', teach:false, requires:['Disciple']},
-    Pastor:    {courses:['old-testament','heresies','biblical-finances','practical-training-level-two'], practical:'level-two', teach:true, requires:['Disciple']},
-    Prophet:   {courses:['hearing-from-god'], practical:null, teach:false, requires:['Pastor']},
-    Bishop:    {courses:['practical-training-level-three'], practical:'level-three', teach:true, requires:['Evangelist','Pastor']},
+    Disciple:  {courses:['scientific-evidence-of-god','full-gospel','new-testament','apologetics','martyrship','healing-and-miracles','practical-training-level-one'], practical:'level-one', mastery:4, requires:[]},
+    Evangelist:{courses:['roberts-rules-of-debate','deliverance','heaven-and-hell','practical-training-level-two'], practical:'level-two', mastery:5, requires:['Disciple']},
+    Pastor:    {courses:['old-testament','heresies','biblical-finances','practical-training-level-two'], practical:'level-two', mastery:7, requires:['Disciple']},
+    Prophet:   {courses:['hearing-from-god'], practical:null, mastery:5, requires:['Pastor']},
+    Bishop:    {courses:['practical-training-level-three'], practical:'level-three', mastery:7, requires:['Evangelist','Pastor']},
   };
-  const PRACTICAL_PARTS = {
-    1:'Receive live training on the activity',
-    2:'Witness the activity completed by an approved instructor',
-    3:'Perform the activity under supervision',
-    4:'Successfully teach someone else the activity',
+  // The seven levels to mastery. Every activity of practical training is mastered level by level, in order,
+  // and each level carries a title: Witness, then Disciple of the activity, then Minister of it, then Instructor of it.
+  const MASTERY = {
+    1:{title:'Witness',       stage:'Experiencing Receiving',                         short:'Receive it yourself',              tell:'Tell the Bishop when and where you received this ministry yourself, and from whom.'},
+    2:{title:'Disciple of',   stage:'Training of Ministry',                           short:'Receive live training',            tell:'Tell the Bishop when, where, and from whom you received live training in this ministry.'},
+    3:{title:'Disciple of',   stage:'Witnessing Ministry',                            short:'Witness it ministered',            tell:'Tell the Bishop when and where you witnessed this ministry, and which approved instructor ministered it.'},
+    4:{title:'Disciple of',   stage:'Ministering with Instruction',                   short:'Minister under instruction',       tell:'Tell the Bishop when and where you ministered it under instruction, and who instructed you.'},
+    5:{title:'Minister of',   stage:'Ministering with Witness to Confirm Competency', short:'Minister before a witness',        tell:'Tell the Bishop when and where you ministered it, and which approved witness confirmed your competency.'},
+    6:{title:'Minister of',   stage:'Training with Instruction',                      short:'Train another under instruction',  tell:'Tell the Bishop whom you trained in this ministry, when and where, and who instructed you as you trained them.'},
+    7:{title:'Instructor of', stage:'Training with Witness to Confirm Competency',    short:'Train another before a witness',   tell:'Tell the Bishop whom you trained in this ministry, when and where, and which approved witness confirmed your competency.'},
   };
+  const MASTERY_MAX = 7;
+  // Who the authorized person was for each level, as the student reports it (the first is the usual one)
+  const ROLES = {
+    1:['Minister — ministered it to me','Witness'],
+    2:['Instructor — trained me'],
+    3:['Instructor — I witnessed them minister it'],
+    4:['Instructor — instructed me as I ministered it'],
+    5:['Witness — confirmed my competency to minister it'],
+    6:['Instructor — instructed me as I trained another'],
+    7:['Witness — confirmed my competency to instruct'],
+  };
+  // kept for older pages: the description of each level
+  const PRACTICAL_PARTS = {}; Object.keys(MASTERY).forEach(n=>{ PRACTICAL_PARTS[n]=MASTERY[n].title+' — '+MASTERY[n].stage; });
   const PRACTICAL_NAMES = {'level-one':'Level One','level-two':'Level Two','level-three':'Level Three'};
-  // The activities of each level of practical training. Each activity is completed in the parts above.
+  // The activities of each level of practical training. Each activity is mastered through the seven levels above,
+  // up to the level of mastery the diploma requires. An activity may name its own levels (e.g. water baptism).
   const PRACTICAL_ACTIVITIES = {
     'level-one': [ // Disciple — the works every believer is sent to do
       ['sharing-the-gospel','Sharing The Gospel'],
       ['street-evangelism','Street Evangelism'],
       ['healing-the-sick','Healing the Sick'],
       ['casting-out-demons','Casting Out Demons'],
-      ['baptizing-in-water','Baptizing in Water',{parts:[1,2],note:'Be baptized in water yourself, or show proof of it, and tell the Bishop about it — that is the witness for this activity.'}],
+      ['baptizing-in-water','Baptizing in Water',{levels:[1,2,3],note:'Be baptized in water yourself, or show proof of it, and tell the Bishop about it — that is level 1, Witness. Then receive training in it and witness a baptism.'}],
       ['baptizing-in-the-holy-spirit','Baptizing in The Holy Spirit'],
       ['baptizing-in-fire','Baptizing in Fire'],
       ['ushering','Ushering'],
       ['childrens-ministry',"Children's Ministry"],
     ],
     'level-two': [ // Evangelist and Pastor — proclaiming and defending the faith, and shepherding the flock
-      ['baptizing-in-water','Baptizing in Water',{parts:[3],teach:true,note:'Evangelists and Pastors perform water baptisms; Pastors and Bishops also teach others to perform them.'}],
+      ['baptizing-in-water','Baptizing in Water',{levels:[4,5,6,7],note:'Evangelists and Prophets perform water baptisms (Minister of Baptizing in Water); Pastors and Bishops also train others to perform them (Instructor of Baptizing in Water).'}],
       ['preaching','Preaching'],
       ['teaching','Teaching'],
       ['giving-a-prophetic-word','Giving a Prophetic Word'],
@@ -77,24 +97,37 @@
   const PLANS = {english:{title:'The Beautiful Reading Plan', page:'the-beautiful-reading-plan.html', total:355}, japanese:{title:'日本語聖書研究 — Japanese Holy Bible Study', page:'japanese-bible-study.html', total:355}};
 
   // everything a diploma needs, including the diplomas it builds on
-  // practical: [{level, parts:[1,2,3] or [1,2,3,4]}] — parts 1–3 for every diploma, part 4 (teaching) for Pastor and Bishop
+  // practical: [{level, mastery, parts:[1..mastery]}] — every activity of that level of training is mastered up to the
+  // diploma's level of mastery: 4 (Disciple of) for the Disciple diploma, 5 (Minister of) for Evangelist, 7 (Instructor of) for Pastor and Bishop
   function requirements(diploma){
     const seen=new Set(); const courses=[]; const practical={}; const chain=[];
     (function walk(d){ if(!DIPLOMAS[d]||seen.has(d)) return; seen.add(d); DIPLOMAS[d].requires.forEach(walk); chain.push(d);
       DIPLOMAS[d].courses.forEach(c=>{ if(!courses.includes(c)) courses.push(c); });
-      const lv=DIPLOMAS[d].practical; if(lv){ practical[lv]=practical[lv]||{level:lv,parts:[1,2,3],teach:false}; if(DIPLOMAS[d].teach){ practical[lv].teach=true; if(!practical[lv].parts.includes(4)) practical[lv].parts.push(4); } } })(diploma);
+      const lv=DIPLOMAS[d].practical; if(lv){ const m=DIPLOMAS[d].mastery||4; practical[lv]=practical[lv]||{level:lv,mastery:0,parts:[]}; if(m>practical[lv].mastery){ practical[lv].mastery=m; practical[lv].parts=[]; for(let n=1;n<=m;n++) practical[lv].parts.push(n); } } })(diploma);
     return {chain, courses, practical:Object.values(practical)};
   }
-  // the parts required for one activity at one level (some activities are special, e.g. water baptism)
+  // the levels of mastery required for one activity at one level of training (some activities name their own, e.g. water baptism)
   function activityParts(act, pr){
     const o=act[2]||{};
-    if(o.parts){ const p=o.parts.slice(); if(o.teach && pr.teach && !p.includes(4)) p.push(4); return p; }
+    if(o.levels) return o.levels.filter(n=>n<=pr.mastery);
     return pr.parts;
+  }
+  // the title a student holds in one activity, given the levels approved so far: the highest level reached in order
+  function masteryTitle(name, approvedLevels, required){
+    const req=(required||[1,2,3,4,5,6,7]).slice().sort((a,b)=>a-b); let reached=0;
+    for(const n of req){ if(approvedLevels.includes(n)) reached=n; else break; }
+    if(!reached) return {level:0,title:''};
+    const m=MASTERY[reached]; return {level:reached, title: m.title==='Witness' ? 'Witness' : m.title+' '+name};
   }
 
   async function user(){ const {data}=await sb.auth.getSession(); return data.session?data.session.user:null; }
   function isAdminUser(u){ return !!u && (u.email||'').toLowerCase()===ADMIN_EMAIL; }
   async function profile(){ const u=await user(); if(!u) return null; const {data}=await sb.from('profiles').select('*').eq('id',u.id).maybeSingle(); return data; }
+  // Competencies: the authorized people a student may send a report to, whether I am one, and the reports waiting for me
+  async function authorizedPeople(){ const {data}=await sb.rpc('authorized_people'); return data||[]; }
+  async function isAuthorized(){ const {data}=await sb.rpc('is_authorized'); return !!data; }
+  async function pendingForMe(){ const u=await user(); if(!u) return []; const {data}=await sb.from('practical_requests').select('*').eq('verifier_id',u.id).eq('status','pending').order('requested_at'); return data||[]; }
+  function activityName(level, slug){ const a=(PRACTICAL_ACTIVITIES[level]||[]).find(x=>x[0]===slug); return a?a[1]:slug; }
 
   // Small account widget for page headers: <span data-school-account></span>
   async function mountWidget(){
@@ -107,6 +140,6 @@
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function fmtDate(d){ return d? new Date(d).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):''; }
 
-  window.School = { sb, COURSES, DIPLOMAS, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PRACTICAL_ACTIVITIES, PLANS, ADMIN_EMAIL, requirements, activityParts, user, profile, isAdminUser, mountWidget, escapeHtml, fmtDate };
+  window.School = { sb, COURSES, DIPLOMAS, MASTERY, MASTERY_MAX, ROLES, PRACTICAL_PAGE, PRACTICAL_PARTS, PRACTICAL_NAMES, PRACTICAL_ACTIVITIES, PLANS, ADMIN_EMAIL, requirements, activityParts, masteryTitle, user, profile, authorizedPeople, isAuthorized, pendingForMe, activityName, isAdminUser, mountWidget, escapeHtml, fmtDate };
   document.addEventListener('DOMContentLoaded', mountWidget);
 })();

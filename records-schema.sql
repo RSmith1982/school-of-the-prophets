@@ -173,3 +173,101 @@ grant execute on function public.exam_gate(text) to authenticated;
 grant execute on function public.submit_exam(text,integer,integer,integer,text,text) to authenticated;
 grant execute on function public.admin_students() to authenticated;
 grant execute on function public.is_admin() to authenticated, anon;
+
+-- Levels of mastery (September 2026) ---------------------------------
+-- Practical training moved from four parts to seven levels of mastery per activity:
+--   1 Witness · 2–4 Disciple of ___ · 5–6 Minister of ___ · 7 Instructor of ___
+alter table public.practical_requests add column if not exists activity text not null default '';
+-- Run the block below ONCE to carry records made under the four parts across to the seven levels:
+--   old part 1 (received training)           -> level 2
+--   old part 2 (witnessed)                   -> level 3   (water baptism, level one: own baptism -> level 1)
+--   old part 3 (performed under supervision) -> level 4
+--   old part 4 (taught someone else)         -> level 6
+-- update public.approvals set item = regexp_replace(item, ':(\d)$', ':' ||
+--   case substring(item from ':(\d)$')
+--     when '4' then '6' when '3' then '4'
+--     when '2' then case when item like 'practical:level-one:baptizing-in-water:%' then '1' else '3' end
+--     when '1' then '2' end)
+--   where item like 'practical:%' and item ~ ':[1-4]$';
+-- update public.practical_requests set part =
+--   case part when 4 then 6 when 3 then 4
+--     when 2 then case when level = 'level-one' and activity = 'baptizing-in-water' then 1 else 3 end
+--     when 1 then 2 else part end
+--   where part between 1 and 4;
+
+-- Competencies: reports for verification, and the authorized people who verify them -----------
+-- Run everything below in the Supabase SQL editor once (it is safe to run again).
+
+-- The people the Bishop has authorized to verify competencies (instructors and witnesses). Only the Bishop writes here.
+create table if not exists public.authorized (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  note text not null default '',
+  granted_at timestamptz not null default now()
+);
+alter table public.authorized enable row level security;
+drop policy if exists "authorized read" on public.authorized;
+create policy "authorized read" on public.authorized for select using (auth.uid() is not null);
+drop policy if exists "authorized admin write" on public.authorized;
+create policy "authorized admin write" on public.authorized for all using (public.is_admin()) with check (public.is_admin());
+
+create or replace function public.is_authorized() returns boolean
+language sql stable security definer set search_path = public as $$
+  select public.is_admin() or exists (select 1 from public.authorized where user_id = auth.uid());
+$$;
+
+-- The list students choose a verifier from: every authorized person, and the Bishop.
+create or replace function public.authorized_people()
+returns table (id uuid, name text) language sql stable security definer set search_path = public as $$
+  select p.id, coalesce(nullif(p.name,''), p.email) as name
+  from public.profiles p
+  where auth.uid() is not null
+    and (lower(p.email) = 'robertsmith.live4yeshua@outlook.com' or exists (select 1 from public.authorized a where a.user_id = p.id))
+  order by (lower(p.email) = 'robertsmith.live4yeshua@outlook.com') desc, name;
+$$;
+
+-- A report now says which level of mastery was reached, when, with whom, and what happened.
+alter table public.practical_requests
+  add column if not exists activity text not null default '',
+  add column if not exists student_name text not null default '',
+  add column if not exists done_on date,
+  add column if not exists verifier_id uuid references auth.users(id) on delete set null,
+  add column if not exists verifier_role text not null default '',
+  add column if not exists trainee text not null default '',
+  add column if not exists status text not null default 'pending',   -- 'pending' | 'confirmed' | 'rejected'
+  add column if not exists decided_at timestamptz,
+  add column if not exists decision_note text not null default '';
+create index if not exists practical_requests_verifier on public.practical_requests (verifier_id, status);
+
+drop policy if exists "own requests" on public.practical_requests;
+drop policy if exists "requests read" on public.practical_requests;
+create policy "requests read" on public.practical_requests for select
+  using (auth.uid() = user_id or auth.uid() = verifier_id or public.is_admin());
+drop policy if exists "requests insert" on public.practical_requests;
+create policy "requests insert" on public.practical_requests for insert with check (auth.uid() = user_id);
+drop policy if exists "requests withdraw" on public.practical_requests;
+create policy "requests withdraw" on public.practical_requests for delete
+  using ((auth.uid() = user_id and status = 'pending') or public.is_admin());
+
+-- The chosen verifier (or the Bishop) confirms or rejects a report. Confirming approves that level of mastery.
+create or replace function public.decide_request(p_id bigint, p_decision text, p_note text)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare r public.practical_requests; vname text;
+begin
+  if auth.uid() is null then raise exception 'sign in first'; end if;
+  select * into r from public.practical_requests where id = p_id;
+  if r.id is null then raise exception 'report not found'; end if;
+  if not (public.is_admin() or r.verifier_id = auth.uid()) then raise exception 'this report was not sent to you'; end if;
+  if p_decision not in ('confirmed','rejected') then raise exception 'decision must be confirmed or rejected'; end if;
+  update public.practical_requests set status = p_decision, decided_at = now(), decision_note = coalesce(p_note,'') where id = p_id;
+  if p_decision = 'confirmed' then
+    select coalesce(nullif(name,''), email) into vname from public.profiles where id = auth.uid();
+    insert into public.approvals (user_id, item, approved, note, approved_at)
+    values (r.user_id, 'practical:' || r.level || ':' || r.activity || ':' || r.part, true, 'Confirmed by ' || coalesce(vname,'an authorized person'), now())
+    on conflict (user_id, item) do update set approved = true, note = excluded.note, approved_at = now();
+  end if;
+  return jsonb_build_object('ok', true, 'status', p_decision);
+end $$;
+
+grant execute on function public.is_authorized() to authenticated;
+grant execute on function public.authorized_people() to authenticated;
+grant execute on function public.decide_request(bigint,text,text) to authenticated;

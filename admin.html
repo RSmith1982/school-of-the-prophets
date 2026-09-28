@@ -61,6 +61,16 @@
   <h2>Sign in</h2>
   <form id="f"><label>Email</label><input type="email" id="e" required><label>Password</label><input type="password" id="p" required><button class="btn" type="submit">Sign in</button><p class="msg" id="m"></p></form>
 </section>
+<section class="panel" id="pendingPanel" hidden>
+  <h2>Competency Reports Awaiting Verification <span class="note" id="pendingCount"></span></h2>
+  <p class="note">Every report a student has sent, whoever they named. The person named confirms it from their own sign-in; you may confirm or reject any of them here. Confirming approves that level of mastery.</p>
+  <div id="pending"></div>
+</section>
+<section class="panel" id="authPanel" hidden>
+  <h2>Authorized Instructors and Witnesses</h2>
+  <p class="note">Students may name any authorized person (or you) as the instructor or witness for a level of mastery, and that person then confirms or rejects the report from their own sign-in.</p>
+  <div id="authorized"></div>
+</section>
 <section class="panel" id="board" hidden>
   <h2>Students <span class="note" id="count"></span></h2>
   <p class="note">Every approval you give appears at once on the student's own progress page. "Undo" removes it.</p>
@@ -70,7 +80,7 @@
 </section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js"></script>
+<script src="school.js?v=7"></script>
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 $('#f').onsubmit=async e=>{e.preventDefault(); $('#m').textContent='Signing in…'; const {error}=await sb.auth.signInWithPassword({email:$('#e').value.trim(),password:$('#p').value}); $('#m').textContent=error?error.message:''; start();};
@@ -78,14 +88,16 @@ $('#out').onclick=async()=>{await sb.auth.signOut(); start();};
 let DATA=null;
 async function start(){
   const u=await S.user();
-  if(!u){ $('#gate').hidden=false; $('#board').hidden=true; return; }
+  if(!u){ $('#gate').hidden=false; $('#board').hidden=true; $('#pendingPanel').hidden=true; $('#authPanel').hidden=true; return; }
   if(!S.isAdminUser(u)){ $('#gate').hidden=false; $('#board').hidden=true; $('#m').textContent='This page is for the Bishop only. You are signed in as '+u.email+'.'; return; }
   $('#gate').hidden=true; $('#board').hidden=false;
-  const [st,ap,cp,rp,pr,at]=await Promise.all([
+  const [st,ap,cp,rp,pr,at,au]=await Promise.all([
     sb.rpc('admin_students'), sb.from('approvals').select('*'), sb.from('course_progress').select('*'),
-    sb.from('reading_progress').select('*'), sb.from('practical_requests').select('*').order('requested_at'), sb.from('exam_attempts').select('*').order('taken_at')
+    sb.from('reading_progress').select('*'), sb.from('practical_requests').select('*').order('requested_at'), sb.from('exam_attempts').select('*').order('taken_at'),
+    sb.from('authorized').select('*')
   ]);
-  DATA={students:st.data||[],ap:ap.data||[],cp:cp.data||[],rp:rp.data||[],pr:pr.data||[],at:at.data||[]};
+  DATA={students:st.data||[],ap:ap.data||[],cp:cp.data||[],rp:rp.data||[],pr:pr.data||[],at:at.data||[],au:au.data||[]};
+  $('#pendingPanel').hidden=false; $('#authPanel').hidden=false;
   if(st.error) $('#list').innerHTML='<p class="msg">'+esc(st.error.message)+'</p>';
   draw();
 }
@@ -99,6 +111,12 @@ function draw(){
   const q=($('#q').value||'').toLowerCase();
   const list=DATA.students.filter(s=>!q||(s.name+' '+s.email).toLowerCase().includes(q));
   $('#count').textContent=`(${DATA.students.length})`;
+  const pend=DATA.pr.filter(r=>(r.status||'pending')==='pending');
+  $('#pendingCount').textContent=`(${pend.length})`;
+  $('#pending').innerHTML=pend.length?`<table><thead><tr><td><b>Student</b></td><td><b>Activity and level</b></td><td><b>Date · named person · role</b></td><td><b>What happened</b></td><td></td></tr></thead><tbody>`+pend.map(r=>{ const name=S.activityName(r.level,r.activity); const m=S.MASTERY[r.part]||{title:'',stage:''}; const who=(DATA.students.find(x=>x.id===r.verifier_id)||{}).name||'—';
+    return `<tr><td>${esc(r.student_name||(DATA.students.find(x=>x.id===r.user_id)||{}).name||'?')}<div class="note">sent ${S.fmtDate(r.requested_at)}</div></td><td>${esc(name)}<div class="note">${S.PRACTICAL_NAMES[r.level]||r.level} · level ${r.part}: ${esc(m.title==='Witness'?'Witness':m.title+' '+name)}<br>${esc(m.stage)}</div></td><td>${esc(r.done_on||'—')}<div class="note">${esc(who)}${r.verifier_role?' · '+esc(r.verifier_role):''}${r.trainee?'<br>trained '+esc(r.trainee):''}</div></td><td class="note" style="white-space:pre-wrap;max-width:22rem">${esc(r.note||'')}</td><td class="pc"><input type="text" id="dn${r.id}" placeholder="Note to the student" style="font:inherit;font-size:.88rem;padding:.25rem .5rem;border:1px solid var(--gold);background:#FBF7EC;width:11rem;display:block;margin-bottom:.3rem"><button class="btn ok" data-decide="${r.id}|confirmed">Confirm</button> <button class="btn ghost" data-decide="${r.id}|rejected">Reject</button></td></tr>`; }).join('')+'</tbody></table>':'<p class="note">Nothing waiting.</p>';
+  $('#authorized').innerHTML='<table>'+DATA.students.filter(x=>!S.isAdminUser({email:x.email})).map(x=>{ const a=DATA.au.find(y=>y.user_id===x.id);
+    return `<tr><td>${esc(x.name||'(no name)')} <span class="note">${esc(x.email)} · ${esc(x.diploma)}</span></td><td>${a?stt('approved','Authorized')+' <span class="note">'+S.fmtDate(a.granted_at)+'</span>':stt('none','Not authorized')}</td><td>${a?`<button class="btn ghost" data-revoke="${x.id}">Revoke</button>`:`<button class="btn ok" data-authorize="${x.id}">Authorize</button>`}</td></tr>`; }).join('')+'</table>';
   $('#list').innerHTML=list.map(s=>{
     const uid=s.id, req=S.requirements(s.diploma), plan=S.PLANS[s.plan]||S.PLANS.english;
     const rp=DATA.rp.find(x=>x.user_id===uid&&x.plan===s.plan); const readDone=(rp&&rp.done||[]).filter(n=>n>=1&&n<=plan.total).length;
@@ -108,13 +126,15 @@ function draw(){
       const hist=att.length?`<div class="note">${att.map(a=>`${a.score}%${a.passed?' ✓':''} ${new Date(a.taken_at).toLocaleDateString()}`).join(' · ')}</div>`:'';
       return `<tr><td>${esc(c.title)}</td><td>${status}${hist}</td><td>${(cp&&cp.status==='passed')||DATA.ap.find(x=>x.user_id===uid&&x.item==='course:'+slug)?approveBtn(uid,'course:'+slug):''}</td></tr>`; }).join('');
     const practical=req.practical.map(pr=>{ const level=pr.level, acts=S.PRACTICAL_ACTIVITIES[level]||[];
-      const rows=[`<tr><td colspan="${pr.parts.length+1}"><strong>${esc(S.COURSES[S.PRACTICAL_PAGE[level]].title)}</strong> <span class="note">parts: ${pr.parts.map(n=>n+' '+S.PRACTICAL_PARTS[n].toLowerCase()).join(' · ')}</span></td></tr>`];
+      const rows=[`<tr><td colspan="${pr.parts.length+1}"><strong>${esc(S.COURSES[S.PRACTICAL_PAGE[level]].title)}</strong> <span class="note">to level ${pr.mastery} of mastery · ${pr.parts.map(n=>n+' '+S.MASTERY[n].stage.toLowerCase()).join(' · ')}</span></td></tr>`];
       acts.forEach(act=>{ const [slug,name]=act; const parts=S.activityParts(act,pr);
+        const held=S.masteryTitle(name, parts.filter(n=>DATA.ap.find(x=>x.user_id===uid&&x.item===`practical:${level}:${slug}:${n}`&&x.approved)), parts);
         const cells=pr.parts.map(n=>{ if(!parts.includes(n)) return '<td class="pc"><span class="note">—</span></td>'; const key=`practical:${level}:${slug}:${n}`; const r=DATA.pr.filter(x=>x.user_id===uid&&x.level===level&&x.activity===slug&&x.part===n).slice(-1)[0];
           const a=DATA.ap.find(x=>x.user_id===uid&&x.item===key&&x.approved);
           if(a) return `<td class="pc">${stt('approved','✓ '+n)} <button class="btn ghost" data-un="${uid}|${key}">Undo</button></td>`;
-          return `<td class="pc">${r?`<span class="st requested" title="${esc(r.note)}">Reported ${new Date(r.requested_at).toLocaleDateString()}</span>${r.note?`<div class="note">“${esc(r.note)}”</div>`:''}`:stt('none','—')} <button class="btn ok" data-ok="${uid}|${key}">Approve ${n}</button></td>`; }).join('');
-        rows.push(`<tr><td>${esc(name)}</td>${cells}</tr>`); });
+          const who=r&&r.verifier_id?(DATA.students.find(x=>x.id===r.verifier_id)||{}).name||'an authorized person':''; const rs=r?(r.status||'pending'):'';
+          return `<td class="pc">${r?`<span class="st ${rs==='rejected'?'none':'requested'}" title="${esc(r.note)}">${rs==='rejected'?'Rejected':'Sent'} ${new Date(r.requested_at).toLocaleDateString()}</span><div class="note">${r.done_on?esc(r.done_on)+' · ':''}${who?'to '+esc(who):''}${r.verifier_role?' ('+esc(r.verifier_role)+')':''}${r.trainee?' · trained '+esc(r.trainee):''}${r.note?'<br>“'+esc(r.note)+'”':''}</div>`:stt('none','—')} <button class="btn ok" data-ok="${uid}|${key}">Approve ${n}</button></td>`; }).join('');
+        rows.push(`<tr><td>${esc(name)}${held.level?`<div class="note"><em>${esc(held.title)}</em></div>`:''}</td>${cells}</tr>`); });
       return rows.join(''); }).join('');
     return `<div class="student"><h3>${esc(s.name||'(no name)')} <small>${esc(s.email)} · ${esc(s.diploma)} · joined ${S.fmtDate(s.created_at)}</small></h3>
       <div class="grid">
@@ -128,6 +148,9 @@ function draw(){
   document.querySelectorAll('[data-ok]').forEach(b=>b.onclick=async()=>{const [uid,item]=b.dataset.ok.split('|'); const {error}=await sb.from('approvals').upsert({user_id:uid,item,approved:true,approved_at:new Date().toISOString()}); if(error) alert(error.message); start();});
   document.querySelectorAll('[data-un]').forEach(b=>b.onclick=async()=>{const [uid,item]=b.dataset.un.split('|'); const {error}=await sb.from('approvals').delete().eq('user_id',uid).eq('item',item); if(error) alert(error.message); start();});
 }
+  document.querySelectorAll('[data-decide]').forEach(b=>b.onclick=async()=>{const [id,decision]=b.dataset.decide.split('|'); const note=($('#dn'+id)||{value:''}).value.trim(); const {error}=await sb.rpc('decide_request',{p_id:+id,p_decision:decision,p_note:note}); if(error) alert(error.message); start();});
+  document.querySelectorAll('[data-authorize]').forEach(b=>b.onclick=async()=>{const {error}=await sb.from('authorized').upsert({user_id:b.dataset.authorize}); if(error) alert(error.message); start();});
+  document.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=async()=>{const {error}=await sb.from('authorized').delete().eq('user_id',b.dataset.revoke); if(error) alert(error.message); start();});
 $('#q').oninput=draw;
 start();
 </script>

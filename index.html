@@ -202,12 +202,12 @@
   .levels .lead{color:var(--ink-soft);font-style:italic;margin:.4rem 0 .6rem}
   .levels ul{margin:0;padding-left:1.1rem;columns:1;line-height:1.6}
   .levels .sub{font-size:.9em;color:var(--ink-soft);font-style:italic}
-  .practical{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
-  @media (max-width:760px){.practical{grid-template-columns:1fr}}
-  .practical article{border-top:2px solid var(--burgundy);padding-top:1rem}
-  .practical .step{font-size:.95rem;color:var(--burgundy);font-style:italic}
-  .practical h3{font-size:1.5rem;color:var(--burgundy);margin:.2rem 0 .5rem}
-  .practical p{color:var(--ink-soft);font-size:1.05rem;margin:0}
+  .mastery{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(19rem,100%),1fr));gap:1.2rem 2rem}
+  .mastery li{display:grid;grid-template-columns:2.6rem 1fr;gap:.8rem;border-top:2px solid var(--burgundy);padding-top:.9rem}
+  .mastery .n{width:2.2rem;height:2.2rem;border-radius:50%;border:1px solid var(--burgundy);color:var(--burgundy);display:grid;place-items:center;font-size:1rem;margin-top:.1rem}
+  .mastery h3{font-size:1.3rem;color:var(--burgundy)}
+  .mastery h3 span{display:block;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:.25rem}
+  .mastery p{color:var(--ink-soft);font-size:1.02rem;margin:.4rem 0 0}
 
   /* ---------- enroll ---------- */
   .enroll{background:var(--navy-deep)}
@@ -247,6 +247,7 @@
         <li><a href="#courses">Courses</a></li>
         <li><a href="#exams">Examinations</a></li>
         <li><a href="#training">Practical training</a></li>
+        <li><a href="levels-of-mastery.html">Levels of mastery</a></li>
         <li class="has-sub"><button type="button" class="sub-btn" aria-expanded="false">Reading plans</button>
           <ul class="sub">
             <li><a href="japanese-bible-study.html">日本語聖書研究 <span class="jp">Japanese Holy Bible Study</span></a></li>
@@ -421,41 +422,28 @@
 <section id="training" class="on-paper">
   <div class="wrap">
     <div class="section-head">
-      <h2>Practical Training</h2>
-      <p>Knowledge alone does not make a minister. Every diploma includes hands-on training in the activities of ministry, each one completed in parts, in order, and approved step by step by the Bishop. The first three parts are required for every diploma; the fourth is required for the Pastor and Bishop diplomas.</p>
+      <h2>Practical Training and Levels of Mastery</h2>
+      <p>Knowledge alone does not make a minister. Every diploma includes hands-on training in the activities of ministry, and every activity is mastered through seven levels, in order, each one approved by the Bishop. Each level carries a title: Witness, then Disciple of the activity, then Minister of it, then Instructor of it. The Disciple diploma requires level 4 in every activity, the Evangelist and Prophet diplomas level 5, and the Pastor and Bishop diplomas level 7. <a href="levels-of-mastery.html" style="color:var(--burgundy)">See the levels of mastery, and the way up from wherever a person stands.</a></p>
     </div>
-    <div class="practical">
-      <article>
-        <div class="step">Part One</div>
-        <h3>Receive Live Training</h3>
-        <p>Receive live training on the activity from an approved instructor: what it is, why the Church does it, and how it is done well.</p>
-      </article>
-      <article>
-        <div class="step">Part Two</div>
-        <h3>Witness the Activity</h3>
-        <p>Witness the activity completed by an approved instructor in a real setting, and reflect on what you saw.</p>
-      </article>
-      <article>
-        <div class="step">Part Three</div>
-        <h3>Perform Under Supervision</h3>
-        <p>Perform the activity yourself under the supervision of an approved instructor, who reports to the Bishop.</p>
-      </article>
-      <article>
-        <div class="step">Part Four — Pastor and Bishop</div>
-        <h3>Teach Someone Else</h3>
-        <p>Successfully teach someone else the activity, so that the practice is carried on through you.</p>
-      </article>
-    </div>
+    <ol class="mastery">
+      <li><span class="n">1</span><div><h3>Witness <span>Experiencing Receiving</span></h3><p>Receive the ministry yourself and bear witness to it.</p></div></li>
+      <li><span class="n">2</span><div><h3>Disciple of ______ <span>Training of Ministry</span></h3><p>Receive live training in it from an approved instructor.</p></div></li>
+      <li><span class="n">3</span><div><h3>Disciple of ______ <span>Witnessing Ministry</span></h3><p>Witness it ministered by an approved instructor.</p></div></li>
+      <li><span class="n">4</span><div><h3>Disciple of ______ <span>Ministering with Instruction</span></h3><p>Minister it yourself under instruction.</p></div></li>
+      <li><span class="n">5</span><div><h3>Minister of ______ <span>Ministering with Witness to Confirm Competency</span></h3><p>Minister it on your own before a witness who confirms your competency.</p></div></li>
+      <li><span class="n">6</span><div><h3>Minister of ______ <span>Training with Instruction</span></h3><p>Train someone else in it under instruction.</p></div></li>
+      <li><span class="n">7</span><div><h3>Instructor of ______ <span>Training with Witness to Confirm Competency</span></h3><p>Train someone else before a witness who confirms your competency to instruct.</p></div></li>
+    </ol>
     <div class="levels">
       <article>
         <h3>Level One <span>Disciple</span></h3>
         <p class="lead">The works every believer is sent to do.</p>
-        <ul><li>Sharing The Gospel</li><li>Street Evangelism</li><li>Healing the Sick</li><li>Casting Out Demons</li><li>Baptizing in Water <span class="sub">— be baptized yourself, or show proof of it, and give account of it</span></li><li>Baptizing in The Holy Spirit</li><li>Baptizing in Fire</li><li>Ushering</li><li>Children's Ministry</li></ul>
+        <ul><li>Sharing The Gospel</li><li>Street Evangelism</li><li>Healing the Sick</li><li>Casting Out Demons</li><li>Baptizing in Water <span class="sub">— Witness: be baptized yourself, or show proof of it, and give account of it</span></li><li>Baptizing in The Holy Spirit</li><li>Baptizing in Fire</li><li>Ushering</li><li>Children's Ministry</li></ul>
       </article>
       <article>
         <h3>Level Two <span>Evangelist and Pastor</span></h3>
         <p class="lead">Proclaiming and defending the faith, and shepherding the flock.</p>
-        <ul><li>Baptizing in Water <span class="sub">— perform it; Pastors also teach others to perform it</span></li><li>Preaching</li><li>Teaching</li><li>Giving a Prophetic Word</li><li>Ministerial Counseling</li><li>Leading Communion</li><li>Giving a Sermon at a Funeral</li><li>Starting a Small Group</li><li>Arranging an Event</li><li>Debating an Atheist</li><li>Debating a Muslim</li><li>Debating a Hindu</li><li>Debating a Buddhist</li><li>Debating a Satanist</li><li>Debating a Believer with a Heresy</li></ul>
+        <ul><li>Baptizing in Water <span class="sub">— Minister of it; Pastors also become Instructor of it</span></li><li>Preaching</li><li>Teaching</li><li>Giving a Prophetic Word</li><li>Ministerial Counseling</li><li>Leading Communion</li><li>Giving a Sermon at a Funeral</li><li>Starting a Small Group</li><li>Arranging an Event</li><li>Debating an Atheist</li><li>Debating a Muslim</li><li>Debating a Hindu</li><li>Debating a Buddhist</li><li>Debating a Satanist</li><li>Debating a Believer with a Heresy</li></ul>
       </article>
       <article>
         <h3>Level Three <span>Bishop</span></h3>
@@ -527,7 +515,7 @@ document.getElementById('showForm').addEventListener('click',()=>{
 document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js?v=6"></script>
+<script src="school.js?v=7"></script>
 <script>School.user().then(u=>{ if(u) School.profile().then(p=>{ const a=document.getElementById("navAccount"); a.textContent=(p&&p.name?p.name.split(" ")[0]:"My")+"’s progress"; }); });</script>
 </body>
 </html>

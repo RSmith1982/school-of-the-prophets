@@ -28,6 +28,7 @@
   .hero p{max-width:var(--measure);margin:.6rem auto 0;color:var(--gold-soft)}
   .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
   .panel h2{font-size:1.7rem;color:var(--navy);margin-bottom:.8rem}
+  .panel#queueBanner{border-color:var(--burgundy);background:#FBF3EE}
   .panel h3{font-size:1.3rem;color:var(--burgundy);margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:1px solid var(--gold)}
   label{display:block;font-size:.95rem;color:var(--ink-soft);margin:.9rem 0 .25rem}
   input[type=text],input[type=email],input[type=password],select,textarea{font:inherit;width:100%;padding:.55rem .7rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--ink);border-radius:2px}
@@ -56,11 +57,13 @@
   .st.requested{background:#F3DFD0;color:var(--burgundy)}
   .st.soon{background:transparent;border:1px dashed var(--gold);color:var(--ink-soft)}
   .note{font-size:.95rem;color:var(--ink-soft)}
+  .title{font-size:.95rem;color:var(--burgundy);font-style:italic}
   .check{display:flex;gap:.6rem;align-items:flex-start;margin:.6rem 0}
   .check input{width:1.15rem;height:1.15rem;margin-top:.3rem;accent-color:var(--burgundy)}
   .ptable td.pc{text-align:center;white-space:nowrap}
   .ptable th{text-align:center}
-  .ptable th:first-child,.ptable td:first-child{text-align:left}
+  .ptable th:first-child,.ptable td:first-child{text-align:left;min-width:13rem}
+  .ptable .chip{padding:.1rem .45rem}
   .chip{font:inherit;font-size:.85rem;padding:.1rem .6rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--navy);border-radius:2px;cursor:pointer}
   .chip.requested{background:#F3DFD0;color:var(--burgundy);border-color:#D9B7A6}
   .legend{list-style:none;padding:0;margin:.2rem 0 .8rem;font-size:.95rem;color:var(--ink-soft);display:grid;grid-template-columns:1fr 1fr;gap:.2rem 1rem}
@@ -127,6 +130,12 @@
   </div>
 </section>
 
+<section class="panel" id="queueBanner" hidden>
+  <h2>Reports Waiting for You</h2>
+  <p id="queueText"></p>
+  <div class="row"><a class="btn gold" href="competencies.html#queue">Open the reports</a></div>
+</section>
+
 <section class="panel">
   <h2>1. Enrollment</h2>
   <p>Every student begins by sending the enrollment request from the <a href="index.html#enroll">Enroll section of the home page</a>. Tick the box once you have sent it; the Bishop confirms it here.</p>
@@ -148,10 +157,12 @@
   <div id="courses"></div>
 </section>
 
+
 <section class="panel">
-  <h2>4. Practical Training</h2>
-  <p class="note">Each activity of a level is completed in parts, in order: receive live training on the activity, witness the activity completed by an approved instructor, and perform the activity under supervision. The Pastor and Bishop diplomas add a fourth part: successfully teach someone else the activity. Press a part to report it done, with a note to the Bishop; he approves each one. The course pages for each level are listed under Courses above.</p>
+  <h2>4. Competencies</h2>
+  <p class="note">Each activity of practical training is mastered through <a href="levels-of-mastery.html">seven levels of mastery</a>, in order, and each level carries a title: <strong>Witness</strong> (level 1), <strong>Disciple of</strong> the activity (levels 2–4), <strong>Minister of</strong> it (levels 5–6), and <strong>Instructor of</strong> it (level 7). The Disciple diploma requires level 4 in every activity, the Evangelist and Prophet diplomas level 5, and the Pastor and Bishop diplomas level 7. Report each level on the competencies page — when it happened, which authorized person was there, and what happened — and that person confirms it.</p>
   <div id="practical"></div>
+  <div class="row"><a class="btn" href="competencies.html">Open my competencies</a></div>
 </section>
 
 <section class="panel" id="settings">
@@ -170,7 +181,7 @@
 <footer><div class="wrap">© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="school.js"></script>
+<script src="school.js?v=7"></script>
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 document.getElementById('year').textContent=new Date().getFullYear();
@@ -224,17 +235,14 @@ function courseRow(slug){
   return `<tr><td>${esc(c.title)}</td><td>${status}</td><td>${action}</td></tr>`;
 }
 function practicalBlock(pr){
-  const level=pr.level, acts=S.PRACTICAL_ACTIVITIES[level]||[];
-  const req=(slug,n)=>PR.filter(x=>x.level===level&&x.activity===slug&&x.part===n).slice(-1)[0];
-  const cell=(slug,n)=>{ const key=`practical:${level}:${slug}:${n}`; const r=req(slug,n);
-    if(approved(key)) return `<td class="pc"><span class="st approved" title="Approved by the Bishop">✓ Approved</span></td>`;
-    if(r) return `<td class="pc"><button class="chip requested" type="button" data-req="${level}|${slug}|${n}" title="Reported ${new Date(r.requested_at).toLocaleDateString()} — awaiting the Bishop. Click to report again.">Reported</button></td>`;
-    return `<td class="pc"><button class="chip" type="button" data-req="${level}|${slug}|${n}">Report</button></td>`; };
-  const head=pr.parts.map(n=>`<th title="${S.PRACTICAL_PARTS[n]}">${n}</th>`).join('');
-  const rows=acts.map(act=>{ const [slug,name]=act; const parts=S.activityParts(act,pr); const o=act[2]||{};
-    return `<tr><td>${esc(name)}${o.note?`<div class="note">${esc(o.note)}</div>`:''}</td>${pr.parts.map(n=>parts.includes(n)?cell(slug,n):'<td class="pc"><span class="note">—</span></td>').join('')}</tr>`; }).join('');
-  const legend=pr.parts.map(n=>`<li><b>${n}.</b> ${S.PRACTICAL_PARTS[n]}</li>`).join('');
-  return `<h3>Practical Training ${S.PRACTICAL_NAMES[level]}</h3><ul class="legend">${legend}</ul><table class="ptable"><thead><tr><th>Activity</th>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+  const level=pr.level, acts=S.PRACTICAL_ACTIVITIES[level]||[]; let total=0, done=0, pend=0;
+  const rows=acts.map(act=>{ const [slug,name]=act; const parts=S.activityParts(act,pr);
+    const ok=parts.filter(n=>approved(`practical:${level}:${slug}:${n}`)); total+=parts.length; done+=ok.length;
+    const p=PR.filter(x=>x.level===level&&x.activity===slug&&(x.status||"pending")==="pending"&&!ok.includes(+x.part)).length; pend+=p;
+    const held=S.masteryTitle(name, ok, parts);
+    return `<tr><td>${esc(name)}</td><td>${held.level?`<span class="title">${esc(held.title)}</span>`:st("none","Not started")}</td><td>${ok.length} of ${parts.length}${p?` <span class="st requested">${p} awaiting verification</span>`:""}</td></tr>`; }).join("");
+  const m=S.MASTERY[pr.mastery];
+  return `<h3>Practical Training ${S.PRACTICAL_NAMES[level]} <small class="note">— to level ${pr.mastery}, ${m.title==="Witness"?"Witness":m.title+" each activity"} · ${done} of ${total} levels approved${pend?`, ${pend} awaiting verification`:""}</small></h3><table><thead><tr><th>Activity</th><th>Title held</th><th>Levels approved</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 function render(){ load().then(ok=>{ $('#authPanel').hidden=ok; $('#me').hidden=!ok; if(ok) show(); else { $('#heroTitle').textContent='My Progress'; } }); }
 function show(){
@@ -264,11 +272,8 @@ function show(){
   $('#courses').innerHTML=`<table><thead><tr><th>Course</th><th>Status</th><th></th></tr></thead><tbody>${req.courses.map(courseRow).join('')}</tbody></table>`;
   // practical
   $('#practical').innerHTML=req.practical.length?req.practical.map(practicalBlock).join(''):'<p class="note">No practical training is required for this diploma beyond the diplomas it builds on.</p>';
-  document.querySelectorAll('[data-req]').forEach(b=>b.onclick=async()=>{ const [level,slug,part]=b.dataset.req.split('|');
-    const name=(S.PRACTICAL_ACTIVITIES[level].find(x=>x[0]===slug)||[])[1]||slug;
-    const asks={1:`${name} — part 1. Tell the Bishop when, where, and from whom you received live training:`,2: slug==='baptizing-in-water' ? `${name} — part 2. Tell the Bishop when and where you were baptized in water, and by whom (or what proof you can show):` : `${name} — part 2. Tell the Bishop when and where you witnessed it, and which approved instructor completed it:`,3:`${name} — part 3. Tell the Bishop when and where you performed it, and who supervised you:`,4:`${name} — part 4. Tell the Bishop whom you taught, and when and where:`};
-    const note=prompt(asks[part]); if(note===null) return;
-    const {error}=await sb.from('practical_requests').insert({user_id:U.id,level,activity:slug,part:+part,note:note||''}); if(error) alert(error.message); else render(); });
+  // reports waiting for me (authorized people and the Bishop)
+  S.pendingForMe().then(q=>{ $("#queueBanner").hidden=!q.length; if(q.length) $("#queueText").textContent=`${q.length} competency report${q.length>1?"s":""} named you as the instructor or witness and await your confirmation.`; });
   // settings
   $('#setName').value=P.name||''; $('#setDiploma').value=P.diploma; $('#setPlan').value=P.plan;
 }

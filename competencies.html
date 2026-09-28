@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="images/logo-64.png">
+<link rel="apple-touch-icon" href="images/logo-180.png">
+<title>Competencies — The School of The Prophets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#14213D;--navy-deep:#0E1830;--burgundy:#6B1F2E;--gold:#C9A24C;--gold-soft:#E4CE8E;--parchment:#F5EFE1;--parchment-dark:#E8DFC8;--ink:#221A14;--ink-soft:#5A4E42;--measure:42rem;--green:#2F5D3A;--red:#8C2B2B}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"EB Garamond",Georgia,serif;font-size:1.12rem;line-height:1.6;color:var(--ink);background:var(--parchment-dark)}
+  a{color:var(--burgundy)}
+  h1,h2,h3,h4{font-weight:500;line-height:1.25;margin:0}
+  .wrap{width:min(100% - 2.5rem,66rem);margin-inline:auto}
+  header{background:var(--navy);color:var(--parchment);border-bottom:3px solid var(--gold)}
+  .top{display:flex;align-items:center;gap:.8rem;padding:1rem 0;flex-wrap:wrap}
+  .top img{width:44px;height:44px;flex:none}
+  .top .name{font-size:1.25rem;font-weight:500}
+  .top .motto{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .top nav{margin-left:auto;display:flex;gap:1rem;flex-wrap:wrap}
+  .top a{color:var(--gold-soft);text-decoration:none}
+  .top a:hover{color:#fff;text-decoration:underline;text-underline-offset:.2em}
+  .hero{color:var(--parchment);padding:2.2rem 0 1.8rem;text-align:center;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,162,76,.16),transparent 70%),var(--navy)}
+  .hero h1{font-size:clamp(2rem,5vw,3rem);color:#fff}
+  .hero p{max-width:var(--measure);margin:.6rem auto 0;color:var(--gold-soft)}
+  .panel{background:var(--parchment);border:1px solid var(--gold);margin:2rem 0;padding:2rem clamp(1.2rem,4vw,3rem);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .panel h2{font-size:1.7rem;color:var(--navy);margin-bottom:.8rem}
+  .panel h3{font-size:1.3rem;color:var(--burgundy);margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:1px solid var(--gold)}
+  .panel h3 small{font-size:.9rem;color:var(--ink-soft);font-weight:400}
+  .panel.alert{border-color:var(--burgundy);background:#FBF3EE}
+  label{display:block;font-size:.95rem;color:var(--ink-soft);margin:.9rem 0 .25rem}
+  input[type=text],input[type=email],input[type=password],input[type=date],select,textarea{font:inherit;width:100%;padding:.55rem .7rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--ink);border-radius:2px}
+  textarea{min-height:7rem;resize:vertical}
+  .btn{font:inherit;font-size:1rem;padding:.55rem 1.2rem;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn.ok{background:var(--green);border-color:var(--green)}
+  .btn.no{background:transparent;border-color:var(--red);color:var(--red)}
+  .btn.small{font-size:.9rem;padding:.3rem .8rem}
+  .btn[disabled]{opacity:.5;cursor:default}
+  .row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+  .msg{color:var(--burgundy);font-style:italic;margin-top:.6rem;min-height:1.4em}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 1.2rem}
+  @media (max-width:640px){.two{grid-template-columns:1fr}}
+  .note{font-size:.95rem;color:var(--ink-soft)}
+  .title{font-size:.95rem;color:var(--burgundy);font-style:italic}
+  table{width:100%;border-collapse:collapse;font-size:1rem}
+  th,td{text-align:left;padding:.5rem .4rem;border-top:1px solid var(--parchment-dark);vertical-align:top}
+  th{font-weight:500;color:var(--ink-soft);font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+  .st{display:inline-block;padding:.1rem .55rem;border-radius:2px;font-size:.88rem;white-space:nowrap}
+  .st.none{background:#E3D9BF;color:var(--ink-soft)}
+  .st.approved{background:var(--green);color:#fff}
+  .st.pending{background:#F3DFD0;color:var(--burgundy)}
+  .st.rejected{background:#EAD2D2;color:var(--red)}
+  .ptable{table-layout:fixed}
+  .ptable th:first-child,.ptable td:first-child{width:14rem;text-align:left}
+  .ptable th,.ptable td{text-align:center}
+  .ptable td.pc{white-space:normal;line-height:1.35;vertical-align:middle;padding:.45rem .2rem}
+  .chip{font:inherit;font-size:.85rem;padding:.15rem .55rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--navy);border-radius:2px;cursor:pointer}
+  .chip.next{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chip.pending{background:#F3DFD0;color:var(--burgundy);border-color:#D9B7A6;cursor:default}
+  .chip.rejected{background:#EAD2D2;color:var(--red);border-color:#D9A6A6}
+  .legend{list-style:none;padding:0;margin:.2rem 0 .8rem;font-size:.95rem;color:var(--ink-soft);display:grid;grid-template-columns:1fr 1fr;gap:.2rem 1rem}
+  @media (max-width:640px){.legend{grid-template-columns:1fr}}
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .card{border:1px solid var(--gold);background:#FBF7EC;padding:1rem 1.2rem;margin:.8rem 0}
+  .card h4{font-size:1.2rem;color:var(--navy)}
+  .card dl{display:grid;grid-template-columns:9rem 1fr;gap:.2rem .8rem;margin:.6rem 0;font-size:1rem}
+  .card dt{color:var(--ink-soft)}
+  .card dd{margin:0}
+  .card .details{white-space:pre-wrap;background:#fff;border:1px solid var(--parchment-dark);padding:.6rem .8rem;border-radius:2px}
+  @media (max-width:520px){.card dl{grid-template-columns:1fr}}
+  .badge{display:inline-block;min-width:1.5em;padding:0 .4em;border-radius:1em;background:var(--burgundy);color:#fff;font-size:.85rem;text-align:center;margin-left:.3rem}
+  footer{padding:2rem 0;text-align:center;color:var(--gold-soft);background:var(--navy-deep);font-size:.95rem}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+<img src="images/logo.svg" alt="" width="44" height="44">
+<div><div class="name">The School of The Prophets</div><div class="motto">Veritas · Fides</div></div>
+<nav><a href="index.html">Home</a><a href="levels-of-mastery.html">Levels of mastery</a><a href="account.html">My progress</a><a href="admin.html" id="adminLink" hidden>Administration</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap"><h1 id="heroTitle">Competencies</h1><p id="heroSub">Every activity of practical training, mastered level by level, each level reported to an authorized person and confirmed.</p></div></section>
+
+<main class="wrap">
+
+<section class="panel" id="authPanel" hidden>
+  <h2>Sign In</h2>
+  <p class="note">Sign in to report your competencies and to see the reports waiting for you. No account yet? <a href="account.html#create">Create one on the progress page.</a></p>
+  <form id="inForm">
+    <label for="inEmail">Email</label><input id="inEmail" type="email" autocomplete="email" required>
+    <label for="inPass">Password</label><input id="inPass" type="password" autocomplete="current-password" required>
+    <div class="row"><button class="btn gold" type="submit">Sign in</button></div>
+    <div class="msg" id="inMsg"></div>
+  </form>
+</section>
+
+<div id="me" hidden>
+
+<!-- ================= Reports waiting for me (authorized people and the Bishop) ================= -->
+<section class="panel alert" id="queue" hidden>
+  <h2>Reports Waiting for You <span class="badge" id="queueCount"></span></h2>
+  <p class="note">These students named you as the instructor or witness for a level of mastery. Confirm it if it happened as reported; reject it with a note if it did not, and the student may report again.</p>
+  <div id="queueList"></div>
+</section>
+
+<!-- ================= Report a competency ================= -->
+<section class="panel" id="report">
+  <h2>Report a Competency</h2>
+  <p class="note">Choose the activity and the level of mastery you are ready to have verified, say when it happened and who the authorized person was, and describe what happened. The person you choose sees your report when they sign in and confirms or rejects it. <a href="levels-of-mastery.html#seven">The seven levels, explained.</a></p>
+  <form id="repForm">
+    <div class="two">
+      <div><label for="rLevel">Level of training</label><select id="rLevel"></select></div>
+      <div><label for="rAct">Activity</label><select id="rAct"></select></div>
+      <div><label for="rPart">Level of mastery ready to be verified</label><select id="rPart"></select></div>
+      <div><label for="rDate">Date it took place</label><input id="rDate" type="date" required></div>
+      <div><label for="rWho">Authorized person who was there</label><select id="rWho" required></select></div>
+      <div><label for="rRole">Their role</label><select id="rRole"></select></div>
+      <div id="rTraineeWrap" hidden><label for="rTrainee">Whom you trained</label><input id="rTrainee" type="text" placeholder="Name of the person you trained"></div>
+    </div>
+    <label for="rDetails">What happened</label>
+    <textarea id="rDetails" placeholder="Where it took place, what was ministered, and how it went." required></textarea>
+    <div class="row"><button class="btn gold" type="submit" id="rSubmit">Send for verification</button><span class="note" id="rHint"></span></div>
+    <div class="msg" id="rMsg"></div>
+  </form>
+</section>
+
+<!-- ================= My competencies ================= -->
+<section class="panel" id="mine">
+  <h2>My Competencies</h2>
+  <p class="note" id="mineIntro"></p>
+  <div id="practical"></div>
+</section>
+
+<!-- ================= My reports ================= -->
+<section class="panel" id="history">
+  <h2>My Reports</h2>
+  <div id="histList"></div>
+</section>
+
+</div>
+</main>
+<footer><div class="wrap">© <span id="year"></span> The School of The Prophets · Bishop Robert P. Smith, Sr.</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="school.js?v=7"></script>
+<script>
+const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
+document.getElementById('year').textContent=new Date().getFullYear();
+$('#inForm').onsubmit=async e=>{e.preventDefault(); $('#inMsg').textContent='Signing in…';
+  const {error}=await sb.auth.signInWithPassword({email:$('#inEmail').value.trim(),password:$('#inPass').value});
+  if(error){$('#inMsg').textContent=error.message;return;} render();};
+
+let U=null,P=null,APP={},PR=[],PEOPLE=[],QUEUE=[],REQ=null,AUTH=false;
+function approved(item){ return !!(APP[item]&&APP[item].approved); }
+function st(cls,txt){ return `<span class="st ${cls}">${txt}</span>`; }
+function personName(id){ const p=PEOPLE.find(x=>x.id===id); return p?p.name:'an authorized person'; }
+function lvName(n){ const m=S.MASTERY[n]; return m.title==='Witness'?'Witness':m.title+' ___'; }
+function fmtD(d){ return d? new Date(d+(d.length===10?'T12:00:00':'')).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):''; }
+
+async function load(){
+  U=await S.user(); if(!U) return false;
+  const [p,a,q,people,auth,queue]=await Promise.all([
+    sb.from('profiles').select('*').eq('id',U.id).maybeSingle(),
+    sb.from('approvals').select('*').eq('user_id',U.id),
+    sb.from('practical_requests').select('*').eq('user_id',U.id).order('requested_at'),
+    S.authorizedPeople(), S.isAuthorized(), S.pendingForMe(),
+  ]);
+  P=p.data||{name:U.email,diploma:'Disciple'};
+  APP={}; (a.data||[]).forEach(x=>APP[x.item]=x);
+  PR=q.data||[]; PEOPLE=people; AUTH=auth||S.isAdminUser(U); QUEUE=queue;
+  REQ=S.requirements(P.diploma);
+  return true;
+}
+
+// ---- the latest report for one activity and level
+function latest(level,slug,n){ return PR.filter(x=>x.level===level&&x.activity===slug&&+x.part===n).slice(-1)[0]; }
+
+function practicalBlock(pr){
+  const level=pr.level, acts=S.PRACTICAL_ACTIVITIES[level]||[];
+  const cell=(slug,n,parts)=>{ const key=`practical:${level}:${slug}:${n}`; const r=latest(level,slug,n);
+    if(approved(key)) return `<td class="pc"><span class="st approved" title="${esc((APP[key].note||'Approved')+' — '+S.fmtDate(APP[key].approved_at))}">✓</span></td>`;
+    if(r&&(r.status||'pending')==='pending') return `<td class="pc"><button class="chip pending" type="button" title="Sent ${new Date(r.requested_at).toLocaleDateString()} to ${esc(personName(r.verifier_id))} — awaiting verification">Sent</button></td>`;
+    const prev=parts[parts.indexOf(n)-1]; const ready=prev===undefined||approved(`practical:${level}:${slug}:${prev}`);
+    if(r&&r.status==='rejected') return `<td class="pc"><button class="chip rejected" type="button" data-fill="${level}|${slug}|${n}" title="${esc('Rejected: '+(r.decision_note||'')+' — report again')}">Again</button></td>`;
+    return `<td class="pc"><button class="chip ${ready?'next':''}" type="button" data-fill="${level}|${slug}|${n}" title="Report level ${n}, ${esc(lvName(n))}">${ready?'Report':n}</button></td>`; };
+  const head=pr.parts.map(n=>`<th title="${esc(S.MASTERY[n].title+' — '+S.MASTERY[n].stage)}">${n}</th>`).join('');
+  const rows=acts.map(act=>{ const [slug,name]=act; const parts=S.activityParts(act,pr); const o=act[2]||{};
+    const held=S.masteryTitle(name, parts.filter(n=>approved(`practical:${level}:${slug}:${n}`)), parts);
+    return `<tr><td>${esc(name)}${held.level?`<div class="title">${esc(held.title)}</div>`:''}${o.note?`<div class="note">${esc(o.note)}</div>`:''}</td>${pr.parts.map(n=>parts.includes(n)?cell(slug,n,parts):'<td class="pc"><span class="note">—</span></td>').join('')}</tr>`; }).join('');
+  const legend=pr.parts.map(n=>`<li><b>${n}.</b> ${esc(lvName(n))} — ${esc(S.MASTERY[n].stage)}</li>`).join('');
+  const m=S.MASTERY[pr.mastery];
+  return `<h3>Practical Training ${S.PRACTICAL_NAMES[level]} <small>— to level ${pr.mastery}, ${m.title==='Witness'?'Witness':m.title+' each activity'}</small></h3><ul class="legend">${legend}</ul><div class="tscroll"><table class="ptable"><thead><tr><th>Activity and title held</th>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+// ---- the report form
+function fillLevels(){ const sel=$('#rLevel'); sel.innerHTML=REQ.practical.map(pr=>`<option value="${pr.level}">Practical Training ${S.PRACTICAL_NAMES[pr.level]}</option>`).join(''); fillActs(); }
+function fillActs(){ const level=$('#rLevel').value; const sel=$('#rAct'); sel.innerHTML=(S.PRACTICAL_ACTIVITIES[level]||[]).map(a=>`<option value="${a[0]}">${esc(a[1])}</option>`).join(''); fillParts(); }
+function fillParts(pick){ const level=$('#rLevel').value, slug=$('#rAct').value; const pr=REQ.practical.find(x=>x.level===level); const act=(S.PRACTICAL_ACTIVITIES[level]||[]).find(a=>a[0]===slug); if(!pr||!act) return;
+  const parts=S.activityParts(act,pr); const sel=$('#rPart'); let next=null;
+  sel.innerHTML=parts.map(n=>{ const key=`practical:${level}:${slug}:${n}`; const done=approved(key); const r=latest(level,slug,n); const pend=r&&(r.status||'pending')==='pending'&&!done;
+    if(!done&&!pend&&next===null) next=n;
+    return `<option value="${n}" ${done||pend?'disabled':''}>${n}. ${esc(lvName(n))} — ${esc(S.MASTERY[n].stage)}${done?' ✓ approved':pend?' (sent, awaiting verification)':''}</option>`; }).join('');
+  const po=pick&&sel.querySelector(`option[value="${pick}"]`); sel.value=(po&&!po.disabled)?pick:(next??parts[0]);
+  fillRoles();
+  $('#rHint').textContent = next===null ? 'Every level of this activity is approved or awaiting verification.' : '';
+  $('#rSubmit').disabled = sel.value==='' || (sel.querySelector(`option[value="${sel.value}"]`)||{}).disabled;
+}
+function fillRoles(){ const n=+$('#rPart').value; const roles=S.ROLES[n]||['Instructor','Witness']; const all=['Instructor','Witness','Minister — ministered it to me'];
+  const opts=roles.concat(all.filter(r=>!roles.some(x=>x.startsWith(r.split(' ')[0])))); $('#rRole').innerHTML=opts.map(r=>`<option>${esc(r)}</option>`).join('');
+  $('#rTraineeWrap').hidden = !(n===6||n===7); }
+function fillPeople(){ $('#rWho').innerHTML='<option value="">— choose —</option>'+PEOPLE.filter(p=>p.id!==U.id).map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join(''); }
+$('#rLevel').onchange=fillActs; $('#rAct').onchange=()=>fillParts(); $('#rPart').onchange=fillRoles;
+$('#repForm').onsubmit=async e=>{ e.preventDefault(); const level=$('#rLevel').value, slug=$('#rAct').value, part=+$('#rPart').value, who=$('#rWho').value;
+  if(!who){ $('#rMsg').textContent='Choose the authorized person who was there.'; return; }
+  if((part===6||part===7)&&!$('#rTrainee').value.trim()){ $('#rMsg').textContent='Say whom you trained.'; return; }
+  $('#rMsg').textContent='Sending…';
+  const {error}=await sb.from('practical_requests').insert({user_id:U.id,level,activity:slug,part,student_name:P.name||U.email,done_on:$('#rDate').value||null,verifier_id:who,verifier_role:$('#rRole').value,trainee:$('#rTrainee').value.trim(),note:$('#rDetails').value.trim(),status:'pending'});
+  if(error){ $('#rMsg').textContent=error.message; return; }
+  $('#rMsg').textContent=`Sent to ${personName(who)} for verification.`; $('#rDetails').value=''; $('#rTrainee').value=''; render(false); };
+
+// ---- reports waiting for me
+function queueBlock(){
+  if(!AUTH||!QUEUE.length){ $('#queue').hidden=true; return; }
+  $('#queue').hidden=false; $('#queueCount').textContent=QUEUE.length;
+  $('#queueList').innerHTML=QUEUE.map(r=>{ const name=S.activityName(r.level,r.activity); const m=S.MASTERY[r.part]||{title:'',stage:''};
+    return `<div class="card" data-id="${r.id}"><h4>${esc(r.student_name||'A student')} — ${esc(name)}, level ${r.part}: ${esc(m.title==='Witness'?'Witness':m.title+' '+name)}</h4>
+      <dl><dt>Stage</dt><dd>${esc(m.stage)}</dd><dt>Date</dt><dd>${esc(fmtD(r.done_on)||'not given')}</dd><dt>Your role</dt><dd>${esc(r.verifier_role||'—')}</dd>${r.trainee?`<dt>Trainee</dt><dd>${esc(r.trainee)}</dd>`:''}<dt>Sent</dt><dd>${S.fmtDate(r.requested_at)}</dd></dl>
+      <div class="details">${esc(r.note||'(no details given)')}</div>
+      <label for="dn${r.id}">Note to the student (optional; give a reason if you reject)</label><input type="text" id="dn${r.id}">
+      <div class="row"><button class="btn ok" type="button" data-decide="${r.id}|confirmed">Confirm — level ${r.part} reached</button><button class="btn no" type="button" data-decide="${r.id}|rejected">Reject</button></div></div>`; }).join('');
+  document.querySelectorAll('[data-decide]').forEach(b=>b.onclick=async()=>{ const [id,decision]=b.dataset.decide.split('|'); const note=$('#dn'+id).value.trim();
+    if(decision==='rejected'&&!note&&!confirm('Reject without a note to the student?')) return;
+    b.disabled=true; const {error}=await sb.rpc('decide_request',{p_id:+id,p_decision:decision,p_note:note}); if(error){ alert(error.message); b.disabled=false; return; } render(false); });
+}
+
+// ---- my reports
+function histBlock(){
+  if(!PR.length){ $('#histList').innerHTML='<p class="note">No reports yet.</p>'; return; }
+  const rows=PR.slice().reverse().map(r=>{ const name=S.activityName(r.level,r.activity); const s=r.status||'pending';
+    const status=s==='confirmed'?st('approved','Confirmed'):s==='rejected'?st('rejected','Rejected'):st('pending','Awaiting verification');
+    return `<tr><td>${esc(name)}<div class="note">${S.PRACTICAL_NAMES[r.level]||r.level} · level ${r.part}, ${esc(lvName(r.part))}</div></td><td>${esc(fmtD(r.done_on)||'—')}</td><td>${esc(personName(r.verifier_id))}<div class="note">${esc(r.verifier_role||'')}</div></td><td>${status}${r.decision_note?`<div class="note">“${esc(r.decision_note)}”</div>`:''}${r.decided_at?`<div class="note">${S.fmtDate(r.decided_at)}</div>`:''}</td><td>${s==='pending'?`<button class="btn small ghost" type="button" data-withdraw="${r.id}">Withdraw</button>`:''}</td></tr>`; }).join('');
+  $('#histList').innerHTML=`<div class="tscroll"><table><thead><tr><th>Activity</th><th>Date</th><th>Sent to</th><th>Status</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.querySelectorAll('[data-withdraw]').forEach(b=>b.onclick=async()=>{ if(!confirm('Withdraw this report?')) return; const {error}=await sb.from('practical_requests').delete().eq('id',+b.dataset.withdraw); if(error) alert(error.message); render(false); });
+}
+
+function render(scroll){ load().then(ok=>{ $('#authPanel').hidden=ok; $('#me').hidden=!ok; if(ok) show(); }); }
+function show(){
+  $('#heroTitle').textContent=(P.name||'My')+' — Competencies'; $('#adminLink').hidden=!S.isAdminUser(U);
+  const m=S.MASTERY[Math.max(...REQ.practical.map(p=>p.mastery),4)];
+  $('#mineIntro').innerHTML=`Diploma: <strong>${esc(P.diploma)}</strong>. Press <span class="chip next">Report</span> on the next level of an activity to fill in the form above, or fill it in directly. A level can be reported once the level before it is approved. Sent reports wait for the person you named; the Bishop may also confirm them.`;
+  queueBlock();
+  fillPeople(); fillLevels();
+  if(!$('#rDate').value){ const d=new Date(); $('#rDate').value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  $('#practical').innerHTML=REQ.practical.length?REQ.practical.map(practicalBlock).join(''):'<p class="note">No practical training is required for this diploma beyond the diplomas it builds on.</p>';
+  document.querySelectorAll('[data-fill]').forEach(b=>b.onclick=()=>{ const [level,slug,n]=b.dataset.fill.split('|'); $('#rLevel').value=level; fillActs(); $('#rAct').value=slug; fillParts(n); $('#report').scrollIntoView({behavior:'smooth',block:'start'}); setTimeout(()=>$('#rDate').focus(),400); });
+  histBlock();
+  if(location.hash==='#queue'&&!$('#queue').hidden) $('#queue').scrollIntoView();
+}
+sb.auth.onAuthStateChange((ev)=>{ if(ev==='SIGNED_OUT') render(); });
+render();
+</script>
+</body>
+</html>
