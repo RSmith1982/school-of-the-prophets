@@ -1,0 +1,151 @@
+[
+  {
+    "n": 1,
+    "title": "What Scripture Says of Heaven",
+    "key_points": [
+      "Heaven is the Father's house, a prepared place for a prepared people.",
+      "The Lord Jesus Christ promised the dying thief he would be with Him in paradise that same day.",
+      "What makes Heaven Heaven is the presence of God Himself, not streets or gates.",
+      "God will wipe away every tear, and Heaven exceeds anything the heart of man has imagined."
+    ],
+    "verse": {
+      "ref": "John 14:1-2",
+      "text": "Let not your heart be troubled: ye believe in God, believe also in me. In my Father's house are many mansions: if it were not so, I would have told you. I go to prepare a place for you."
+    },
+    "scene": {
+      "file": "heaven-and-hell-1",
+      "sky": "gold",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 220, 160],
+      "items": [
+        { "el": "mountain", "x": 620, "y": 245, "s": 0.6 },
+        { "el": "city", "x": 400, "y": 240, "s": 1.1 },
+        { "el": "gate", "x": 400, "y": 330, "s": 0.9 },
+        { "el": "dove", "x": 250, "y": 130, "s": 0.6 },
+        { "el": "path", "x": 400, "y": 350, "s": 1.0 }
+      ],
+      "caption": "A prepared place, in the Father's house",
+      "alt": "A golden sky over a shining city on a hill, with an open gate and a path leading toward it, and a dove flying above."
+    }
+  },
+  {
+    "n": 2,
+    "title": "The Resurrection of the Body and the New Jerusalem",
+    "key_points": [
+      "The believer's hope includes bodily resurrection, not merely the soul's survival.",
+      "The body is sown in corruption and weakness but raised in incorruption, glory, and power.",
+      "The dead in the Lord Jesus Christ rise first, then the living are caught up to meet Him.",
+      "God will dwell with His people in the new heaven, new earth, and the holy city, and they shall reign forever."
+    ],
+    "verse": {
+      "ref": "1 Corinthians 15:42-43",
+      "text": "So also is the resurrection of the dead. It is sown in corruption; it is raised in incorruption: It is sown in dishonour; it is raised in glory: it is sown in weakness; it is raised in power."
+    },
+    "scene": {
+      "file": "heaven-and-hell-2",
+      "sky": "dawn",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": [400, 200, 150],
+      "items": [
+        { "el": "city", "x": 400, "y": 235, "s": 1.1 },
+        { "el": "tomb", "x": 220, "y": 340, "s": 0.7 },
+        { "el": "tree", "x": 580, "y": 330, "s": 0.7 },
+        { "el": "water", "x": 400, "y": 380, "s": 1.0 },
+        { "el": "trumpet", "x": 400, "y": 140, "s": 0.6 }
+      ],
+      "caption": "Sown in weakness, raised in glory",
+      "alt": "Dawn breaking over the holy city with the river of life flowing before it, an empty tomb to one side, and a trumpet sounding above."
+    }
+  },
+  {
+    "n": 3,
+    "title": "Hell, Death, and the Lake of Fire",
+    "key_points": [
+      "Hell (Sheol/Hades) is the holding place of the unrighteous dead, conscious and awaiting judgment.",
+      "Hell and the lake of fire are not the same; hell itself is cast into the lake of fire.",
+      "The lake of fire was prepared for the devil and his angels, not for mankind.",
+      "Free will, not cruelty, explains hell: God will not force His presence on a soul that refuses Him."
+    ],
+    "verse": {
+      "ref": "Matthew 25:41",
+      "text": "Depart from me, ye cursed, into everlasting fire, prepared for the devil and his angels."
+    },
+    "scene": {
+      "file": "heaven-and-hell-3",
+      "sky": "storm",
+      "ground": "sea",
+      "rays": null,
+      "glow": [400, 300, 90],
+      "items": [
+        { "el": "anchor", "x": 400, "y": 340, "s": 1.0 },
+        { "el": "chains", "x": 250, "y": 350, "s": 0.6 },
+        { "el": "hand_lamp_stand", "x": 560, "y": 320, "s": 0.6 },
+        { "el": "thunder", "x": 400, "y": 100, "s": 0.7 }
+      ],
+      "caption": "A great gulf fixed; a single light still holds",
+      "alt": "A dim, stormy sky over the sea with a broken chain and a small lampstand near an anchor, restrained and without any figures."
+    }
+  },
+  {
+    "n": 4,
+    "title": "The Two Judgments",
+    "key_points": [
+      "The judgment seat of the Lord Jesus Christ is for believers, reviewing works, not salvation.",
+      "Works are tested by fire like gold, silver, and precious stones versus wood, hay, and stubble.",
+      "Faithful believers receive crowns, which can be lost though the soul itself is kept.",
+      "At the great white throne, the books and the book of life are opened, and the deciding question is whether one's name is written there."
+    ],
+    "verse": {
+      "ref": "1 Corinthians 3:13",
+      "text": "Every man's work shall be made manifest: for the day shall declare it, because it shall be revealed by fire; and the fire shall try every man's work of what sort it is."
+    },
+    "scene": {
+      "file": "heaven-and-hell-4",
+      "sky": "hall",
+      "ground": "floor",
+      "rays": [400, -40],
+      "glow": [400, 210, 150],
+      "items": [
+        { "el": "pillar", "x": 190, "y": 250, "s": 0.7 },
+        { "el": "pillar", "x": 610, "y": 250, "s": 0.7 },
+        { "el": "scales", "x": 400, "y": 330, "s": 1.1 },
+        { "el": "book_stack", "x": 560, "y": 350, "s": 0.7 },
+        { "el": "crown", "x": 250, "y": 320, "s": 0.6 }
+      ],
+      "caption": "The books are opened; the crown is kept for the faithful",
+      "alt": "A great hall with pillars and light streaming down on a set of scales, with a stack of books and a crown nearby."
+    }
+  },
+  {
+    "n": 5,
+    "title": "Living in the Light of Eternity",
+    "key_points": [
+      "Believers lay up treasure in Heaven rather than on earth, because the heart follows the treasure.",
+      "Believers redeem the time, guard their days, and endure faithfully to the end.",
+      "Winning souls matters urgently, since every person is walking toward one of two destinations.",
+      "The hope of seeing the Lord Jesus Christ purifies the believer's life now."
+    ],
+    "verse": {
+      "ref": "Matthew 6:20-21",
+      "text": "But lay up for yourselves treasures in heaven, where neither moth nor rust doth corrupt, and where thieves do not break through nor steal: For where your treasure is, there will your heart be also."
+    },
+    "scene": {
+      "file": "heaven-and-hell-5",
+      "sky": "day",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 200, 140],
+      "items": [
+        { "el": "sun", "x": 400, "y": 110, "s": 0.8 },
+        { "el": "path", "x": 400, "y": 340, "s": 1.0 },
+        { "el": "sheaf", "x": 240, "y": 340, "s": 0.6 },
+        { "el": "hourglass", "x": 560, "y": 330, "s": 0.6 },
+        { "el": "bible", "x": 400, "y": 355, "s": 0.9 }
+      ],
+      "caption": "Treasure laid up, time redeemed, and the race endured",
+      "alt": "A bright day over rolling hills with a path leading forward, an hourglass and a sheaf of grain beside it, and an open Bible in the foreground."
+    }
+  }
+]

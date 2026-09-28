@@ -1,0 +1,170 @@
+[
+  {
+    "n": 1,
+    "title": "What Heresy Is and Why It Matters",
+    "key_points": [
+      "Heresy means choosing what pleases you from Scripture and laying the rest aside.",
+      "False teachers creep in quietly among believers rather than announcing themselves openly.",
+      "Test every teaching by what it says about the Lord Jesus Christ and by its fruit.",
+      "The first church continued steadfastly in the apostles' doctrine, not private opinion."
+    ],
+    "verse": {
+      "ref": "2 Peter 2:1",
+      "text": "But there were false prophets also among the people, even as there shall be false teachers among you, who privily shall bring in damnable heresies, even denying the Lord that bought them, and bring upon themselves swift destruction."
+    },
+    "scene": {
+      "file": "heresies-1",
+      "sky": "dusk",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": null,
+      "items": [
+        {"el": "path", "x": 400, "y": 320, "s": 1.0},
+        {"el": "lamp", "x": 400, "y": 300, "s": 1.1},
+        {"el": "bible", "x": 300, "y": 340, "s": 0.9}
+      ],
+      "caption": "A lamp on the path, and the Book beside it.",
+      "alt": "A single lamp glowing on a quiet path at dusk beside an open Bible."
+    }
+  },
+  {
+    "n": 2,
+    "title": "The Early Heresies",
+    "key_points": [
+      "Nearly every modern error is an old heresy wearing new clothes.",
+      "Gnosticism sold secret knowledge; Docetism denied Christ truly came in the flesh.",
+      "Arianism made the Son a creature; Marcion cut the Old Testament away with scissors.",
+      "Pelagianism flattered man as able to save himself instead of needing the cross."
+    ],
+    "verse": {
+      "ref": "John 1:1",
+      "text": "In the beginning was the Word, and the Word was with God, and the Word was God."
+    },
+    "scene": {
+      "file": "heresies-2",
+      "sky": "night",
+      "ground": "floor",
+      "rays": null,
+      "glow": [400, 150, 90],
+      "items": [
+        {"el": "pillar", "x": 250, "y": 300, "s": 0.7},
+        {"el": "pillar", "x": 550, "y": 300, "s": 0.7},
+        {"el": "book_stack", "x": 400, "y": 350, "s": 1.0},
+        {"el": "star", "x": 400, "y": 110, "s": 0.8}
+      ],
+      "caption": "Old errors return; the Word still stands between the pillars.",
+      "alt": "A stack of ancient books between two pillars under a night sky with a single star."
+    }
+  },
+  {
+    "n": 3,
+    "title": "Denying That the Lord Jesus Christ Is God",
+    "key_points": [
+      "Being wrong about who the Lord Jesus Christ is cannot be undone by being right elsewhere.",
+      "Jehovah's Witnesses, Mormonism, liberal theology, and Islam each deny His deity in a different way.",
+      "Thomas called Him \"My Lord and my God,\" and the Lord Jesus Christ received the confession.",
+      "Only God Himself could pay an infinite debt, so His deity is what makes the cross sufficient."
+    ],
+    "verse": {
+      "ref": "John 20:28",
+      "text": "And Thomas answered and said unto him, My Lord and my God."
+    },
+    "scene": {
+      "file": "heresies-3",
+      "sky": "gold",
+      "ground": "none",
+      "rays": [400, -40],
+      "glow": [400, 200, 120],
+      "items": [
+        {"el": "crown", "x": 400, "y": 220, "s": 1.1},
+        {"el": "seal", "x": 400, "y": 340, "s": 0.8}
+      ],
+      "caption": "The crown that belongs to God alone.",
+      "alt": "A golden crown haloed in light above a royal seal."
+    }
+  },
+  {
+    "n": 4,
+    "title": "Errors About Salvation and Sin",
+    "key_points": [
+      "Works-salvation loads grace with law; hyper-grace and universalism cut holiness away entirely.",
+      "Eternal security misused becomes a permission slip for continued, unrepented sin.",
+      "Two-crucifixion Christianity treats the cross as a line of credit instead of one finished sacrifice.",
+      "Denying hell contradicts the Lord Jesus Christ, who spoke of it more than anyone in Scripture."
+    ],
+    "verse": {
+      "ref": "Ephesians 2:8",
+      "text": "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God."
+    },
+    "scene": {
+      "file": "heresies-4",
+      "sky": "day",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": null,
+      "items": [
+        {"el": "gate", "x": 400, "y": 280, "s": 1.2},
+        {"el": "path", "x": 400, "y": 340, "s": 1.0},
+        {"el": "sheaf", "x": 620, "y": 350, "s": 0.6}
+      ],
+      "caption": "Grace is the narrow door; endurance is the road beyond it.",
+      "alt": "A narrow gate opening onto a path through a sunlit plain."
+    }
+  },
+  {
+    "n": 5,
+    "title": "Errors About the Holy Spirit and Healing",
+    "key_points": [
+      "Cessationism claims the gifts ceased with the apostles, but the promise reaches all who believe.",
+      "The Holy Ghost is a person to be obeyed and loved, never a force to be used.",
+      "Chasing manifestations without holiness proves nothing; character and the Word do.",
+      "God can heal, God works through believers, and God is willing, as He told the leper."
+    ],
+    "verse": {
+      "ref": "Hebrews 13:8",
+      "text": "Jesus Christ the same yesterday, and to day, and for ever."
+    },
+    "scene": {
+      "file": "heresies-5",
+      "sky": "dawn",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 130, 100],
+      "items": [
+        {"el": "mountain", "x": 400, "y": 250, "s": 0.9},
+        {"el": "dove", "x": 400, "y": 120, "s": 0.9},
+        {"el": "water", "x": 400, "y": 350, "s": 1.0}
+      ],
+      "caption": "The Spirit descends on still water at first light.",
+      "alt": "A dove descending in the dawn light over still water before distant hills."
+    }
+  },
+  {
+    "n": 6,
+    "title": "Guarding the Flock",
+    "key_points": [
+      "Read Scripture in its context, since almost every heresy is built on a verse torn loose.",
+      "Declare the whole counsel of God, not one truth preached so hard it swallows the others.",
+      "Mark the divisive plainly, but restore the deceived in meekness as prisoners, not enemies.",
+      "Hold fast to what has already been given rather than seeking a new revelation."
+    ],
+    "verse": {
+      "ref": "Acts 20:27",
+      "text": "For I have not shunned to declare unto you all the counsel of God."
+    },
+    "scene": {
+      "file": "heresies-6",
+      "sky": "day",
+      "ground": "table",
+      "rays": null,
+      "glow": null,
+      "items": [
+        {"el": "wall", "x": 400, "y": 250, "s": 0.8},
+        {"el": "shield", "x": 300, "y": 340, "s": 0.9},
+        {"el": "bible", "x": 470, "y": 350, "s": 1.1}
+      ],
+      "caption": "A shield and the open Book, kept for the flock's sake.",
+      "alt": "A shield resting beside an open Bible on a wooden table."
+    }
+  }
+]

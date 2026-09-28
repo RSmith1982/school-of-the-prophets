@@ -1,0 +1,176 @@
+[
+  {
+    "n": 1,
+    "title": "A Reason for the Hope",
+    "key_points": [
+      "Sanctify the Lord God in your heart first; a reasoned answer is born there, not in an opinion.",
+      "Be ready always, not only when convenient, because the question rarely comes at a good hour.",
+      "The hope itself must be visible in a believer's life before anyone will ask the reason for it.",
+      "Answer with meekness and fear, aiming to win the soul rather than merely win the argument."
+    ],
+    "verse": {
+      "ref": "1 Peter 3:15",
+      "text": "But sanctify the Lord God in your hearts: and be ready always to give an answer to every man that asketh you a reason of the hope that is in you with meekness and fear."
+    },
+    "scene": {
+      "file": "apologetics-1",
+      "sky": "dawn",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 250, 140],
+      "items": [
+        { "el": "mountain", "x": 400, "y": 245, "s": 0.7 },
+        { "el": "path", "x": 400, "y": 320, "s": 1.0 },
+        { "el": "lamp", "x": 400, "y": 320, "s": 1.1 },
+        { "el": "dove", "x": 300, "y": 120, "s": 0.6 }
+      ],
+      "caption": "Ready always, with meekness and fear",
+      "alt": "A lit lamp standing on a path at dawn beneath soft rays and a dove, hills in the distance."
+    }
+  },
+  {
+    "n": 2,
+    "title": "The Evidence That God Exists",
+    "key_points": [
+      "The universe had a beginning, and nothing has ever been observed to produce something from nothing.",
+      "Creation's design, from the cell's code to the ordered heavens, points to a Maker, leaving men without excuse.",
+      "A moral law written on every man's heart implies a Lawgiver higher than himself.",
+      "The evidence clears the ground for faith but does not save; only the Gospel has power to save."
+    ],
+    "verse": {
+      "ref": "Romans 1:20",
+      "text": "For the invisible things of him from the creation of the world are clearly seen, being understood by the things that are made, even his eternal power and Godhead; so that they are without excuse."
+    },
+    "scene": {
+      "file": "apologetics-2",
+      "sky": "night",
+      "ground": "hills",
+      "rays": null,
+      "glow": [400, 130, 160],
+      "items": [
+        { "el": "mountain", "x": 400, "y": 250, "s": 0.7 },
+        { "el": "star", "x": 250, "y": 100, "s": 0.5 },
+        { "el": "star", "x": 550, "y": 90, "s": 0.5 },
+        { "el": "moon", "x": 400, "y": 120, "s": 1.1 },
+        { "el": "tree", "x": 600, "y": 320, "s": 0.6 }
+      ],
+      "caption": "The heavens declare the glory of God",
+      "alt": "A moon and scattered stars over dark hills, a lone tree standing beneath the night sky."
+    }
+  },
+  {
+    "n": 3,
+    "title": "Why the Bible Can Be Trusted",
+    "key_points": [
+      "Fulfilled prophecy, such as Micah naming Bethlehem centuries early, shows the Book is God-breathed.",
+      "The Scriptures have been preserved through persecution and confirmed by overwhelming manuscript evidence.",
+      "Sixty-six books by forty authors over sixteen centuries tell one unified story of one Redeemer.",
+      "Changed lives and the Book's honesty about its own heroes' failures testify it is not man's invention."
+    ],
+    "verse": {
+      "ref": "2 Timothy 3:16",
+      "text": "All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness."
+    },
+    "scene": {
+      "file": "apologetics-3",
+      "sky": "gold",
+      "ground": "table",
+      "rays": [400, -40],
+      "glow": [400, 300, 150],
+      "items": [
+        { "el": "podium", "x": 400, "y": 340, "s": 1.0 },
+        { "el": "bible", "x": 400, "y": 320, "s": 1.1 },
+        { "el": "scroll", "x": 250, "y": 335, "s": 0.6 },
+        { "el": "candle", "x": 560, "y": 330, "s": 0.7 }
+      ],
+      "caption": "Given by inspiration of God, and profitable",
+      "alt": "An open Bible resting on a podium with a scroll and a lit candle beside it, golden light above."
+    }
+  },
+  {
+    "n": 4,
+    "title": "The Resurrection of the Lord Jesus Christ",
+    "key_points": [
+      "The tomb was empty in the very city where He was crucified, and no enemy could produce the body.",
+      "Paul lists named, living witnesses, including above five hundred brethren, inviting investigation.",
+      "Frightened disciples who fled became fearless preachers, a change a stolen body cannot explain.",
+      "Every apostle sealed his testimony with his own death, and not one of them ever recanted."
+    ],
+    "verse": {
+      "ref": "Luke 24:6",
+      "text": "He is not here, but is risen: remember how he spake unto you when he was yet in Galilee."
+    },
+    "scene": {
+      "file": "apologetics-4",
+      "sky": "dawn",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 300, 170],
+      "items": [
+        { "el": "mountain", "x": 400, "y": 245, "s": 0.6 },
+        { "el": "tomb", "x": 400, "y": 330, "s": 1.2 },
+        { "el": "sunrise_arc", "x": 400, "y": 300, "s": 1.0 }
+      ],
+      "caption": "He is not here: for he is risen",
+      "alt": "An empty tomb standing open before a rising sun at dawn, mountains behind."
+    }
+  },
+  {
+    "n": 5,
+    "title": "Answering the Common Objections",
+    "key_points": [
+      "God is not the author of suffering; He entered our pain in the Lord Jesus Christ and promises overcoming.",
+      "God judges every man by the light given him, and every man has heard enough to be responsible.",
+      "Hypocrites in the church do not excuse anyone, for each man gives account of himself to God.",
+      "Science studies what God made; it answers how, while the Bible answers Who and why."
+    ],
+    "verse": {
+      "ref": "John 14:6",
+      "text": "Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me."
+    },
+    "scene": {
+      "file": "apologetics-5",
+      "sky": "storm",
+      "ground": "sea",
+      "rays": [400, -40],
+      "glow": [400, 260, 140],
+      "items": [
+        { "el": "thunder", "x": 200, "y": 110, "s": 0.6 },
+        { "el": "water", "x": 400, "y": 330, "s": 1.2 },
+        { "el": "anchor", "x": 400, "y": 300, "s": 1.0 },
+        { "el": "gate", "x": 620, "y": 250, "s": 0.5 }
+      ],
+      "caption": "An anchor holding fast through the storm",
+      "alt": "An anchor set firm above a stormy sea, distant thunder in a darkened sky."
+    }
+  },
+  {
+    "n": 6,
+    "title": "Apologetics with Power",
+    "key_points": [
+      "Paul's preaching stood not in the wisdom of men but in demonstration of the Spirit and of power.",
+      "Signs follow the preaching of the word; they do not lead it, and they must flow from holiness.",
+      "Boldness to speak and love for the soul must both accompany the power, or the power becomes noise.",
+      "A believer's own testimony of what God has done cannot be cross-examined away by any skeptic."
+    ],
+    "verse": {
+      "ref": "1 Corinthians 2:4",
+      "text": "And my speech and my preaching was not with enticing words of man's wisdom, but in demonstration of the Spirit and of power."
+    },
+    "scene": {
+      "file": "apologetics-6",
+      "sky": "hall",
+      "ground": "floor",
+      "rays": [400, -40],
+      "glow": [400, 280, 160],
+      "items": [
+        { "el": "pillar", "x": 200, "y": 260, "s": 0.7 },
+        { "el": "pillar", "x": 600, "y": 260, "s": 0.7 },
+        { "el": "hand_lamp_stand", "x": 400, "y": 330, "s": 1.1 },
+        { "el": "fire", "x": 400, "y": 260, "s": 0.6 }
+      ],
+      "caption": "Not in word only, but in power",
+      "alt": "A seven-branched lampstand burning brightly between two pillars in a hall, flame above."
+    }
+  }
+]

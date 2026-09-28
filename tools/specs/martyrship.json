@@ -1,0 +1,146 @@
+[
+  {
+    "n": 1,
+    "title": "Count the Cost",
+    "key_points": [
+      "The Lord Jesus Christ told the multitudes what following Him would cost before they signed up.",
+      "Half-started discipleship shames the name of God; He would rather we count the cost honestly first.",
+      "Carrying the cross daily means settling the question of our own life every morning, not only in a crisis.",
+      "A man who has already handed his life over has nothing left that the enemy can seize."
+    ],
+    "verse": {
+      "ref": "Luke 14:27",
+      "text": "And whosoever doth not bear his cross, and come after me, cannot be my disciple."
+    },
+    "scene": {
+      "file": "martyrship-1",
+      "sky": "dawn",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 200, 140],
+      "items": [
+        { "el": "mountain", "x": 400, "y": 240, "s": 0.9 },
+        { "el": "path", "x": 400, "y": 320, "s": 1.1 },
+        { "el": "cross", "x": 400, "y": 300, "s": 1.1 },
+        { "el": "sunrise_arc", "x": 400, "y": 340, "s": 0.7 }
+      ],
+      "caption": "Count the cost before the road, not on it.",
+      "alt": "A single cross on a hilltop path at dawn, sunlight breaking over distant hills."
+    }
+  },
+  {
+    "n": 2,
+    "title": "The Witness of Stephen and the Apostles",
+    "key_points": [
+      "A martyr is first of all a witness; the dying came from refusing to stop telling what was seen.",
+      "Stephen saw the Lord Jesus Christ standing to receive him and prayed forgiveness for his killers.",
+      "Nearly every apostle who ate with the risen Lord died violently for the testimony, and none recanted.",
+      "Heaven called the otherwise-unknown Antipas 'my faithful martyr,' honouring the witness the earth forgot."
+    ],
+    "verse": {
+      "ref": "Acts 7:56",
+      "text": "And said, Behold, I see the heavens opened, and the Son of man standing on the right hand of God."
+    },
+    "scene": {
+      "file": "martyrship-2",
+      "sky": "dawn",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": [400, 130, 150],
+      "items": [
+        { "el": "cloud", "x": 250, "y": 100, "s": 0.6 },
+        { "el": "sun", "x": 400, "y": 110, "s": 1.0 },
+        { "el": "crown", "x": 400, "y": 300, "s": 1.1 },
+        { "el": "scroll", "x": 300, "y": 340, "s": 0.6 }
+      ],
+      "caption": "Heaven opened to receive its faithful witness.",
+      "alt": "A crown resting on open ground beneath a bright, opened sky with a scroll nearby."
+    }
+  },
+  {
+    "n": 3,
+    "title": "The Persecuted Church Through the Ages and Today",
+    "key_points": [
+      "Rome martyred believers for refusing to call Caesar lord, yet the Church grew as it was killed.",
+      "Reformation believers were burned for owning and translating Scripture in their own tongue.",
+      "The twentieth century took more Christian lives than all prior centuries combined, and persecution continues today worldwide.",
+      "We are commanded to remember those in bonds as though we ourselves were bound with them."
+    ],
+    "verse": {
+      "ref": "Hebrews 13:3",
+      "text": "Remember them that are in bonds, as bound with them; and them which suffer adversity, as being yourselves also in the body."
+    },
+    "scene": {
+      "file": "martyrship-3",
+      "sky": "storm",
+      "ground": "plain",
+      "rays": null,
+      "glow": [400, 300, 120],
+      "items": [
+        { "el": "thunder", "x": 200, "y": 120, "s": 0.6 },
+        { "el": "chains", "x": 400, "y": 310, "s": 1.0 },
+        { "el": "lamp", "x": 400, "y": 340, "s": 0.9 },
+        { "el": "bible", "x": 500, "y": 345, "s": 0.6 }
+      ],
+      "caption": "Of whom the world was not worthy.",
+      "alt": "A broken chain beside a small steady lamp and an open Bible under a stormy sky."
+    }
+  },
+  {
+    "n": 4,
+    "title": "Standing Firm When It Comes",
+    "key_points": [
+      "Fear God rather than men; whichever fear is greater in you decides what you do when trouble comes.",
+      "The grace for the hour, including the words to say, is given in the hour and not before.",
+      "Prayer, fasting, and hidden holiness build the believer long before any trial arrives.",
+      "Forgiving persecutors, as Stephen did, confronts them with the living God rather than mere bravery."
+    ],
+    "verse": {
+      "ref": "Matthew 10:28",
+      "text": "And fear not them which kill the body, but are not able to kill the soul: but rather fear him which is able to destroy both soul and body in hell."
+    },
+    "scene": {
+      "file": "martyrship-4",
+      "sky": "night",
+      "ground": "floor",
+      "rays": null,
+      "glow": [400, 150, 130],
+      "items": [
+        { "el": "star", "x": 250, "y": 100, "s": 0.5 },
+        { "el": "star", "x": 550, "y": 90, "s": 0.5 },
+        { "el": "hand_lamp_stand", "x": 400, "y": 330, "s": 1.1 },
+        { "el": "shield", "x": 320, "y": 350, "s": 0.6 }
+      ],
+      "caption": "The grace for the hour is given in the hour.",
+      "alt": "A seven-branched lampstand burning steadily at night beneath quiet stars, with a shield beside it."
+    }
+  },
+  {
+    "n": 5,
+    "title": "Faithful Unto Death: The Crown of Life",
+    "key_points": [
+      "The Lord Jesus Christ promised a victor's crown of life to those faithful unto death.",
+      "Believers overcame by the blood of the Lamb, the word of their testimony, and not loving their lives unto death.",
+      "Souls under the altar are given white robes and told to rest a little season until justice is answered.",
+      "Present affliction is light and momentary set against the far more exceeding, eternal weight of glory."
+    ],
+    "verse": {
+      "ref": "Revelation 2:10",
+      "text": "Be thou faithful unto death, and I will give thee a crown of life."
+    },
+    "scene": {
+      "file": "martyrship-5",
+      "sky": "gold",
+      "ground": "none",
+      "rays": [400, -40],
+      "glow": [400, 220, 160],
+      "items": [
+        { "el": "crown", "x": 400, "y": 250, "s": 1.2 },
+        { "el": "anchor", "x": 300, "y": 340, "s": 0.7 },
+        { "el": "dove", "x": 500, "y": 150, "s": 0.6 }
+      ],
+      "caption": "Faithful unto death, and He will give thee a crown of life.",
+      "alt": "A golden crown glowing in radiant light, with an anchor below and a dove overhead."
+    }
+  }
+]

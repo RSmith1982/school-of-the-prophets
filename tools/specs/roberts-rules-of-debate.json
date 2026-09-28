@@ -1,0 +1,130 @@
+[
+  {
+    "n": 1,
+    "title": "What These Rules Are",
+    "key_points": [
+      "These Rules are a book of order, not a technique for winning arguments.",
+      "They govern how a debate proceeds, not what either side says.",
+      "Built in three layers: Maxims at the base, Law over the text, Rules built on both.",
+      "A debate under order lets disagreement end in a settled decision instead of a quarrel."
+    ],
+    "verse": {"ref": "1 Corinthians 14:40", "text": "Let all things be done decently and in order."},
+    "scene": {
+      "file": "roberts-rules-of-debate-1",
+      "sky": "hall",
+      "ground": "floor",
+      "rays": [400, -40],
+      "glow": [450, 340, 120],
+      "items": [
+        {"el": "pillar", "x": 150, "y": 250, "s": 0.6},
+        {"el": "pillar", "x": 650, "y": 250, "s": 0.6},
+        {"el": "book_stack", "x": 300, "y": 355, "s": 0.9},
+        {"el": "podium", "x": 470, "y": 340, "s": 1.1}
+      ],
+      "caption": "Order, not a bag of tricks.",
+      "alt": "A quiet hall with pillars, a podium, and a stack of books standing in ordered light."
+    }
+  },
+  {
+    "n": 2,
+    "title": "The Maxims",
+    "key_points": [
+      "Four maxims ground every rule: equal weights, true-or-false statements, one truth, and rules from maxims.",
+      "A rule binding one side and not the other is a false weight and its verdict worthless.",
+      "Every statement either matches reality or it does not, regardless of either side's opinion.",
+      "Truth in one field cannot contradict truth in another, so points transfer across subjects."
+    ],
+    "verse": {"ref": "Proverbs 20:10", "text": "Divers weights, and divers measures, both of them are alike abomination to the LORD."},
+    "scene": {
+      "file": "roberts-rules-of-debate-2",
+      "sky": "gold",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": [400, 330, 140],
+      "items": [
+        {"el": "pillar", "x": 200, "y": 240, "s": 0.5},
+        {"el": "pillar", "x": 600, "y": 240, "s": 0.5},
+        {"el": "scales", "x": 400, "y": 330, "s": 1.2},
+        {"el": "book_stack", "x": 400, "y": 395, "s": 0.7}
+      ],
+      "caption": "Equal weights for every side.",
+      "alt": "A pair of balanced scales standing on an open plain under a golden sky, resting on a stack of books."
+    }
+  },
+  {
+    "n": 3,
+    "title": "The Law and the Rules",
+    "key_points": [
+      "The Law fixes which copy of the Rules is official: the author's own last, complete, English version.",
+      "Nine written Rules cover equal time, agreed sub points, two objections, precedent, and unanimous boolean votes.",
+      "A disputed sub point tables the whole debate until it is settled as its own debate.",
+      "A debater cannot vote to let a point stand that he himself disagrees with."
+    ],
+    "verse": {"ref": "Matthew 5:37", "text": "But let your communication be, Yea, yea; Nay, nay: for whatsoever is more than these cometh of evil."},
+    "scene": {
+      "file": "roberts-rules-of-debate-3",
+      "sky": "dusk",
+      "ground": "table",
+      "rays": null,
+      "glow": [420, 320, 110],
+      "items": [
+        {"el": "seal", "x": 300, "y": 320, "s": 0.9},
+        {"el": "scroll", "x": 430, "y": 335, "s": 1.2},
+        {"el": "book_stack", "x": 570, "y": 355, "s": 0.75}
+      ],
+      "caption": "One official version, sealed.",
+      "alt": "A sealed scroll resting on a table beside a stack of books under a dusky sky."
+    }
+  },
+  {
+    "n": 4,
+    "title": "Formats",
+    "key_points": [
+      "A format only shapes how time and turns are divided; the Rules stay the same.",
+      "In the Small Group format, each side gets a matching, uninterrupted turn for everything it does.",
+      "Questions, evasions, and false answers are handled inside the speaker's own turn, not the other side's.",
+      "Any new format must still keep equal time and true-or-false decisions for both sides."
+    ],
+    "verse": {"ref": "Isaiah 1:18", "text": "Come now, and let us reason together, saith the LORD: though your sins be as scarlet, they shall be as white as snow; though they be red like crimson, they shall be as wool."},
+    "scene": {
+      "file": "roberts-rules-of-debate-4",
+      "sky": "day",
+      "ground": "floor",
+      "rays": [400, -40],
+      "glow": null,
+      "items": [
+        {"el": "pillar", "x": 150, "y": 250, "s": 0.55},
+        {"el": "pillar", "x": 650, "y": 250, "s": 0.55},
+        {"el": "podium", "x": 300, "y": 345, "s": 1.0},
+        {"el": "hourglass", "x": 490, "y": 335, "s": 1.0}
+      ],
+      "caption": "Turns measured by equal time.",
+      "alt": "A podium and an hourglass standing side by side in a bright, pillared hall."
+    }
+  },
+  {
+    "n": 5,
+    "title": "Settling a Point",
+    "key_points": [
+      "Settling a point starts from the written transcript, pinned to the exact sentence spoken.",
+      "Both sides must agree on what a sentence means before it can be judged.",
+      "Both sides state in advance what would prove the point false, or it is not a boolean.",
+      "A point is won only by direct agreement or by logic both sides accepted beforehand."
+    ],
+    "verse": {"ref": "Amos 3:3", "text": "Can two walk together, except they be agreed?"},
+    "scene": {
+      "file": "roberts-rules-of-debate-5",
+      "sky": "dawn",
+      "ground": "table",
+      "rays": [400, -40],
+      "glow": [480, 300, 100],
+      "items": [
+        {"el": "scroll", "x": 320, "y": 345, "s": 1.0},
+        {"el": "lamp", "x": 480, "y": 300, "s": 0.9},
+        {"el": "scales", "x": 400, "y": 390, "s": 1.1}
+      ],
+      "caption": "Agree the logic; let it judge.",
+      "alt": "A scroll and a lamp beside a pair of scales at dawn, marking the point that agreement settles."
+    }
+  }
+]

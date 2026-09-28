@@ -1,0 +1,199 @@
+[
+  {
+    "n": 1,
+    "title": "The Old Testament Is the New Testament Concealed",
+    "key_points": [
+      "The Old Testament and New Testament are one book with one Author and one Redeemer.",
+      "On the Emmaus road the Lord Jesus Christ showed Himself in Moses, the prophets, and the psalms.",
+      "The law was a schoolmaster meant to bring us to Christ, not to be hugged as an end in itself.",
+      "Every Old Testament covenant, from Abraham to Jeremiah's new covenant, points forward to Him."
+    ],
+    "verse": {
+      "ref": "Luke 24:27",
+      "text": "And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself."
+    },
+    "scene": {
+      "file": "old-testament-1",
+      "sky": "dawn",
+      "ground": "path",
+      "rays": [400, -40],
+      "glow": [400, 260, 140],
+      "items": [
+        {"el": "mountain", "x": 620, "y": 245, "s": 0.6},
+        {"el": "scroll", "x": 300, "y": 320, "s": 1.0},
+        {"el": "bible", "x": 470, "y": 330, "s": 1.2},
+        {"el": "path", "x": 400, "y": 360, "s": 1.0}
+      ],
+      "caption": "One book, one Author, one Redeemer",
+      "alt": "An open Bible and an ancient scroll together on a path at dawn, with mountains in the distance and light breaking over the horizon."
+    }
+  },
+  {
+    "n": 2,
+    "title": "Biblical Symbols and Numbers",
+    "key_points": [
+      "Blood is life poured out for the guilty, from the coats of skins in Eden to the Lamb of God.",
+      "Oil marks the man anointed by the Holy Ghost for service, as with Samuel and David.",
+      "Leaven pictures corruption spreading quietly, so Scripture warns believers to beware it.",
+      "Numbers like three, seven, twelve, forty, and seventy carry consistent, God-given meaning."
+    ],
+    "verse": {
+      "ref": "Leviticus 17:11",
+      "text": "For the life of the flesh is in the blood: and I have given it to you upon the altar to make an atonement for your souls: for it is the blood that maketh an atonement for the soul."
+    },
+    "scene": {
+      "file": "old-testament-2",
+      "sky": "day",
+      "ground": "table",
+      "glow": [400, 300, 120],
+      "items": [
+        {"el": "lamp", "x": 250, "y": 320, "s": 0.7},
+        {"el": "chalice", "x": 400, "y": 330, "s": 1.1},
+        {"el": "sheaf", "x": 560, "y": 335, "s": 0.7},
+        {"el": "scales", "x": 320, "y": 350, "s": 0.6}
+      ],
+      "caption": "God teaches with pictures, and the pictures agree",
+      "alt": "A chalice at the center of a table flanked by a lamp, a sheaf of grain, and a set of scales, under calm daylight."
+    }
+  },
+  {
+    "n": 3,
+    "title": "Christophanies: The Angel of the LORD",
+    "key_points": [
+      "The Angel of the LORD appeared to Abraham, Jacob, Moses, Joshua, and Manoah before Bethlehem.",
+      "This Person accepts worship and bears the name I AM, which no created angel ever does.",
+      "At the burning bush He declared His own name and told Moses to remove his shoes on holy ground.",
+      "In Nebuchadnezzar's furnace a fourth man walked with the three, loose and unhurt, like the Son of God."
+    ],
+    "verse": {
+      "ref": "Exodus 3:2",
+      "text": "And the angel of the LORD appeared unto him in a flame of fire out of the midst of a bush: and he looked, and, behold, the bush burned with fire, and the bush was not consumed."
+    },
+    "scene": {
+      "file": "old-testament-3",
+      "sky": "night",
+      "ground": "desert",
+      "glow": [400, 300, 150],
+      "items": [
+        {"el": "mountain", "x": 620, "y": 250, "s": 0.6},
+        {"el": "fire", "x": 400, "y": 320, "s": 1.2},
+        {"el": "star", "x": 150, "y": 110, "s": 0.6},
+        {"el": "star", "x": 650, "y": 100, "s": 0.5}
+      ],
+      "caption": "He did not begin at Bethlehem",
+      "alt": "A flame burning on the desert ground at night beneath stars and distant mountains, unconsumed."
+    }
+  },
+  {
+    "n": 4,
+    "title": "Types of the Lord Jesus Christ",
+    "key_points": [
+      "A type is a real person or event God shaped in advance to picture something greater coming.",
+      "Isaac carrying the wood up Moriah and the Passover lamb both portray the sacrifice of the Lord Jesus Christ.",
+      "Joseph, rejected by his brethren and raised to the throne, becomes the fullest portrait of the cross.",
+      "Melchizedek, priest without genealogy, is made like the Son of God and abides a priest continually."
+    ],
+    "verse": {
+      "ref": "Exodus 12:13",
+      "text": "And the blood shall be to you for a token upon the houses where ye are: and when I see the blood, I will pass over you, and the plague shall not be upon you to destroy you, when I smite the land of Egypt."
+    },
+    "scene": {
+      "file": "old-testament-4",
+      "sky": "gold",
+      "ground": "hills",
+      "rays": [400, -40],
+      "items": [
+        {"el": "mountain", "x": 600, "y": 240, "s": 0.6},
+        {"el": "sheaf", "x": 280, "y": 340, "s": 0.7},
+        {"el": "gate", "x": 400, "y": 330, "s": 1.1},
+        {"el": "crown", "x": 400, "y": 250, "s": 0.6}
+      ],
+      "caption": "Portraits God painted, not pictures we invented",
+      "alt": "A doorway on a golden hillside beneath a crown of light, with a sheaf of grain nearby and mountains behind."
+    }
+  },
+  {
+    "n": 5,
+    "title": "The Gap Theory: Genesis 1:1 and 1:2",
+    "key_points": [
+      "God created the earth perfect, not in vain, so its later formlessness came from judgment, not creation.",
+      "Lucifer's pride and fall, described in Isaiah and Ezekiel, brought ruin between Genesis 1:1 and 1:2.",
+      "Jeremiah 4 echoes the exact language of Genesis 1:2 to describe the effect of God's fierce anger.",
+      "The Spirit moved upon the ruined waters, and the six days restore the earth for man."
+    ],
+    "verse": {
+      "ref": "Genesis 1:2",
+      "text": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters."
+    },
+    "scene": {
+      "file": "old-testament-5",
+      "sky": "storm",
+      "ground": "sea",
+      "glow": [400, 150, 130],
+      "items": [
+        {"el": "cloud", "x": 300, "y": 110, "s": 0.9},
+        {"el": "thunder", "x": 480, "y": 130, "s": 0.7},
+        {"el": "water", "x": 400, "y": 320, "s": 1.2},
+        {"el": "dove", "x": 400, "y": 180, "s": 0.6}
+      ],
+      "caption": "The Spirit moved upon the face of the waters",
+      "alt": "A dove hovering over dark storm-tossed water beneath heavy clouds, with distant thunder in the sky."
+    }
+  },
+  {
+    "n": 6,
+    "title": "Daniel's Timeline and the Rebirth of Israel in 1948",
+    "key_points": [
+      "Ezekiel's 390 and 40 days of lying down equal 430 years of appointed chastisement for Israel.",
+      "Subtracting the 70 years in Babylon and multiplying the remainder sevenfold gives 2,520 biblical years.",
+      "Converted to 907,200 days and then to solar years, the count runs from 536 BC to 1948.",
+      "Isaiah asked who ever heard of a nation born in a single day, and it happened on 14 May 1948."
+    ],
+    "verse": {
+      "ref": "Isaiah 66:8",
+      "text": "Who hath heard such a thing? who hath seen such things? Shall the earth be made to bring forth in one day? or shall a nation be born at once? for as soon as Zion travailed, she brought forth her children."
+    },
+    "scene": {
+      "file": "old-testament-6",
+      "sky": "dusk",
+      "ground": "hills",
+      "glow": [400, 200, 140],
+      "items": [
+        {"el": "hourglass", "x": 260, "y": 320, "s": 0.9},
+        {"el": "star", "x": 400, "y": 260, "s": 1.0},
+        {"el": "city", "x": 560, "y": 250, "s": 0.6},
+        {"el": "mountain", "x": 680, "y": 250, "s": 0.5}
+      ],
+      "caption": "Not one word of His promises will fall to the ground",
+      "alt": "An hourglass and a six-pointed star before a distant city on the hills at dusk."
+    }
+  },
+  {
+    "n": 7,
+    "title": "The Seventy Weeks: Messiah Cut Off and the Temple Fulfilled",
+    "key_points": [
+      "Gabriel gave Daniel 490 years determined upon his people and the holy city.",
+      "From the 445 BC decree to rebuild Jerusalem, 483 years reach the day Messiah rode into the city.",
+      "Messiah was cut off, but not for Himself, and afterward the sanctuary was destroyed in AD 70.",
+      "The Lord Jesus Christ fulfilled the temple in His own body, and believers are now God's temple."
+    ],
+    "verse": {
+      "ref": "Daniel 9:26",
+      "text": "And after threescore and two weeks shall Messiah be cut off, but not for himself: and the people of the prince that shall come shall destroy the city and the sanctuary."
+    },
+    "scene": {
+      "file": "old-testament-7",
+      "sky": "hall",
+      "ground": "floor",
+      "glow": [400, 250, 150],
+      "items": [
+        {"el": "pillar", "x": 240, "y": 260, "s": 0.7},
+        {"el": "pillar", "x": 560, "y": 260, "s": 0.7},
+        {"el": "temple", "x": 400, "y": 245, "s": 0.9},
+        {"el": "scroll", "x": 400, "y": 350, "s": 0.9}
+      ],
+      "caption": "Every day of the sixty-nine weeks came to pass",
+      "alt": "A scroll lying on the floor of a hall between two pillars, before a temple in the background."
+    }
+  }
+]

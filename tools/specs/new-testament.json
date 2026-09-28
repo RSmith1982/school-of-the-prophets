@@ -1,0 +1,118 @@
+[
+  {
+    "n": 1,
+    "title": "How to Read the New Testament in the Order of the Story",
+    "key_points": [
+      "John 1 opens the plan, showing the Word who was with God before Bethlehem.",
+      "Luke and Acts are one story in two volumes, one written, the other continued by the Holy Ghost.",
+      "Epistles are placed at the point in Acts where each was actually written and read.",
+      "The plan ends with Luke's genealogy climbing backward to Adam, the son of God."
+    ],
+    "verse": {
+      "ref": "John 1:14",
+      "text": "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth."
+    },
+    "scene": {
+      "file": "new-testament-1",
+      "sky": "dawn",
+      "ground": "path",
+      "rays": [400, -40],
+      "glow": [400, 140, 120],
+      "items": [
+        { "el": "mountain", "x": 150, "y": 250, "s": 0.6 },
+        { "el": "sunrise_arc", "x": 400, "y": 150, "s": 1.0 },
+        { "el": "scroll", "x": 400, "y": 340, "s": 1.1 },
+        { "el": "path", "x": 400, "y": 380, "s": 1.0 }
+      ],
+      "caption": "In the beginning was the Word",
+      "alt": "A scroll rests on a path at dawn, light rays breaking over distant hills."
+    }
+  },
+  {
+    "n": 2,
+    "title": "The Gospel According to Luke: The Lord Jesus Christ From Bethlehem to the Ascension",
+    "key_points": [
+      "Luke moves from the temple and manger through Galilee toward Jerusalem and the cross.",
+      "At Luke 9:51 He steadfastly sets His face to go to Jerusalem, turning the whole book.",
+      "The travel narrative carries the good Samaritan, the prodigal son, and Zacchaeus.",
+      "The Gospel closes with the ascension, hands lifted in blessing and a church full of joy."
+    ],
+    "verse": {
+      "ref": "Luke 2:11",
+      "text": "For unto you is born this day in the city of David a Saviour, which is Christ the Lord."
+    },
+    "scene": {
+      "file": "new-testament-2",
+      "sky": "gold",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 120, 130],
+      "items": [
+        { "el": "mountain", "x": 620, "y": 250, "s": 0.55 },
+        { "el": "star", "x": 400, "y": 100, "s": 1.0 },
+        { "el": "path", "x": 400, "y": 360, "s": 1.1 },
+        { "el": "sheaf", "x": 250, "y": 340, "s": 0.6 }
+      ],
+      "caption": "The road set steadfastly toward Jerusalem",
+      "alt": "A star shines over rolling hills with a path leading toward distant mountains."
+    }
+  },
+  {
+    "n": 3,
+    "title": "The Acts of the Apostles and the Epistles in Their Places",
+    "key_points": [
+      "The risen Lord commands the disciples to wait, then promises power from the Holy Ghost.",
+      "Pentecost brings the Spirit and three thousand souls through Peter's preaching.",
+      "Saul the persecutor is struck down on the Damascus road and becomes the chief apostle.",
+      "Each epistle answers a real crisis at the place in Acts where it was written."
+    ],
+    "verse": {
+      "ref": "Acts 1:8",
+      "text": "But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me both in Jerusalem, and in all Judaea, and in Samaria, and unto the uttermost part of the earth."
+    },
+    "scene": {
+      "file": "new-testament-3",
+      "sky": "day",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": [400, 130, 140],
+      "items": [
+        { "el": "city", "x": 220, "y": 245, "s": 0.55 },
+        { "el": "fire", "x": 400, "y": 330, "s": 1.0 },
+        { "el": "trumpet", "x": 560, "y": 340, "s": 0.7 },
+        { "el": "scroll", "x": 400, "y": 380, "s": 0.8 }
+      ],
+      "caption": "Power to be witnesses to the uttermost part of the earth",
+      "alt": "A flame rests before a distant city, with a trumpet and scroll nearby on open ground."
+    }
+  },
+  {
+    "n": 4,
+    "title": "Revelation and the End of the Story",
+    "key_points": [
+      "Revelation opens with a blessing on the reader and the Lord among the seven candlesticks.",
+      "The Lamb as it had been slain alone is worthy to open the sealed book.",
+      "Babylon falls, and a voice calls the saints to come out of her.",
+      "The book ends with a new heaven and new earth where God wipes away every tear."
+    ],
+    "verse": {
+      "ref": "Revelation 21:4",
+      "text": "And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away."
+    },
+    "scene": {
+      "file": "new-testament-4",
+      "sky": "dawn",
+      "ground": "none",
+      "rays": [400, -40],
+      "glow": [400, 150, 150],
+      "items": [
+        { "el": "city", "x": 400, "y": 250, "s": 1.0 },
+        { "el": "crown", "x": 400, "y": 340, "s": 0.9 },
+        { "el": "olive_branch", "x": 250, "y": 360, "s": 0.6 },
+        { "el": "dove", "x": 560, "y": 130, "s": 0.6 }
+      ],
+      "caption": "Behold, I make all things new",
+      "alt": "A holy city glows at dawn above a crown, with a dove flying in the light."
+    }
+  }
+]

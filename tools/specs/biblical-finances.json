@@ -1,0 +1,142 @@
+[
+  {
+    "n": 1,
+    "title": "It All Belongs to God",
+    "key_points": [
+      "Everything belongs to God; He owns it all and has placed a portion in our hands as stewards.",
+      "God requires stewards to be faithful, not brilliant or wealthy.",
+      "In the parable of the talents, unequal amounts are judged only by faithfulness with what was received.",
+      "The servant who buried his talent out of fear shows that doing nothing with God's goods is loss, not neutral."
+    ],
+    "verse": {
+      "ref": "Haggai 2:8",
+      "text": "The silver is mine, and the gold is mine, saith the LORD of hosts."
+    },
+    "scene": {
+      "file": "biblical-finances-1",
+      "sky": "gold",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": [430, 360, 120],
+      "items": [
+        {"el": "bible", "x": 300, "y": 345, "s": 0.9},
+        {"el": "coins", "x": 440, "y": 365, "s": 1.1},
+        {"el": "scales", "x": 550, "y": 335, "s": 0.8}
+      ],
+      "caption": "The silver is mine, and the gold is mine.",
+      "alt": "Coins and a scale rest beside an open Bible under a golden, ray-lit sky, showing that all things belong to God."
+    }
+  },
+  {
+    "n": 2,
+    "title": "Tithes, Offerings, and Firstfruits",
+    "key_points": [
+      "Tithing began with Abraham long before the law, given freely to Melchizedek out of worship.",
+      "Malachi calls the withheld tithe robbery and invites Israel to test God's promised blessing.",
+      "The Lord Jesus Christ upheld tithing while rebuking neglect of judgment, mercy, and faith.",
+      "Giving is to be purposed beforehand in the heart and offered cheerfully, not under pressure."
+    ],
+    "verse": {
+      "ref": "2 Corinthians 9:7",
+      "text": "Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver."
+    },
+    "scene": {
+      "file": "biblical-finances-2",
+      "sky": "dawn",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": null,
+      "items": [
+        {"el": "temple", "x": 400, "y": 245, "s": 0.9},
+        {"el": "sheaf", "x": 310, "y": 360, "s": 0.9},
+        {"el": "coins", "x": 480, "y": 365, "s": 0.9}
+      ],
+      "caption": "God loveth a cheerful giver.",
+      "alt": "A sheaf of grain and a pile of coins are brought before a temple in the early dawn light."
+    }
+  },
+  {
+    "n": 3,
+    "title": "Sowing and Reaping",
+    "key_points": [
+      "Sowing and reaping is a fixed law of balance woven into all creation, and God is not mocked.",
+      "Sparing sowing yields a sparing harvest, and bountiful sowing yields a bountiful one.",
+      "The widow of Zarephath sowed her last meal first, and her supply of meal and oil never failed.",
+      "The harvest is not immediate, so believers must sow deliberately and not faint before due season."
+    ],
+    "verse": {
+      "ref": "Galatians 6:7",
+      "text": "Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap."
+    },
+    "scene": {
+      "file": "biblical-finances-3",
+      "sky": "day",
+      "ground": "plain",
+      "rays": null,
+      "glow": null,
+      "items": [
+        {"el": "sun", "x": 400, "y": 110, "s": 0.8},
+        {"el": "path", "x": 400, "y": 335, "s": 1.0},
+        {"el": "sheaf", "x": 430, "y": 365, "s": 1.1}
+      ],
+      "caption": "Whatsoever a man soweth, that shall he also reap.",
+      "alt": "A sheaf of grain stands beside a path leading toward a sunlit horizon, a picture of sowing and reaping."
+    }
+  },
+  {
+    "n": 4,
+    "title": "Debt, Work, and Contentment",
+    "key_points": [
+      "The borrower is servant to the lender, so debt costs a measure of freedom.",
+      "Christians are to owe no man anything except the ongoing debt of love.",
+      "Scripture commands honest work and providing for one's own house, and rebukes idleness.",
+      "Godliness with contentment is great gain, while the love of money brings many sorrows."
+    ],
+    "verse": {
+      "ref": "1 Timothy 6:6",
+      "text": "But godliness with contentment is great gain."
+    },
+    "scene": {
+      "file": "biblical-finances-4",
+      "sky": "day",
+      "ground": "plain",
+      "rays": null,
+      "glow": null,
+      "items": [
+        {"el": "tree", "x": 290, "y": 350, "s": 0.9},
+        {"el": "chains", "x": 460, "y": 355, "s": 1.0},
+        {"el": "coins", "x": 420, "y": 375, "s": 0.7}
+      ],
+      "caption": "Godliness with contentment is great gain.",
+      "alt": "A broken chain lies near a tree and a few coins, showing freedom from debt through honest work and contentment."
+    }
+  },
+  {
+    "n": 5,
+    "title": "Money in the House of God",
+    "key_points": [
+      "Ananias and Sapphira sinned not by the amount withheld but by giving a false gift for appearance.",
+      "Paul refused to carry the collection alone so it would be honest before God and visibly honest before men.",
+      "Elders who labour in the Word are worthy of support but must be free from the love of money.",
+      "The offering exists to feed the work of God and to remember the widow, the poor, and the persecuted."
+    ],
+    "verse": {
+      "ref": "2 Corinthians 8:21",
+      "text": "Providing for honest things, not only in the sight of the Lord, but also in the sight of men."
+    },
+    "scene": {
+      "file": "biblical-finances-5",
+      "sky": "hall",
+      "ground": "table",
+      "rays": null,
+      "glow": null,
+      "items": [
+        {"el": "scales", "x": 400, "y": 340, "s": 1.0},
+        {"el": "coins", "x": 320, "y": 358, "s": 0.8},
+        {"el": "lamp", "x": 500, "y": 335, "s": 0.7}
+      ],
+      "caption": "Providing for honest things in the sight of men.",
+      "alt": "A scale, coins, and a lamp rest on a table, showing money in the house of God handled openly and honestly."
+    }
+  }
+]

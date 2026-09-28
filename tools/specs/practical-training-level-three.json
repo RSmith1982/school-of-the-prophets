@@ -1,0 +1,120 @@
+[
+  {
+    "n": 1,
+    "title": "The Bishop's Charge",
+    "key_points": [
+      "A bishop desires a good work, not a title, a platform, or a crown.",
+      "Character, not talent, is what Paul lists as qualifying a man for oversight.",
+      "An overseer feeds the flock with sound doctrine and also turns back the wolf.",
+      "True oversight raises up other elders instead of gathering people to himself."
+    ],
+    "verse": {
+      "ref": "1 Timothy 3:1",
+      "text": "This is a true saying, If a man desire the office of a bishop, he desireth a good work."
+    },
+    "scene": {
+      "file": "practical-training-level-three-1",
+      "sky": "dawn",
+      "ground": "hills",
+      "rays": [400, -40],
+      "glow": [400, 180, 90],
+      "items": [
+        {"el": "mountain", "x": 400, "y": 240, "s": 0.9},
+        {"el": "path", "x": 400, "y": 320, "s": 1.0},
+        {"el": "crown", "x": 400, "y": 180, "s": 1.1},
+        {"el": "bible", "x": 400, "y": 345, "s": 0.9}
+      ],
+      "caption": "A crown of glory that fadeth not away.",
+      "alt": "A crown glows above a path winding through hills toward distant mountains, with an open Bible resting on the ground before it."
+    }
+  },
+  {
+    "n": 2,
+    "title": "Setting Up a Church",
+    "key_points": [
+      "A church begins in prayer and fasting, not with a building or a name.",
+      "The early church continued in doctrine, fellowship, breaking of bread, and prayers.",
+      "Elders are appointed only after time has tested them, with prayer and fasting.",
+      "Money is kept honest and in the light, seen to be so before men as well as God."
+    ],
+    "verse": {
+      "ref": "Acts 2:42",
+      "text": "And they continued stedfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers."
+    },
+    "scene": {
+      "file": "practical-training-level-three-2",
+      "sky": "day",
+      "ground": "plain",
+      "rays": [400, -40],
+      "glow": null,
+      "items": [
+        {"el": "temple", "x": 400, "y": 245, "s": 0.9},
+        {"el": "gate", "x": 210, "y": 310, "s": 0.6},
+        {"el": "bible", "x": 400, "y": 345, "s": 1.0},
+        {"el": "chalice", "x": 320, "y": 355, "s": 0.7},
+        {"el": "bread", "x": 480, "y": 355, "s": 0.7},
+        {"el": "dove", "x": 400, "y": 120, "s": 0.7}
+      ],
+      "caption": "Doctrine, fellowship, the breaking of bread, and prayers.",
+      "alt": "A temple stands beyond an open gate, with an open Bible, bread, and a chalice set together below a dove flying in a clear sky."
+    }
+  },
+  {
+    "n": 3,
+    "title": "Holding a Miracle Event",
+    "key_points": [
+      "A miracle event is won beforehand in secret prayer and fasting, not on the platform.",
+      "The Gospel is preached first, so a healed body is not gained while a soul is lost.",
+      "Faith is set on God alone; the minister points every eye away from himself.",
+      "When healing does not come, the power is never the problem — the line is searched for a break."
+    ],
+    "verse": {
+      "ref": "Mark 9:29",
+      "text": "Howbeit this kind goeth not out but by prayer and fasting."
+    },
+    "scene": {
+      "file": "practical-training-level-three-3",
+      "sky": "gold",
+      "ground": "sea",
+      "rays": [400, -40],
+      "glow": [400, 250, 100],
+      "items": [
+        {"el": "sun", "x": 400, "y": 90, "s": 1.0},
+        {"el": "cross", "x": 400, "y": 250, "s": 1.1},
+        {"el": "dove", "x": 280, "y": 140, "s": 0.6},
+        {"el": "water", "x": 400, "y": 330, "s": 1.0}
+      ],
+      "caption": "Preach Him first, and give Him the glory last.",
+      "alt": "Golden light rays fall on a cross standing at the water's edge, with a dove flying above calm water."
+    }
+  },
+  {
+    "n": 4,
+    "title": "Ministering in a Persecuted Region",
+    "key_points": [
+      "Believers are sent as sheep among wolves, wise as serpents and harmless as doves.",
+      "The Holy Ghost, not a formula, decides whether a night is to flee or to stand.",
+      "Underground churches are kept small with many raised-up leaders and careful discretion.",
+      "Distance is no barrier to God; believing prayer reaches a brother in any cell."
+    ],
+    "verse": {
+      "ref": "Matthew 10:16",
+      "text": "Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves."
+    },
+    "scene": {
+      "file": "practical-training-level-three-4",
+      "sky": "storm",
+      "ground": "floor",
+      "rays": null,
+      "glow": [400, 300, 80],
+      "items": [
+        {"el": "thunder", "x": 600, "y": 90, "s": 0.7},
+        {"el": "star", "x": 150, "y": 100, "s": 0.6},
+        {"el": "chains", "x": 400, "y": 330, "s": 1.0},
+        {"el": "candle", "x": 400, "y": 295, "s": 0.9}
+      ],
+      "caption": "Wise as serpents, harmless as doves — joyful still.",
+      "alt": "A single candle burns beside a broken chain on the floor under a stormy sky, with one star breaking through the clouds."
+    }
+  }
+]
