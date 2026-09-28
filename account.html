@@ -70,6 +70,10 @@
   @media (max-width:640px){.legend{grid-template-columns:1fr}}
   .big{font-size:2.2rem;color:var(--burgundy);font-weight:600;line-height:1}
   footer{padding:2rem 0;text-align:center;color:var(--gold-soft);background:var(--navy-deep);font-size:.95rem}
+
+  .pw{position:relative}
+  .pw input{padding-right:4.2rem}
+  .pw button{position:absolute;right:.35rem;top:50%;transform:translateY(-50%);font:inherit;font-size:.85rem;padding:.15rem .5rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--navy);border-radius:2px;cursor:pointer}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -186,6 +190,7 @@
 <script>
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('input[type=password]').forEach(i=>{ const w=document.createElement('div'); w.className='pw'; i.parentNode.insertBefore(w,i); w.appendChild(i); const b=document.createElement('button'); b.type='button'; b.textContent='Show'; b.setAttribute('aria-label','Show password'); b.onclick=()=>{ const s=i.type==='password'; i.type=s?'text':'password'; b.textContent=s?'Hide':'Show'; }; w.appendChild(b); });
 
 // ---- signed-out UI
 $('#tabIn').onclick=()=>{$('#tabIn').classList.add('on');$('#tabUp').classList.remove('on');$('#inForm').hidden=false;$('#upForm').hidden=true;};

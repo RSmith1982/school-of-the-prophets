@@ -46,6 +46,10 @@
   input[type=email],input[type=password]{font:inherit;padding:.5rem .7rem;border:1px solid var(--gold);background:#FBF7EC;border-radius:2px;width:100%;max-width:26rem;display:block;margin:.3rem 0 .8rem}
   .filter{margin:.4rem 0 .8rem}
   .filter input{font:inherit;padding:.4rem .6rem;border:1px solid var(--gold);background:#FBF7EC;border-radius:2px;width:100%;max-width:24rem}
+
+  .pw{position:relative}
+  .pw input{padding-right:4.2rem}
+  .pw button{position:absolute;right:.35rem;top:50%;transform:translateY(-50%);font:inherit;font-size:.85rem;padding:.15rem .5rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--navy);border-radius:2px;cursor:pointer}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -82,6 +86,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="school.js?v=8"></script>
 <script>
+document.querySelectorAll('input[type=password]').forEach(i=>{ const w=document.createElement('div'); w.className='pw'; i.parentNode.insertBefore(w,i); w.appendChild(i); const b=document.createElement('button'); b.type='button'; b.textContent='Show'; b.setAttribute('aria-label','Show password'); b.onclick=()=>{ const s=i.type==='password'; i.type=s?'text':'password'; b.textContent=s?'Hide':'Show'; }; w.appendChild(b); });
 const S=window.School, sb=S.sb, $=s=>document.querySelector(s), esc=S.escapeHtml;
 $('#f').onsubmit=async e=>{e.preventDefault(); $('#m').textContent='Signing in…'; const {error}=await sb.auth.signInWithPassword({email:$('#e').value.trim(),password:$('#p').value}); $('#m').textContent=error?error.message:''; start();};
 $('#out').onclick=async()=>{await sb.auth.signOut(); start();};
