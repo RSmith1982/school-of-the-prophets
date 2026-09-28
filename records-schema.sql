@@ -357,3 +357,11 @@ end $$;
 grant execute on function public.can_add_people() to authenticated;
 grant execute on function public.claimable_people() to anon, authenticated;
 grant execute on function public.claim_person(bigint) to authenticated;
+-- Enrollment built into the site: the request is kept on the student's profile and confirmed by the Bishop.
+alter table public.profiles
+  add column if not exists phone text not null default '',
+  add column if not exists city text not null default '',
+  add column if not exists church text not null default '',
+  add column if not exists hoped_diploma text not null default '',
+  add column if not exists about text not null default '',
+  add column if not exists enrolled_at timestamptz;

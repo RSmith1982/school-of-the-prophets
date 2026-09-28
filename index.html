@@ -491,14 +491,11 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Enroll</h2>
-      <p>Two steps. First, <a href="account.html#create" style="color:var(--gold-soft)">create your student account</a>, where your reading, your courses, and your diploma are recorded. Then send the registration form below; Bishop Robert P. Smith, Sr. confirms your enrollment and approves each step as you go.</p>
+      <p>There is no cost to apply. Create your student account, tell the Bishop who you are, and he confirms your enrollment; from then on your reading, your courses, your examinations, and your practical training are recorded in one place, and he approves each step as you go.</p>
     </div>
-    <div class="actions" style="border:0;padding:0;margin:0 0 1.2rem;justify-content:flex-start">
-      <button class="btn" type="button" id="showForm">Open the registration form</button>
-    </div>
-    <div class="form-frame" id="formFrame" hidden>
-      <iframe id="formIframe" title="Registration form" data-src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qKw8dVUMUlEMUoxUEU2VUI4OVhGWTlCNkYzTktKVi4u&embed=true" allowfullscreen></iframe>
-      <p class="note">If the form does not appear above, <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qKw8dVUMUlEMUoxUEU2VUI4OVhGWTlCNkYzTktKVi4u" target="_blank" rel="noopener" style="color:var(--gold-soft)">open it in a new tab</a>.</p>
+    <div class="actions" style="border:0;padding:0;margin:0;justify-content:flex-start">
+      <a class="btn" href="account.html#create">Create your student account</a>
+      <a class="btn ghost" href="account.html">I already have an account</a>
     </div>
   </div>
 </section>
@@ -519,11 +516,6 @@ const nav=document.querySelector('.nav'),mb=document.getElementById('menuBtn');
 document.querySelectorAll('.sub-btn').forEach(b=>b.addEventListener('click',e=>{const li=b.parentElement;const o=li.classList.toggle('open');b.setAttribute('aria-expanded',o);e.stopPropagation();}));
 document.addEventListener('click',()=>document.querySelectorAll('.has-sub.open').forEach(li=>{li.classList.remove('open');li.querySelector('.sub-btn').setAttribute('aria-expanded','false');}));
 mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);});
-document.getElementById('showForm').addEventListener('click',()=>{
-  const f=document.getElementById('formFrame'), i=document.getElementById('formIframe');
-  if(!i.src) i.src=i.dataset.src; f.hidden=false; document.getElementById('showForm').hidden=true;
-  setTimeout(()=>f.scrollIntoView({behavior:'smooth',block:'start'}),50);
-});
 document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

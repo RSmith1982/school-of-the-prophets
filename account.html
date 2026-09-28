@@ -31,7 +31,7 @@
   .panel#queueBanner{border-color:var(--burgundy);background:#FBF3EE}
   .panel h3{font-size:1.3rem;color:var(--burgundy);margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:1px solid var(--gold)}
   label{display:block;font-size:.95rem;color:var(--ink-soft);margin:.9rem 0 .25rem}
-  input[type=text],input[type=email],input[type=password],select,textarea{font:inherit;width:100%;padding:.55rem .7rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--ink);border-radius:2px}
+  input[type=text],input[type=tel],input[type=email],input[type=password],select,textarea{font:inherit;width:100%;padding:.55rem .7rem;border:1px solid var(--gold);background:#FBF7EC;color:var(--ink);border-radius:2px}
   textarea{min-height:5rem}
   .btn{font:inherit;font-size:1rem;padding:.55rem 1.2rem;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-block}
   .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
@@ -84,7 +84,7 @@
 <a href="index.html">Home</a> &nbsp; <a href="#" id="navOut" hidden>Sign out</a>
 </div></header>
 
-<section class="hero"><div class="wrap"><h1 id="heroTitle">My Progress</h1><p id="heroSub">Sign in to keep your reading, your courses, and your diploma in one place.</p></div></section>
+<section class="hero"><div class="wrap"><h1 id="heroTitle">My Progress</h1><p id="heroSub">Create your student account to enroll, then keep your reading, your courses, and your diploma in one place.</p></div></section>
 
 <main class="wrap">
 
@@ -140,11 +140,28 @@
   <div class="row"><a class="btn gold" href="competencies.html#queue">Open the reports</a></div>
 </section>
 
-<section class="panel">
+<section class="panel" id="enrollPanel">
   <h2>1. Enrollment</h2>
-  <p>Every student begins by sending the enrollment request from the <a href="index.html#enroll">Enroll section of the home page</a>. Tick the box once you have sent it; the Bishop confirms it here.</p>
-  <label class="check"><input type="checkbox" id="enrollSent"><span>I have sent my enrollment request.</span></label>
-  <p id="enrollStatus"></p>
+  <div id="enrollForm">
+    <p>Tell the Bishop who you are. There is no cost to apply. Once he confirms your enrollment, your courses, examinations and practical training are recorded here.</p>
+    <form id="enForm">
+      <div class="two">
+        <div><label for="enName">Full name</label><input id="enName" type="text" autocomplete="name" required></div>
+        <div><label for="enPhone">Phone number</label><input id="enPhone" type="tel" autocomplete="tel" required></div>
+        <div><label for="enCity">City and country</label><input id="enCity" type="text" autocomplete="address-level2" required></div>
+        <div><label for="enChurch">Church you attend (if any)</label><input id="enChurch" type="text"></div>
+        <div><label for="enDiploma">Diploma you hope to pursue</label><select id="enDiploma"><option>Disciple</option><option>Evangelist</option><option>Pastor</option><option>Prophet</option><option>Bishop</option></select><div class="note">Every student begins with Disciple — it is the foundation for all the others.</div></div>
+      </div>
+      <label for="enAbout">Tell the Bishop about yourself and why you wish to enroll</label>
+      <textarea id="enAbout" required></textarea>
+      <div class="row"><button class="btn gold" type="submit">Send my enrollment request</button></div>
+      <div class="msg" id="enMsg"></div>
+    </form>
+  </div>
+  <div id="enrollSent" hidden>
+    <p id="enrollStatus"></p>
+    <p class="note" id="enrollSummary"></p>
+  </div>
 </section>
 
 <section class="panel">
@@ -269,8 +286,10 @@ function show(){
   const pct=Math.round(done/total*100); $('#dipBar').style.width=pct+'%'; $('#dipPct').textContent=`${done} of ${total} steps approved (${pct}%)`;
   $('#overall').innerHTML = approved('diploma:'+P.diploma) ? `<span class="st approved">Diploma awarded — ${esc(P.diploma)}</span>` : pct===100 ? 'Every step is approved. The Bishop will award the diploma.' : 'Keep going, one step at a time. '+(req.chain.length>1?`The ${esc(P.diploma)} diploma builds on ${req.chain.slice(0,-1).join(' and ')}, so those requirements are included below.`:'');
   // enrollment
-  $('#enrollSent').checked=!!P.enrollment_sent;
-  $('#enrollStatus').innerHTML = approved('enrollment')?st('approved','Enrollment confirmed by the Bishop'):P.enrollment_sent?st('requested','Sent · awaiting the Bishop’s confirmation'):st('none','Not yet sent');
+  const sent=!!P.enrollment_sent; $('#enrollForm').hidden=sent; $('#enrollSent').hidden=!sent;
+  if(!sent){ if(!$('#enName').value) $('#enName').value=P.name||''; }
+  $('#enrollStatus').innerHTML = approved('enrollment')?st('approved','Enrollment confirmed by the Bishop'):st('requested','Sent '+(P.enrolled_at?S.fmtDate(P.enrolled_at):'')+' · awaiting the Bishop’s confirmation');
+  $('#enrollSummary').textContent=[P.phone,P.city,P.church,P.hoped_diploma?'hoping to pursue '+P.hoped_diploma:''].filter(Boolean).join(' · ');
   // plan
   $('#planIntro').innerHTML=`Your plan: <strong>${esc(plan.title)}</strong>. One complete reading plan — this one or the other — is required for every diploma. Tick each reading on the plan page and it is recorded here.`;
   $('#planBar').style.width=Math.round(readDone/plan.total*100)+'%';
@@ -285,7 +304,9 @@ function show(){
   // settings
   $('#setName').value=P.name||''; $('#setDiploma').textContent=P.diploma; $('#setPlan').value=P.plan;
 }
-$('#enrollSent').onchange=async e=>{ const {error}=await sb.from('profiles').update({enrollment_sent:e.target.checked,updated_at:new Date().toISOString()}).eq('id',U.id); if(error) alert(error.message); render(); };
+$('#enForm').onsubmit=async e=>{ e.preventDefault(); $('#enMsg').textContent='Sending…';
+  const {error}=await sb.from('profiles').update({name:$('#enName').value.trim(),phone:$('#enPhone').value.trim(),city:$('#enCity').value.trim(),church:$('#enChurch').value.trim(),hoped_diploma:$('#enDiploma').value,about:$('#enAbout').value.trim(),enrollment_sent:true,enrolled_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',U.id);
+  if(error){ $('#enMsg').textContent=error.message; return; } render(); };
 $('#saveSettings').onclick=async()=>{ $('#setMsg').textContent='Saving…';
   const {error}=await sb.from('profiles').update({name:$('#setName').value.trim(),plan:$('#setPlan').value,updated_at:new Date().toISOString()}).eq('id',U.id);
   if(error){$('#setMsg').textContent=error.message;return;}
